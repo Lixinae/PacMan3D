@@ -3,12 +3,15 @@
 
 #include "boardSquare.h"
 #include "pacman.h"
+#include "renderer.h"
 
 class Wall : public BoardSquare {
 
 public:
 
 	Wall();
+	
+	Renderer::Model getModel() const; //TODO should be option model (empty case haven't model)
 	
 	bool isWalkable() const;
 	

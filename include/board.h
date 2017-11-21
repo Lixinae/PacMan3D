@@ -3,6 +3,10 @@
 
 #include "boardPosition.h"
 #include "boardSquare.h"
+#include <map>
+#include <vector>
+
+using namespace std;
 
 class Board {
 
@@ -10,13 +14,17 @@ public:
 
 	Board(); // TODO should be private, the factory from file must be public
 
-	BoardSquare * getSquare(const BoardPosition & position) const; // TODO return may be pointer or const reference
+	map<Renderer::Model, vector<BoardPosition>> * getModels() const; //TODO Maybe return a const reference
+
+	const BoardSquare & getSquare(const BoardPosition & position) const;
+	
+	const BoardSquare & operator[](const BoardPosition & position) const;
 	
 private:
  
-	int width;
-	int height;
-	// TODO a map boardPosition -> boardSquare
+	int _width;
+	int _height;
+	BoardSquare *** _squares; // TODO maybe change for a map<position *, square *>
 
 };
 
