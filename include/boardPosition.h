@@ -11,6 +11,9 @@ public:
 	
 	BoardPosition(int x, int y);
 	
+	int getX() const;
+	int getY() const;
+	
 	bool operator==(const BoardPosition & other) const;
 	bool operator!=(const BoardPosition & other) const;
 	
