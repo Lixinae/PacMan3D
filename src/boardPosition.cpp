@@ -13,7 +13,7 @@ bool BoardPosition::operator==(const BoardPosition & other) const {
 }
 
 bool BoardPosition::operator!=(const BoardPosition & other) const {
-	return not (*this == other);
+	return !(*this == other);
 }
 
 ostream & operator<<(ostream & os, BoardPosition position) {
