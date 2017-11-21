@@ -3,6 +3,7 @@
 
 #include "boardPosition.h"
 #include "boardSquare.h"
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -13,15 +14,17 @@ public:
 
 	Board(); // TODO should be private, the factory from file must be public
 
+	map<Renderer::Model, vector<BoardPosition>> * getModels() const; //TODO Maybe return a const reference
+
 	const BoardSquare & getSquare(const BoardPosition & position) const;
 	
 	const BoardSquare & operator[](const BoardPosition & position) const;
 	
 private:
  
-	int width;
-	int height;
-	BoardSquare *** squares; // TODO maybe change for a map<position *, square *>
+	int _width;
+	int _height;
+	BoardSquare *** _squares; // TODO maybe change for a map<position *, square *>
 
 };
 
