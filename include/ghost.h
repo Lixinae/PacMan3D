@@ -7,7 +7,7 @@ class Ghost {
 
 public:
 
-	Ghost(const BoardPosition & position);
+	explicit Ghost(const BoardPosition & position);
 
 private:
 
