@@ -2,8 +2,11 @@
 
 #include "pacman.h"
 #include "boardSquare.h"
+#include "bonus.h"
+#include "renderer.h"
+#include "pacGomme.h"//TODO remove
 
-Floor::Floor() : _bonus(nullptr) {
+Floor::Floor() : _bonus(new PacGomme()) { //TODO
 
 }
 
@@ -17,6 +20,10 @@ Floor::~Floor() {
 	}
 }
 	
+Renderer::Model Floor::getModel() const {
+	return _bonus->getModel(); // TODO empty option if bonus == nullptr  
+}
+
 bool Floor::isWalkable() const {
 	return true;
 }

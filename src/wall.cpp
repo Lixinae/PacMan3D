@@ -2,9 +2,14 @@
 
 #include "pacman.h"
 #include "boardSquare.h"
+#include "renderer.h"
 
 Wall::Wall() {
 
+}
+	
+Renderer::Model Wall::getModel() const {
+	return Renderer::Model::WALL;
 }
 	
 bool Wall::isWalkable() const {

@@ -10,6 +10,8 @@ public:
 	
 	PacGomme();
 	
+	Renderer::Model getModel() const;
+	
 	void apply(Pacman pacman);
 
 };
