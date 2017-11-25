@@ -5,7 +5,3 @@
 Ghost::Ghost(const BoardPosition &position): _position(position) {
 
 }
-
-Ghost::Ghost(const BoardPosition &position) {
-
-}

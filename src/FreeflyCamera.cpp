@@ -1,15 +1,15 @@
-#include "glimac/FreeflyCamera.hpp"
+#include "FreeflyCamera.hpp"
 #include <iostream>
-#define _USE_MATH_DEFINES
+
  
 #include <cmath>
-FreeflyCamera::FreeflyCamera():	
-	m_Position(0,0,0),m_fPhi(M_PI),m_fTheta(0){
+FreeflyCamera::FreeflyCamera():
+        m_Position(0,0,0), m_fPhi(static_cast<float>(M_PI)), m_fTheta(0){
 	computeDirectionVectors();
 }
 
-FreeflyCamera::FreeflyCamera(glm::vec3 m_Position):	
-	m_Position(m_Position),m_fPhi(M_PI),m_fTheta(0){
+FreeflyCamera::FreeflyCamera(glm::vec3 m_Position):
+        m_Position(m_Position), m_fPhi(static_cast<float>(M_PI)), m_fTheta(0){
 	computeDirectionVectors();
 }
 
@@ -36,7 +36,7 @@ void FreeflyCamera::moveLeft(float t){
 
 void FreeflyCamera::computeDirectionVectors(){
 	m_LeftVector = glm::vec3(sin(m_fPhi+M_PI/2),0,cos(m_fPhi+M_PI/2));
-	m_FrontVector = glm::vec3(cos(m_fTheta)*sin(m_fPhi),sin(m_fTheta),cos(m_fTheta)*cos(m_fPhi));
+	m_FrontVector = glm::vec3(std::cos(m_fTheta)* std::sin(m_fPhi), std::sin(m_fTheta), std::cos(m_fTheta)* std::cos(m_fPhi));
 	m_UpVector = glm::cross(m_FrontVector, m_LeftVector);
 }
 

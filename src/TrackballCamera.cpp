@@ -1,5 +1,4 @@
-#include "glimac/TrackballCamera.hpp"
-#include <iostream>
+#include "TrackballCamera.hpp"
 
 TrackballCamera::TrackballCamera():
 	m_fDistance(5),m_fAngleX(0),m_fAngleY(0){}
