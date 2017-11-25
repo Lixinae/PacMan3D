@@ -1,0 +1,21 @@
+#include "common.hpp"
+
+class FreeflyCamera{
+
+private:
+	//float m_fDistance,m_fAngleX,m_fAngleY;
+	glm::vec3 m_Position;
+	float m_fPhi,m_fTheta;
+	glm::vec3 m_FrontVector,m_LeftVector, m_UpVector;
+
+	void computeDirectionVectors();
+public:
+	FreeflyCamera();
+
+	void rotateLeft(float degrees);
+	void rotateUp(float degrees);
+	void moveFront(float t);
+	void moveLeft(float t);
+
+	glm::mat4 getViewMatrix() const;
+};
