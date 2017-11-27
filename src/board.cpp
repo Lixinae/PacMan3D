@@ -2,6 +2,7 @@
 
 #include "boardPosition.h"
 #include "boardSquare.h"
+#include "boardRepresentation.h"
 #include "floor.h" // TODO Delete
 #include <map>
 #include <vector>
@@ -19,12 +20,12 @@ Board::Board() : _width(50), _height(50), _squares(nullptr) { // TODO
 	
 }
 	
-map<Renderer::Model, vector<BoardPosition>> * Board::getModels() const {
-	// TODO change impl
-	map<Renderer::Model, vector<BoardPosition>> * modelsMap = new map<Renderer::Model, vector<BoardPosition>>();
+map<BoardRepresentation::Model, vector<BoardPosition>> * Board::getModels() const {
+	// TODO remove
+	map<BoardRepresentation::Model, vector<BoardPosition>> * modelsMap = new map<BoardRepresentation::Model, vector<BoardPosition>>();
 	for (int i = 0; i < _width; i++) {
 		for (int j = 0; j < _height; j++) {
-			Renderer::Model model = _squares[i][j]->getModel();
+			BoardRepresentation::Model model = _squares[i][j]->getModel();
 			(*modelsMap)[model].push_back(BoardPosition(i,j));
 		}
 	}

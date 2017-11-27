@@ -2,7 +2,6 @@
 #define __BOARD_REPRESENTATION_H__
 
 #include "boardPosition.h"
-#include "renderer.h"
 #include <map>
 #include <vector>
 
@@ -12,15 +11,22 @@ class BoardRepresentation {
 
 public:
 
+	enum class Model {
+		PACMAN,
+		WALL,
+		PAC_GOMME
+		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...
+	};
+
 	BoardRepresentation(); 
 	
-	vector<BoardPosition> getPositions(Renderer::Model model) const;
+	vector<BoardPosition> getPositions(Model model) const;
 
-	void add(Renderer::Model model, const BoardPosition & position);
+	void add(Model model, const BoardPosition & position);
 	
-	void remove(Renderer::Model model, const BoardPosition & position);
+	void remove(Model model, const BoardPosition & position);
 	
-	vector<BoardPosition> operator[](Renderer::Model model) const;
+	vector<BoardPosition> operator[](Model model) const;
 	
 private:
  
