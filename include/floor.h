@@ -4,7 +4,7 @@
 #include "boardSquare.h"
 #include "pacman.h"
 #include "bonus.h"
-#include "renderer.h"
+#include "boardRepresentation.h"
 
 class Floor : public BoardSquare {
 
@@ -15,7 +15,7 @@ public:
 	
 	~Floor();
 	
-	Renderer::Model getModel() const; //TODO should be option model (empty case haven't model)
+	BoardRepresentation::Model getModel() const; //TODO should be option model (empty case haven't model)
 	
 	bool isWalkable() const;
 	

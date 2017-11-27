@@ -2,14 +2,14 @@
 
 #include "pacman.h"
 #include "bonus.h"
-#include "renderer.h"
+#include "boardRepresentation.h"
 
 PacGomme::PacGomme() {
 
 }
 
-Renderer::Model PacGomme::getModel() const {
-	return Renderer::Model::PAC_GOMME;
+BoardRepresentation::Model PacGomme::getModel() const {
+	return BoardRepresentation::Model::PAC_GOMME;
 }
 
 void PacGomme::apply(Pacman /*pacman*/) {

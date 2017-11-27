@@ -3,6 +3,7 @@
 
 #include "boardPosition.h"
 #include "boardSquare.h"
+#include "boardRepresentation.h"
 #include <map>
 #include <vector>
 
@@ -14,7 +15,7 @@ public:
 
 	Board(); // TODO should be private, the factory from file must be public
 
-	map<Renderer::Model, vector<BoardPosition>> * getModels() const; //TODO Maybe return a const reference
+	map<BoardRepresentation::Model, vector<BoardPosition>> * getModels() const; //TODO remove : use class boardrepr
 
 	const BoardSquare & getSquare(const BoardPosition & position) const;
 	

@@ -3,6 +3,7 @@
 
 #include "pacman.h"
 #include "bonus.h"
+#include "boardRepresentation.h"
 
 class PacGomme : public Bonus {
 
@@ -10,7 +11,7 @@ public:
 	
 	PacGomme();
 	
-	Renderer::Model getModel() const;
+	BoardRepresentation::Model getModel() const;
 	
 	void apply(Pacman pacman);
 

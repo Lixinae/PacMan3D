@@ -1,13 +1,13 @@
 #ifndef __BONUS_H__
 #define __BONUS_H__
 
-#include "renderer.h"
+#include "boardRepresentation.h"
 
 class Bonus {
 
 public: 
 
-	virtual Renderer::Model getModel() const = 0; //TODO should be option model
+	virtual BoardRepresentation::Model getModel() const = 0; //TODO should be option model
 
 	virtual void apply(Pacman pacman) = 0;
 	
