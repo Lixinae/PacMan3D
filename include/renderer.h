@@ -7,7 +7,7 @@ class Renderer {
 
 public:
 
-	virtual void render(const BoardRepresentation & boardRepr) = 0;
+	virtual void render(const BoardRepresentation & boardRepr) const = 0;
 	
 	virtual ~Renderer() {
 		
