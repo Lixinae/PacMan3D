@@ -22,7 +22,7 @@ BoardRepresentation::BoardRepresentation() : modelsPositions() {
 	}
 }
 	
-const vector<BoardPosition> BoardRepresentation::getPositions(Model model) const {
+const vector<BoardPosition> & BoardRepresentation::getPositions(Model model) const {
 	return modelsPositions.at(model);
 }
 
@@ -35,6 +35,6 @@ void BoardRepresentation::remove(Model model, const BoardPosition & position) {
 	positions.erase(std::remove(positions.begin(), positions.end(), position), positions.end());
 }
 	
-const vector<BoardPosition> BoardRepresentation::operator[](Model model) const {
+const vector<BoardPosition> & BoardRepresentation::operator[](Model model) const {
 	return getPositions(model);
 }
