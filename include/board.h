@@ -26,6 +26,7 @@ private:
 	int _width;
 	int _height;
 	BoardSquare *** _squares; // TODO maybe change for a map<position *, square *>
+	map<BoardPosition, BoardSquare *> squares;
 
 };
 

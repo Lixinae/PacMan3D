@@ -16,6 +16,10 @@ public:
 	
 	bool operator==(const BoardPosition & other) const;
 	bool operator!=(const BoardPosition & other) const;
+	bool operator<(const BoardPosition & other) const;
+	bool operator>(const BoardPosition & other) const;
+	bool operator<=(const BoardPosition & other) const;
+	bool operator>=(const BoardPosition & other) const;
 	
 	friend ostream & operator<<(ostream & os, BoardPosition position);
 	
