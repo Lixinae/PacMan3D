@@ -22,13 +22,13 @@ public:
 
 	BoardRepresentation(); 
 	
-	const vector<BoardPosition> getPositions(Model model) const;
+	const vector<BoardPosition> & getPositions(Model model) const;
 
 	void add(Model model, const BoardPosition & position);
 	
 	void remove(Model model, const BoardPosition & position);
 	
-	const vector<BoardPosition> operator[](Model model) const;
+	const vector<BoardPosition> & operator[](Model model) const;
 	
 private:
  
