@@ -1,4 +1,7 @@
-#include "glimac/common.hpp"
+#ifndef __FREEFLY_CAMERA_H__
+#define __FREEFLY_CAMERA_H__
+
+#include <glimac/common.hpp>
 
 class TrackballCamera{
 
@@ -17,4 +20,6 @@ public:
 
 	glm::mat4 getViewMatrix() const;
 };
+
+#endif
 
