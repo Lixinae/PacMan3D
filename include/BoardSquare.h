@@ -1,8 +1,8 @@
 #ifndef __BOARD_SQUARE_H__
 #define __BOARD_SQUARE_H__
 
-#include "pacman.h"
-#include "boardRepresentation.h"
+#include <Pacman.h>
+#include <BoardRepresentation.h>
 
 class BoardSquare {
 

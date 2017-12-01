@@ -1,6 +1,6 @@
+#include <Ghost.h>
 
-#include <boardPosition.h>
-#include <ghost.h>
+#include <BoardPosition.h>
 
 Ghost::Ghost(const BoardPosition &position): _position(position) {
 

@@ -1,10 +1,10 @@
 #ifndef __FLOOR_H__
 #define __FLOOR_H__
 
-#include "boardSquare.h"
-#include "pacman.h"
-#include "bonus.h"
-#include "boardRepresentation.h"
+#include <BoardSquare.h>
+#include <Pacman.h>
+#include <Bonus.h>
+#include <BoardRepresentation.h>
 
 class Floor : public BoardSquare {
 

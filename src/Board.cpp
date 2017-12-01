@@ -1,8 +1,8 @@
-#include "board.h"
+#include <Board.h>
 
-#include "boardPosition.h"
-#include "boardSquare.h"
-#include "boardRepresentation.h"
+#include <BoardPosition.h>
+#include <BoardSquare.h>
+#include <BoardRepresentation.h>
 #include <map>
 #include <vector>
 

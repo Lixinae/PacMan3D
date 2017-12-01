@@ -1,8 +1,8 @@
 #ifndef __RENDERER_3D_H__
 #define __RENDERER_3D_H__
 
-#include "renderer.h"
-#include "boardRepresentation.h"
+#include <Renderer.h>
+#include <BoardRepresentation.h>
 
 class Renderer3D : public Renderer {
 

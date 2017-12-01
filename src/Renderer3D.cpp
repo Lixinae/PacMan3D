@@ -1,6 +1,6 @@
-#include "renderer3D.h"
+#include <Renderer3D.h>
 
-#include "boardRepresentation.h"
+#include <BoardRepresentation.h>
 
 
 Renderer3D::Renderer3D() {

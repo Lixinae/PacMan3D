@@ -10,9 +10,9 @@
 #include <glimac/FreeflyCamera.hpp>
 #include <cstddef>
 
-#include "renderer.h"
-#include "renderer3D.h"
-#include "boardRepresentation.h"
+#include <Renderer.h>
+#include <Renderer3D.h>
+#include <BoardRepresentation.h>
 
 using namespace glimac;
 using namespace std;

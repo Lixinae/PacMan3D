@@ -1,7 +1,7 @@
 #ifndef __BOARD_REPRESENTATION_H__
 #define __BOARD_REPRESENTATION_H__
 
-#include "boardPosition.h"
+#include <BoardPosition.h>
 #include <map>
 #include <vector>
 

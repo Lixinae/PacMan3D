@@ -1,8 +1,8 @@
-#include "pacGomme.h"
+#include <PacGomme.h>
 
-#include "pacman.h"
-#include "bonus.h"
-#include "boardRepresentation.h"
+#include <Pacman.h>
+#include <Bonus.h>
+#include <BoardRepresentation.h>
 
 PacGomme::PacGomme() {
 

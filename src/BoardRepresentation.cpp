@@ -1,6 +1,6 @@
-#include "boardRepresentation.h"
+#include <BoardRepresentation.h>
 
-#include "boardPosition.h"
+#include <BoardPosition.h>
 #include <map>
 #include <vector>
 #include <algorithm>

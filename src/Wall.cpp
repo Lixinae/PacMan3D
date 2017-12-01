@@ -1,8 +1,8 @@
-#include "wall.h"
+#include <Wall.h>
 
-#include "pacman.h"
-#include "boardSquare.h"
-#include "boardRepresentation.h"
+#include <Pacman.h>
+#include <BoardSquare.h>
+#include <BoardRepresentation.h>
 
 Wall::Wall() {
 

@@ -1,9 +1,9 @@
 #ifndef __WALL_H__
 #define __WALL_H__
 
-#include "boardSquare.h"
-#include "pacman.h"
-#include "boardRepresentation.h"
+#include <BoardSquare.h>
+#include <Pacman.h>
+#include <BoardRepresentation.h>
 
 class Wall : public BoardSquare {
 

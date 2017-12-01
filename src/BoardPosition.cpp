@@ -1,4 +1,4 @@
-#include "boardPosition.h"
+#include <BoardPosition.h>
 
 #include <iostream>
 

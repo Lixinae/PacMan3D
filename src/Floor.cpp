@@ -1,10 +1,10 @@
-#include "floor.h"
+#include <Floor.h>
 
-#include "pacman.h"
-#include "boardSquare.h"
-#include "bonus.h"
-#include "boardRepresentation.h"
-#include "pacGomme.h"//TODO remove
+#include <Pacman.h>
+#include <BoardSquare.h>
+#include <Bonus.h>
+#include <BoardRepresentation.h>
+#include <PacGomme.h>//TODO remove
 
 Floor::Floor() : _bonus(new PacGomme()) { //TODO
 
