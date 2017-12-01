@@ -10,6 +10,8 @@
 #include <glimac/FreeflyCamera.hpp>
 #include <cstddef>
 
+#include <Pacman.h>
+#include <Board.h>
 #include <Renderer.h>
 #include <Renderer3D.h>
 #include <GameRepresentation.h>
@@ -28,6 +30,9 @@ int main() {
         std::cerr << glewGetErrorString(glewInitError) << std::endl;
         return EXIT_FAILURE;
     }
+    
+    Pacman pacman(BoardPosition(50,50), Pacman::Orientation::WEST);
+    Board board;
     
     GameRepresentation gr;
     gr.add(GameRepresentation::Model::WALL, BoardPosition(15,15));
