@@ -15,10 +15,7 @@ public:
 
 	Board(); // TODO should be private, the factory from file must be public
 
-	map<GameRepresentation::Model, vector<BoardPosition>> * getModels() const; //TODO remove : use class boardrepr
-
 	const BoardSquare & getSquare(const BoardPosition & position) const;
-	
 	const BoardSquare & operator[](const BoardPosition & position) const;
 	
 private:
