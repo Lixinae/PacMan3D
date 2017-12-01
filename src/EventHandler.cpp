@@ -1,5 +1,4 @@
 #include "EventHandler.hpp"
-#include "../include/EventHandler.hpp"
 
 EventHandler::EventHandler() {
 
@@ -7,7 +6,7 @@ EventHandler::EventHandler() {
 
 void EventHandler::handleEvent(const SDL_Event event){
 
-    if(event.type == SQL_QUIT){
+    if(event.type == SDL_QUIT){
         _exitProgram = true;
         return;
     }
