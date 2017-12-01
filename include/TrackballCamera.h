@@ -1,5 +1,5 @@
-#ifndef __FREEFLY_CAMERA_H__
-#define __FREEFLY_CAMERA_H__
+#ifndef __TRACKBALL_CAMERA_H__
+#define __TRACKBALL_CAMERA_H__
 
 #include <glimac/common.hpp>
 
