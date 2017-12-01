@@ -1,4 +1,5 @@
 #include "EventHandler.hpp"
+#include "../include/EventHandler.hpp"
 
 EventHandler::EventHandler() {
 
@@ -50,6 +51,7 @@ void EventHandler::handleEvent(const SDL_Event event){
         _keyRight = false;
         _speedUp = false;
         _speedDown = false;
+        _changeCamera = false;
     }
 
 
