@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Board::Board() : _width(50), _height(50), _squares(nullptr), squares() { // TODO
+Board::Board() : squares() {
 	
 }
 	
