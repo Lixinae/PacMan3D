@@ -17,20 +17,22 @@ public:
 		PAC_GOMME
 		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...
 	};
+	
+	static const vector<Model> MODELS;
 
 	BoardRepresentation(); 
 	
-	vector<BoardPosition> getPositions(Model model) const;
+	const vector<BoardPosition> getPositions(Model model) const;
 
 	void add(Model model, const BoardPosition & position);
 	
 	void remove(Model model, const BoardPosition & position);
 	
-	vector<BoardPosition> operator[](Model model) const;
+	const vector<BoardPosition> operator[](Model model) const;
 	
 private:
  
-	// TODO maybe map<Renderer::Model, vector<BoardPosition>>
+	map<Model, vector<BoardPosition>> modelsPositions;
 
 };
 
