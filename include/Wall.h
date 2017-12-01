@@ -3,7 +3,7 @@
 
 #include <BoardSquare.h>
 #include <Pacman.h>
-#include <BoardRepresentation.h>
+#include <GameRepresentation.h>
 
 class Wall : public BoardSquare {
 
@@ -11,7 +11,7 @@ public:
 
 	Wall();
 	
-	BoardRepresentation::Model getModel() const; //TODO should be option model (empty case haven't model)
+	GameRepresentation::Model getModel() const; //TODO should be option model (empty case haven't model)
 	
 	bool isWalkable() const;
 	

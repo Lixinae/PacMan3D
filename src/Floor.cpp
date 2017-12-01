@@ -3,7 +3,7 @@
 #include <Pacman.h>
 #include <BoardSquare.h>
 #include <Bonus.h>
-#include <BoardRepresentation.h>
+#include <GameRepresentation.h>
 #include <PacGomme.h>//TODO remove
 
 Floor::Floor() : _bonus(new PacGomme()) { //TODO
@@ -20,7 +20,7 @@ Floor::~Floor() {
 	}
 }
 	
-BoardRepresentation::Model Floor::getModel() const {
+GameRepresentation::Model Floor::getModel() const {
 	return _bonus->getModel(); // TODO empty option if bonus == nullptr  
 }
 

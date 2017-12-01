@@ -2,19 +2,19 @@
 
 #include <BoardPosition.h>
 #include <BoardSquare.h>
-#include <BoardRepresentation.h>
+#include <GameRepresentation.h>
 #include <map>
 #include <vector>
 
 using namespace std;
 
-Board::Board() : squares() {
+Board::Board() : _squares() {
 	
 }
 	
-map<BoardRepresentation::Model, vector<BoardPosition>> * Board::getModels() const {
+map<GameRepresentation::Model, vector<BoardPosition>> * Board::getModels() const {
 	// TODO remove
-	map<BoardRepresentation::Model, vector<BoardPosition>> * modelsMap = new map<BoardRepresentation::Model, vector<BoardPosition>>();
+	map<GameRepresentation::Model, vector<BoardPosition>> * modelsMap = new map<GameRepresentation::Model, vector<BoardPosition>>();
 	/*for (int i = 0; i < _width; i++) {
 		for (int j = 0; j < _height; j++) {
 			BoardRepresentation::Model model = _squares[i][j]->getModel();
@@ -26,7 +26,7 @@ map<BoardRepresentation::Model, vector<BoardPosition>> * Board::getModels() cons
 	
 const BoardSquare & Board::getSquare(const BoardPosition & position) const {
 	//TODO Option Square <=> Square *
-	return *(squares.at(position));
+	return *(_squares.at(position));
 }
 
 const BoardSquare & Board::operator[](const BoardPosition & position) const {

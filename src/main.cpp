@@ -12,7 +12,7 @@
 
 #include <Renderer.h>
 #include <Renderer3D.h>
-#include <BoardRepresentation.h>
+#include <GameRepresentation.h>
 
 using namespace glimac;
 using namespace std;
@@ -29,12 +29,12 @@ int main() {
         return EXIT_FAILURE;
     }
     
-    BoardRepresentation br;
-    br.add(BoardRepresentation::Model::WALL, BoardPosition(15,15));
-    br.add(BoardRepresentation::Model::WALL, BoardPosition(25,13));
-    br.add(BoardRepresentation::Model::WALL, BoardPosition(30,33));
-    br.add(BoardRepresentation::Model::WALL, BoardPosition(25,25));
-    br.add(BoardRepresentation::Model::WALL, BoardPosition(28,28));
+    GameRepresentation gr;
+    gr.add(GameRepresentation::Model::WALL, BoardPosition(15,15));
+    gr.add(GameRepresentation::Model::WALL, BoardPosition(25,13));
+    gr.add(GameRepresentation::Model::WALL, BoardPosition(30,33));
+    gr.add(GameRepresentation::Model::WALL, BoardPosition(25,25));
+    gr.add(GameRepresentation::Model::WALL, BoardPosition(28,28));
     
     Renderer * renderer = new Renderer3D;
     
@@ -46,7 +46,7 @@ int main() {
                 done = true;
             }
         }
-        renderer->render(br);
+        renderer->render(gr);
     }
     
     delete renderer;

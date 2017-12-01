@@ -2,14 +2,14 @@
 
 #include <Pacman.h>
 #include <BoardSquare.h>
-#include <BoardRepresentation.h>
+#include <GameRepresentation.h>
 
 Wall::Wall() {
 
 }
 	
-BoardRepresentation::Model Wall::getModel() const {
-	return BoardRepresentation::Model::WALL;
+GameRepresentation::Model Wall::getModel() const {
+	return GameRepresentation::Model::WALL;
 }
 	
 bool Wall::isWalkable() const {

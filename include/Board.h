@@ -3,7 +3,7 @@
 
 #include <BoardPosition.h>
 #include <BoardSquare.h>
-#include <BoardRepresentation.h>
+#include <GameRepresentation.h>
 #include <map>
 #include <vector>
 
@@ -15,7 +15,7 @@ public:
 
 	Board(); // TODO should be private, the factory from file must be public
 
-	map<BoardRepresentation::Model, vector<BoardPosition>> * getModels() const; //TODO remove : use class boardrepr
+	map<GameRepresentation::Model, vector<BoardPosition>> * getModels() const; //TODO remove : use class boardrepr
 
 	const BoardSquare & getSquare(const BoardPosition & position) const;
 	
@@ -23,7 +23,7 @@ public:
 	
 private:
  
-	map<BoardPosition, BoardSquare *> squares;
+	map<BoardPosition, BoardSquare *> _squares;
 
 };
 

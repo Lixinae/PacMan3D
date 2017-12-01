@@ -2,13 +2,13 @@
 #define __BOARD_SQUARE_H__
 
 #include <Pacman.h>
-#include <BoardRepresentation.h>
+#include <GameRepresentation.h>
 
 class BoardSquare {
 
 public:
 	
-	virtual BoardRepresentation::Model getModel() const = 0;
+	virtual GameRepresentation::Model getModel() const = 0;
 	
 	virtual bool isWalkable() const = 0;
 	
