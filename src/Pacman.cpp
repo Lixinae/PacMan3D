@@ -1,6 +1,6 @@
-#include "pacman.h"
+#include <Pacman.h>
 
-#include "boardPosition.h"
+#include <BoardPosition.h>
 
 Pacman::Pacman(const BoardPosition & position) : _position(position) {
 

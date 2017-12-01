@@ -1,7 +1,7 @@
 #ifndef __GHOST_H__
 #define __GHOST_H__
 
-#include "boardPosition.h"
+#include <BoardPosition.h>
 
 class Ghost {
 

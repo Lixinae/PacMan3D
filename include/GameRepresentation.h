@@ -1,13 +1,13 @@
 #ifndef __BOARD_REPRESENTATION_H__
 #define __BOARD_REPRESENTATION_H__
 
-#include "boardPosition.h"
+#include <BoardPosition.h>
 #include <map>
 #include <vector>
 
 using namespace std;
 
-class BoardRepresentation {
+class GameRepresentation {
 
 public:
 
@@ -20,7 +20,7 @@ public:
 	
 	static const vector<Model> MODELS;
 
-	BoardRepresentation(); 
+	GameRepresentation(); 
 	
 	const vector<BoardPosition> & getPositions(Model model) const;
 
@@ -32,7 +32,7 @@ public:
 	
 private:
  
-	map<Model, vector<BoardPosition>> modelsPositions;
+	map<Model, vector<BoardPosition>> _modelsPositions;
 
 };
 

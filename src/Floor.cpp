@@ -1,10 +1,10 @@
-#include "floor.h"
+#include <Floor.h>
 
-#include "pacman.h"
-#include "boardSquare.h"
-#include "bonus.h"
-#include "boardRepresentation.h"
-#include "pacGomme.h"//TODO remove
+#include <Pacman.h>
+#include <BoardSquare.h>
+#include <Bonus.h>
+#include <GameRepresentation.h>
+#include <PacGomme.h>//TODO remove
 
 Floor::Floor() : _bonus(new PacGomme()) { //TODO
 
@@ -20,7 +20,7 @@ Floor::~Floor() {
 	}
 }
 	
-BoardRepresentation::Model Floor::getModel() const {
+GameRepresentation::Model Floor::getModel() const {
 	return _bonus->getModel(); // TODO empty option if bonus == nullptr  
 }
 

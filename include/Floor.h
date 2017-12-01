@@ -1,10 +1,10 @@
 #ifndef __FLOOR_H__
 #define __FLOOR_H__
 
-#include "boardSquare.h"
-#include "pacman.h"
-#include "bonus.h"
-#include "boardRepresentation.h"
+#include <BoardSquare.h>
+#include <Pacman.h>
+#include <Bonus.h>
+#include <GameRepresentation.h>
 
 class Floor : public BoardSquare {
 
@@ -15,7 +15,7 @@ public:
 	
 	~Floor();
 	
-	BoardRepresentation::Model getModel() const; //TODO should be option model (empty case haven't model)
+	GameRepresentation::Model getModel() const; //TODO should be option model (empty case haven't model)
 	
 	bool isWalkable() const;
 	

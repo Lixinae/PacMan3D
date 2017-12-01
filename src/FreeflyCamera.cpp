@@ -1,5 +1,4 @@
-#include "FreeflyCamera.hpp"
-
+#include <FreeflyCamera.h>
 
 FreeflyCamera::FreeflyCamera() :
         m_Position(0, 0, 0),

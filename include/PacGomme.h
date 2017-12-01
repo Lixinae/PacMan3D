@@ -1,9 +1,9 @@
 #ifndef __PAC_GOMME_H__
 #define __PAC_GOMME_H__
 
-#include "pacman.h"
-#include "bonus.h"
-#include "boardRepresentation.h"
+#include <Pacman.h>
+#include <Bonus.h>
+#include <GameRepresentation.h>
 
 class PacGomme : public Bonus {
 
@@ -11,7 +11,7 @@ public:
 	
 	PacGomme();
 	
-	BoardRepresentation::Model getModel() const;
+	GameRepresentation::Model getModel() const;
 	
 	void apply(Pacman pacman);
 

@@ -1,7 +1,7 @@
 #ifndef __PACMAN_H__
 #define __PACMAN_H__
 
-#include "boardPosition.h"
+#include <BoardPosition.h>
 
 class Pacman {
 
