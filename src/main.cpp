@@ -14,12 +14,15 @@
 #include <Renderer.h>
 #include <Renderer3D.h>
 
+#include <json/json.hpp>
+using json = nlohmann::json;
+
 using namespace glimac;
 using namespace std;
 using namespace glm;
 
 int main() {
-	
+		
     float l=800,h=600;
     SDLWindowManager windowManager(l,h, "GLImac");
 
@@ -29,7 +32,20 @@ int main() {
         return EXIT_FAILURE;
     }
     
-    Game game;
+    json jsonGame, jsonCases; 
+    jsonCases = json::array({
+		{{"position",{{"x",9}, {"y",10}}},{"case", {{"type","floor"}, {"args",json({})}}}},
+		{{"position",{{"x",10}, {"y",10}}},{"case", {{"type","floor"}, {"args",json({})}}}},
+		{{"position",{{"x",11}, {"y",10}}},{"case", {{"type","floor"}, {"args",json({})}}}}
+	});
+    jsonGame["pacman"]["position"]["x"] = 10;
+    jsonGame["pacman"]["position"]["y"] = 10;
+    jsonGame["pacman"]["orientation"] = "west";
+    jsonGame["board"]["cases"] = jsonCases;
+	
+	cout << setw(4) << jsonGame << endl;
+	
+    Game game = Game::fromJSON(jsonGame);
     
     Renderer * renderer = new Renderer3D;
     

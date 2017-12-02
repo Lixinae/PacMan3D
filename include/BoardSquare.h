@@ -3,10 +3,15 @@
 
 #include <Pacman.h>
 #include <GameRepresentation.h>
+#include <json/json.hpp>
+
+using json = nlohmann::json;
 
 class BoardSquare {
 
 public:
+	
+	static BoardSquare * fromJSON(json jsonSquare);
 	
 	virtual GameRepresentation::Model getModel() const = 0;
 	

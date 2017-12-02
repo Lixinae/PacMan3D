@@ -4,9 +4,18 @@
 #include <Pacman.h>
 #include <GameRepresentation.h>
 #include <BoardPosition.h>
+#include <json/json.hpp>
 
-Game::Game() : _board(), _pacman(BoardPosition(50,50), Pacman::Orientation::WEST) { //TODO
+using json = nlohmann::json;
 
+Game::Game(Board board, Pacman pacman) : _board(board), _pacman(pacman) {
+
+}
+
+Game Game::fromJSON(json jsonGame) {
+	Board board = Board::fromJSON(jsonGame["board"]);
+	Pacman pacman = Pacman::fromJSON(jsonGame["pacman"]);
+	return Game(board, pacman);
 }
 
 GameRepresentation Game::getRepresentation() const {

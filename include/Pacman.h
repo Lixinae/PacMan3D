@@ -2,6 +2,9 @@
 #define __PACMAN_H__
 
 #include <BoardPosition.h>
+#include <json/json.hpp>
+
+using json = nlohmann::json;
 
 class Pacman {
 	
@@ -14,7 +17,7 @@ public:
 		WEST
 	};
 
-	Pacman(const BoardPosition & position, Orientation orientation);
+	static Pacman fromJSON(json jsonPacman);
 	
 	void setOrientation(Orientation orientation);
 	
@@ -26,6 +29,10 @@ private:
 	
 	BoardPosition _position;
 	Orientation _orientation;
+	
+	Pacman(const BoardPosition & position, Orientation orientation);
+	
+	static Orientation orientationFromString(string strOrientation);
 
 };
 

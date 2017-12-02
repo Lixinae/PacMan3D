@@ -6,14 +6,19 @@
 #include <GameRepresentation.h>
 #include <map>
 #include <vector>
+#include <json/json.hpp>
 
 using namespace std;
+
+using json = nlohmann::json;
 
 class Board {
 
 public:
 
-	Board(); // TODO should be private, the factory from file must be public
+	static Board fromJSON(json jsonBoard);
+	
+	~Board();
 
 	vector<BoardPosition> getPositions() const;
 
@@ -23,6 +28,8 @@ public:
 private:
  
 	map<BoardPosition, BoardSquare *> _squares;
+	
+	Board(const map<BoardPosition, BoardSquare *> & squares);
 
 };
 

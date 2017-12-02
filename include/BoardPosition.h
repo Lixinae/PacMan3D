@@ -2,14 +2,19 @@
 #define __BOARD_POSITION_H__
 
 #include <iostream>
+#include <json/json.hpp>
 
 using namespace std;
+
+using json = nlohmann::json;
 
 class BoardPosition {
 
 public:
 	
 	BoardPosition(int x, int y);
+	
+	static BoardPosition fromJSON(json jsonPosition);
 	
 	int getX() const;
 	int getY() const;
