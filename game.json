@@ -1,0 +1,43 @@
+{
+    "board": {
+        "cases": [
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 9,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 10,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 11,
+                    "y": 10
+                }
+            }
+        ]
+    },
+    "pacman": {
+        "orientation": "west",
+        "position": {
+            "x": 10,
+            "y": 10
+        }
+    }
+}

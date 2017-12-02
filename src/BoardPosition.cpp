@@ -1,12 +1,19 @@
 #include <BoardPosition.h>
 
 #include <iostream>
+#include <json/json.hpp>
 
 using namespace std;
+
+using json = nlohmann::json;
 
 BoardPosition::BoardPosition(int x, int y) : _x(x), _y(y) {
 
 }
+
+BoardPosition BoardPosition::fromJSON(json jsonPosition) {
+	return BoardPosition(jsonPosition["x"], jsonPosition["y"]);
+};
 
 int BoardPosition::getX() const {
 	return _x;

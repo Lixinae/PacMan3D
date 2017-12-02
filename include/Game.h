@@ -4,14 +4,15 @@
 #include <Board.h>
 #include <Pacman.h>
 #include <GameRepresentation.h>
+#include <json/json.hpp>
 
-using namespace std;
+using json = nlohmann::json;
 
 class Game {
 
 public:
-
-	Game(); // TODO private, public factory from json
+	
+	static Game fromJSON(json jsonGame);
 	
 	GameRepresentation getRepresentation() const; // TODO repr may be a field
 	
@@ -21,6 +22,8 @@ private:
  
 	Board _board;
 	Pacman _pacman;
+	
+	Game(Board board, Pacman pacman);
 
 };
 

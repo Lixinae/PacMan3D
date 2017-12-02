@@ -1,6 +1,7 @@
 #include <glimac/SDLWindowManager.hpp>
 #include <GL/glew.h>
 #include <iostream>
+#include <fstream>
 #include <glimac/Program.hpp>
 #include <glimac/FilePath.hpp>
 #include <glimac/glm.hpp>
@@ -9,17 +10,19 @@
 #include <glimac/TrackballCamera.hpp>
 #include <glimac/FreeflyCamera.hpp>
 #include <cstddef>
-
 #include <Game.h>
 #include <Renderer.h>
 #include <Renderer3D.h>
+#include <json/json.hpp>
 
 using namespace glimac;
 using namespace std;
 using namespace glm;
 
+using json = nlohmann::json;
+
 int main() {
-	
+		
     float l=800,h=600;
     SDLWindowManager windowManager(l,h, "GLImac");
 
@@ -29,7 +32,13 @@ int main() {
         return EXIT_FAILURE;
     }
     
-    Game game;
+    json jsonGame;
+    
+    ifstream gameFile("../game.json");
+    gameFile >> jsonGame; 
+	gameFile.close();
+
+    Game game = Game::fromJSON(jsonGame);
     
     Renderer * renderer = new Renderer3D;
     
@@ -41,7 +50,7 @@ int main() {
                 done = true;
             }
         }
-        renderer->render(game.getRepresentation());
+		renderer->render(game.getRepresentation());
     }
     
     delete renderer;
