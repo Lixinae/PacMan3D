@@ -10,9 +10,9 @@
 #include <glimac/FreeflyCamera.hpp>
 #include <cstddef>
 
+#include <Game.h>
 #include <Renderer.h>
 #include <Renderer3D.h>
-#include <GameRepresentation.h>
 
 using namespace glimac;
 using namespace std;
@@ -29,12 +29,7 @@ int main() {
         return EXIT_FAILURE;
     }
     
-    GameRepresentation gr;
-    gr.add(GameRepresentation::Model::WALL, BoardPosition(15,15));
-    gr.add(GameRepresentation::Model::WALL, BoardPosition(25,13));
-    gr.add(GameRepresentation::Model::WALL, BoardPosition(30,33));
-    gr.add(GameRepresentation::Model::WALL, BoardPosition(25,25));
-    gr.add(GameRepresentation::Model::WALL, BoardPosition(28,28));
+    Game game;
     
     Renderer * renderer = new Renderer3D;
     
@@ -46,7 +41,7 @@ int main() {
                 done = true;
             }
         }
-        renderer->render(gr);
+        renderer->render(game.getRepresentation());
     }
     
     delete renderer;
