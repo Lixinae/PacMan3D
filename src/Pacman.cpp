@@ -10,6 +10,10 @@ void Pacman::setOrientation(Orientation orientation) {
 	_orientation = orientation;
 }
 
+BoardPosition Pacman::getPosition() const {
+	return _position;
+}
+
 BoardPosition Pacman::getNextPosition() const {
 	int dx, dy;
 	switch (_orientation) {
