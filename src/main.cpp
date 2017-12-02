@@ -34,7 +34,7 @@ int main() {
     
     json jsonGame;
     
-    ifstream gameFile("../game.json");
+    ifstream gameFile("assets/game/game.json");
     gameFile >> jsonGame; 
 	gameFile.close();
 
