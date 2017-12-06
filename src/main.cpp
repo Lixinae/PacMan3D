@@ -40,7 +40,7 @@ int main() {
 
     Game game = Game::fromJSON(jsonGame);
     
-    Renderer * renderer = new Renderer3D;
+    Renderer * renderer = new Renderer3D(&windowManager);
     
     bool done = false;
     while(!done) {
