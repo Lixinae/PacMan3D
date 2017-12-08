@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(Pacman3D)
 
-find_package(SDL2 REQUIRED)
+find_package(SDL REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 
