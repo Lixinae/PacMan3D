@@ -1,6 +1,7 @@
 #include <FreeflyCamera.h>
 
 FreeflyCamera::FreeflyCamera() :
+        Camera(),
         m_Position(0, 0, 0),
         m_fPhi(static_cast<float>(M_PI)),
         m_fTheta(0),
@@ -11,6 +12,7 @@ FreeflyCamera::FreeflyCamera() :
 }
 
 FreeflyCamera::FreeflyCamera(glm::vec3 m_Position) :
+        Camera(),
         m_Position(m_Position),
         m_fPhi(static_cast<float>(M_PI)),
         m_fTheta(0),
@@ -21,13 +23,13 @@ FreeflyCamera::FreeflyCamera(glm::vec3 m_Position) :
 }
 
 
-void FreeflyCamera::rotateLeft(float degrees) {
+void FreeflyCamera::rotateHorizontal(float degrees) {
     degrees = glm::radians(degrees);
     m_fPhi += degrees;
     computeDirectionVectors();
 }
 
-void FreeflyCamera::rotateUp(float degrees) {
+void FreeflyCamera::rotateVertical(float degrees) {
     degrees = glm::radians(degrees);
     m_fTheta += degrees;
     computeDirectionVectors();
@@ -37,7 +39,7 @@ void FreeflyCamera::moveFront(float t) {
     m_Position += t * m_FrontVector;
 }
 
-void FreeflyCamera::moveLeft(float t) {
+void FreeflyCamera::moveHorizontal(float t) {
     m_Position += t * m_LeftVector;
 }
 

@@ -1,11 +1,13 @@
 #include <TrackballCamera.h>
 
 TrackballCamera::TrackballCamera() :
+        Camera(),
         m_fDistance(5),
         m_fAngleX(0),
         m_fAngleY(0) {}
 
 TrackballCamera::TrackballCamera(float m_fDistance, float m_fAngleX, float m_fAngleY) :
+        Camera(),
         m_fDistance(m_fDistance),
         m_fAngleX(m_fAngleX),
         m_fAngleY(m_fAngleY) {}
