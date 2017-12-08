@@ -21,7 +21,7 @@ using namespace glm;
 
 using json = nlohmann::json;
 
-int main() {
+int main(int argc, char** argv) {
 		
     float l=800,h=600;
     SDLWindowManager windowManager(l,h, "GLImac");

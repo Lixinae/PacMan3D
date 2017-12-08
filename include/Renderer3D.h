@@ -20,6 +20,10 @@ private:
 
 	SDLWindowManager * _windowManager;
 	map<GameRepresentation::Model, Model3D> _models;
+	
+	GLuint matrix;
+
+	Model3D get3DModel(GameRepresentation::Model model);
 
 };
 
