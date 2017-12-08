@@ -42,7 +42,7 @@ void Renderer3D::render(const GameRepresentation & repr) const {
 		for (auto & position : positions) {
 			// TODO better
 			MVMatrix = translate(mat4(1.f), vec3(0, 0, -5));
-			MVMatrix = translate(MVMatrix, vec3(position.getX()/4., position.getX()/4., 0));
+			MVMatrix = translate(MVMatrix, vec3(position.getX()/4., position.getY()/4., 0));
 			NormalMatrix = transpose(inverse(MVMatrix));
 			glUniformMatrix4fv(uMVPmatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
 			glUniformMatrix4fv(uMVmatrix, 1, GL_FALSE, glm::value_ptr(MVMatrix));
