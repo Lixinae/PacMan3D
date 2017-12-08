@@ -4,6 +4,7 @@
 #include <Renderer.h>
 #include <GameRepresentation.h>
 #include <Model3D.h>
+#include <glimac/Program.hpp>
 #include <glimac/SDLWindowManager.hpp>
 
 using namespace glimac;
@@ -21,7 +22,13 @@ private:
 	SDLWindowManager * _windowManager;
 	map<GameRepresentation::Model, Model3D> _models;
 	
-	GLuint matrix;
+	/* TODO maybe rm */
+	GLuint uMVPmatrix; 
+    GLuint uMVmatrix;
+    GLuint uNormalmatrix;
+
+	Program program; // TODO should be in model
+	/*				 */
 
 	Model3D get3DModel(GameRepresentation::Model model);
 

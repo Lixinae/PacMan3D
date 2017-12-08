@@ -17,6 +17,8 @@ public:
 
 private:
 
+	// TODO model may have a matrix for init transform (scale, ...) 
+
 	GLuint vao;
 
 };

@@ -32,6 +32,9 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
     
+    glEnable(GL_DEPTH_TEST);
+    
+    
     json jsonGame;
     
     ifstream gameFile("assets/game/game.json");
