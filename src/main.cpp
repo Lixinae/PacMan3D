@@ -139,7 +139,7 @@ int main(int argc, char **argv) {
         pacman.iterate();
         
         //TODO sleep framerate
-        this_thread::sleep_for(chrono::milliseconds(40));
+        this_thread::sleep_for(chrono::milliseconds(50));
         
         
     }
