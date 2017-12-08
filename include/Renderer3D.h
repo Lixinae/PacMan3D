@@ -13,6 +13,8 @@ class Renderer3D : public Renderer {
 
 public:
 
+	static const float SQUARE_SIZE;
+
 	Renderer3D(SDLWindowManager * windowManager); //TODO private + take in argument the map of BoardRepresentation->Model3D  
 
 	void render(const GameRepresentation & repr) const;

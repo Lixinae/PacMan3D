@@ -9,14 +9,17 @@
 using namespace glimac;
 using namespace glm;
 
+const float Renderer3D::SQUARE_SIZE = 1;
+
 Model3D Renderer3D::get3DModel(GameRepresentation::Model model) {
-	float r = 1, g = 0, b = 0;
-	if (model == GameRepresentation::Model::PAC_GOMME) {
-		r = 1;
-		g = 1;
-		b = 0;
+	switch (model) {
+		case GameRepresentation::Model::PACMAN:
+			return Model3D();
+		case GameRepresentation::Model::WALL:
+			return Model3D();
+		case GameRepresentation::Model::PAC_GOMME:
+			return Model3D();
 	}
-	return Model3D(r,g,b);
 }
 
 Renderer3D::Renderer3D(SDLWindowManager * windowManager) : _windowManager(windowManager), _models() {
@@ -41,8 +44,9 @@ void Renderer3D::render(const GameRepresentation & repr) const {
 		model3d.bindVAO();
 		for (auto & position : positions) {
 			// TODO better
-			MVMatrix = translate(mat4(1.f), vec3(0, 0, -5));
-			MVMatrix = translate(MVMatrix, vec3(position.getX()/4., position.getY()/4., 0));
+			MVMatrix = translate(mat4(1.f), vec3(0, 0, -20));
+			// TODO (x,y) on (x,0,y)
+			MVMatrix = translate(MVMatrix, vec3(position.getX()*SQUARE_SIZE, position.getY()*SQUARE_SIZE, 0));
 			NormalMatrix = transpose(inverse(MVMatrix));
 			glUniformMatrix4fv(uMVPmatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
 			glUniformMatrix4fv(uMVmatrix, 1, GL_FALSE, glm::value_ptr(MVMatrix));

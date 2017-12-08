@@ -7,11 +7,7 @@
 
 using namespace glimac;
 
-Model3D::Model3D() : Model3D(1,1,1) {
-	
-}
-
-Model3D::Model3D(float r, float g, float b) {
+Model3D::Model3D() {
 	const GLuint VERTEX_ATTR_POSITION = 0;
 	const GLuint VERTEX_ATTR_NORMAL = 1;
 	const GLuint VERTEX_ATTR_TEXTURE = 2;
