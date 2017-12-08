@@ -21,7 +21,7 @@ using namespace glm;
 
 using json = nlohmann::json;
 
-int main() {
+int main(int argc, char** argv) {
 		
     float l=800,h=600;
     SDLWindowManager windowManager(l,h, "GLImac");
@@ -40,7 +40,7 @@ int main() {
 
     Game game = Game::fromJSON(jsonGame);
     
-    Renderer * renderer = new Renderer3D;
+    Renderer * renderer = new Renderer3D(&windowManager);
     
     bool done = false;
     while(!done) {
