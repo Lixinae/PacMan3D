@@ -38,6 +38,8 @@ public:
 	
 	bool changeCamera();
 
+	bool mouseRight() const;
+
 	void set_exitProgram(bool _exitProgram);
 
 	void set_moveLeft(bool _moveLeft);

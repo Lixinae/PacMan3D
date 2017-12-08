@@ -39,6 +39,10 @@ void EventHandler::handleEvent(const SDL_Event event){
                 break;
             case SDLK_c:
                 _changeCamera = true;
+                break;
+            case SDLK_t:// todo -> possiblement changer la touche d'activation pour accéléré / décélérer
+                _activateSpeed = !_activateSpeed;
+                break;
             default:
                 break;
         }
@@ -102,6 +106,10 @@ bool EventHandler::speedDown() {
 
 bool EventHandler::changeCamera() {
     return _changeCamera;
+}
+
+bool EventHandler::mouseRight() const {
+    return _mouseRight;
 }
 
 void EventHandler::set_exitProgram(bool _exitProgram) {
