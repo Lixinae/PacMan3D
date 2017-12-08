@@ -57,11 +57,13 @@ void EventHandler::handleEvent(const SDL_Event event){
         _changeCamera = false;
     }
 
-
     if(event.type == SDL_MOUSEBUTTONDOWN){
         switch(event.button.button){
             case SDL_BUTTON_RIGHT:
                 _mouseRight = true;
+                break;
+            case SDL_BUTTON_LEFT:
+                _mouseLeft = true;
                 break;
             default:
                 break;
@@ -69,6 +71,7 @@ void EventHandler::handleEvent(const SDL_Event event){
     }
     if(event.type == SDL_MOUSEBUTTONUP){
         _mouseRight = false;
+        _mouseLeft = false;
     }
 }
 
@@ -146,5 +149,9 @@ void EventHandler::set_speedDown(bool _speedDown) {
 
 void EventHandler::set_changeCamera(bool _changeCamera) {
     EventHandler::_changeCamera = _changeCamera;
+}
+
+bool EventHandler::mouseLeft() const {
+    return _mouseLeft;
 }
 

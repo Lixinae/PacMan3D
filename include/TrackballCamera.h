@@ -19,6 +19,7 @@ public:
 	
 	void rotateVertical(float degrees) override;
 
+    void moveHorizontal(float t) override;
 	glm::mat4 getViewMatrix() const override;
 };
 

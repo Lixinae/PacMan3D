@@ -1,13 +1,11 @@
 #include <TrackballCamera.h>
 
 TrackballCamera::TrackballCamera() :
-        Camera(),
         m_fDistance(5),
         m_fAngleX(0),
         m_fAngleY(0) {}
 
 TrackballCamera::TrackballCamera(float m_fDistance, float m_fAngleX, float m_fAngleY) :
-        Camera(),
         m_fDistance(m_fDistance),
         m_fAngleX(m_fAngleX),
         m_fAngleY(m_fAngleY) {}
@@ -29,4 +27,8 @@ glm::mat4 TrackballCamera::getViewMatrix() const {
     viewMatrix = glm::rotate(viewMatrix, glm::radians(m_fAngleX), glm::vec3(1, 0, 0));
     viewMatrix = glm::rotate(viewMatrix, glm::radians(m_fAngleY), glm::vec3(0, 1, 0));
     return viewMatrix;
+}
+
+void TrackballCamera::moveHorizontal(float t) {
+
 }

@@ -21,6 +21,7 @@ private:
 	bool _changeCamera=false;
 
     bool _mouseRight= false;
+    bool _mouseLeft= false;
 public:
 	EventHandler();
 
@@ -40,7 +41,9 @@ public:
 
 	bool mouseRight() const;
 
-	void set_exitProgram(bool _exitProgram);
+    bool mouseLeft() const;
+
+    void set_exitProgram(bool _exitProgram);
 
 	void set_moveLeft(bool _moveLeft);
 

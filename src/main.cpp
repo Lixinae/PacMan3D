@@ -48,49 +48,57 @@ int main(int argc, char **argv) {
     bool done = false;
     EventHandler eventHandler;
     double speed = 1;
-//    Todo -> avoir une classe mere de camera pour changer facilement entre les 2 implementations
-    Camera camera;
     TrackballCamera trackballCamera;
     FreeflyCamera freeflyCamera;
-    camera = trackballCamera;
-    bool isTrackBall=true;
+    bool isTrackBall = true;
     while (!done) {
         SDL_Event event{};
         while (windowManager.pollEvent(event)) {
             eventHandler.handleEvent(event);
-
-
         }
         if (eventHandler.exitProgram()) {
             done = true;
         }
 
         if (eventHandler.changeCamera()) {
-            if(isTrackBall){
-                camera = freeflyCamera;
-                isTrackBall = false;
-            }else{
-                camera = trackballCamera;
-                isTrackBall = true;
-            }
+            isTrackBall = !isTrackBall;
             eventHandler.set_changeCamera(false);
         }
-// Todo -> La gestion des controle de la camera doit etre identique il faut donc une classe camera mere des 2
-        if(eventHandler.moveUp()){
-            camera.moveFront(1.*speed);
-        }
-        else if(eventHandler.moveDown()){
-            camera.moveFront(-1.*speed);
-        }
-        if(eventHandler.moveLeft()){
-            camera.moveHorizontal(1.*speed);
-        }
-        else if(eventHandler.moveRight()){
-            camera.moveHorizontal(-1.*speed);
-        }
-        if(eventHandler.mouseRight()){
-            camera.rotateHorizontal(event.motion.xrel);
-            camera.rotateVertical(event.motion.yrel);
+
+        if (isTrackBall) {
+//            if(keyUp){
+//                trackballCamera.rotateVertical(0.005);
+//            }
+//            else if(keyDown){
+//                trackballCamera.rotateVertical(-0.005);
+//            }
+//            if(keyLeft){
+//                trackballCamera.rotateHorizontal(-0.005);
+//            }
+//            else if(keyRight){
+//                trackballCamera.rotateHorizontal(0.005);
+//            }
+//            if(eventHandler.mouseLeft()){
+//                trackballCamera.moveFront(0.005);
+//            }
+//            else if(eventHandler.mouseRight()){
+//                trackballCamera.moveFront(-0.005);
+//            }
+        } else {
+            if (eventHandler.moveUp()) {
+                freeflyCamera.moveFront(1. * speed);
+            } else if (eventHandler.moveDown()) {
+                freeflyCamera.moveFront(-1. * speed);
+            }
+            if (eventHandler.moveLeft()) {
+                freeflyCamera.moveHorizontal(1. * speed);
+            } else if (eventHandler.moveRight()) {
+                freeflyCamera.moveHorizontal(-1. * speed);
+            }
+            if (eventHandler.mouseRight()) {
+                freeflyCamera.rotateHorizontal(event.motion.xrel);
+                freeflyCamera.rotateVertical(event.motion.yrel);
+            }
         }
         if (eventHandler.activateSpeed()) {
             if (eventHandler.speedUp()) {
