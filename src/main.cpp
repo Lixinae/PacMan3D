@@ -1,17 +1,19 @@
-#include <glimac/SDLWindowManager.hpp>
-#include <GL/glew.h>
 #include <iostream>
+#include <cstddef>
+#include <chrono>
+#include <thread>
 #include <fstream>
+#include <json/json.hpp>
+#include <GL/glew.h>
+#include <glimac/SDLWindowManager.hpp>
 #include <glimac/Program.hpp>
 #include <glimac/FilePath.hpp>
 #include <glimac/glm.hpp>
 #include <glimac/Sphere.hpp>
 #include <glimac/Image.hpp>
-#include <cstddef>
 #include <Game.h>
 #include <Renderer.h>
 #include <Renderer3D.h>
-#include <json/json.hpp>
 #include <EventHandler.hpp>
 #include <Camera.h>
 #include <FreeflyCamera.h>
@@ -45,21 +47,44 @@ int main(int argc, char **argv) {
 
     Renderer *renderer = new Renderer3D(&windowManager);
 
-    bool done = false;
     EventHandler eventHandler;
     double speed = 1;
     TrackballCamera trackballCamera;
     FreeflyCamera freeflyCamera;
     bool isTrackBall = true;
+
+	bool done = false;
     while (!done) {
+		
+		Pacman & pacman = game.getPacman();
+    
         SDL_Event event{};
         while (windowManager.pollEvent(event)) {
             eventHandler.handleEvent(event);
         }
+		
         if (eventHandler.exitProgram()) {
             done = true;
         }
 
+		// TODO //
+		if (windowManager.isKeyPressed(SDLK_z)) {
+			cout << "z" << endl;
+			pacman.setOrientation(Pacman::Orientation::NORTH);
+		} else if (windowManager.isKeyPressed(SDLK_s)) {
+			cout << "s" << endl;
+			pacman.setOrientation(Pacman::Orientation::SOUTH);
+		} else if (windowManager.isKeyPressed(SDLK_q)) {
+			cout << "q" << endl;
+			pacman.setOrientation(Pacman::Orientation::WEST);
+		} else if (windowManager.isKeyPressed(SDLK_d)) {
+			cout << "d" << endl;
+			pacman.setOrientation(Pacman::Orientation::EAST);
+		}
+		// 		//
+
+
+		/*
         if (eventHandler.changeCamera()) {
             isTrackBall = !isTrackBall;
             eventHandler.set_changeCamera(false);
@@ -107,8 +132,16 @@ int main(int argc, char **argv) {
                 speed -= (speed - 0.02 >= 0 ? 0.02 : 0.);
             }
         }
+        */
 
         renderer->render(game.getRepresentation());
+        
+        pacman.iterate();
+        
+        //TODO sleep framerate
+        this_thread::sleep_for(chrono::milliseconds(40));
+        
+        
     }
 
     delete renderer;

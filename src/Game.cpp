@@ -18,6 +18,10 @@ Game Game::fromJSON(json jsonGame) {
 	return Game(board, pacman);
 }
 
+Pacman & Game::getPacman() {
+	return _pacman;
+}
+
 GameRepresentation Game::getRepresentation() const {
 	GameRepresentation representation; // TODO use field to avoid all computation
 	representation.add(GameRepresentation::Model::PACMAN, _pacman.getPosition());

@@ -14,9 +14,11 @@ public:
 	
 	static Game fromJSON(json jsonGame);
 	
+	Pacman & getPacman(); //TODO do not return the pacman : apply the transformation locally in game
+	
 	GameRepresentation getRepresentation() const; // TODO repr may be a field
 	
-	void iterate();
+	void iterate(); // TODO maybe remove
 	
 private:
  

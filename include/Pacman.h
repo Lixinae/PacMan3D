@@ -21,6 +21,8 @@ public:
 	
 	void setOrientation(Orientation orientation);
 	
+	void iterate(); // TODO for the moment
+	
 	BoardPosition getPosition() const;
 	BoardPosition getNextPosition() const;
 	void setNextPosition(const BoardPosition & position); // TODO maybe position not in argument
