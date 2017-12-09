@@ -5,7 +5,7 @@
 #include <SDL/SDL.h>
 #include <Game.h>
 #include <glimac/SDLWindowManager.hpp>
-#include "Configuration.h"
+#include <Configuration.h>
 
 using namespace glimac;
 using namespace std;

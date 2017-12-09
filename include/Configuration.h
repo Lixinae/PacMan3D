@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <json/json.hpp>
+#include <SDL/SDL.h>
 
 using json = nlohmann::json;
 
@@ -22,11 +23,11 @@ class Configuration {
 
 private:
 
-    map<control, string> _keyMap; // TODO should be a control -> SDL_key map
+    map<control, SDLKey> _keyMap; // TODO should be a control -> SDL_key map
     
-    Configuration(map<control, string> keyMap);
+    Configuration(map<control, SDLKey> keyMap);
     
-    static map<control, string> keyMapFromJSON(const json & json);
+    static map<control, SDLKey> keyMapFromJSON(const json & json);
 
 public:
 
@@ -35,7 +36,7 @@ public:
 	static Configuration fromJSON(const json & json);
 	static Configuration fromJSONFile(const string & filePath);
 
-    map<control, string> getControlMap();
+    map<control, SDLKey> getControlMap();
     
 };
 
