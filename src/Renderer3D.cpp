@@ -25,7 +25,7 @@ AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
 	}
 }
 
-Renderer3D::Renderer3D(SDLWindowManager * windowManager, Camera * camera) : _windowManager(windowManager), _camera(camera), _models() {
+Renderer3D::Renderer3D(SDLWindowManager * windowManager, int windowWidth, int windowHeight, Camera * camera) : _windowManager(windowManager), _camera(camera), ProjMatrix(perspective(radians(70.f), float(windowWidth)/windowHeight, 0.1f, 100.f)), _models() {
 	for (auto & model : GameRepresentation::MODELS) {
 		AbstractModel3D * model3d = get3DModel(model); // TODO free
 		_models[model] = model3d;
@@ -33,7 +33,6 @@ Renderer3D::Renderer3D(SDLWindowManager * windowManager, Camera * camera) : _win
 }
 	
 void Renderer3D::render(const GameRepresentation & repr) const {
-	mat4 ProjMatrix = perspective(radians(70.f), float(800)/600, 0.1f, 100.f); //TODO screen
 	mat4 GlobalMVMatrix = _camera->getViewMatrix();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	for (auto & model : GameRepresentation::MODELS) {  

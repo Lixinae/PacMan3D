@@ -17,17 +17,18 @@ public:
 
 	static const float SQUARE_SIZE;
 
-	Renderer3D(SDLWindowManager * windowManager, Camera * camera); //TODO private + take in argument the map of BoardRepresentation->Model3D  
+	Renderer3D(SDLWindowManager * windowManager, int windowWidth, int windowHeight, Camera * camera); //TODO private + take in argument the map of BoardRepresentation->Model3D  
 
 	void render(const GameRepresentation & repr) const;
 
 private:
 
 	SDLWindowManager * _windowManager;
+	mat4 ProjMatrix;
 	Camera * _camera;
 	map<GameRepresentation::Model, AbstractModel3D *> _models;
 
-	AbstractModel3D * get3DModel(GameRepresentation::Model model);
+	static AbstractModel3D * get3DModel(GameRepresentation::Model model);
 
 };
 

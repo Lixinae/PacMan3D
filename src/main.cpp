@@ -27,8 +27,8 @@ using json = nlohmann::json;
 
 int main(int argc, char **argv) {
 
-    float l = 800, h = 600;
-    SDLWindowManager windowManager(l, h, "GLImac");
+    int windowWidth = 800, windowHeight = 600;
+    SDLWindowManager windowManager(windowWidth, windowHeight, "GLImac");
 
     GLenum glewInitError = glewInit();
     if (GLEW_OK != glewInitError) {
@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
 	camera->rotateVertical(45);
 	camera->rotateHorizontal(15);
 
-    Renderer * renderer = new Renderer3D(&windowManager, camera);
+    Renderer * renderer = new Renderer3D(&windowManager, windowWidth, windowHeight, camera);
 
     EventHandler eventHandler;
     
@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
 		
 		Pacman & pacman = game.getPacman();
     
-        SDL_Event event{};
+        SDL_Event event;
         while (windowManager.pollEvent(event)) {
             eventHandler.handleEvent(event);
         }
