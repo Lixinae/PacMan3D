@@ -11,8 +11,10 @@
 class Camera {
 
 public:
+
     Camera() = default;
 
+	/* *** TODO maybe not usefull *** */
     virtual void rotateHorizontal(float degrees)= 0;
 
     /**
@@ -32,7 +34,8 @@ public:
      * @param t
      */
     virtual void moveHorizontal(float t)= 0;
-
+	/* *** 						 *** */
+	
     /**
      * Calcul la viewMatrix de la camera et la renvoie
      * @return La viewMatrix de la camera

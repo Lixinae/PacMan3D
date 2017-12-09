@@ -45,13 +45,19 @@ int main(int argc, char **argv) {
     gameFile.close();
     Game game = Game::fromJSON(jsonGame);
 
-    Renderer *renderer = new Renderer3D(&windowManager);
+	Camera * camera = new TrackballCamera;
+	camera->moveFront(20);
+	camera->rotateVertical(45);
+	camera->rotateHorizontal(15);
+
+    Renderer * renderer = new Renderer3D(&windowManager, camera);
 
     EventHandler eventHandler;
-    double speed = 1;
-    TrackballCamera trackballCamera;
-    FreeflyCamera freeflyCamera;
-    bool isTrackBall = true;
+    
+    //double speed = 1;
+    //TrackballCamera trackballCamera;
+    //FreeflyCamera freeflyCamera;
+    //bool isTrackBall = true;
 
 	bool done = false;
     while (!done) {
@@ -144,6 +150,7 @@ int main(int argc, char **argv) {
         
     }
 
+	delete camera;
     delete renderer;
 
     return EXIT_SUCCESS;

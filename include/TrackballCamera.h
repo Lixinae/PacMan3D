@@ -2,7 +2,7 @@
 #define __TRACKBALL_CAMERA_H__
 
 #include <glimac/common.hpp>
-#include "Camera.h"
+#include <Camera.h>
 
 class TrackballCamera :public Camera{
 
