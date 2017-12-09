@@ -7,16 +7,11 @@
 #include <GL/glew.h>
 #include <glimac/SDLWindowManager.hpp>
 #include <glimac/Program.hpp>
-#include <glimac/FilePath.hpp>
-#include <glimac/glm.hpp>
-#include <glimac/Sphere.hpp>
 #include <glimac/Image.hpp>
 #include <Game.h>
 #include <Renderer.h>
 #include <Renderer3D.h>
 #include <EventHandler.h>
-#include <Camera.h>
-#include <FreeflyCamera.h>
 #include <TrackballCamera.h>
 
 using namespace glimac;
@@ -45,6 +40,9 @@ int main(int argc, char **argv) {
     gameFile.close();
     Game game = Game::fromJSON(jsonGame);
 
+    Configuration configuration("assets/configuration.json");
+
+
 	Camera * camera = new TrackballCamera;
 	camera->moveFront(20);
 	camera->rotateVertical(45);
@@ -52,8 +50,8 @@ int main(int argc, char **argv) {
 
     Renderer * renderer = new Renderer3D(&windowManager, windowWidth, windowHeight, camera);
 
-    EventHandler eventHandler;
-    
+    //EventHandler eventHandler;
+
     //double speed = 1;
     //TrackballCamera trackballCamera;
     //FreeflyCamera freeflyCamera;
@@ -66,11 +64,10 @@ int main(int argc, char **argv) {
     
         SDL_Event event;
         while (windowManager.pollEvent(event)) {
-            eventHandler.handleEvent(event);
-        }
-		
-        if (eventHandler.exitProgram()) {
-            done = true;
+            if (event.type == SDL_QUIT) {
+                done = true; // Leave the loop after this iteration
+            }
+            //eventHandler.handleEvent(event);
         }
 
 		// TODO //
