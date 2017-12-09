@@ -12,6 +12,7 @@
 #include <Renderer3D.h>
 #include <EventHandler.h>
 #include <TrackballCamera.h>
+#include <PointOfView.h>
 
 using namespace glimac;
 using namespace std;
@@ -36,12 +37,20 @@ int main(int argc, char **argv) {
     Configuration configuration = Configuration::fromJSONFile("assets/configuration.json");
 
 
-	Camera * camera = new TrackballCamera;
-	camera->moveFront(20);
-	camera->rotateVertical(45);
-	camera->rotateHorizontal(15);
+	Camera * camera1 = new TrackballCamera;
+	camera1->moveFront(20);
+	camera1->rotateVertical(45);
+	camera1->rotateHorizontal(15);
+	
+	Camera * camera2 = new TrackballCamera;
+	camera2->moveFront(20);
+	camera2->rotateVertical(45);
+	camera2->rotateHorizontal(-15);
+	
+	int icam = 1; //TODO change
+	PointOfView pointOfView(camera1);
 
-    Renderer * renderer = new Renderer3D(&windowManager, windowWidth, windowHeight, camera);
+    Renderer * renderer = new Renderer3D(&windowManager, windowWidth, windowHeight, &pointOfView);
 
     //EventHandler eventHandler;
 
@@ -76,6 +85,15 @@ int main(int argc, char **argv) {
 		} else if (windowManager.isKeyPressed(SDLK_d)) {
 			cout << "d" << endl;
 			pacman.setOrientation(Pacman::Orientation::EAST);
+		} else if (windowManager.isKeyPressed(SDLK_c)) {
+			cout << "c" << endl;
+			if (icam == 1) {
+				pointOfView.setCamera(camera2);
+				icam = 2;
+			} else if (icam == 2) {
+				pointOfView.setCamera(camera1);
+				icam = 1;
+			}
 		}
 		// 		//
 
@@ -140,7 +158,8 @@ int main(int argc, char **argv) {
         
     }
 
-	delete camera;
+	delete camera1;
+	delete camera2;
     delete renderer;
 
     return EXIT_SUCCESS;
