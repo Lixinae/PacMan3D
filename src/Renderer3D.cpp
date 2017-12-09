@@ -1,8 +1,10 @@
 #include <Renderer3D.h>
 
-#include <GameRepresentation.h>
 #include <GL/glew.h>
-#include <glimac/glm.hpp>
+#include <Renderer.h>
+#include <GameRepresentation.h>
+#include <AbstractModel3D.h>
+#include <NormalModel3D.h>
 #include <glimac/Program.hpp>
 #include <glimac/SDLWindowManager.hpp>
 
@@ -11,49 +13,41 @@ using namespace glm;
 
 const float Renderer3D::SQUARE_SIZE = 1;
 
-Model3D Renderer3D::get3DModel(GameRepresentation::Model model) {
+AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
 	switch (model) {
 		case GameRepresentation::Model::PACMAN:
-			return Model3D(0); // TODO use path to their 3D model
+			return new NormalModel3D;
 		case GameRepresentation::Model::WALL:
-			return Model3D(2);
+			return new NormalModel3D;
 		case GameRepresentation::Model::PAC_GOMME:
-			return Model3D(1);
+			return new NormalModel3D;
 	}
 }
 
 Renderer3D::Renderer3D(SDLWindowManager * windowManager) : _windowManager(windowManager), _models() {
 	for (auto & model : GameRepresentation::MODELS) {
-		Model3D model3d = get3DModel(model);
+		AbstractModel3D * model3d = get3DModel(model); // TODO free
 		_models[model] = model3d;
 	}
-	program = loadProgram("shaders/3D.vs.glsl", "shaders/normal.fs.glsl");
-	program.use();
-	uMVPmatrix = glGetUniformLocation(program.getGLId(), "uMVPMatrix");
-    uMVmatrix = glGetUniformLocation(program.getGLId(), "uMVMatrix");
-    uNormalmatrix = glGetUniformLocation(program.getGLId(), "uNormalMatrix");
 }
 	
 void Renderer3D::render(const GameRepresentation & repr) const {
-	mat4 ProjMatrix, MVMatrix, NormalMatrix;
+	mat4 ProjMatrix, MVMatrix;
 	ProjMatrix = perspective(radians(70.f), float(800)/600, 0.1f, 100.f); //TODO screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	for (auto & model : GameRepresentation::MODELS) {  
 		vector<BoardPosition> positions = repr[model];
-		Model3D model3d = _models.at(model);
-		model3d.bindVAO();
+		AbstractModel3D * model3d = _models.at(model);
+		model3d->bind();
 		for (auto & position : positions) {
 			// TODO better
 			MVMatrix = translate(mat4(1.f), vec3(0, 0, -20));
 			// TODO (x,y) on (x,0,y)
 			MVMatrix = translate(MVMatrix, vec3(position.getX()*SQUARE_SIZE, position.getY()*SQUARE_SIZE, 0));
-			NormalMatrix = transpose(inverse(MVMatrix));
-			glUniformMatrix4fv(uMVPmatrix, 1, GL_FALSE, glm::value_ptr(ProjMatrix * MVMatrix));
-			glUniformMatrix4fv(uMVmatrix, 1, GL_FALSE, glm::value_ptr(MVMatrix));
-			glUniformMatrix4fv(uNormalmatrix, 1, GL_FALSE, glm::value_ptr(NormalMatrix));
-			glDrawArrays(GL_TRIANGLES, 0, model3d.count());
+			model3d->setMatrices(ProjMatrix, MVMatrix);
+			glDrawArrays(GL_TRIANGLES, 0, model3d->count());
 		}
-		model3d.unbindVAO();
+		model3d->unbind();
 	}
 	_windowManager->swapBuffers();
 }
