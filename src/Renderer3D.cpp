@@ -41,6 +41,7 @@ void Renderer3D::render(const GameRepresentation & repr) const {
 	for (auto & model : GameRepresentation::MODELS) {  
 		vector<BoardPosition> positions = repr[model];
 		Model3D model3d = _models.at(model);
+		program.use();
 		model3d.bindVAO();
 		for (auto & position : positions) {
 			// TODO better
