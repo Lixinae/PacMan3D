@@ -18,7 +18,12 @@ const GLuint AbstractModel3D::VERTEX_ATTR_POSITION = 0;
 const GLuint AbstractModel3D::VERTEX_ATTR_NORMAL = 1;
 const GLuint AbstractModel3D::VERTEX_ATTR_TEXTURE = 2;
 
-AbstractModel3D::AbstractModel3D(string fragmentShader) {
+const GLchar * AbstractModel3D::VERTEX_UNIFORM_MVP_MATRIX = "uMVPMatrix";
+const GLchar * AbstractModel3D::VERTEX_UNIFORM_MV_MATRIX = "uMVMatrix";
+const GLchar * AbstractModel3D::VERTEX_UNIFORM_NORMAL_MATRIX = "uNormalMatrix";
+
+
+void AbstractModel3D::initPoints() {
 	glGenBuffers(1, &_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 	
@@ -55,7 +60,18 @@ AbstractModel3D::AbstractModel3D(string fragmentShader) {
 	// ...
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+}
+
+void AbstractModel3D::initProgram(string fragmentShader) {
 	_program = loadProgram(VERTEX_SHADER_3D, fragmentShader);
+	_uMVPmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_MVP_MATRIX);
+    _uMVmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_MV_MATRIX);
+    _uNormalmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_NORMAL_MATRIX);
+}
+	
+AbstractModel3D::AbstractModel3D(string fragmentShader) {
+	initPoints();
+	initProgram(fragmentShader);
 }
 
 AbstractModel3D::~AbstractModel3D()  {

@@ -18,6 +18,10 @@ public:
 	static const GLuint VERTEX_ATTR_NORMAL;
 	static const GLuint VERTEX_ATTR_TEXTURE;
 	
+	static const GLchar * VERTEX_UNIFORM_MVP_MATRIX;
+	static const GLchar * VERTEX_UNIFORM_MV_MATRIX;
+	static const GLchar * VERTEX_UNIFORM_NORMAL_MATRIX;
+	
 	AbstractModel3D(string fragmentShader); //TODO should be protected
 	virtual ~AbstractModel3D();
 	
@@ -33,7 +37,15 @@ private:
 	GLuint _vbo;
 	GLuint _vao;
 	GLsizei _size;
+	
 	Program _program;
+
+	GLuint _uMVPmatrix; 
+    GLuint _uMVmatrix;
+    GLuint _uNormalmatrix;
+    
+    void initPoints();
+    void initProgram(string fragmentShader);
 
 };
 
