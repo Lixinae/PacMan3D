@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
     gameFile.close();
     Game game = Game::fromJSON(jsonGame);
 
-    Configuration configuration("assets/configuration.json");
+    Configuration configuration = Configuration::fromJSONFile("assets/configuration.json");
 
 
 	Camera * camera = new TrackballCamera;

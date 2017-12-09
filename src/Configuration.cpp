@@ -1,55 +1,41 @@
 #include <Configuration.h>
 #include <fstream>
 
-Configuration::Configuration() {
+Configuration::Configuration(map<control, string> keyMap) : _keyMap(keyMap) {
 
 }
 
-
-Configuration::Configuration(const string &filePath) : _filePath(filePath) {
-    if (!readConfigFromFile()) {
-        loadDefaultConfiguration();
-    }
+Configuration Configuration::defaultConfiguration() {
+	map<control, string> keyMap;
+	keyMap[control::UP] = "z";
+    keyMap[control::DOWN] = "s";
+    keyMap[control::LEFT] = "q";
+    keyMap[control::RIGHT] = "d";
+    keyMap[control::CHANGE_CAMERA] = "c";
+	return Configuration(keyMap);
 }
 
-bool Configuration::readConfigFromFile() {
-    cout << "Loading config file" << endl;
-    json jsonConfig;
-    ifstream configFile(_filePath);
-    configFile >> jsonConfig;
+map<control, string> Configuration::keyMapFromJSON(const json & json) {
+	map<control, string> keyMap;
+	keyMap[control::UP] = json["Up"];
+    keyMap[control::DOWN] = json["Down"];
+    keyMap[control::LEFT] = json["Left"];
+    keyMap[control::RIGHT] = json["Right"];
+    keyMap[control::CHANGE_CAMERA] = json["ChangeCamera"];
+	return keyMap;
+}
+
+Configuration Configuration::fromJSON(const json & json) {
+	map<control, string> keyMap = keyMapFromJSON(json["keybinds"]);
+	return Configuration(keyMap);
+}
+
+Configuration Configuration::fromJSONFile(const string & filePath) {
+	json jsonConfig;
+	ifstream configFile(filePath);
+	configFile >> jsonConfig;
     configFile.close();
-    return parseJsonKeybinds(jsonConfig["keybinds"]);
-}
-
-bool Configuration::parseJsonKeybinds(const json &json) {
-    try {
-        pair<control, string> keyUp(control::UP, json["Up"]);
-        pair<control, string> keyDown(control::DOWN, json["Down"]);
-        pair<control, string> keyLeft(control::LEFT, json["Left"]);
-        pair<control, string> keyRight(control::RIGHT, json["Right"]);
-        pair<control, string> keyChangeCamera(control::CHANGE_CAMERA, json["ChangeCamera"]);
-        _keyMap.insert(keyUp);
-        _keyMap.insert(keyDown);
-        _keyMap.insert(keyLeft);
-        _keyMap.insert(keyRight);
-        _keyMap.insert(keyChangeCamera);
-    } catch (const exception &e) {
-        return false;
-    }
-    return true;
-}
-
-void Configuration::loadDefaultConfiguration() {
-    pair<control, string> keyUp(control::UP, "z");
-    pair<control, string> keyDown(control::DOWN, "s");
-    pair<control, string> keyLeft(control::LEFT, "q");
-    pair<control, string> keyRight(control::RIGHT, "d");
-    pair<control, string> keyChangeCamera(control::CHANGE_CAMERA, "c");
-    _keyMap.insert(keyUp);
-    _keyMap.insert(keyDown);
-    _keyMap.insert(keyLeft);
-    _keyMap.insert(keyRight);
-    _keyMap.insert(keyChangeCamera);
+	return fromJSON(jsonConfig);
 }
 
 map<control, string> Configuration::getControlMap() {
