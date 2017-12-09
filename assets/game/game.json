@@ -1,6 +1,98 @@
 {
+    
     "board": {
+    
         "cases": [
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 1,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 2,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 3,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 4,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 5,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 6,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 7,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 8,
+                    "y": 10
+                }
+            },
             {
                 "case": {
                     "args": {},
@@ -17,8 +109,8 @@
                     "type": "floor"
                 },
                 "position": {
-                    "x": 10,
-                    "y": 10
+                    "x": 0,
+                    "y": 9
                 }
             },
             {
@@ -27,12 +119,94 @@
                     "type": "floor"
                 },
                 "position": {
-                    "x": 11,
-                    "y": 10
+                    "x": 1,
+                    "y": 9
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 2,
+                    "y": 9
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 3,
+                    "y": 9
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 4,
+                    "y": 9
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 5,
+                    "y": 9
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 6,
+                    "y": 9
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 7,
+                    "y": 9
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 8,
+                    "y": 9
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 9,
+                    "y": 9
                 }
             }
+            
         ]
     },
+    
     "pacman": {
         "orientation": "west",
         "position": {
@@ -40,4 +214,5 @@
             "y": 0
         }
     }
+    
 }
