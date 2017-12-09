@@ -14,11 +14,11 @@ const float Renderer3D::SQUARE_SIZE = 1;
 Model3D Renderer3D::get3DModel(GameRepresentation::Model model) {
 	switch (model) {
 		case GameRepresentation::Model::PACMAN:
-			return Model3D();
+			return Model3D(0); // TODO use path to their 3D model
 		case GameRepresentation::Model::WALL:
-			return Model3D();
+			return Model3D(2);
 		case GameRepresentation::Model::PAC_GOMME:
-			return Model3D();
+			return Model3D(1);
 	}
 }
 
@@ -36,7 +36,7 @@ Renderer3D::Renderer3D(SDLWindowManager * windowManager) : _windowManager(window
 	
 void Renderer3D::render(const GameRepresentation & repr) const {
 	mat4 ProjMatrix, MVMatrix, NormalMatrix;
-	ProjMatrix = perspective(radians(70.f), float(800)/600, 0.1f, 100.f);
+	ProjMatrix = perspective(radians(70.f), float(800)/600, 0.1f, 100.f); //TODO screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	for (auto & model : GameRepresentation::MODELS) {  
 		vector<BoardPosition> positions = repr[model];
