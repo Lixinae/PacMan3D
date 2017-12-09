@@ -7,15 +7,21 @@
 class FreeflyCamera: public Camera{
 
 private:
+
 	glm::vec3 m_Position;
 	float m_fPhi,m_fTheta;
 	glm::vec3 m_FrontVector,m_LeftVector, m_UpVector;
 
 	void computeDirectionVectors();
+	
 public:
+
 	FreeflyCamera();
 
-    explicit FreeflyCamera(glm::vec3 m_Position);
+    explicit FreeflyCamera(glm::vec3 Position);
+    
+    Camera * clone() const;
+    
     /**
      * Permet de faire tourner la camera vers la gauche ou la droite (en ajoutant ou en enlevant des degrées)
      * @param degrees
@@ -42,6 +48,7 @@ public:
      * @return La viewMatrix de la camera
      */
 	glm::mat4 getViewMatrix() const override;
+	
 };
 
 #endif
