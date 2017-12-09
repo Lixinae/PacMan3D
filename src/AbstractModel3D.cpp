@@ -94,14 +94,9 @@ GLsizei AbstractModel3D::count() const {
 	return _size;
 }
 
-void AbstractModel3D::setMVPMatrix(const mat4 & MVPMatrix) {
-	glUniformMatrix4fv(_uMVPmatrix, 1, GL_FALSE, value_ptr(MVPMatrix));
-}
-
-void AbstractModel3D::setMVMatrix(const mat4 & MVMatrix) {
+void AbstractModel3D::setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix) {
+	glUniformMatrix4fv(_uMVPmatrix, 1, GL_FALSE, value_ptr(ProjMatrix * MVMatrix));
 	glUniformMatrix4fv(_uMVmatrix, 1, GL_FALSE, value_ptr(MVMatrix));
+	glUniformMatrix4fv(_uNormalmatrix, 1, GL_FALSE, value_ptr(transpose(inverse(MVMatrix))));
 }
 
-void AbstractModel3D::setNormalMatrix(const mat4 & NormalMatrix) {
-	glUniformMatrix4fv(_uNormalmatrix, 1, GL_FALSE, value_ptr(NormalMatrix));
-}

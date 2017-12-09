@@ -32,7 +32,7 @@ Renderer3D::Renderer3D(SDLWindowManager * windowManager) : _windowManager(window
 }
 	
 void Renderer3D::render(const GameRepresentation & repr) const {
-	mat4 ProjMatrix, MVMatrix, NormalMatrix;
+	mat4 ProjMatrix, MVMatrix;
 	ProjMatrix = perspective(radians(70.f), float(800)/600, 0.1f, 100.f); //TODO screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	for (auto & model : GameRepresentation::MODELS) {  
@@ -44,10 +44,7 @@ void Renderer3D::render(const GameRepresentation & repr) const {
 			MVMatrix = translate(mat4(1.f), vec3(0, 0, -20));
 			// TODO (x,y) on (x,0,y)
 			MVMatrix = translate(MVMatrix, vec3(position.getX()*SQUARE_SIZE, position.getY()*SQUARE_SIZE, 0));
-			NormalMatrix = transpose(inverse(MVMatrix));
-			model3d->setMVPMatrix(ProjMatrix * MVMatrix);
-			model3d->setMVMatrix(MVMatrix);
-			model3d->setNormalMatrix(NormalMatrix);
+			model3d->setMatrices(ProjMatrix, MVMatrix);
 			glDrawArrays(GL_TRIANGLES, 0, model3d->count());
 		}
 		model3d->unbind();

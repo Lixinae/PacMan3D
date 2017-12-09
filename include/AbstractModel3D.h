@@ -32,9 +32,7 @@ public:
 	
 	GLsizei count() const;
 	
-	void setMVPMatrix(const mat4 & MVPMatrix); 		 //
-	void setMVMatrix(const mat4 & MVMatrix); 		 // TODO maybe remove (may be change in setMatrix(proj,mvmat))
-	void setNormalMatrix(const mat4 & NormalMatrix); //
+	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix); // TODO maybe remove
 
 private:
 
