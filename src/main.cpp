@@ -14,7 +14,7 @@
 #include <Game.h>
 #include <Renderer.h>
 #include <Renderer3D.h>
-#include <EventHandler.hpp>
+#include <EventHandler.h>
 #include <Camera.h>
 #include <FreeflyCamera.h>
 #include <TrackballCamera.h>

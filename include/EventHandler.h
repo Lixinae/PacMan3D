@@ -1,7 +1,7 @@
 #ifndef __EVENT_HANDLER_H__
 #define __EVENT_HANDLER_H__
 
-#include "glimac/common.hpp"
+#include <glimac/common.hpp>
 #include <SDL/SDL.h>
 
 // Permet de gerer les evenement de la sdl lors qu'un utilisateur interagit avec le jeu
