@@ -11,9 +11,9 @@ FreeflyCamera::FreeflyCamera() :
     computeDirectionVectors();
 }
 
-FreeflyCamera::FreeflyCamera(glm::vec3 m_Position) :
+FreeflyCamera::FreeflyCamera(glm::vec3 Position) :
         Camera(),
-        m_Position(m_Position),
+        m_Position(Position),
         m_fPhi(static_cast<float>(M_PI)),
         m_fTheta(0),
         m_LeftVector(0, 0, 0),
@@ -22,6 +22,16 @@ FreeflyCamera::FreeflyCamera(glm::vec3 m_Position) :
     computeDirectionVectors();
 }
 
+Camera * FreeflyCamera::clone() const {
+	FreeflyCamera * camera = new FreeflyCamera;
+	camera->m_Position = m_Position;
+	camera->m_fPhi = m_fPhi;
+	camera->m_fTheta = m_fTheta;
+	camera->m_LeftVector = m_LeftVector;
+	camera->m_FrontVector = m_FrontVector;
+	camera->m_UpVector = m_UpVector;
+	return camera;
+}
 
 void FreeflyCamera::rotateHorizontal(float degrees) {
     degrees = glm::radians(degrees);

@@ -5,10 +5,14 @@ TrackballCamera::TrackballCamera() :
         m_fAngleX(0),
         m_fAngleY(0) {}
 
-TrackballCamera::TrackballCamera(float m_fDistance, float m_fAngleX, float m_fAngleY) :
-        m_fDistance(m_fDistance),
-        m_fAngleX(m_fAngleX),
-        m_fAngleY(m_fAngleY) {}
+TrackballCamera::TrackballCamera(float Distance, float AngleX, float AngleY) :
+        m_fDistance(Distance),
+        m_fAngleX(AngleX),
+        m_fAngleY(AngleY) {}
+        
+Camera * TrackballCamera::clone() const {
+	return new TrackballCamera(m_fDistance, m_fAngleX, m_fAngleY);
+}
 
 void TrackballCamera::moveFront(float delta) {
     m_fDistance += delta;

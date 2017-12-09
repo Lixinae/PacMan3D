@@ -4,14 +4,18 @@
 #include <glimac/common.hpp>
 #include <Camera.h>
 
-class TrackballCamera :public Camera{
+class TrackballCamera :public Camera {
 
 private:
-	float m_fDistance,m_fAngleX,m_fAngleY;
+
+	float m_fDistance, m_fAngleX, m_fAngleY;
 
 public:
+
 	TrackballCamera();
-	TrackballCamera(float m_fDistance,float m_fAngleX,float m_fAngleY);
+	TrackballCamera(float Distance, float AngleX, float AngleY);
+
+	Camera * clone() const;
 
 	void moveFront(float delta) override;
 
@@ -21,6 +25,7 @@ public:
 
     void moveHorizontal(float t) override;
 	glm::mat4 getViewMatrix() const override;
+	
 };
 
 #endif
