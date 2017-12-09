@@ -36,6 +36,8 @@ public:
     virtual void moveHorizontal(float t)= 0;
 	/* *** 						 *** */
 	
+	virtual Camera * clone() const = 0;
+	
     /**
      * Calcul la viewMatrix de la camera et la renvoie
      * @return La viewMatrix de la camera

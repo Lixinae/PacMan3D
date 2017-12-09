@@ -7,6 +7,7 @@
 #include <NormalModel3D.h>
 #include <glimac/Program.hpp>
 #include <glimac/SDLWindowManager.hpp>
+#include <PointOfView.h>
 #include <Camera.h>
 
 using namespace glimac;
@@ -25,7 +26,7 @@ AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
 	}
 }
 
-Renderer3D::Renderer3D(SDLWindowManager * windowManager, int windowWidth, int windowHeight, Camera * camera) : _windowManager(windowManager), _camera(camera), ProjMatrix(perspective(radians(70.f), float(windowWidth)/windowHeight, 0.1f, 100.f)), _models() {
+Renderer3D::Renderer3D(SDLWindowManager * windowManager, int windowWidth, int windowHeight, PointOfView * pointOfView) : _windowManager(windowManager), _pointOfView(pointOfView), ProjMatrix(perspective(radians(70.f), float(windowWidth)/windowHeight, 0.1f, 100.f)), _models() {
 	for (auto & model : GameRepresentation::MODELS) {
 		AbstractModel3D * model3d = get3DModel(model); // TODO free
 		_models[model] = model3d;
@@ -33,14 +34,13 @@ Renderer3D::Renderer3D(SDLWindowManager * windowManager, int windowWidth, int wi
 }
 	
 void Renderer3D::render(const GameRepresentation & repr) const {
-	mat4 GlobalMVMatrix = _camera->getViewMatrix();
+	mat4 GlobalMVMatrix = _pointOfView->getCamera()->getViewMatrix();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	for (auto & model : GameRepresentation::MODELS) {  
 		vector<BoardPosition> positions = repr[model];
 		AbstractModel3D * model3d = _models.at(model);
 		model3d->bind();
 		for (auto & position : positions) {
-			// TODO (x,y) on (x,0,y)
 			mat4 MVMatrix = translate(GlobalMVMatrix, vec3(position.getX()*SQUARE_SIZE, 0, -position.getY()*SQUARE_SIZE));
 			model3d->setMatrices(ProjMatrix, MVMatrix);
 			glDrawArrays(GL_TRIANGLES, 0, model3d->count());
