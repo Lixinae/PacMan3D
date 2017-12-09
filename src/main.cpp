@@ -2,7 +2,6 @@
 #include <cstddef>
 #include <chrono>
 #include <thread>
-#include <fstream>
 #include <json/json.hpp>
 #include <GL/glew.h>
 #include <glimac/SDLWindowManager.hpp>
@@ -33,13 +32,7 @@ int main(int argc, char **argv) {
 
     glEnable(GL_DEPTH_TEST);
 
-
-    json jsonGame;
-    ifstream gameFile("assets/game/game.json");
-    gameFile >> jsonGame;
-    gameFile.close();
-    Game game = Game::fromJSON(jsonGame);
-
+    Game game = Game::fromJSONFile("assets/game/game.json");
     Configuration configuration = Configuration::fromJSONFile("assets/configuration.json");
 
 

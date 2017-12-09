@@ -5,14 +5,18 @@
 #include <Pacman.h>
 #include <GameRepresentation.h>
 #include <json/json.hpp>
+#include <string>
 
 using json = nlohmann::json;
+
+using namespace std;
 
 class Game {
 
 public:
 	
-	static Game fromJSON(json jsonGame);
+	static Game fromJSON(const json & jsonGame);
+	static Game fromJSONFile(const string & filePath);
 	
 	Pacman & getPacman(); //TODO do not return the pacman : apply the transformation locally in game
 	

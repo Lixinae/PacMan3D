@@ -11,7 +11,7 @@ class BoardSquare {
 
 public:
 	
-	static BoardSquare * fromJSON(json jsonSquare);
+	static BoardSquare * fromJSON(const json & jsonSquare);
 	
 	virtual GameRepresentation::Model getModel() const = 0;
 	

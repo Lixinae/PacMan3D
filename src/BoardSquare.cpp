@@ -6,7 +6,7 @@
 
 using json = nlohmann::json;
 
-BoardSquare * BoardSquare::fromJSON(json jsonSquare) {
+BoardSquare * BoardSquare::fromJSON(const json & jsonSquare) {
 	string type = jsonSquare["type"];
 	if (type == "wall") {
 		return new Wall;

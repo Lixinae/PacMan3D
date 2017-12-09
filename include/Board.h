@@ -16,7 +16,7 @@ class Board {
 
 public:
 
-	static Board fromJSON(json jsonBoard);
+	static Board fromJSON(const json & jsonBoard);
 	
 	~Board();
 
