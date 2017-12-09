@@ -3,10 +3,12 @@
 
 #include <GL/glew.h>
 #include <string>
+#include <glimac/glm.hpp>
 #include <glimac/Program.hpp>
 
 using namespace std;
 using namespace glimac;
+using namespace glm;
 
 class AbstractModel3D {
 
@@ -29,6 +31,10 @@ public:
 	virtual void unbind();
 	
 	GLsizei count() const;
+	
+	void setMVPMatrix(const mat4 & MVPMatrix); 		 //
+	void setMVMatrix(const mat4 & MVMatrix); 		 // TODO maybe remove (may be change in setMatrix(proj,mvmat))
+	void setNormalMatrix(const mat4 & NormalMatrix); //
 
 private:
 

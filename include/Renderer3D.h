@@ -1,9 +1,10 @@
 #ifndef __RENDERER_3D_H__
 #define __RENDERER_3D_H__
 
+#include <GL/glew.h>
 #include <Renderer.h>
 #include <GameRepresentation.h>
-#include <Model3D.h>
+#include <AbstractModel3D.h>
 #include <glimac/Program.hpp>
 #include <glimac/SDLWindowManager.hpp>
 
@@ -22,17 +23,9 @@ public:
 private:
 
 	SDLWindowManager * _windowManager;
-	map<GameRepresentation::Model, Model3D> _models;
-	
-	/* TODO maybe rm */
-	GLuint uMVPmatrix; 
-    GLuint uMVmatrix;
-    GLuint uNormalmatrix;
+	map<GameRepresentation::Model, AbstractModel3D *> _models;
 
-	Program program; // TODO should be in model
-	/*				 */
-
-	Model3D get3DModel(GameRepresentation::Model model);
+	AbstractModel3D * get3DModel(GameRepresentation::Model model);
 
 };
 

@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <string>
+#include <glimac/glm.hpp>
 #include <glimac/Program.hpp>
 #include <Utils.h>
 
@@ -11,6 +12,7 @@
 
 using namespace std;
 using namespace glimac;
+using namespace glm;
 
 const string AbstractModel3D::VERTEX_SHADER_3D = Utils::SHADER_PATH + "/" + "3D.vs.glsl";
 
@@ -90,4 +92,16 @@ void AbstractModel3D::unbind() {
 
 GLsizei AbstractModel3D::count() const {
 	return _size;
+}
+
+void AbstractModel3D::setMVPMatrix(const mat4 & MVPMatrix) {
+	glUniformMatrix4fv(_uMVPmatrix, 1, GL_FALSE, value_ptr(MVPMatrix));
+}
+
+void AbstractModel3D::setMVMatrix(const mat4 & MVMatrix) {
+	glUniformMatrix4fv(_uMVmatrix, 1, GL_FALSE, value_ptr(MVMatrix));
+}
+
+void AbstractModel3D::setNormalMatrix(const mat4 & NormalMatrix) {
+	glUniformMatrix4fv(_uNormalmatrix, 1, GL_FALSE, value_ptr(NormalMatrix));
 }
