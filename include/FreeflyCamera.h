@@ -2,7 +2,7 @@
 #define __FREEFLY_CAMERA_H__
 
 #include <glimac/common.hpp>
-#include "Camera.h"
+#include <Camera.h>
 
 class FreeflyCamera: public Camera{
 

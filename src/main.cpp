@@ -27,8 +27,8 @@ using json = nlohmann::json;
 
 int main(int argc, char **argv) {
 
-    float l = 800, h = 600;
-    SDLWindowManager windowManager(l, h, "GLImac");
+    int windowWidth = 800, windowHeight = 600;
+    SDLWindowManager windowManager(windowWidth, windowHeight, "GLImac");
 
     GLenum glewInitError = glewInit();
     if (GLEW_OK != glewInitError) {
@@ -45,20 +45,26 @@ int main(int argc, char **argv) {
     gameFile.close();
     Game game = Game::fromJSON(jsonGame);
 
-    Renderer *renderer = new Renderer3D(&windowManager);
+	Camera * camera = new TrackballCamera;
+	camera->moveFront(20);
+	camera->rotateVertical(45);
+	camera->rotateHorizontal(15);
+
+    Renderer * renderer = new Renderer3D(&windowManager, windowWidth, windowHeight, camera);
 
     EventHandler eventHandler;
-    double speed = 1;
-    TrackballCamera trackballCamera;
-    FreeflyCamera freeflyCamera;
-    bool isTrackBall = true;
+    
+    //double speed = 1;
+    //TrackballCamera trackballCamera;
+    //FreeflyCamera freeflyCamera;
+    //bool isTrackBall = true;
 
 	bool done = false;
     while (!done) {
 		
 		Pacman & pacman = game.getPacman();
     
-        SDL_Event event{};
+        SDL_Event event;
         while (windowManager.pollEvent(event)) {
             eventHandler.handleEvent(event);
         }
@@ -144,6 +150,7 @@ int main(int argc, char **argv) {
         
     }
 
+	delete camera;
     delete renderer;
 
     return EXIT_SUCCESS;
