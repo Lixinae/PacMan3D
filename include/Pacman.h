@@ -17,7 +17,7 @@ public:
 		WEST
 	};
 
-	static Pacman fromJSON(json jsonPacman);
+	static Pacman fromJSON(const json & jsonPacman);
 	
 	void setOrientation(Orientation orientation);
 	

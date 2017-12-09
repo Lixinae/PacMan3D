@@ -9,7 +9,7 @@ Pacman::Pacman(const BoardPosition & position, Orientation orientation) : _posit
 
 }
 
-Pacman Pacman::fromJSON(json jsonPacman) {
+Pacman Pacman::fromJSON(const json & jsonPacman) {
 	BoardPosition position = BoardPosition::fromJSON(jsonPacman["position"]);
 	Orientation orientation = orientationFromString(jsonPacman["orientation"]); 
 	return Pacman(position, orientation);

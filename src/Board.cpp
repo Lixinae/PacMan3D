@@ -16,7 +16,7 @@ Board::~Board() {
 	// TODO manage delete for new boardsquare::fromjson
 }
 
-Board Board::fromJSON(json jsonBoard) {
+Board Board::fromJSON(const json & jsonBoard) {
 	map<BoardPosition, BoardSquare *> squares;
 	json casesArray = jsonBoard["cases"];
 	for (json::iterator it = casesArray.begin(); it != casesArray.end(); ++it) {

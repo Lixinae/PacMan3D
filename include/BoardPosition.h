@@ -14,7 +14,7 @@ public:
 	
 	BoardPosition(int x, int y);
 	
-	static BoardPosition fromJSON(json jsonPosition);
+	static BoardPosition fromJSON(const json & jsonPosition);
 	
 	int getX() const;
 	int getY() const;

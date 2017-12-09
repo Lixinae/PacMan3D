@@ -8,6 +8,7 @@
 using json = nlohmann::json;
 
 using namespace std;
+
 enum class control {
     UP,
     DOWN,
@@ -20,21 +21,22 @@ enum class control {
 class Configuration {
 
 private:
-    map<control, string> _keyMap;
-    string _filePath;
 
-    bool parseJsonKeybinds(const json &json);
-
-    bool readConfigFromFile();
-
-    void loadDefaultConfiguration();
+    map<control, string> _keyMap; // TODO should be a control -> SDL_key map
+    
+    Configuration(map<control, string> keyMap);
+    
+    static map<control, string> keyMapFromJSON(const json & json);
 
 public:
-    Configuration();
 
-    Configuration(const string &filePath);
+	static Configuration defaultConfiguration();
+	
+	static Configuration fromJSON(const json & json);
+	static Configuration fromJSONFile(const string & filePath);
 
     map<control, string> getControlMap();
+    
 };
 
 #endif
