@@ -1,6 +1,5 @@
 #include <PointOfView.h>
 
-#include <Camera.h>
 
 PointOfView::PointOfView(Camera * camera) : _camera(camera) {
 

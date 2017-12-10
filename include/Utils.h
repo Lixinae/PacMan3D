@@ -13,9 +13,7 @@ public:
 
 private:
 
-	Utils() {
-	
-	}
+	Utils() = default;
 
 };
 
