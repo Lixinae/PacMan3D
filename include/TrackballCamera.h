@@ -4,26 +4,47 @@
 #include <glimac/common.hpp>
 #include <Camera.h>
 
-class TrackballCamera :public Camera {
+class TrackballCamera : public Camera {
 
 private:
 
-	float m_fDistance, m_fAngleX, m_fAngleY;
+    float m_fDistance, m_fAngleX, m_fAngleY;
 
 public:
 
-	TrackballCamera();
-	TrackballCamera(float Distance, float AngleX, float AngleY);
+    TrackballCamera();
 
-	void moveFront(float delta) override;
+    TrackballCamera(float Distance, float AngleX, float AngleY);
 
-	void rotateHorizontal(float degrees) override;
-	
-	void rotateVertical(float degrees) override;
+    /**
+     * Permet d'avancer ou de reculer la camera
+     * @param t : valeur a enlever ou rajouter
+     */
+    void moveFront(float delta) override;
 
+
+    void rotateHorizontal(float degrees) override;
+
+    /**
+    * Permet de faire tourner la camera vers le haut ou le bas(en ajoutant ou en enlevant des degrées)
+    * @param degrees : valeur en degrees a enlever ou ajouter
+    */
+    void rotateVertical(float degrees) override;
+
+    /**
+     * Permet de deplacer la camera vers la gauche ou la droite
+     * /!\ Non implementé pour cette camera
+     * @param t : valeur a enlever ou rajouter
+     *
+     */
     void moveHorizontal(float t) override;
-	glm::mat4 getViewMatrix() const override;
-	
+
+    /**
+     * Calcul la viewMatrix de la camera et la renvoie
+     * @return La viewMatrix de la camera
+     */
+    glm::mat4 getViewMatrix() const override;
+
 };
 
 #endif
