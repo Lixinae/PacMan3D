@@ -1,20 +1,25 @@
 #include <Renderer3D.h>
 #include <NormalModel3D.h>
+#include <TexModel3D.h>
+#include <glimac/Program.hpp>
+#include <glimac/SDLWindowManager.hpp>
+#include <PointOfView.h>
+#include <Camera.h>
 
 using namespace glimac;
 using namespace glm;
 
 const float Renderer3D::SQUARE_SIZE = 1;
 
-AbstractModel3D *Renderer3D::get3DModel(GameRepresentation::Model model) {
-    switch (model) {
-        case GameRepresentation::Model::PACMAN:
-            return new NormalModel3D;
-        case GameRepresentation::Model::WALL:
-            return new NormalModel3D;
-        case GameRepresentation::Model::PAC_GOMME:
-            return new NormalModel3D;
-    }
+AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
+	switch (model) {
+		case GameRepresentation::Model::PACMAN:
+			return new TexModel3D("assets/textures/EarthMap.jpg");
+		case GameRepresentation::Model::WALL:
+			return new TexModel3D("assets/textures/MoonMap.jpg");
+		case GameRepresentation::Model::PAC_GOMME:
+			return new TexModel3D("assets/textures/MoonMap.jpg");
+	}
 }
 
 Renderer3D::Renderer3D(SDLWindowManager *windowManager, int windowWidth, int windowHeight, PointOfView *pointOfView) :

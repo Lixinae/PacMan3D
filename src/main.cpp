@@ -86,21 +86,24 @@ int main(int argc, char **argv) {
             //eventHandler.handleEvent(event);
         }
 
-        // TODO //
-        if (windowManager.isKeyPressed(SDLK_z)) {
-            cout << "z" << endl;
-            pacman.setOrientation(Pacman::Orientation::NORTH);
-        } else if (windowManager.isKeyPressed(SDLK_s)) {
-            cout << "s" << endl;
-            pacman.setOrientation(Pacman::Orientation::SOUTH);
-        } else if (windowManager.isKeyPressed(SDLK_q)) {
-            cout << "q" << endl;
-            pacman.setOrientation(Pacman::Orientation::WEST);
-        } else if (windowManager.isKeyPressed(SDLK_d)) {
-            cout << "d" << endl;
-            pacman.setOrientation(Pacman::Orientation::EAST);
-        }
-//			else if (windowManager.isKeyPressed(SDLK_c)) { // TODO -> changer la maniere -> ne pas pouvoir rester appuyer dessus
+		// TODO //
+		if (windowManager.isKeyPressed(SDLK_z)) {
+			cout << "z" << endl;
+			pacman.setOrientation(Pacman::Orientation::NORTH);
+		}
+		if (windowManager.isKeyPressed(SDLK_s)) {
+			cout << "s" << endl;
+			pacman.setOrientation(Pacman::Orientation::SOUTH);
+		}
+		if (windowManager.isKeyPressed(SDLK_q)) {
+			cout << "q" << endl;
+			pacman.setOrientation(Pacman::Orientation::WEST);
+		}
+		if (windowManager.isKeyPressed(SDLK_d)) {
+			cout << "d" << endl;
+			pacman.setOrientation(Pacman::Orientation::EAST);
+		}
+//		if (windowManager.isKeyPressed(SDLK_c)) {
 //			cout << "c" << endl;
 //			if (icam == 1) {
 //				pointOfView.setCamera(camera2);
@@ -110,22 +113,66 @@ int main(int argc, char **argv) {
 //				icam = 1;
 //			}
 //		}
-        else if (windowManager.isKeyPressed(SDLK_b)) {
-            cout << "b" << endl;
-            if (icam == 1) {
-                camera1->moveFront(1);
-            } else if (icam == 2) {
-                camera2->moveFront(1);
+		if (windowManager.isKeyPressed(SDLK_b)) {
+			cout << "b" << endl;
+			if (icam == 1) {
+				camera1->moveFront(1);
+			} else if (icam == 2) {
+				camera2->moveFront(1);
+			}
+		}
+		if (windowManager.isKeyPressed(SDLK_n)) {
+			cout << "n" << endl;
+			if (icam == 1) {
+				camera1->moveFront(-1);
+			} else if (icam == 2) {
+				camera2->moveFront(-1);
+			}
+		}
+		// 		//
+
+
+		/*
+        if (eventHandler.changeCamera()) {
+            isTrackBall = !isTrackBall;
+            eventHandler.set_changeCamera(false);
+        }
+
+        if (isTrackBall) {
+//            if(keyUp){
+//                trackballCamera.rotateVertical(0.005);
+//            }
+//            else if(keyDown){
+//                trackballCamera.rotateVertical(-0.005);
+//            }
+//            if(keyLeft){
+//                trackballCamera.rotateHorizontal(-0.005);
+//            }
+//            else if(keyRight){
+//                trackballCamera.rotateHorizontal(0.005);
+//            }
+//            if(eventHandler.mouseLeft()){
+//                trackballCamera.moveFront(0.005);
+//            }
+//            else if(eventHandler.mouseRight()){
+//                trackballCamera.moveFront(-0.005);
+//            }
+        } else {
+            if (eventHandler.moveUp()) {
+                freeflyCamera.moveFront(1. * speed);
+            } else if (eventHandler.moveDown()) {
+                freeflyCamera.moveFront(-1. * speed);
             }
-        } else if (windowManager.isKeyPressed(SDLK_n)) {
-            cout << "n" << endl;
-            if (icam == 1) {
-                camera1->moveFront(-1);
-            } else if (icam == 2) {
-                camera2->moveFront(-1);
+            if (eventHandler.moveLeft()) {
+                freeflyCamera.moveHorizontal(1. * speed);
+            } else if (eventHandler.moveRight()) {
+                freeflyCamera.moveHorizontal(-1. * speed);
+            }
+            if (eventHandler.mouseRight()) {
+                freeflyCamera.rotateHorizontal(event.motion.xrel);
+                freeflyCamera.rotateVertical(event.motion.yrel);
             }
         }
-        /*
         if (eventHandler.activateSpeed()) {
             if (eventHandler.speedUp()) {
                 speed += 0.02;
