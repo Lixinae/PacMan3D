@@ -76,16 +76,20 @@ int main(int argc, char **argv) {
 		if (windowManager.isKeyPressed(SDLK_z)) {
 			cout << "z" << endl;
 			pacman.setOrientation(Pacman::Orientation::NORTH);
-		} else if (windowManager.isKeyPressed(SDLK_s)) {
+		}
+		if (windowManager.isKeyPressed(SDLK_s)) {
 			cout << "s" << endl;
 			pacman.setOrientation(Pacman::Orientation::SOUTH);
-		} else if (windowManager.isKeyPressed(SDLK_q)) {
+		}
+		if (windowManager.isKeyPressed(SDLK_q)) {
 			cout << "q" << endl;
 			pacman.setOrientation(Pacman::Orientation::WEST);
-		} else if (windowManager.isKeyPressed(SDLK_d)) {
+		}
+		if (windowManager.isKeyPressed(SDLK_d)) {
 			cout << "d" << endl;
 			pacman.setOrientation(Pacman::Orientation::EAST);
-		} else if (windowManager.isKeyPressed(SDLK_c)) {
+		}
+		if (windowManager.isKeyPressed(SDLK_c)) {
 			cout << "c" << endl;
 			if (icam == 1) {
 				pointOfView.setCamera(camera2);
@@ -94,14 +98,16 @@ int main(int argc, char **argv) {
 				pointOfView.setCamera(camera1);
 				icam = 1;
 			}
-		} else if (windowManager.isKeyPressed(SDLK_b)) {
+		}
+		if (windowManager.isKeyPressed(SDLK_b)) {
 			cout << "b" << endl;
 			if (icam == 1) {
 				camera1->moveFront(1);
 			} else if (icam == 2) {
 				camera2->moveFront(1);
 			}
-		} else if (windowManager.isKeyPressed(SDLK_n)) {
+		}
+		if (windowManager.isKeyPressed(SDLK_n)) {
 			cout << "n" << endl;
 			if (icam == 1) {
 				camera1->moveFront(-1);
