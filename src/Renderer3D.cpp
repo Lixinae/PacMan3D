@@ -1,10 +1,5 @@
 #include <Renderer3D.h>
-#include <NormalModel3D.h>
 #include <TexModel3D.h>
-#include <glimac/Program.hpp>
-#include <glimac/SDLWindowManager.hpp>
-#include <PointOfView.h>
-#include <Camera.h>
 
 using namespace glimac;
 using namespace glm;
