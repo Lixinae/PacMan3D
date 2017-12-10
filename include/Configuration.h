@@ -30,7 +30,6 @@ private:
     map<control, SDLKey> _keyMap;
     pair<int, int> _windowSize;
 
-
     static SDLKey stringToKey(string s);
     
     static map<control, SDLKey> keyMapFromJSON(const json & json);

@@ -18,7 +18,7 @@ private:
     SDLWindowManager _windowManager;
     Game _game;
     Configuration _configuration;
-    //std::map<> keyMap;// todo changer les types
+    bool _firstCamera = true;
     /*
     bool _keyLeft=false;
     bool _keyRight=false;
@@ -36,7 +36,11 @@ private:
 public:
     EventHandler(const SDLWindowManager &windowManager, const Game &game, const Configuration &configuration);
 
-	void handleEvent(const SDL_Event event);
+    /**
+     * Gère les evenement liés à la SDl , tel que les touches appuyer ou les mouvement de la souris
+     * @param event Evenement SDL à traiter
+     */
+    void handleEvent(const SDL_Event event);
 
     /*
     bool moveLeft() const;

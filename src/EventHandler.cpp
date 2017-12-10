@@ -9,8 +9,6 @@ EventHandler::EventHandler(const SDLWindowManager &windowManager, const Game &ga
 }
 
 
-
-
 void EventHandler::handleEvent(const SDL_Event event) {
 
     auto map = _configuration.getControlMap();
@@ -21,26 +19,43 @@ void EventHandler::handleEvent(const SDL_Event event) {
     SDLKey rightKey = map[control::RIGHT];
     SDLKey changeCamera = map[control::CHANGE_CAMERA];
 
-//	Pacman &pacman = game.getPacman();
-//	if (windowManager.isKeyPressed(SDLK_z)) {
-//		cout << "z" << endl;
-//		pacman.setOrientation(Pacman::Orientation::NORTH);
-//	} else if (windowManager.isKeyPressed(SDLK_s)) {
-//		cout << "s" << endl;
-//		pacman.setOrientation(Pacman::Orientation::SOUTH);
-//	} else if (windowManager.isKeyPressed(SDLK_q)) {
-//		cout << "q" << endl;
-//		pacman.setOrientation(Pacman::Orientation::WEST);
-//	} else if (windowManager.isKeyPressed(SDLK_d)) {
-//		cout << "d" << endl;
-//		pacman.setOrientation(Pacman::Orientation::EAST);
-//	}
+    Pacman &pacman = _game.getPacman();
+    if (_windowManager.isKeyPressed(upKey)) {
+        cout << "z" << endl;
+        pacman.setOrientation(Pacman::Orientation::NORTH);
+    } else if (_windowManager.isKeyPressed(downKey)) {
+        cout << "s" << endl;
+        pacman.setOrientation(Pacman::Orientation::SOUTH);
+    } else if (_windowManager.isKeyPressed(leftKey)) {
+        cout << "q" << endl;
+        pacman.setOrientation(Pacman::Orientation::WEST);
+    } else if (_windowManager.isKeyPressed(rightKey)) {
+        cout << "d" << endl;
+        pacman.setOrientation(Pacman::Orientation::EAST);
+    } //else if (_windowManager.isKeyPressed(changeCamera)) { // TODO -> changer la maniere -> ne pas pouvoir rester appuyer dessus
+    //cout << "c" << endl;
+//        if (icam == 1) {
+//            pointOfView.setCamera(camera2);
+//            icam = 2;
+//        } else if (icam == 2) {
+//            pointOfView.setCamera(camera1);
+//            icam = 1;
+//        }
 
-    /*
-    if(event.type == SDL_QUIT){
-        _exitProgram = true;
-        return;
+    // todo -> recup le point of view ici et les 2 camera
+    if (event.type == SDL_KEYDOWN) {
+        if (event.key.keysym.sym == changeCamera) {
+            if (_firstCamera) {
+                _firstCamera = !_firstCamera;
+
+//                pointOfView.setCamera(camera2);
+            } else {
+                _firstCamera = !_firstCamera;
+//                pointOfView.setCamera(camera1);
+            }
+        }
     }
+    /*
 
     if (event.type == SDL_KEYDOWN) {
         switch (event.key.keysym.sym) { //voir https://wiki.libsdl.org/SDL_Keycode
