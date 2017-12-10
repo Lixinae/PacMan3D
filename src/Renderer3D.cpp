@@ -5,6 +5,7 @@
 #include <GameRepresentation.h>
 #include <AbstractModel3D.h>
 #include <NormalModel3D.h>
+#include <TexModel3D.h>
 #include <glimac/Program.hpp>
 #include <glimac/SDLWindowManager.hpp>
 #include <PointOfView.h>
@@ -18,11 +19,11 @@ const float Renderer3D::SQUARE_SIZE = 1;
 AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
 	switch (model) {
 		case GameRepresentation::Model::PACMAN:
-			return new NormalModel3D;
+			return new TexModel3D("assets/textures/EarthMap.jpg");
 		case GameRepresentation::Model::WALL:
-			return new NormalModel3D;
+			return new TexModel3D("assets/textures/MoonMap.jpg");
 		case GameRepresentation::Model::PAC_GOMME:
-			return new NormalModel3D;
+			return new TexModel3D("assets/textures/MoonMap.jpg");
 	}
 }
 

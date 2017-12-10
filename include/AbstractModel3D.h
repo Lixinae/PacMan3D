@@ -34,6 +34,10 @@ public:
 	
 	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix); // TODO maybe remove
 
+protected:
+
+	Program _program;
+
 private:
 
 	// TODO model may have a matrix for init transform (scale, ...) 
@@ -41,8 +45,6 @@ private:
 	GLuint _vbo;
 	GLuint _vao;
 	GLsizei _size;
-	
-	Program _program;
 
 	GLuint _uMVPmatrix; 
     GLuint _uMVmatrix;
