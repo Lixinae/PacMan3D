@@ -2,19 +2,14 @@
 
 #include <Camera.h>
 
-PointOfView::PointOfView(const Camera * camera) : _camera(camera->clone()) {
+PointOfView::PointOfView(Camera * camera) : _camera(camera) {
 
-}
-
-PointOfView::~PointOfView() {
-	delete _camera;
 }
 
 const Camera * PointOfView::getCamera() const {
 	return _camera;
 }
 
-void PointOfView::setCamera(const Camera * camera) {
-	delete _camera;
-	_camera = camera->clone();
+void PointOfView::setCamera(Camera * camera) {
+	_camera = camera;
 }

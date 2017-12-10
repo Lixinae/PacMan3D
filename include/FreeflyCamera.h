@@ -20,8 +20,6 @@ public:
 
     explicit FreeflyCamera(glm::vec3 Position);
     
-    Camera * clone() const;
-    
     /**
      * Permet de faire tourner la camera vers la gauche ou la droite (en ajoutant ou en enlevant des degrées)
      * @param degrees

@@ -22,17 +22,6 @@ FreeflyCamera::FreeflyCamera(glm::vec3 Position) :
     computeDirectionVectors();
 }
 
-Camera * FreeflyCamera::clone() const {
-	FreeflyCamera * camera = new FreeflyCamera;
-	camera->m_Position = m_Position;
-	camera->m_fPhi = m_fPhi;
-	camera->m_fTheta = m_fTheta;
-	camera->m_LeftVector = m_LeftVector;
-	camera->m_FrontVector = m_FrontVector;
-	camera->m_UpVector = m_UpVector;
-	return camera;
-}
-
 void FreeflyCamera::rotateHorizontal(float degrees) {
     degrees = glm::radians(degrees);
     m_fPhi += degrees;

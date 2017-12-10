@@ -15,8 +15,6 @@ public:
 	TrackballCamera();
 	TrackballCamera(float Distance, float AngleX, float AngleY);
 
-	Camera * clone() const;
-
 	void moveFront(float delta) override;
 
 	void rotateHorizontal(float degrees) override;

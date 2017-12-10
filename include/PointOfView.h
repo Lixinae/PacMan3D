@@ -5,14 +5,14 @@
 
 class PointOfView {
 
+// TODO get all the camera used
+
 public:
 
-	PointOfView(const Camera * camera);
-
-	~PointOfView();
+	PointOfView(Camera * camera);
 
 	const Camera * getCamera() const;
-	void setCamera(const Camera * camera);
+	void setCamera(Camera * camera);
 
 private:
 

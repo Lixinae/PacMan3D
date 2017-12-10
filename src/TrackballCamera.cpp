@@ -9,10 +9,6 @@ TrackballCamera::TrackballCamera(float Distance, float AngleX, float AngleY) :
         m_fDistance(Distance),
         m_fAngleX(AngleX),
         m_fAngleY(AngleY) {}
-        
-Camera * TrackballCamera::clone() const {
-	return new TrackballCamera(m_fDistance, m_fAngleX, m_fAngleY);
-}
 
 void TrackballCamera::moveFront(float delta) {
     m_fDistance += delta;
