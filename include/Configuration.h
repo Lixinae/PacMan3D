@@ -27,6 +27,8 @@ private:
     
     Configuration(map<control, SDLKey> keyMap);
     
+    static SDLKey stringToKey(string s);
+    
     static map<control, SDLKey> keyMapFromJSON(const json & json);
 
 public:
