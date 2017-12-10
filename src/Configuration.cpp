@@ -43,7 +43,7 @@ map<control, SDLKey> Configuration::getControlMap() {
 }
 
 // todo -> changer car tres moche
-SDLKey stringToKey(string s) {
+SDLKey Configuration::stringToKey(string s) {
     if (s == "a") return SDLK_a;
     if (s == "b") return SDLK_b;
     if (s == "c") return SDLK_c;
