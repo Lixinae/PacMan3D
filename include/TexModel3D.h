@@ -12,7 +12,7 @@ public:
 
 	//TODO static const path
 	
-	TexModel3D(const string & texturePath);
+	TexModel3D(const string & meshPath, const string & texturePath);
 	
 	void bind();
 	void unbind();

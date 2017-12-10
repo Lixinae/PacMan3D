@@ -2,10 +2,6 @@
 
 #include <Utils.h>
 
-#include <glimac/Sphere.hpp>
-#include <glimac/Cone.hpp>
-
-
 using namespace std;
 using namespace glimac;
 using namespace glm;
@@ -21,29 +17,11 @@ const GLchar * AbstractModel3D::VERTEX_UNIFORM_MV_MATRIX = "uMVMatrix";
 const GLchar * AbstractModel3D::VERTEX_UNIFORM_NORMAL_MATRIX = "uNormalMatrix";
 
 
-void AbstractModel3D::initPoints() {
+void AbstractModel3D::initPoints(Mesh mesh) {
 	glGenBuffers(1, &_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	
-	/* TODO RM */
-	int modelPath = 0;
-	if (modelPath == 0) {
-		Sphere shape(1, 16, 16);
-		_size = shape.getVertexCount();
-		glBufferData(GL_ARRAY_BUFFER, _size*sizeof(ShapeVertex), shape.getDataPointer(), GL_STATIC_DRAW);
-	}
-	if (modelPath == 1) {
-		Sphere shape(0.3, 16, 16);
-		_size = shape.getVertexCount();
-		glBufferData(GL_ARRAY_BUFFER, _size*sizeof(ShapeVertex), shape.getDataPointer(), GL_STATIC_DRAW);
-	}
-	if (modelPath == 2) {
-		Cone shape(1, 1, 16, 16);
-		_size = shape.getVertexCount();
-		glBufferData(GL_ARRAY_BUFFER, _size*sizeof(ShapeVertex), shape.getDataPointer(), GL_STATIC_DRAW);
-	}
-	/*			*/
-	
+	_size = mesh.getVertexCount();
+	glBufferData(GL_ARRAY_BUFFER, _size*sizeof(ShapeVertex), mesh.getDataPointer(), GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glGenVertexArrays(1, &_vao);
 	glBindVertexArray(_vao);
@@ -60,15 +38,15 @@ void AbstractModel3D::initPoints() {
 	glBindVertexArray(0);
 }
 
-void AbstractModel3D::initProgram(string fragmentShader) {
+void AbstractModel3D::initProgram(const string & fragmentShader) {
 	_program = loadProgram(VERTEX_SHADER_3D, fragmentShader);
 	_uMVPmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_MVP_MATRIX);
     _uMVmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_MV_MATRIX);
     _uNormalmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_NORMAL_MATRIX);
 }
 	
-AbstractModel3D::AbstractModel3D(string fragmentShader) {
-	initPoints();
+AbstractModel3D::AbstractModel3D(const string & mesh, const string & fragmentShader) {
+	initPoints(Mesh::fromOBJFile(mesh));
 	initProgram(fragmentShader);
 }
 

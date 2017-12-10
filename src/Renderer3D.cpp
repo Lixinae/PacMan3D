@@ -9,11 +9,11 @@ const float Renderer3D::SQUARE_SIZE = 1;
 AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
 	switch (model) {
 		case GameRepresentation::Model::PACMAN:
-			return new TexModel3D("assets/textures/EarthMap.jpg");
+			return new TexModel3D("a", "assets/textures/EarthMap.jpg");
 		case GameRepresentation::Model::WALL:
-			return new TexModel3D("assets/textures/MoonMap.jpg");
+			return new TexModel3D("b", "assets/textures/MoonMap.jpg");
 		case GameRepresentation::Model::PAC_GOMME:
-			return new TexModel3D("assets/textures/MoonMap.jpg");
+			return new TexModel3D("c", "assets/textures/MoonMap.jpg");
 	}
 }
 

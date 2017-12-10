@@ -2,6 +2,7 @@
 #define __ABSTRACT_MODEL_3D_H__
 
 #include <GL/glew.h>
+#include <Mesh.h>
 #include <string>
 #include <glimac/glm.hpp>
 #include <glimac/Program.hpp>
@@ -24,7 +25,8 @@ public:
 	static const GLchar * VERTEX_UNIFORM_MV_MATRIX;
 	static const GLchar * VERTEX_UNIFORM_NORMAL_MATRIX;
 	
-	AbstractModel3D(string fragmentShader); //TODO should be protected
+	AbstractModel3D(const string & mesh, const string & fragmentShader); //TODO should be protected
+																		// Make factory
 	virtual ~AbstractModel3D();
 	
 	virtual void bind();
@@ -50,8 +52,8 @@ private:
     GLuint _uMVmatrix;
     GLuint _uNormalmatrix;
     
-    void initPoints();
-    void initProgram(string fragmentShader);
+    void initPoints(Mesh mesh);
+    void initProgram(const string & fragmentShader);
 
 };
 
