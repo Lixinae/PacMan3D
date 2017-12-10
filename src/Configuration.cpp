@@ -1,7 +1,8 @@
 #include <Configuration.h>
 #include <fstream>
 
-Configuration::Configuration(map<control, SDLKey> keyMap) : _keyMap(keyMap) {
+Configuration::Configuration(map<control, SDLKey> keyMap, pair<int, int> windowSize) : _keyMap(keyMap),
+                                                                                       _windowSize(windowSize) {
 
 }
 
@@ -14,7 +15,9 @@ Configuration Configuration::defaultConfiguration() {
     keyMap[control::CHANGE_CAMERA] = stringToKey("c");
     keyMap[control::ZOOM_IN] = stringToKey("b");
     keyMap[control::ZOOM_OUT] = stringToKey("n");
-	return Configuration(keyMap);
+
+    pair<int, int> windowSize = pair<int, int>(800, 600);
+    return Configuration(keyMap, windowSize);
 }
 
 map<control, SDLKey> Configuration::keyMapFromJSON(const json & json) {
@@ -29,9 +32,17 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json & json) {
 	return keyMap;
 }
 
+pair<int, int> Configuration::windowSizeFromJson(const json &json) {
+    int width = json["width"];
+    int height = json["height"];
+    return pair<int, int>(width, height);
+}
+
 Configuration Configuration::fromJSON(const json & json) {
 	map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
-	return Configuration(keyMap);
+    pair<int, int> windowSize = windowSizeFromJson(json["windowSize"]);
+    //pair<int,int>windowSize = pair<int,int>(800,600);
+    return Configuration(keyMap, windowSize);
 }
 
 Configuration Configuration::fromJSONFile(const string & filePath) {
@@ -42,7 +53,19 @@ Configuration Configuration::fromJSONFile(const string & filePath) {
 	return fromJSON(jsonConfig);
 }
 
-map<control, SDLKey> Configuration::getControlMap() {
+pair<int, int> Configuration::get_windowSize() const {
+    return _windowSize;
+}
+
+int Configuration::getWidth() const {
+    return _windowSize.first;
+}
+
+int Configuration::getHeight() const {
+    return _windowSize.second;
+}
+
+map<control, SDLKey> Configuration::getControlMap() const {
     return _keyMap;
 }
 
@@ -136,3 +159,6 @@ SDLKey Configuration::stringToKey(string s) {
     if (s == "esc") return SDLK_ESCAPE;
 
 }
+
+
+
