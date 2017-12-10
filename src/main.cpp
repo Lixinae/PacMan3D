@@ -94,6 +94,20 @@ int main(int argc, char **argv) {
 				pointOfView.setCamera(camera1);
 				icam = 1;
 			}
+		} else if (windowManager.isKeyPressed(SDLK_b)) {
+			cout << "b" << endl;
+			if (icam == 1) {
+				camera1->moveFront(1);
+			} else if (icam == 2) {
+				camera2->moveFront(1);
+			}
+		} else if (windowManager.isKeyPressed(SDLK_n)) {
+			cout << "n" << endl;
+			if (icam == 1) {
+				camera1->moveFront(-1);
+			} else if (icam == 2) {
+				camera2->moveFront(-1);
+			}
 		}
 		// 		//
 
