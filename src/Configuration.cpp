@@ -12,6 +12,8 @@ Configuration Configuration::defaultConfiguration() {
     keyMap[control::LEFT] = stringToKey("q");
     keyMap[control::RIGHT] = stringToKey("d");
     keyMap[control::CHANGE_CAMERA] = stringToKey("c");
+    keyMap[control::ZOOM_IN] = stringToKey("b");
+    keyMap[control::ZOOM_OUT] = stringToKey("n");
 	return Configuration(keyMap);
 }
 
@@ -22,6 +24,8 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json & json) {
     keyMap[control::LEFT] = stringToKey(json["Left"]);
     keyMap[control::RIGHT] = stringToKey(json["Right"]);
     keyMap[control::CHANGE_CAMERA] = stringToKey(json["ChangeCamera"]);
+    keyMap[control::ZOOM_IN] = stringToKey(json["ZoomIn"]);
+    keyMap[control::ZOOM_OUT] = stringToKey(json["ZoomOut"]);
 	return keyMap;
 }
 

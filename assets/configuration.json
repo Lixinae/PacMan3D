@@ -4,6 +4,8 @@
     "Down": "s",
     "Left": "q",
     "Right": "d",
-    "ChangeCamera": "c"
+    "ChangeCamera": "c",
+	"ZoomIn":"b",
+	"ZoomOut":"n"
   }
 }

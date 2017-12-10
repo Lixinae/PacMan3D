@@ -15,7 +15,9 @@ enum class control {
     DOWN,
     LEFT,
     RIGHT,
-    CHANGE_CAMERA
+    CHANGE_CAMERA,
+	ZOOM_IN,
+	ZOOM_OUT
     // todo Add other possible controles if needed
 };
 
