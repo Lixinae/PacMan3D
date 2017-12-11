@@ -1,4 +1,5 @@
 #include <Renderer3D.h>
+#include <NormalModel3D.h>
 #include <TexModel3D.h>
 
 using namespace glimac;
@@ -17,11 +18,11 @@ AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
 	}
 }
 
-Renderer3D::Renderer3D(SDLWindowManager *windowManager, int windowWidth, int windowHeight, PointOfView *pointOfView) :
-        _windowManager(windowManager),
-        _pointOfView(pointOfView),
-        ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
-        _models() {
+Renderer3D::Renderer3D(int windowWidth, int windowHeight, PointOfView *pointOfView) :
+	_pointOfView(pointOfView),
+	_ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
+	_models() 
+{
     for (auto &model : GameRepresentation::MODELS) {
         AbstractModel3D *model3d = get3DModel(model); // TODO free
         _models[model] = model3d;
@@ -39,12 +40,13 @@ void Renderer3D::render(const GameRepresentation &repr) const {
         AbstractModel3D *model3d = _models.at(model);
         model3d->bind();
         for (auto &position : positions) {
-            mat4 MVMatrix = translate(GlobalMVMatrix,
-                                      vec3(position.getX() * SQUARE_SIZE, 0, -position.getY() * SQUARE_SIZE));
-            model3d->setMatrices(ProjMatrix, MVMatrix);
+            mat4 MVMatrix = translate(
+				GlobalMVMatrix,
+				vec3(position.getX() * SQUARE_SIZE, 0, -position.getY() * SQUARE_SIZE)
+			);
+            model3d->setMatrices(_ProjMatrix, MVMatrix);
             glDrawArrays(GL_TRIANGLES, 0, model3d->count());
         }
         model3d->unbind();
     }
-    _windowManager->swapBuffers();
 }

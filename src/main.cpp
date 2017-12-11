@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
     int icam = 1; //TODO change
     PointOfView pointOfView(camera1);
 
-    Renderer *renderer = new Renderer3D(&windowManager, windowWidth, windowHeight, &pointOfView);
+    Renderer *renderer = new Renderer3D(windowWidth, windowHeight, &pointOfView);
 
     EventHandler eventHandler = EventHandler::fromConfiguration(configuration);
 
@@ -107,6 +107,8 @@ int main(int argc, char **argv) {
 
         pacman.iterate();
 
+		windowManager.swapBuffers();
+		
         //TODO sleep framerate
         this_thread::sleep_for(chrono::milliseconds(50));
 

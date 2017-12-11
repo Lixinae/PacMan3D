@@ -6,7 +6,6 @@
 #include <GameRepresentation.h>
 #include <AbstractModel3D.h>
 #include <glimac/Program.hpp>
-#include <glimac/SDLWindowManager.hpp>
 #include <PointOfView.h>
 
 using namespace glimac;
@@ -17,14 +16,13 @@ public:
 
 	static const float SQUARE_SIZE;
 
-	Renderer3D(SDLWindowManager * windowManager, int windowWidth, int windowHeight, PointOfView * pointOfView); //TODO private + take in argument the map of BoardRepresentation->Model3D  
+	Renderer3D(int windowWidth, int windowHeight, PointOfView * pointOfView); //TODO private + take in argument the map of BoardRepresentation->Model3D  
 
 	void render(const GameRepresentation & repr) const;
 
 private:
 
-	SDLWindowManager * _windowManager;
-	mat4 ProjMatrix;
+	mat4 _ProjMatrix;
 	PointOfView * _pointOfView;
 	map<GameRepresentation::Model, AbstractModel3D *> _models;
 
