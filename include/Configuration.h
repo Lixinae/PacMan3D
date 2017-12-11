@@ -54,8 +54,7 @@ public:
      */
 	static Configuration fromJSONFile(const string & filePath);
 
-
-    map<control, SDLKey> getControlMap() const;
+    const map<control, SDLKey> getControlMap() const;
 
     int getWidth() const;
 

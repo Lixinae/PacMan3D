@@ -33,17 +33,10 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json & json) {
 	return keyMap;
 }
 
-pair<int, int> Configuration::windowSizeFromJson(const json &json) {
-    int width = json["width"];
-    int height = json["height"];
-    return pair<int, int>(width, height);
-}
-
 Configuration Configuration::fromJSON(const json & json) {
 	map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
-	int windowWidth = json["width"];
-	int windowHeight = json["height"];
-    pair<int, int> windowSize = windowSizeFromJson(json["windowSize"]);
+	int windowWidth = json["windowSize"]["width"];
+	int windowHeight = json["windowSize"]["height"];
     return Configuration(keyMap, windowWidth, windowHeight);
 }
 
@@ -63,11 +56,10 @@ int Configuration::getHeight() const {
     return _windowHeight;
 }
 
-map<control, SDLKey> Configuration::getControlMap() const {
+const map<control, SDLKey> Configuration::getControlMap() const {
     return _keyMap;
 }
 
-// todo -> changer car tres moche
 SDLKey Configuration::stringToKey(string s) {
     if (s == "a") return SDLK_a;
     if (s == "b") return SDLK_b;
@@ -155,8 +147,4 @@ SDLKey Configuration::stringToKey(string s) {
     if (s == "f14") return SDLK_F14;
     if (s == "f15") return SDLK_F15;
     if (s == "esc") return SDLK_ESCAPE;
-
 }
-
-
-
