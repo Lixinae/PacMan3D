@@ -8,6 +8,8 @@
 #include <glimac/SDLWindowManager.hpp>
 #include <Configuration.h>
 
+#include <Camera.h> // TODO rm
+
 using namespace glimac;
 using namespace std;
 using namespace glm;
@@ -17,18 +19,20 @@ class EventHandler {
 private:
 
 	map<control, SDLKey> _keyMap;
-
-	EventHandler(const map<control, SDLKey> & keyMap);
+	
+	Camera * _c1, * _c2; //TODO rm
+	int _icam;
 
 public:
 
-    static EventHandler fromConfiguration(const Configuration & configuration);
+	// TODO rm camera, should be managed in pointofview
+	EventHandler(const map<control, SDLKey> & keyMap, Camera * c1, Camera * c2);
 
     /**
      * Gère les evenement liés à la SDL, tel que les touches appuyer ou les mouvement de la souris
      * @param windowManager Window Manager
      */
-    void handleEvent(SDLWindowManager & windowManager, Game & game);
+    bool handleEvent(SDLWindowManager & windowManager, Game & game);
 
 };
 

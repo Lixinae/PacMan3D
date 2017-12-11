@@ -37,70 +37,29 @@ int main(int argc, char **argv) {
 
     Game game = Game::fromJSONFile("assets/game/game.json");
 
-    Camera *camera1 = new TrackballCamera;
+    Camera * camera1 = new TrackballCamera;
     camera1->moveFront(20);
     camera1->rotateVertical(45);
     camera1->rotateHorizontal(15);
 
-    Camera *camera2 = new TrackballCamera;
+    Camera * camera2 = new TrackballCamera;
     camera2->moveFront(20);
     camera2->rotateVertical(45);
     camera2->rotateHorizontal(-15);
 
-    int icam = 1; //TODO change
-    game.getPointOfView().setCamera(camera1);
+    game.getPointOfView().setCamera(camera1); // TODO change
 
-	EventHandler eventHandler = EventHandler::fromConfiguration(configuration);
+	EventHandler eventHandler(configuration.getControlMap(), camera1, camera2);
     Renderer *renderer = new Renderer3D(windowWidth, windowHeight, &(game.getPointOfView())); //TODO check adr function return
-
-    //double speed = 1;
-    //TrackballCamera trackballCamera;
-    //FreeflyCamera freeflyCamera;
-    //bool isTrackBall = true;
 
     bool done = false;
     while (!done) {
 
         Pacman &pacman = game.getPacman();
 
-        SDL_Event event;
-        while (windowManager.pollEvent(event)) {
-            if (event.type == SDL_QUIT) {
-                done = true; // Leave the loop after this iteration
-            }
-
-            // todo -> recup le point of view ici et les 2 camera
-            if (event.type == SDL_KEYDOWN) {
-                if (event.key.keysym.sym == SDLK_c) {
-                    cout << "c" << endl;
-                    if (icam == 1) {
-                        game.getPointOfView().setCamera(camera2);
-                        icam = 2;
-                    } else if (icam == 2) {
-                        game.getPointOfView().setCamera(camera1);
-                        icam = 1;
-                    }
-                }
-            }
-        }
-		if (windowManager.isKeyPressed(SDLK_b)) {
-			cout << "b" << endl;
-			if (icam == 1) {
-				camera1->moveFront(1);
-			} else if (icam == 2) {
-				camera2->moveFront(1);
-			}
+		if (eventHandler.handleEvent(windowManager, game)) {
+			done = true;
 		}
-		if (windowManager.isKeyPressed(SDLK_n)) {
-			cout << "n" << endl;
-			if (icam == 1) {
-				camera1->moveFront(-1);
-			} else if (icam == 2) {
-				camera2->moveFront(-1);
-			}
-		}
-	
-		eventHandler.handleEvent(windowManager, game);
 		
         renderer->render(game.getRepresentation());
 
