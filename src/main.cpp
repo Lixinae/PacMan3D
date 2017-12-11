@@ -48,11 +48,10 @@ int main(int argc, char **argv) {
     camera2->rotateHorizontal(-15);
 
     int icam = 1; //TODO change
-    PointOfView pointOfView(camera1);
+    game.getPointOfView().setCamera(camera1);
 
-    Renderer *renderer = new Renderer3D(windowWidth, windowHeight, &pointOfView);
-
-    EventHandler eventHandler = EventHandler::fromConfiguration(configuration);
+	EventHandler eventHandler = EventHandler::fromConfiguration(configuration);
+    Renderer *renderer = new Renderer3D(windowWidth, windowHeight, &(game.getPointOfView())); //TODO check adr function return
 
     //double speed = 1;
     //TrackballCamera trackballCamera;
@@ -75,10 +74,10 @@ int main(int argc, char **argv) {
                 if (event.key.keysym.sym == SDLK_c) {
                     cout << "c" << endl;
                     if (icam == 1) {
-                        pointOfView.setCamera(camera2);
+                        game.getPointOfView().setCamera(camera2);
                         icam = 2;
                     } else if (icam == 2) {
-                        pointOfView.setCamera(camera1);
+                        game.getPointOfView().setCamera(camera1);
                         icam = 1;
                     }
                 }

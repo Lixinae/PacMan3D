@@ -1,7 +1,7 @@
 #include <PointOfView.h>
 
 
-PointOfView::PointOfView(Camera * camera) : _camera(camera) {
+PointOfView::PointOfView() : _camera(nullptr) {
 
 }
 
