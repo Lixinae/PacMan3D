@@ -9,7 +9,7 @@ class PointOfView {
 
 public:
 
-	PointOfView(Camera * camera);
+	PointOfView();
 
 	const Camera * getCamera() const;
 	void setCamera(Camera * camera);

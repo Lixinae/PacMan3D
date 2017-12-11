@@ -1,212 +1,66 @@
 #include <EventHandler.h>
 
-EventHandler::EventHandler(const SDLWindowManager &windowManager, const Game &game, const Configuration &configuration)
-        :
-        _windowManager(windowManager),
-        _game(game),
-        _configuration(configuration) {
+EventHandler::EventHandler(const map<control, SDLKey> & keyMap, Camera * c1, Camera * c2) :
+	_keyMap(keyMap),
+	_c1(c1),
+	_c2(c2),
+	_icam(1)
+{
 
 }
 
-
-void EventHandler::handleEvent(const SDL_Event event) {
-
-    auto map = _configuration.getControlMap();
-
-    SDLKey upKey = map[control::UP];
-    SDLKey downKey = map[control::DOWN];
-    SDLKey leftKey = map[control::LEFT];
-    SDLKey rightKey = map[control::RIGHT];
-    SDLKey changeCamera = map[control::CHANGE_CAMERA];
-
-    Pacman &pacman = _game.getPacman();
-    if (_windowManager.isKeyPressed(upKey)) {
-        cout << "z" << endl;
-        pacman.setOrientation(Pacman::Orientation::NORTH);
-    } else if (_windowManager.isKeyPressed(downKey)) {
-        cout << "s" << endl;
-        pacman.setOrientation(Pacman::Orientation::SOUTH);
-    } else if (_windowManager.isKeyPressed(leftKey)) {
-        cout << "q" << endl;
-        pacman.setOrientation(Pacman::Orientation::WEST);
-    } else if (_windowManager.isKeyPressed(rightKey)) {
-        cout << "d" << endl;
-        pacman.setOrientation(Pacman::Orientation::EAST);
-    } //else if (_windowManager.isKeyPressed(changeCamera)) { // TODO -> changer la maniere -> ne pas pouvoir rester appuyer dessus
-    //cout << "c" << endl;
-//        if (icam == 1) {
-//            pointOfView.setCamera(camera2);
-//            icam = 2;
-//        } else if (icam == 2) {
-//            pointOfView.setCamera(camera1);
-//            icam = 1;
-//        }
-
-    // todo -> recup le point of view ici et les 2 camera
-    if (event.type == SDL_KEYDOWN) {
-        if (event.key.keysym.sym == changeCamera) {
-            if (_firstCamera) {
-                _firstCamera = !_firstCamera;
-
-//                pointOfView.setCamera(camera2);
-            } else {
-                _firstCamera = !_firstCamera;
-//                pointOfView.setCamera(camera1);
-            }
-        }
-    }
-    /*
-
-    if (event.type == SDL_KEYDOWN) {
-        switch (event.key.keysym.sym) { //voir https://wiki.libsdl.org/SDL_Keycode
-            // Deplacement de la camera
-            case SDLK_q:
-                _keyLeft=true;
-                _keyRight=false;
-                break;
-            case SDLK_d:
-                _keyLeft=false;
-                _keyRight=true;
-                break;
-            case SDLK_z:
-                _keyUp=true;
-                _keyDown=false;
-                break;
-            case SDLK_s:
-                _keyDown=true;
-                _keyUp=false;
-                break;
-            case SDLK_KP_PLUS:
-                _speedUp = true;
-                _speedDown = false;
-                break;
-            case SDLK_KP_MINUS:
-                _speedDown = true;
-                _speedUp = false;
-                break;
-            case SDLK_c:
-                _changeCamera = true;
-                break;
-            case SDLK_t:// todo -> possiblement changer la touche d'activation pour accéléré / décélérer
-                _activateSpeed = !_activateSpeed;
-                break;
-            default:
-                break;
-        }
-    }
-    if(event.type == SDL_KEYUP){
-        _keyUp = false;
-        _keyDown = false;
-        _keyLeft = false;
-        _keyRight = false;
-        _speedUp = false;
-        _speedDown = false;
-        _changeCamera = false;
-    }
-
-    if(event.type == SDL_MOUSEBUTTONDOWN){
-        switch(event.button.button){
-            case SDL_BUTTON_RIGHT:
-                _mouseRight = true;
-                break;
-            case SDL_BUTTON_LEFT:
-                _mouseLeft = true;
-                break;
-            default:
-                break;
-        }
-    }
-    if(event.type == SDL_MOUSEBUTTONUP){
-        _mouseRight = false;
-        _mouseLeft = false;
-    }
-    */
+bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
+	Pacman &pacman = game.getPacman();
+	SDL_Event event;
+	bool finish = false;
+	bool changeCamera = false;
+	while (windowManager.pollEvent(event)) {
+		if (event.type == SDL_QUIT) {
+			finish = true;
+		}
+		if (event.type == SDL_KEYDOWN) {
+			if (event.key.keysym.sym == _keyMap[control::CHANGE_CAMERA]) {
+				changeCamera = true;
+			}
+		}
+	}
+	if (finish) {
+		return true;
+	}
+	if (changeCamera) {
+		if (_icam == 1) {
+			game.getPointOfView().setCamera(_c2);
+			_icam = 2;
+		} else if (_icam == 2) {
+			game.getPointOfView().setCamera(_c1);
+			_icam = 1;
+		}
+	}
+	if (windowManager.isKeyPressed(_keyMap[control::UP])) {
+		pacman.setOrientation(Pacman::Orientation::NORTH);
+	}
+	if (windowManager.isKeyPressed(_keyMap[control::DOWN])) {
+		pacman.setOrientation(Pacman::Orientation::SOUTH);
+	}
+	if (windowManager.isKeyPressed(_keyMap[control::LEFT])) {
+		pacman.setOrientation(Pacman::Orientation::WEST);
+	}
+	if (windowManager.isKeyPressed(_keyMap[control::RIGHT])) {
+		pacman.setOrientation(Pacman::Orientation::EAST);
+	}
+	if (windowManager.isKeyPressed(SDLK_b)) { // TODO should not be key
+		if (_icam == 1) {
+			_c1->moveFront(1);
+		} else if (_icam == 2) {
+			_c2->moveFront(1);
+		}
+	}
+	if (windowManager.isKeyPressed(SDLK_n)) { // TODO should not be key
+		if (_icam == 1) {
+			_c1->moveFront(-1);
+		} else if (_icam == 2) {
+			_c2->moveFront(-1);
+		}
+	}
+	return false;
 }
-
-
-/*
-bool EventHandler::moveLeft() {
-	return windowManager.isKeyPressed(SDLK_q);
-    //return _keyLeft;
-}
-
-bool EventHandler::moveRight() {
-	return windowManager.isKeyPressed(SDLK_d);
-    //return _keyRight;
-}
-
-bool EventHandler::moveUp() {
-	return windowManager.isKeyPressed(SDLK_z);
-    //return _keyUp;
-}
-
-bool EventHandler::moveDown() {
-	return windowManager.isKeyPressed(SDLK_s);
-    //return _keyDown;
-}
-
-bool EventHandler::activateSpeed() {
-	return windowManager.isKeyPressed(SDLK_t);
-    //return _activateSpeed;
-}
-
-bool EventHandler::speedUp() {
-	return windowManager.isKeyPressed(SDLK_KP_PLUS);
-    //return _speedUp;
-}
-
-bool EventHandler::speedDown() {
-	return windowManager.isKeyPressed(SDLK_KP_MINUS);
-    //return _speedDown;
-}
-
-bool EventHandler::changeCamera() {
-    return windowManager.isKeyPressed(SDLK_c);
-	//return _changeCamera;
-}
-
-bool EventHandler::mouseRight() const {
-	return windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT) ;
-    //return _mouseRight;
-}*/
-/*
-void EventHandler::set_exitProgram(bool _exitProgram) {
-    EventHandler::_exitProgram = _exitProgram;
-}
-
-void EventHandler::set_moveLeft(bool _moveLeft) {
-    EventHandler::_keyLeft = _moveLeft;
-}
-
-void EventHandler::set_moveRight(bool _moveRight) {
-    EventHandler::_keyRight = _moveRight;
-}
-
-void EventHandler::set_moveUp(bool _moveUp) {
-    EventHandler::_keyUp = _moveUp;
-}
-
-void EventHandler::set_moveDown(bool _moveDown) {
-    EventHandler::_keyDown = _moveDown;
-}
-
-void EventHandler::set_activateSpeed(bool _activateSpeed) {
-    EventHandler::_activateSpeed = _activateSpeed;
-}
-
-void EventHandler::set_speedUp(bool _speedUp) {
-    EventHandler::_speedUp = _speedUp;
-}
-
-void EventHandler::set_speedDown(bool _speedDown) {
-    EventHandler::_speedDown = _speedDown;
-}
-
-void EventHandler::set_changeCamera(bool _changeCamera) {
-    EventHandler::_changeCamera = _changeCamera;
-}
-
-bool EventHandler::mouseLeft() const {
-    return _mouseLeft;
-}
-*/

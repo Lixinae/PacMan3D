@@ -1,8 +1,11 @@
 #include <Configuration.h>
 #include <fstream>
 
-Configuration::Configuration(map<control, SDLKey> keyMap, pair<int, int> windowSize) : _keyMap(keyMap),
-                                                                                       _windowSize(windowSize) {
+Configuration::Configuration(map<control, SDLKey> keyMap, int windowWidth, int windowHeight) :
+	_keyMap(keyMap),
+	_windowWidth(windowWidth),
+	_windowHeight(windowHeight) 
+{
 
 }
 
@@ -15,9 +18,7 @@ Configuration Configuration::defaultConfiguration() {
     keyMap[control::CHANGE_CAMERA] = stringToKey("c");
     keyMap[control::ZOOM_IN] = stringToKey("b");
     keyMap[control::ZOOM_OUT] = stringToKey("n");
-
-    pair<int, int> windowSize = pair<int, int>(800, 600);
-    return Configuration(keyMap, windowSize);
+    return Configuration(keyMap, 800, 600);
 }
 
 map<control, SDLKey> Configuration::keyMapFromJSON(const json & json) {
@@ -32,17 +33,11 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json & json) {
 	return keyMap;
 }
 
-pair<int, int> Configuration::windowSizeFromJson(const json &json) {
-    int width = json["width"];
-    int height = json["height"];
-    return pair<int, int>(width, height);
-}
-
 Configuration Configuration::fromJSON(const json & json) {
 	map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
-    pair<int, int> windowSize = windowSizeFromJson(json["windowSize"]);
-    //pair<int,int>windowSize = pair<int,int>(800,600);
-    return Configuration(keyMap, windowSize);
+	int windowWidth = json["windowSize"]["width"];
+	int windowHeight = json["windowSize"]["height"];
+    return Configuration(keyMap, windowWidth, windowHeight);
 }
 
 Configuration Configuration::fromJSONFile(const string & filePath) {
@@ -53,23 +48,18 @@ Configuration Configuration::fromJSONFile(const string & filePath) {
 	return fromJSON(jsonConfig);
 }
 
-pair<int, int> Configuration::get_windowSize() const {
-    return _windowSize;
-}
-
 int Configuration::getWidth() const {
-    return _windowSize.first;
+    return _windowWidth;
 }
 
 int Configuration::getHeight() const {
-    return _windowSize.second;
+    return _windowHeight;
 }
 
-map<control, SDLKey> Configuration::getControlMap() const {
+const map<control, SDLKey> Configuration::getControlMap() const {
     return _keyMap;
 }
 
-// todo -> changer car tres moche
 SDLKey Configuration::stringToKey(string s) {
     if (s == "a") return SDLK_a;
     if (s == "b") return SDLK_b;
@@ -157,8 +147,4 @@ SDLKey Configuration::stringToKey(string s) {
     if (s == "f14") return SDLK_F14;
     if (s == "f15") return SDLK_F15;
     if (s == "esc") return SDLK_ESCAPE;
-
 }
-
-
-
