@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
 
     Renderer *renderer = new Renderer3D(&windowManager, windowWidth, windowHeight, &pointOfView);
 
-    EventHandler eventHandler(configuration);
+    EventHandler eventHandler = EventHandler::fromConfiguration(configuration);
 
     //double speed = 1;
     //TrackballCamera trackballCamera;

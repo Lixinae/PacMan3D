@@ -3,6 +3,7 @@
 
 #include <glimac/common.hpp>
 #include <SDL/SDL.h>
+#include <map>
 #include <Game.h>
 #include <glimac/SDLWindowManager.hpp>
 #include <Configuration.h>
@@ -15,9 +16,13 @@ class EventHandler {
 
 private:
 
+	map<control, SDLKey> _keyMap;
+
+	EventHandler(const map<control, SDLKey> & keyMap);
+
 public:
 
-    EventHandler(const Configuration & configuration);
+    static EventHandler fromConfiguration(const Configuration & configuration);
 
     /**
      * Gère les evenement liés à la SDL, tel que les touches appuyer ou les mouvement de la souris
