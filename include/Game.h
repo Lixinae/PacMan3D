@@ -22,7 +22,7 @@ public:
 	//TODO do not return the pacman : apply the transformation locally in game
 	PointOfView & getPointOfView(); //TODO rm
 	
-	void orientPacman(Pacman::Orientation orientation);
+	void orientPacman(Utils::Orientation orientation);
 	
 	GameRepresentation getRepresentation() const; // TODO repr may be a field
 	

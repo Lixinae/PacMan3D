@@ -5,17 +5,17 @@
 
 using json = nlohmann::json;
 
-Pacman::Pacman(const BoardPosition & position, Orientation orientation) : _position(position), _orientation(orientation) {
+Pacman::Pacman(const BoardPosition & position, Utils::Orientation orientation) : _position(position), _orientation(orientation) {
 
 }
 
 Pacman Pacman::fromJSON(const json & jsonPacman) {
 	BoardPosition position = BoardPosition::fromJSON(jsonPacman["position"]);
-	Orientation orientation = orientationFromString(jsonPacman["orientation"]); 
+	Utils::Orientation orientation = Utils::orientationFromString(jsonPacman["orientation"]); 
 	return Pacman(position, orientation);
 }
 
-void Pacman::setOrientation(Orientation orientation) {
+void Pacman::setOrientation(Utils::Orientation orientation) {
 	_orientation = orientation;
 }
 
@@ -24,44 +24,9 @@ BoardPosition Pacman::getPosition() const {
 }
 
 BoardPosition Pacman::getNextPosition() const {
-	int dx, dy;
-	switch (_orientation) {
-		case Orientation::NORTH:
-			dx = 0;
-			dy = 1;
-			break;
-		case Orientation::SOUTH:
-			dx = 0;
-			dy = -1;
-			break;
-		case Orientation::EAST:
-			dx = 1;
-			dy = 0;
-			break;
-		case Orientation::WEST:
-			dx = -1;
-			dy = 0;
-			break;
-	}
-	return BoardPosition(_position.getX() + dx, _position.getY() + dy);
+	return _position.translate(_orientation);
 }
 
-void Pacman::setNextPosition(const BoardPosition & position) {
-	_position = position;
-} 
-
-Pacman::Orientation Pacman::orientationFromString(string strOrientation) {
-	if (strOrientation == "north") {
-		return Pacman::Orientation::NORTH;
-	}
-	if (strOrientation == "south") {
-		return Pacman::Orientation::SOUTH;
-	}
-	if (strOrientation == "east") {
-		return Pacman::Orientation::EAST;
-	}
-	if (strOrientation == "west") {
-		return Pacman::Orientation::WEST;
-	} 
-	throw invalid_argument(strOrientation + " is not a valid string representation of orientation");
+void Pacman::setNextPosition() {
+	_position = _position.translate(_orientation);
 }

@@ -1,4 +1,5 @@
 #include <Game.h>
+
 #include <fstream>
 
 using json = nlohmann::json;
@@ -23,7 +24,7 @@ Game Game::fromJSONFile(const string &filePath) {
     return fromJSON(jsonGame);
 }
 
-void Game::orientPacman(Pacman::Orientation orientation) {
+void Game::orientPacman(Utils::Orientation orientation) {
 	_pacman.setOrientation(orientation);
 }
 
@@ -41,8 +42,7 @@ GameRepresentation Game::getRepresentation() const {
 }
 
 void Game::iterate() {
-    BoardPosition pacmanPosition = _pacman.getNextPosition();
-    if (_board[pacmanPosition].isWalkable()) {;
-		_pacman.setNextPosition(pacmanPosition);
+    if (_board[_pacman.getNextPosition()].isWalkable()) {;
+		_pacman.setNextPosition();
 	}
 }

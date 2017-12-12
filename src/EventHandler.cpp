@@ -1,5 +1,7 @@
 #include <EventHandler.h>
 
+#include <Utils.h>
+
 EventHandler::EventHandler(const map<control, SDLKey> & keyMap, Camera * c1, Camera * c2) :
 	_keyMap(keyMap),
 	_c1(c1),
@@ -36,16 +38,16 @@ bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
 		}
 	}
 	if (windowManager.isKeyPressed(_keyMap[control::UP])) {
-		game.orientPacman(Pacman::Orientation::NORTH);
+		game.orientPacman(Utils::Orientation::NORTH);
 	}
 	if (windowManager.isKeyPressed(_keyMap[control::DOWN])) {
-		game.orientPacman(Pacman::Orientation::SOUTH);
+		game.orientPacman(Utils::Orientation::SOUTH);
 	}
 	if (windowManager.isKeyPressed(_keyMap[control::LEFT])) {
-		game.orientPacman(Pacman::Orientation::WEST);
+		game.orientPacman(Utils::Orientation::WEST);
 	}
 	if (windowManager.isKeyPressed(_keyMap[control::RIGHT])) {
-		game.orientPacman(Pacman::Orientation::EAST);
+		game.orientPacman(Utils::Orientation::EAST);
 	}
 	if (windowManager.isKeyPressed(SDLK_b)) { // TODO should not be key
 		if (_icam == 1) {
