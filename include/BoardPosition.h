@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <json/json.hpp>
+#include <Utils.h>
 
 using namespace std;
 
@@ -18,6 +19,8 @@ public:
 	
 	int getX() const;
 	int getY() const;
+	
+	BoardPosition translate(Utils::Orientation orientation) const;
 	
 	bool operator==(const BoardPosition & other) const;
 	bool operator!=(const BoardPosition & other) const;

@@ -54,16 +54,14 @@ int main(int argc, char **argv) {
 
     bool done = false;
     while (!done) {
-
-        Pacman &pacman = game.getPacman();
-
+		
 		if (eventHandler.handleEvent(windowManager, game)) {
 			done = true;
 		}
 		
         renderer->render(game.getRepresentation());
 
-        pacman.iterate();
+		game.iterate();
 
 		windowManager.swapBuffers();
 		

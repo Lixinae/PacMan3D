@@ -2,7 +2,9 @@
 #define __PACMAN_H__
 
 #include <BoardPosition.h>
+#include <GameRepresentation.h>
 #include <json/json.hpp>
+#include <Utils.h>
 
 using json = nlohmann::json;
 
@@ -10,31 +12,22 @@ class Pacman {
 	
 public:
 
-	enum class Orientation {
-		NORTH,
-		SOUTH,
-		EAST,
-		WEST
-	};
-
 	static Pacman fromJSON(const json & jsonPacman);
 	
-	void setOrientation(Orientation orientation);
-	
-	void iterate(); // TODO for the moment
+	void setOrientation(Utils::Orientation orientation);
 	
 	BoardPosition getPosition() const;
 	BoardPosition getNextPosition() const;
-	void setNextPosition(const BoardPosition & position); // TODO maybe position not in argument
+	void setNextPosition();
+	
+	GameRepresentation::Model getModel() const;
 		
 private:
 	
 	BoardPosition _position;
-	Orientation _orientation;
+	Utils::Orientation _orientation;
 	
-	Pacman(const BoardPosition & position, Orientation orientation);
-	
-	static Orientation orientationFromString(string strOrientation);
+	Pacman(const BoardPosition & position, Utils::Orientation orientation);
 
 };
 

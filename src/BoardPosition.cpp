@@ -1,8 +1,5 @@
 #include <BoardPosition.h>
 
-#include <iostream>
-#include <json/json.hpp>
-
 using namespace std;
 
 using json = nlohmann::json;
@@ -21,6 +18,29 @@ int BoardPosition::getX() const {
 
 int BoardPosition::getY() const {
 	return _y;
+}
+
+BoardPosition BoardPosition::translate(Utils::Orientation orientation) const {
+	int dx, dy;
+	switch (orientation) {
+		case Utils::Orientation::NORTH:
+			dx = 0;
+			dy = 1;
+			break;
+		case Utils::Orientation::SOUTH:
+			dx = 0;
+			dy = -1;
+			break;
+		case Utils::Orientation::EAST:
+			dx = 1;
+			dy = 0;
+			break;
+		case Utils::Orientation::WEST:
+			dx = -1;
+			dy = 0;
+			break;
+	}
+	return BoardPosition(_x + dx, _y + dy);
 }
 
 bool BoardPosition::operator==(const BoardPosition & other) const {

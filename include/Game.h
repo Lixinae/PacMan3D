@@ -19,8 +19,10 @@ public:
 	static Game fromJSON(const json & jsonGame);
 	static Game fromJSONFile(const string & filePath);
 	
-	Pacman & getPacman(); //TODO do not return the pacman : apply the transformation locally in game
+	//TODO do not return the pacman : apply the transformation locally in game
 	PointOfView & getPointOfView(); //TODO rm
+	
+	void orientPacman(Utils::Orientation orientation);
 	
 	GameRepresentation getRepresentation() const; // TODO repr may be a field
 	
@@ -31,6 +33,8 @@ private:
 	Board _board;
 	Pacman _pacman;
 	PointOfView _pointOfView;
+	
+	GameRepresentation _representation;
 	
 	Game(Board board, Pacman pacman);
 
