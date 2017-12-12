@@ -34,6 +34,8 @@ private:
 	Pacman _pacman;
 	PointOfView _pointOfView;
 	
+	GameRepresentation _representation;
+	
 	Game(Board board, Pacman pacman);
 
 };

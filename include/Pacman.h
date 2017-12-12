@@ -2,6 +2,7 @@
 #define __PACMAN_H__
 
 #include <BoardPosition.h>
+#include <GameRepresentation.h>
 #include <json/json.hpp>
 #include <Utils.h>
 
@@ -18,6 +19,8 @@ public:
 	BoardPosition getPosition() const;
 	BoardPosition getNextPosition() const;
 	void setNextPosition();
+	
+	GameRepresentation::Model getModel() const;
 		
 private:
 	

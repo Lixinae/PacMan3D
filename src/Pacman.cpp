@@ -30,3 +30,7 @@ BoardPosition Pacman::getNextPosition() const {
 void Pacman::setNextPosition() {
 	_position = _position.translate(_orientation);
 }
+
+GameRepresentation::Model Pacman::getModel() const {
+	return GameRepresentation::Model::PACMAN;
+}
