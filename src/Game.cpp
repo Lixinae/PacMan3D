@@ -41,7 +41,8 @@ GameRepresentation Game::getRepresentation() const {
 }
 
 void Game::iterate() {
-    // TODO
-    BoardPosition pacmanPosition = _pacman.getPosition();
-	_pacman.iterate();
+    BoardPosition pacmanPosition = _pacman.getNextPosition();
+    if (_board[pacmanPosition].isWalkable()) {;
+		_pacman.setNextPosition(pacmanPosition);
+	}
 }
