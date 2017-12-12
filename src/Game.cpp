@@ -23,8 +23,8 @@ Game Game::fromJSONFile(const string &filePath) {
     return fromJSON(jsonGame);
 }
 
-Pacman & Game::getPacman() {
-    return _pacman;
+void Game::orientPacman(Pacman::Orientation orientation) {
+	_pacman.setOrientation(orientation);
 }
 
 PointOfView & Game::getPointOfView() {
@@ -43,5 +43,5 @@ GameRepresentation Game::getRepresentation() const {
 void Game::iterate() {
     // TODO
     BoardPosition pacmanPosition = _pacman.getPosition();
-
+	_pacman.iterate();
 }

@@ -10,10 +10,9 @@ EventHandler::EventHandler(const map<control, SDLKey> & keyMap, Camera * c1, Cam
 }
 
 bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
-	Pacman &pacman = game.getPacman();
-	SDL_Event event;
 	bool finish = false;
 	bool changeCamera = false;
+	SDL_Event event;
 	while (windowManager.pollEvent(event)) {
 		if (event.type == SDL_QUIT) {
 			finish = true;
@@ -37,16 +36,16 @@ bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
 		}
 	}
 	if (windowManager.isKeyPressed(_keyMap[control::UP])) {
-		pacman.setOrientation(Pacman::Orientation::NORTH);
+		game.orientPacman(Pacman::Orientation::NORTH);
 	}
 	if (windowManager.isKeyPressed(_keyMap[control::DOWN])) {
-		pacman.setOrientation(Pacman::Orientation::SOUTH);
+		game.orientPacman(Pacman::Orientation::SOUTH);
 	}
 	if (windowManager.isKeyPressed(_keyMap[control::LEFT])) {
-		pacman.setOrientation(Pacman::Orientation::WEST);
+		game.orientPacman(Pacman::Orientation::WEST);
 	}
 	if (windowManager.isKeyPressed(_keyMap[control::RIGHT])) {
-		pacman.setOrientation(Pacman::Orientation::EAST);
+		game.orientPacman(Pacman::Orientation::EAST);
 	}
 	if (windowManager.isKeyPressed(SDLK_b)) { // TODO should not be key
 		if (_icam == 1) {
