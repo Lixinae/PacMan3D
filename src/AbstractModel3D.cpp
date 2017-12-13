@@ -1,13 +1,11 @@
 #include <AbstractModel3D.h>
 
-#include <Utils.h>
-
 using namespace std;
 using namespace glimac;
 using namespace glm;
 
-const string AbstractModel3D::VERTEX_SHADER_3D = Utils::SHADER_PATH + "/" + "3D.vs.glsl";
-//const string AbstractModel3D::VERTEX_SHADER_3D = "shaders/3D.vs.glsl";
+//const string AbstractModel3D::VERTEX_SHADER_3D = Utils::SHADER_PATH + "/" + "3D.vs.glsl";
+const string AbstractModel3D::VERTEX_SHADER_3D = "shaders/3D.vs.glsl";
 const GLuint AbstractModel3D::VERTEX_ATTR_POSITION = 0;
 const GLuint AbstractModel3D::VERTEX_ATTR_NORMAL = 1;
 const GLuint AbstractModel3D::VERTEX_ATTR_TEXTURE = 2;
