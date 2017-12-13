@@ -35,20 +35,8 @@ int realMain() {
     glEnable(GL_DEPTH_TEST);
 
     Game game = Game::fromJSONFile("assets/game/game.json");
-
-    Camera * camera1 = new TrackballCamera;
-    camera1->moveFront(20);
-    camera1->rotateVertical(45);
-    camera1->rotateHorizontal(15);
-
-    Camera * camera2 = new TrackballCamera;
-    camera2->moveFront(20);
-    camera2->rotateVertical(45);
-    camera2->rotateHorizontal(-15);
-
-    game.getPointOfView().setCamera(camera1); // TODO change
-
-    EventHandler eventHandler(configuration.getControlMap(), camera1, camera2);
+ 
+	  EventHandler eventHandler(configuration.getControlMap());
     Renderer *renderer = new Renderer3D(windowWidth, windowHeight, &(game.getPointOfView())); //TODO check adr function return
 
     bool done = false;
@@ -69,8 +57,6 @@ int realMain() {
 
     }
 
-    delete camera1;
-    delete camera2;
     delete renderer;
 
     return EXIT_SUCCESS;

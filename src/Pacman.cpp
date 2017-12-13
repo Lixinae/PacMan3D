@@ -31,6 +31,10 @@ void Pacman::setNextPosition() {
 	_position = _position.translate(_orientation);
 }
 
+void Pacman::iterate() {
+	// TODO decrement counter when super state ect
+}
+
 GameRepresentation::Model Pacman::getModel() const {
 	return GameRepresentation::Model::PACMAN;
 }

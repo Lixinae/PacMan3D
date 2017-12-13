@@ -20,6 +20,8 @@ public:
 	BoardPosition getNextPosition() const;
 	void setNextPosition();
 	
+	void iterate();
+	
 	GameRepresentation::Model getModel() const;
 		
 private:
