@@ -54,7 +54,7 @@ void Game::iterate() {
 		_representation.remove(pacmanModel, _pacman.getPosition());
 		// Update
 		square.receive(_pacman);
-		_pacman.setNextPosition(); // TODO may be in case.receive
+		_pacman.iterate(); // TODO may be in case.receive
 		// Reset model
 		for (const GameRepresentation::Model & model : square.getModels()) {
 			_representation.add(model, nextPosition);

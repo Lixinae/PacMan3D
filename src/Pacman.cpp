@@ -27,7 +27,7 @@ BoardPosition Pacman::getNextPosition() const {
 	return _position.translate(_orientation);
 }
 
-void Pacman::setNextPosition() {
+void Pacman::iterate() {
 	_position = _position.translate(_orientation);
 }
 
