@@ -44,10 +44,21 @@ GameRepresentation Game::getRepresentation() const {
 
 void Game::iterate() {
 	BoardPosition nextPosition = _pacman.getNextPosition();
-    if (_board[nextPosition].isWalkable()) {
+	BoardSquare & square = _board[nextPosition];
+    if (square.isWalkable()) {
+		// Clean model
 		GameRepresentation::Model pacmanModel = _pacman.getModel();
+		for (const GameRepresentation::Model & model : square.getModels()) {
+			_representation.remove(model, nextPosition);
+		}
 		_representation.remove(pacmanModel, _pacman.getPosition());
+		// Update
+		square.receive(_pacman);
 		_pacman.setNextPosition(); // TODO may be in case.receive
+		// Reset model
+		for (const GameRepresentation::Model & model : square.getModels()) {
+			_representation.add(model, nextPosition);
+		}
 		_representation.add(pacmanModel, nextPosition);
 	}
 }
