@@ -18,6 +18,7 @@ public:
 	
 	BoardPosition getPosition() const;
 	BoardPosition getNextPosition() const;
+	void setNextPosition();
 	
 	void iterate();
 	

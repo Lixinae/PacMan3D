@@ -27,8 +27,12 @@ BoardPosition Pacman::getNextPosition() const {
 	return _position.translate(_orientation);
 }
 
-void Pacman::iterate() {
+void Pacman::setNextPosition() {
 	_position = _position.translate(_orientation);
+}
+
+void Pacman::iterate() {
+	// TODO decrement counter when super state ect
 }
 
 GameRepresentation::Model Pacman::getModel() const {
