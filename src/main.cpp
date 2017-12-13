@@ -19,10 +19,9 @@ using namespace glm;
 
 using json = nlohmann::json;
 
-int main(int argc, char **argv) {
-
+int realMain() {
     Configuration configuration = Configuration::fromJSONFile("assets/configuration.json");
-    
+
     int windowWidth = configuration.getWidth();
     int windowHeight = configuration.getHeight();
     SDLWindowManager windowManager(windowWidth, windowHeight, "GLImac");
@@ -49,22 +48,22 @@ int main(int argc, char **argv) {
 
     game.getPointOfView().setCamera(camera1); // TODO change
 
-	EventHandler eventHandler(configuration.getControlMap(), camera1, camera2);
+    EventHandler eventHandler(configuration.getControlMap(), camera1, camera2);
     Renderer *renderer = new Renderer3D(windowWidth, windowHeight, &(game.getPointOfView())); //TODO check adr function return
 
     bool done = false;
     while (!done) {
-		
-		if (eventHandler.handleEvent(windowManager, game)) {
-			done = true;
-		}
-		
+
+        if (eventHandler.handleEvent(windowManager, game)) {
+            done = true;
+        }
+
         renderer->render(game.getRepresentation());
 
-		game.iterate();
+        game.iterate();
 
-		windowManager.swapBuffers();
-		
+        windowManager.swapBuffers();
+
         //TODO sleep framerate
         this_thread::sleep_for(chrono::milliseconds(50));
 
@@ -75,5 +74,16 @@ int main(int argc, char **argv) {
     delete renderer;
 
     return EXIT_SUCCESS;
+
+}
+
+// Main pour linux
+int main(int argc, char **argv) {
+    return realMain();
+}
+
+// Main pour windows
+int WinMain(int argc, char **argv) {
+    return realMain();
 
 } 
