@@ -3,6 +3,7 @@
 
 #include <Pacman.h>
 #include <GameRepresentation.h>
+#include <vector>
 #include <json/json.hpp>
 
 using json = nlohmann::json;
@@ -13,7 +14,7 @@ public:
 	
 	static BoardSquare * fromJSON(const json & jsonSquare);
 	
-	virtual GameRepresentation::Model getModel() const = 0;
+	virtual vector<GameRepresentation::Model> getModels() const = 0;
 	
 	virtual bool isWalkable() const = 0;
 	

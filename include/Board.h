@@ -22,8 +22,8 @@ public:
 
 	vector<BoardPosition> getPositions() const;
 
-	const BoardSquare & getSquare(const BoardPosition & position) const;
-	const BoardSquare & operator[](const BoardPosition & position) const;
+	BoardSquare & getSquare(const BoardPosition & position) const;
+	BoardSquare & operator[](const BoardPosition & position) const;
 			
 private:
  
