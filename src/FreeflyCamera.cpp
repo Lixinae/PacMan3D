@@ -1,9 +1,12 @@
 #include <FreeflyCamera.h>
 
+// Pour palier aux soucis de macro M_PI sous windows , vu que c'est une norme POSX
+constexpr double pi() { return std::atan2(0, -1); }
+
 FreeflyCamera::FreeflyCamera() :
         Camera(),
         m_Position(0, 0, 0),
-        m_fPhi(static_cast<float>(M_PI)),
+        m_fPhi(static_cast<float>(pi())),
         m_fTheta(0),
         m_LeftVector(0, 0, 0),
         m_FrontVector(0, 0, 0),
@@ -14,7 +17,7 @@ FreeflyCamera::FreeflyCamera() :
 FreeflyCamera::FreeflyCamera(glm::vec3 Position) :
         Camera(),
         m_Position(Position),
-        m_fPhi(static_cast<float>(M_PI)),
+        m_fPhi(static_cast<float>(pi())),
         m_fTheta(0),
         m_LeftVector(0, 0, 0),
         m_FrontVector(0, 0, 0),
@@ -43,9 +46,9 @@ void FreeflyCamera::moveHorizontal(float t) {
 }
 
 void FreeflyCamera::computeDirectionVectors() {
-    m_LeftVector = glm::vec3(sin(m_fPhi + M_PI / 2),
+    m_LeftVector = glm::vec3(sin(m_fPhi + pi() / 2),
                              0,
-                             cos(m_fPhi + M_PI / 2));
+                             cos(m_fPhi + pi() / 2));
     m_FrontVector = glm::vec3(std::cos(m_fTheta) * std::sin(m_fPhi),
                               std::sin(m_fTheta),
                               std::cos(m_fTheta) * std::cos(m_fPhi));
