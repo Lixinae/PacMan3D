@@ -11,7 +11,7 @@ public:
 
 	Wall();
 	
-	GameRepresentation::Model getModel() const; //TODO should be option model (empty case haven't model)
+	vector<GameRepresentation::Model> getModels() const;
 	
 	bool isWalkable() const;
 	

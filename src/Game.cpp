@@ -8,8 +8,10 @@ using namespace std;
 
 Game::Game(Board board, Pacman pacman) : _board(board), _pacman(pacman), _pointOfView(), _representation() {
 	_representation.add(_pacman.getModel(), _pacman.getPosition());
-    for (auto &position : _board.getPositions()) {
-		_representation.add(_board[position].getModel(), position);
+    for (const BoardPosition & position : _board.getPositions()) {
+		for (const GameRepresentation::Model & model : _board[position].getModels()) {
+			_representation.add(model, position);
+		}
     }
 }
 
@@ -28,6 +30,7 @@ Game Game::fromJSONFile(const string &filePath) {
 }
 
 void Game::orientPacman(Utils::Orientation orientation) {
+	// TODO do not redirect if there is a wall in the direction
 	_pacman.setOrientation(orientation);
 }
 

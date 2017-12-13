@@ -8,8 +8,8 @@ Wall::Wall() {
 
 }
 	
-GameRepresentation::Model Wall::getModel() const {
-	return GameRepresentation::Model::WALL;
+vector<GameRepresentation::Model> Wall::getModels() const {
+	return {GameRepresentation::Model::WALL};
 }
 	
 bool Wall::isWalkable() const {

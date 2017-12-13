@@ -20,8 +20,12 @@ Floor::~Floor() {
 	}
 }
 	
-GameRepresentation::Model Floor::getModel() const {
-	return _bonus->getModel(); // TODO empty option if bonus == nullptr  
+vector<GameRepresentation::Model> Floor::getModels() const {
+	vector<GameRepresentation::Model> models;
+	if (_bonus != nullptr) {
+		models.push_back(_bonus->getModel());
+	}
+	return models;
 }
 
 bool Floor::isWalkable() const {
