@@ -13,6 +13,8 @@ AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
 			return new TexModel3D("a", "assets/textures/EarthMap.jpg");
 		case GameRepresentation::Model::WALL:
 			return new TexModel3D("b", "assets/textures/MoonMap.jpg");
+		case GameRepresentation::Model::FLOOR:
+			return new TexModel3D("d", "assets/textures/MoonMap.jpg");
 		case GameRepresentation::Model::PAC_GOMME:
 			return new TexModel3D("c", "assets/textures/MoonMap.jpg");
 	}

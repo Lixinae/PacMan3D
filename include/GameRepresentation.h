@@ -14,6 +14,7 @@ public:
 	enum class Model {
 		PACMAN,
 		WALL,
+		FLOOR,
 		PAC_GOMME
 		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...
 	};

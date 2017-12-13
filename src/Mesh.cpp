@@ -14,8 +14,10 @@ Mesh Mesh::fromOBJFile(const string & filePath) {
 		r = 0.7;
 	} else if (filePath == "b") {
 		r = 1;
-	} else {
+	} else if (filePath == "c") {
 		r = 0.3;
+	} else {
+		r = 0.05;
 	}
 	Sphere sphere(r,16,16);
 	vector<ShapeVertex> vertices(sphere.getVertexCount());
