@@ -2,7 +2,7 @@
 
 #include <Wall.h>
 #include <Floor.h>
-#include <json/json.hpp>
+#include <PacGomme.h>
 
 using json = nlohmann::json;
 
@@ -13,7 +13,8 @@ BoardSquare * BoardSquare::fromJSON(const json & jsonSquare) {
 	}
 	if (type == "floor") {
 		//TODO use args for bonus in constructor
-		return new Floor;
+		Bonus * bonus = new PacGomme; 
+		return new Floor(bonus);
 	}
 	throw invalid_argument(type + " is not a valid string representation of case type");
 }

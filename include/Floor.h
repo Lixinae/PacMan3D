@@ -11,6 +11,7 @@ class Floor : public BoardSquare {
 public:
 
 	Floor();
+	Floor(const Bonus * bonus);
 	Floor(const Floor & floor);
 	
 	~Floor();
