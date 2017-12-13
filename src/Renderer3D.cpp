@@ -35,7 +35,7 @@ Renderer3D::Renderer3D(int windowWidth, int windowHeight, PointOfView *pointOfVi
  * On peut se servir de la structure "Program" que le prof avait donné dans le tp sur le multi-texturing
  * */
 void Renderer3D::render(const GameRepresentation &repr) const {
-    mat4 GlobalMVMatrix = _pointOfView->getCamera()->getViewMatrix();
+    mat4 GlobalMVMatrix = _pointOfView->getCurrentCamera().getViewMatrix();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (auto &model : GameRepresentation::MODELS) {
         vector<BoardPosition> positions = repr[model];

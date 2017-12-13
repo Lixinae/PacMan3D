@@ -1,14 +1,19 @@
 #include <PointOfView.h>
 
 
-PointOfView::PointOfView() : _camera(nullptr) {
+PointOfView::PointOfView() : _trackballCamera(25,45,15), _trackballCamera2(25,45,-15), _current(0) {
+
 
 }
 
-const Camera * PointOfView::getCamera() const {
-	return _camera;
+Camera & PointOfView::getCurrentCamera() {
+	if (_current == 0) {
+		return _trackballCamera;
+	} else {
+		return _trackballCamera2;
+	}
 }
 
-void PointOfView::setCamera(Camera * camera) {
-	_camera = camera;
+void PointOfView::setNextCamera() {
+	_current = (_current + 1)%2;
 }
