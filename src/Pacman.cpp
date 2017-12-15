@@ -15,6 +15,10 @@ Pacman Pacman::fromJSON(const json & jsonPacman) {
 	return Pacman(position, orientation);
 }
 
+Utils::Orientation Pacman::getOrientation() {
+	return _orientation;
+}
+
 void Pacman::setOrientation(Utils::Orientation orientation) {
 	_orientation = orientation;
 }
@@ -25,14 +29,6 @@ BoardPosition Pacman::getPosition() const {
 
 void Pacman::setPosition(const BoardPosition & position) {
 	_position = position;
-}
-
-BoardPosition Pacman::getNextPosition() const {
-	return _position.translate(_orientation);
-}
-
-void Pacman::setNextPosition() {
-	_position = _position.translate(_orientation);
 }
 
 void Pacman::iterate() {
