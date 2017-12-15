@@ -36,8 +36,8 @@ void Game::orientPacman(Utils::Orientation orientation) {
 	}
 }
 
-PointOfView & Game::getPointOfView() {
-    return _pointOfView;
+PointOfView * Game::getPointOfView() {
+    return &_pointOfView;
 }
 
 GameRepresentation Game::getRepresentation() const {
@@ -55,7 +55,7 @@ void Game::iterate() {
 		}
 		_representation.remove(pacmanModel, _pacman.getPosition());
 		// Update
-		_pacman.setPosition(nextPosition);
+		_pacman.setPosition(nextPosition); //TODO outofrange when move in tunnel : maybe wall in map problem
 		square.receive(_pacman);
 		// Reset model
 		for (const GameRepresentation::Model & model : square.getModels()) {
