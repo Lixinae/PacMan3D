@@ -30,8 +30,10 @@ Game Game::fromJSONFile(const string &filePath) {
 }
 
 void Game::orientPacman(Utils::Orientation orientation) {
-	// TODO do not redirect if there is a wall in the direction
-	_pacman.setOrientation(orientation);
+	BoardPosition nextPosition = _pacman.getPosition().translate(orientation);
+	if (_board[nextPosition].isWalkable()) {
+		_pacman.setOrientation(orientation);
+	}
 }
 
 PointOfView & Game::getPointOfView() {
