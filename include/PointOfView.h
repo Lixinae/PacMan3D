@@ -2,22 +2,23 @@
 #define __POINT_OF_VIEW_H__
 
 #include <Camera.h>
+#include <TrackballCamera.h>
 
 class PointOfView {
-
-// TODO get all the camera used
 
 public:
 
 	PointOfView();
-
-	const Camera * getCamera() const;
-	void setCamera(Camera * camera);
+	
+	Camera & getCurrentCamera();
+	void setNextCamera();
 
 private:
-
-	Camera * _camera;
-
+	
+	TrackballCamera _trackballCamera;
+	TrackballCamera _trackballCamera2;
+	int _current;
+	
 };
 
 #endif

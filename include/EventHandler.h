@@ -19,14 +19,10 @@ class EventHandler {
 private:
 
 	map<control, SDLKey> _keyMap;
-	
-	Camera * _c1, * _c2; //TODO rm
-	int _icam;
 
 public:
 
-	// TODO rm camera, should be managed in pointofview
-	EventHandler(const map<control, SDLKey> & keyMap, Camera * c1, Camera * c2);
+	EventHandler(const map<control, SDLKey> & keyMap);
 
     /**
      * Gère les evenement liés à la SDL, tel que les touches appuyer ou les mouvement de la souris

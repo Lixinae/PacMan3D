@@ -15,3 +15,7 @@ GameRepresentation::Model PacGomme::getModel() const {
 void PacGomme::apply(Pacman /*pacman*/) {
 	//TODO update score
 }
+
+Bonus * PacGomme::clone() const {
+	return new PacGomme;
+}

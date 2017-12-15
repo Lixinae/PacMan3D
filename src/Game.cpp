@@ -61,4 +61,5 @@ void Game::iterate() {
 		}
 		_representation.add(pacmanModel, nextPosition);
 	}
+	_pacman.iterate();
 }

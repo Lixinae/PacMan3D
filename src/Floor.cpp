@@ -4,19 +4,24 @@
 #include <BoardSquare.h>
 #include <Bonus.h>
 #include <GameRepresentation.h>
-#include <PacGomme.h>//TODO remove
 
-Floor::Floor() : _bonus(new PacGomme()) { //TODO
+Floor::Floor() : _bonus(nullptr) {
 
 }
 
-Floor::Floor(const Floor & other) : _bonus(other._bonus) { // TODO : deep copy, add clone() in interface bonus
+Floor::Floor(const Bonus * bonus) : _bonus(bonus->clone()) {
 
+}
+
+Floor::Floor(const Floor & other) : _bonus(nullptr) {
+	if (other._bonus != nullptr) {
+		_bonus = other._bonus->clone();
+	}
 }
 
 Floor::~Floor() {
 	if (_bonus != nullptr) {
-		// TODO delete bonus, or, bonus.delete() in interface
+		delete _bonus;
 	}
 }
 	
@@ -35,7 +40,7 @@ bool Floor::isWalkable() const {
 void Floor::receive(Pacman pacman) {
 	if (_bonus != nullptr) {
 		_bonus->apply(pacman);
-		// TODO delete bonus, or, bonus.delete() in interface
+		delete _bonus;
 		_bonus = nullptr;
 	}
 }
