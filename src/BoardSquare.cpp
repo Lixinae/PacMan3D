@@ -2,6 +2,7 @@
 
 #include <Wall.h>
 #include <Floor.h>
+#include <Tunnel.h>
 #include <Bonus.h>
 
 using json = nlohmann::json;
@@ -16,6 +17,12 @@ BoardSquare * BoardSquare::fromJSON(const json & jsonSquare) {
 		BoardSquare * square = new Floor(bonus);
 		delete bonus;
 		return square;
+	}
+	if (type == "tunnel") {
+		Utils::Orientation orientation = Utils::orientationFromString(jsonSquare["args"]["orientation"]); 
+		BoardPosition dest = BoardPosition::fromJSON(jsonSquare["args"]["dest"]);
+		Utils::Orientation destOrientation = Utils::orientationFromString(jsonSquare["args"]["destOrientation"]); 
+		return new Tunnel(orientation, dest, destOrientation);
 	}
 	throw invalid_argument(type + " is not a valid string representation of case type");
 }
