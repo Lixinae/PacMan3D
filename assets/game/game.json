@@ -1083,6 +1083,496 @@
             },
             {
                 "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -18,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -17,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -16,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -15,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -14,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -13,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -18,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -17,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -16,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -15,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -14,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": -13,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": -18,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": -17,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": -16,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": -15,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": -14,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": -13,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": -12,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 12,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 13,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 14,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 15,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 16,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 17,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 18,
+                    "y": -1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 12,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 13,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 14,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 15,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 16,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 17,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {},
+                    "type": "wall"
+                },
+                "position": {
+                    "x": 18,
+                    "y": 1
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 12,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 13,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 14,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 15,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 16,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 17,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 18,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "dest": {
+                            "x": 18,
+                            "y": 0
+                        },
+                        "destOrientation": "west",
+                        "orientation": "west"
+                    },
+                    "type": "tunnel"
+                },
+                "position": {
+                    "x": -18,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "dest": {
+                            "x": -18,
+                            "y": 0
+                        },
+                        "destOrientation": "east",
+                        "orientation": "east"
+                    },
+                    "type": "tunnel"
+                },
+                "position": {
+                    "x": 18,
+                    "y": 0
+                }
+            },
+            {
+                "case": {
                     "args": {
                         "bonus": {
                             "type": "pacgomme"
