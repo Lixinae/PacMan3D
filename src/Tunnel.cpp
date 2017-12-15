@@ -32,7 +32,7 @@ bool Tunnel::isWalkable() const {
 	return true;
 }
 	
-void Tunnel::receive(Pacman pacman) {
+void Tunnel::receive(Pacman & pacman) {
 	pacman.setPosition(_dest);	
 	pacman.setOrientation(_destOrientation);
 }

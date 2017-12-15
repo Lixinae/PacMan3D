@@ -18,7 +18,7 @@ public:
 	
 	virtual bool isWalkable() const = 0;
 	
-	virtual void receive(Pacman pacman) = 0;
+	virtual void receive(Pacman & pacman) = 0;
 	
 	virtual ~BoardSquare() {
 		

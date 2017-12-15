@@ -37,7 +37,7 @@ bool Floor::isWalkable() const {
 	return true;
 }
 	
-void Floor::receive(Pacman pacman) {
+void Floor::receive(Pacman & pacman) {
 	if (_bonus != nullptr) {
 		_bonus->apply(pacman);
 		delete _bonus;

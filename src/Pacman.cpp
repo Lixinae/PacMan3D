@@ -24,7 +24,7 @@ BoardPosition Pacman::getPosition() const {
 }
 
 void Pacman::setPosition(const BoardPosition & position) {
-	
+	_position = position;
 }
 
 BoardPosition Pacman::getNextPosition() const {

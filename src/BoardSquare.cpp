@@ -13,6 +13,7 @@ BoardSquare * BoardSquare::fromJSON(const json & jsonSquare) {
 		return new Wall;
 	}
 	if (type == "floor") {
+		// TODO manage if no bonus in square
 		Bonus * bonus = Bonus::fromJSON(jsonSquare["args"]["bonus"]); 
 		BoardSquare * square = new Floor(bonus);
 		delete bonus;
