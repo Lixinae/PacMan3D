@@ -43,7 +43,7 @@ GameRepresentation Game::getRepresentation() const {
 }
 
 void Game::iterate() {
-	BoardPosition nextPosition = _pacman.getNextPosition();
+	BoardPosition nextPosition = _pacman.getPosition().translate(_pacman.getOrientation());
 	BoardSquare & square = _board[nextPosition];
     if (square.isWalkable()) {
 		// Clean model
@@ -53,8 +53,8 @@ void Game::iterate() {
 		}
 		_representation.remove(pacmanModel, _pacman.getPosition());
 		// Update
+		_pacman.setPosition(nextPosition);
 		square.receive(_pacman);
-		_pacman.setNextPosition(); // TODO may be in case.receive
 		// Reset model
 		for (const GameRepresentation::Model & model : square.getModels()) {
 			_representation.add(model, nextPosition);

@@ -14,14 +14,12 @@ public:
 
 	static Pacman fromJSON(const json & jsonPacman);
 	
+	Utils::Orientation getOrientation();
 	void setOrientation(Utils::Orientation orientation);
 	
 	BoardPosition getPosition() const;
 	void setPosition(const BoardPosition & position);
-	
-	BoardPosition getNextPosition() const;
-	void setNextPosition();
-	
+
 	void iterate();
 	
 	GameRepresentation::Model getModel() const;
