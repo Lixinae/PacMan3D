@@ -15,7 +15,7 @@ public:
 
 	virtual GameRepresentation::Model getModel() const = 0;
 
-	virtual void apply(Pacman pacman) = 0;
+	virtual void apply(Pacman & pacman) = 0;
 	
 	virtual Bonus * clone() const = 0;
 	

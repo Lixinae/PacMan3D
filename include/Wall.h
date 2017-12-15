@@ -15,7 +15,7 @@ public:
 	
 	bool isWalkable() const;
 	
-	void receive(Pacman pacman);
+	void receive(Pacman & pacman);
 	
 };
 

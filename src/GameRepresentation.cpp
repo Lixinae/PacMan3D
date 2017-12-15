@@ -11,6 +11,7 @@ const vector<GameRepresentation::Model> GameRepresentation::MODELS = {
 	GameRepresentation::Model::PACMAN,
 	GameRepresentation::Model::WALL,
 	GameRepresentation::Model::FLOOR,
+	GameRepresentation::Model::TUNNEL,
 	GameRepresentation::Model::PAC_GOMME
 	//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...
 };

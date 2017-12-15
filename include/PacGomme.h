@@ -13,7 +13,7 @@ public:
 	
 	GameRepresentation::Model getModel() const;
 	
-	void apply(Pacman pacman);
+	void apply(Pacman & pacman);
 	
 	Bonus * clone() const;
 
