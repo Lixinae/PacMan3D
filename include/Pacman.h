@@ -17,6 +17,8 @@ public:
 	void setOrientation(Utils::Orientation orientation);
 	
 	BoardPosition getPosition() const;
+	void setPosition(const BoardPosition & position);
+	
 	BoardPosition getNextPosition() const;
 	void setNextPosition();
 	

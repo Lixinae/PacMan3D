@@ -43,8 +43,9 @@ int realMain() {
 
     Game game = Game::fromJSONFile("assets/game/game.json");
  
-	  EventHandler eventHandler(configuration.getControlMap());
+	EventHandler eventHandler(configuration.getControlMap());
     Renderer *renderer = new Renderer3D(windowWidth, windowHeight, &(game.getPointOfView())); //TODO check adr function return
+	cerr << "test" << endl;
 
     bool done = false;
     while (!done) {

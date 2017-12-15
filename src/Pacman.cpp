@@ -23,6 +23,10 @@ BoardPosition Pacman::getPosition() const {
 	return _position;
 }
 
+void Pacman::setPosition(const BoardPosition & position) {
+	
+}
+
 BoardPosition Pacman::getNextPosition() const {
 	return _position.translate(_orientation);
 }
