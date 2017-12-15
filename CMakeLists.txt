@@ -14,19 +14,20 @@ if (WIN32)
 
     #SET(CMAKE_INSTALL_PREFIX "D:/Program Files/Assimp/")
     #Set the assimp library_files
-    set(ASSIMP_LIBRARY "D:/Program Files/Assimp/lib/libassimp.dll.a;D:/Program Files/Assimp/lib/libzlibstatic.a")
+    #set(ASSIMP_LIBRARY "D:/Program Files/Assimp/lib/libassimp.dll.a;D:/Program Files/Assimp/lib/libzlibstatic.a")
     set(ALL_LIBRARIES
             glimac
             ${SDL_LIBRARY}
             ${OPENGL_LIBRARIES}
             ${GLEW_LIBRARY}
-            ${ASSIMP_LIBRARY}
+            #${ASSIMP_LIBRARY}
+            assimp
             )
 else (WIN32)
     # Set the linux variables
     find_package(SDL REQUIRED)
     find_package(GLEW REQUIRED)
-    find_package(assimp REQUIRED)
+    #find_package(assimp REQUIRED)
     set(ALL_LIBRARIES
             glimac
             ${SDL_LIBRARY}
@@ -52,14 +53,15 @@ include_directories(
 
 add_subdirectory(glimac)
 
-#Laisser pour le moment, a titre de test
-#set(ZLIB_LIBRARIES zlibstatic)
-#set(ENABLE_BOOST_WORKAROUND ON)
-#set(BUILD_STATIC_LIB ON)
-#set(BUILD_ASSIMP_TOOLS OFF)
-#set(ASSIMP_BUILD_STATIC_LIB ON)
-#
-#add_subdirectory(third-party/assimp/)
+#Flag pour la librairie assimp
+set(ZLIB_LIBRARIES zlibstatic)
+set(ENABLE_BOOST_WORKAROUND ON)
+set(BUILD_STATIC_LIB ON)
+set(BUILD_ASSIMP_TOOLS OFF)
+set(SYSTEM_IRRXML OFF)
+set(ASSIMP_BUILD_STATIC_LIB ON)
+
+add_subdirectory(third-party/assimp/)
 
 file(GLOB_RECURSE source_files src/*)
 file(GLOB_RECURSE SHADER_FILES *.glsl)
