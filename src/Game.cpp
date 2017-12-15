@@ -30,12 +30,14 @@ Game Game::fromJSONFile(const string &filePath) {
 }
 
 void Game::orientPacman(Utils::Orientation orientation) {
-	// TODO do not redirect if there is a wall in the direction
-	_pacman.setOrientation(orientation);
+	BoardPosition nextPosition = _pacman.getPosition().translate(orientation);
+	if (_board[nextPosition].isWalkable()) {
+		_pacman.setOrientation(orientation);
+	}
 }
 
-PointOfView & Game::getPointOfView() {
-    return _pointOfView;
+PointOfView * Game::getPointOfView() {
+    return &_pointOfView;
 }
 
 GameRepresentation Game::getRepresentation() const {
@@ -53,7 +55,7 @@ void Game::iterate() {
 		}
 		_representation.remove(pacmanModel, _pacman.getPosition());
 		// Update
-		_pacman.setPosition(nextPosition);
+		_pacman.setPosition(nextPosition); //TODO outofrange when move in tunnel : maybe wall in map problem
 		square.receive(_pacman);
 		// Reset model
 		for (const GameRepresentation::Model & model : square.getModels()) {
