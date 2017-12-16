@@ -11,6 +11,8 @@ using json = nlohmann::json;
 class BoardSquare {
 
 public:
+
+	// TODO add struct BoardSquareArgs and use it in argument of receive
 	
 	static BoardSquare * fromJSON(const json & jsonSquare);
 	

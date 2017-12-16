@@ -22,9 +22,9 @@ Mesh Mesh::fromOBJFile(const string & filePath) {
 	vector<ShapeVertex> vertices;
 	for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
 		const aiMesh * mesh = scene->mMeshes[i];
-		for(unsigned int j = 0; j < mesh->mNumFaces; j++) {
+		for (unsigned int j = 0; j < mesh->mNumFaces; j++) {
 			const aiFace & face = mesh->mFaces[j];
-			for(unsigned int k = 0; k < 3; k++) {
+			for (unsigned int k = 0; k < 3; k++) {
 				aiVector3D position = mesh->mVertices[face.mIndices[k]];
 				aiVector3D normal = mesh->mNormals[face.mIndices[k]];
 				// texCoords is a 3D vector but we only use the 2 first dimensions
