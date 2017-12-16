@@ -21,7 +21,7 @@ using json = nlohmann::json;
 
 int realMain() {
 
-    Configuration configuration = Configuration::fromJSONFile("assets/configuration.json");
+    Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
 
     int windowWidth = configuration.getWidth();
     int windowHeight = configuration.getHeight();
@@ -35,7 +35,7 @@ int realMain() {
 
     glEnable(GL_DEPTH_TEST);
 
-    Game game = Game::fromJSONFile("assets/game/game.json");
+    Game game = Game::fromJSONFile("assets/games/game.json");
  
 	EventHandler eventHandler(configuration.getControlMap());
     Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView());

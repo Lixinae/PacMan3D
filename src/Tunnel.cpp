@@ -33,6 +33,7 @@ bool Tunnel::isWalkable() const {
 }
 	
 void Tunnel::receive(Pacman & pacman) {
+	// TODO clean current position in gamerepr
 	pacman.setPosition(_dest);	
 	pacman.setOrientation(_destOrientation);
 }
