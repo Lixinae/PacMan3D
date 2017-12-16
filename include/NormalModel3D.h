@@ -10,7 +10,7 @@ public:
 
 	static const string FRAGMENT_SHADER_NORMAL_3D;
 	
-	NormalModel3D(const string & meshPath);
+	NormalModel3D(const string & meshPath, const mat4 & modelTransform);
 
 };
 

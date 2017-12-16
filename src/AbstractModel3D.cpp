@@ -27,11 +27,9 @@ void AbstractModel3D::initPoints(Mesh mesh) {
 	glEnableVertexAttribArray(VERTEX_ATTR_NORMAL);
 	glEnableVertexAttribArray(VERTEX_ATTR_TEXTURE);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	// TODO May change when load extern 3d file
 	glVertexAttribPointer(VERTEX_ATTR_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid*)offsetof(ShapeVertex, position)); 
 	glVertexAttribPointer(VERTEX_ATTR_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid*)offsetof(ShapeVertex, normal)); 
 	glVertexAttribPointer(VERTEX_ATTR_TEXTURE, 2, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid*)offsetof(ShapeVertex, texCoords)); 
-	// ...
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
@@ -43,9 +41,10 @@ void AbstractModel3D::initProgram(const string & fragmentShader) {
     _uNormalmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_NORMAL_MATRIX);
 }
 	
-AbstractModel3D::AbstractModel3D(const string & mesh, const string & fragmentShader) {
+AbstractModel3D::AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform) {
 	initPoints(Mesh::fromOBJFile(mesh));
 	initProgram(fragmentShader);
+	_modelTransform = modelTransform; // TODO Init list
 }
 
 AbstractModel3D::~AbstractModel3D()  {
@@ -67,8 +66,9 @@ GLsizei AbstractModel3D::count() const {
 }
 
 void AbstractModel3D::setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix) {
-	glUniformMatrix4fv(_uMVPmatrix, 1, GL_FALSE, value_ptr(ProjMatrix * MVMatrix));
-	glUniformMatrix4fv(_uMVmatrix, 1, GL_FALSE, value_ptr(MVMatrix));
-	glUniformMatrix4fv(_uNormalmatrix, 1, GL_FALSE, value_ptr(transpose(inverse(MVMatrix))));
+	mat4 transformMVMatrix = MVMatrix * _modelTransform;
+	glUniformMatrix4fv(_uMVPmatrix, 1, GL_FALSE, value_ptr(ProjMatrix * transformMVMatrix));
+	glUniformMatrix4fv(_uMVmatrix, 1, GL_FALSE, value_ptr(transformMVMatrix));
+	glUniformMatrix4fv(_uNormalmatrix, 1, GL_FALSE, value_ptr(transpose(inverse(transformMVMatrix))));
 }
 
