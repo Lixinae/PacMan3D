@@ -5,20 +5,21 @@
 using namespace glimac;
 using namespace glm;
 
-const float Renderer3D::SQUARE_SIZE = 1;
+const float Renderer3D::SQUARE_SIZE = 2.5; //TODO 1
 
 AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
 	switch (model) {
 		case GameRepresentation::Model::PACMAN:
-			return new TexModel3D("a", "assets/textures/EarthMap.jpg");
+			//return new TexModel3D("a", "assets/textures/EarthMap.jpg");
+			return new NormalModel3D("assets/models/cube.obj");
 		case GameRepresentation::Model::WALL:
-			return new TexModel3D("b", "assets/textures/MoonMap.jpg");
+			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg");
 		case GameRepresentation::Model::FLOOR:
-			return new TexModel3D("d", "assets/textures/MoonMap.jpg");
+			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg");
 		case GameRepresentation::Model::TUNNEL:
-			return new TexModel3D("a", "assets/textures/EarthMap.jpg");
+			return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg");
 		case GameRepresentation::Model::PAC_GOMME:
-			return new TexModel3D("c", "assets/textures/MoonMap.jpg");
+			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg");
 	}
 }
 
