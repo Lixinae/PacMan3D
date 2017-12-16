@@ -5,21 +5,27 @@
 using namespace glimac;
 using namespace glm;
 
-const float Renderer3D::SQUARE_SIZE = 2.5; //TODO 1
+const float Renderer3D::SQUARE_SIZE = 1;
 
 AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
+	mat4 modelTransform(1);
 	switch (model) {
 		case GameRepresentation::Model::PACMAN:
-			//return new TexModel3D("a", "assets/textures/EarthMap.jpg");
-			return new NormalModel3D("assets/models/cube.obj");
+			modelTransform = scale(modelTransform, vec3(0.6, 0.6, 0.6));
+			//return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg");
+			return new NormalModel3D("assets/models/cube.obj", modelTransform);
 		case GameRepresentation::Model::WALL:
-			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg");
+			modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
+			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
 		case GameRepresentation::Model::FLOOR:
-			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg");
+			modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
+			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
 		case GameRepresentation::Model::TUNNEL:
-			return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg");
+			modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
+			return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
 		case GameRepresentation::Model::PAC_GOMME:
-			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg");
+			modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
+			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
 	}
 }
 

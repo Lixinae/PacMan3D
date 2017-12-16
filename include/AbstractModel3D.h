@@ -25,8 +25,9 @@ public:
 	static const GLchar * VERTEX_UNIFORM_MV_MATRIX;
 	static const GLchar * VERTEX_UNIFORM_NORMAL_MATRIX;
 	
-	AbstractModel3D(const string & mesh, const string & fragmentShader); //TODO should be protected
-																		// Make factory
+	AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform); 
+																			//TODO should be protected
+																		   // Make factory
 	virtual ~AbstractModel3D();
 	
 	virtual void bind();
@@ -51,6 +52,8 @@ private:
 	GLuint _uMVPmatrix; 
     GLuint _uMVmatrix;
     GLuint _uNormalmatrix;
+    
+    mat4 _modelTransform;
     
     void initPoints(Mesh mesh);
     void initProgram(const string & fragmentShader);

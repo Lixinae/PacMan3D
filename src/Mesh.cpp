@@ -15,9 +15,9 @@ Mesh::Mesh(vector<ShapeVertex> vertices) : _vertices(vertices) {
 
 Mesh Mesh::fromOBJFile(const string & filePath) {
 	Assimp::Importer importer;
-	const aiScene *scene = importer.ReadFile(filePath, aiProcessPreset_TargetRealtime_Fast);
+	const aiScene * scene = importer.ReadFile(filePath, aiProcessPreset_TargetRealtime_Fast);
 	if (!scene) { //TODO except
-		printf("Unable to laod mesh: %s\n", importer.GetErrorString());
+		printf("%s\n", importer.GetErrorString());
 	}
 	vector<ShapeVertex> vertices;
 	for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
@@ -28,11 +28,11 @@ Mesh Mesh::fromOBJFile(const string & filePath) {
 				aiVector3D position = mesh->mVertices[face.mIndices[k]];
 				aiVector3D normal = mesh->mNormals[face.mIndices[j]];
 				// texCoords is a 3D vector but we only use the 2 first dimensions
-				aiVector3D texCoords = position; // mesh->mTextureCoords[0][face.mIndices[k]]
+				aiVector3D texCoords = position; // TODO use : mesh->mTextureCoords[0][face.mIndices[k]]
 				ShapeVertex shapeVertex;
 				shapeVertex.position = glm::vec3(position.x, position.y, position.z);
 				shapeVertex.normal = glm::vec3(normal.x, normal.y, normal.z);
-				shapeVertex.texCoords = glm::vec2(texCoords.x, texCoords.y);
+				shapeVertex.texCoords = glm::vec2(texCoords.x, texCoords.y); // TODO maybe x,z or y,z , ...
 				vertices.push_back(shapeVertex);
 			}
 		}
