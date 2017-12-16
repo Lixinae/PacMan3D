@@ -18,14 +18,16 @@ AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
 			modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
 			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
 		case GameRepresentation::Model::FLOOR:
-			modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
-			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
+			modelTransform = scale(modelTransform, vec3(0.5, 0.1, 0.5));
+			return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
 		case GameRepresentation::Model::TUNNEL:
 			modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
 			return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
 		case GameRepresentation::Model::PAC_GOMME:
-			modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
-			return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
+			modelTransform = scale(modelTransform, vec3(0.3, 0.3, 0.3));
+			modelTransform = rotate(modelTransform, 0.78f, vec3(0.f,0.f,1.f));
+			//return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
+			return new NormalModel3D("assets/models/cube.obj", modelTransform);
 	}
 }
 

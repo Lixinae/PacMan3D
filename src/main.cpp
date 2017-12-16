@@ -13,9 +13,6 @@
 #include <EventHandler.h>
 #include <TrackballCamera.h>
 
-#include <assimp/Importer.hpp>      // C++ importer interface
-#include <assimp/scene.h>           // Output data structure
-
 using namespace glimac;
 using namespace std;
 using namespace glm;
@@ -23,9 +20,6 @@ using namespace glm;
 using json = nlohmann::json;
 
 int realMain() {
-    cout << "test" << endl;
-    // Ligne de test
-    Assimp::Importer importer;
 
     Configuration configuration = Configuration::fromJSONFile("assets/configuration.json");
 
@@ -70,12 +64,12 @@ int realMain() {
 
 }
 
-// Main pour linux
+// Main for linux
 int main(int argc, char **argv) {
     return realMain();
 }
 
-// Main pour windows
+// Main for windows
 int WinMain(int argc, char **argv) {
     return realMain();
 

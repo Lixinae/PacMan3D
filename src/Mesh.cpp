@@ -37,23 +37,6 @@ Mesh Mesh::fromOBJFile(const string & filePath) {
 			}
 		}
 	}
-	/* TODO rm */
-	/*float r;
-	if (filePath == "a") {
-		r = 0.7;
-	} else if (filePath == "b") {
-		r = 1;
-	} else if (filePath == "c") {
-		r = 0.3;
-	} else {
-		r = 0.05;
-	}
-	Sphere sphere(r,16,16);
-	vector<ShapeVertex> vertices(sphere.getVertexCount());
-	for (int i = 0; i < sphere.getVertexCount(); i++) {
-		vertices[i] = sphere.getDataPointer()[i];
-	}*/
-	/*  			  */
 	return Mesh(vertices);
 }
 
