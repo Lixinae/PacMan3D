@@ -31,7 +31,7 @@ Mesh Mesh::fromOBJFile(const string & filePath) {
 				aiVector3D normal = mesh->mNormals[face.mIndices[k]];
 				shapeVertex.normal = glm::vec3(normal.x, normal.y, normal.z);
 				aiVector3D * uv = mesh->mTextureCoords[0];
-				// if uv if null there is no texture
+				// if uv if null there is no texture coords
 				if (uv != nullptr) {
 					// texCoords is a 3D vector but we only use the 2 first dimensions
 					aiVector3D texCoords = uv[face.mIndices[k]];
