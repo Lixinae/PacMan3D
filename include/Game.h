@@ -35,7 +35,7 @@ private:
 	
 	GameRepresentation _representation;
 	
-	Game(Board board, Pacman pacman);
+	Game(const Board & board, const Pacman & pacman);
 
 };
 

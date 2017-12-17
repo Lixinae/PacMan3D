@@ -18,6 +18,8 @@ public:
 
 	static Board fromJSON(const json & jsonBoard);
 	
+	Board(const Board & other);
+	
 	~Board();
 
 	vector<BoardPosition> getPositions() const;

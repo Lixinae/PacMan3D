@@ -6,7 +6,7 @@ using json = nlohmann::json;
 
 using namespace std;
 
-Game::Game(Board board, Pacman pacman) : _board(board), _pacman(pacman), _pointOfView(), _representation() {
+Game::Game(const Board & board, const Pacman & pacman) : _board(board), _pacman(pacman), _pointOfView(), _representation() {
 	_representation.add(_pacman.getModel(), _pacman.getPosition());
     for (const BoardPosition & position : _board.getPositions()) {
 		for (const GameRepresentation::Model & model : _board[position].getModels()) {
@@ -17,6 +17,7 @@ Game::Game(Board board, Pacman pacman) : _board(board), _pacman(pacman), _pointO
 
 Game Game::fromJSON(const json &jsonGame) {
     Board board = Board::fromJSON(jsonGame["board"]);
+     cerr << "totoche" << endl;
     Pacman pacman = Pacman::fromJSON(jsonGame["pacman"]);
     return Game(board, pacman);
 }

@@ -9,11 +9,19 @@
 using namespace std;
 
 Board::Board(const map<BoardPosition, BoardSquare *> & squares) : _squares(squares) {
-	
+
+}
+
+Board::Board(const Board & other) : _squares() {
+	for (const auto & entry : other._squares) {
+		_squares[entry.first] = entry.second->clone();
+	}
 }
 
 Board::~Board() {
-	// TODO manage delete for new boardsquare::fromjson
+	for (auto & entry : _squares) {
+		delete entry.second;
+	}
 }
 
 Board Board::fromJSON(const json & jsonBoard) {
@@ -21,9 +29,9 @@ Board Board::fromJSON(const json & jsonBoard) {
 	json casesArray = jsonBoard["cases"];
 	for (json::iterator it = casesArray.begin(); it != casesArray.end(); ++it) {
 		BoardPosition position = BoardPosition::fromJSON((*it)["position"]);
-		BoardSquare * square = BoardSquare::fromJSON((*it)["case"]); //TODO Manage delete
+		BoardSquare * square = BoardSquare::fromJSON((*it)["case"]);
 		squares[position] = square;
-	}	
+	}
 	return Board(squares);
 }
 

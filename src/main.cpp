@@ -36,7 +36,7 @@ int realMain() {
     glEnable(GL_DEPTH_TEST);
 
     Game game = Game::fromJSONFile("assets/games/game.json");
- 
+
 	EventHandler eventHandler(configuration.getControlMap());
     Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView());
 
