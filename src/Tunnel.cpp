@@ -33,7 +33,7 @@ bool Tunnel::isWalkable() const {
 }
 	
 void Tunnel::receive(BoardSquare::Context & context) {
-	context.pacman.setPosition(_dest);	
+	context.pacman.setPosition(_dest.translate(_destOrientation));	
 	context.pacman.setOrientation(_destOrientation);
 }
 

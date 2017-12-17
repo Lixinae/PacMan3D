@@ -9,7 +9,7 @@ using namespace std;
 Game::Game(const Board & board, const Pacman & pacman) : _board(board), _pacman(pacman), _pointOfView(), _representation() {
 	_representation.add(_pacman.getModel(), _pacman.getPosition());
     for (const BoardPosition & position : _board.getPositions()) {
-		for (const GameRepresentation::Model & model : _board[position].getModels()) {
+		for (const GameRepresentation::Model & model : _board[position]->getModels()) {
 			_representation.add(model, position);
 		}
     }
@@ -31,7 +31,8 @@ Game Game::fromJSONFile(const string &filePath) {
 
 void Game::orientPacman(Utils::Orientation orientation) {
 	BoardPosition nextPosition = _pacman.getPosition().translate(orientation);
-	if (_board[nextPosition].isWalkable()) {
+	BoardSquare * square = _board[nextPosition];
+	if (square != nullptr && square->isWalkable()) {
 		_pacman.setOrientation(orientation);
 	}
 }
@@ -46,25 +47,24 @@ GameRepresentation Game::getRepresentation() const {
 
 void Game::iterate() {
 	BoardPosition nextPosition = _pacman.getPosition().translate(_pacman.getOrientation());
-	BoardSquare & square = _board[nextPosition];
-    if (square.isWalkable()) {
+	BoardSquare * square = _board[nextPosition];
+    if (square != nullptr && square->isWalkable()) {
 		// Clean model
-		GameRepresentation::Model pacmanModel = _pacman.getModel();
-		for (const GameRepresentation::Model & model : square.getModels()) {
+		for (const GameRepresentation::Model & model : square->getModels()) {
 			_representation.remove(model, nextPosition);
 		}
-		_representation.remove(pacmanModel, _pacman.getPosition());
+		_representation.remove(_pacman.getModel(), _pacman.getPosition());
 		// Update
-		_pacman.setPosition(nextPosition); //TODO outofrange when move in tunnel : maybe wall in map problem
+		_pacman.setPosition(nextPosition);
 		BoardSquare::Context context(_pacman);
-		square.receive(context);
+		square->receive(context);
 		// Reset model
 		/* TODO better : add new pacman pos */
-		for (const GameRepresentation::Model & model : square.getModels()) {
+		for (const GameRepresentation::Model & model : square->getModels()) {
 			_representation.add(model, nextPosition);
 		}
 		/* *** */
-		_representation.add(pacmanModel, _pacman.getPosition());
+		_representation.add(_pacman.getModel(), _pacman.getPosition());
 	}
 	_pacman.iterate();
 }

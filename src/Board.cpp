@@ -43,11 +43,14 @@ vector<BoardPosition> Board::getPositions() const {
 	return positions;
 }
 
-BoardSquare & Board::getSquare(const BoardPosition & position) const {
-	//TODO Option Square <=> Square *
-	return *(_squares.at(position));
+BoardSquare * Board::getSquare(const BoardPosition & position) const {
+	auto it = _squares.find(position);
+	if (it == _squares.end()) {
+		return nullptr;
+	}
+	return it->second;
 }
 
-BoardSquare & Board::operator[](const BoardPosition & position) const {
+BoardSquare * Board::operator[](const BoardPosition & position) const {
 	return getSquare(position);
 }
