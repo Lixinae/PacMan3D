@@ -14,13 +14,13 @@ public:
 	
 	TexModel3D(const string & meshPath, const string & texturePath, const mat4 & modelTransform);
 	
-	void bind();
-	void unbind();
+	void bind() override;
+	void unbind() override;
 	
 private:
 
 	GLuint _textureObject;
-	GLuint _uTexture;
+	GLint _uTexture;
 
 };
 

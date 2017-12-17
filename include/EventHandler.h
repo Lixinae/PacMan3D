@@ -8,8 +8,6 @@
 #include <glimac/SDLWindowManager.hpp>
 #include <Configuration.h>
 
-#include <Camera.h> // TODO rm
-
 using namespace glimac;
 using namespace std;
 using namespace glm;
@@ -22,7 +20,7 @@ private:
 
 public:
 
-	EventHandler(const map<control, SDLKey> & keyMap);
+    explicit EventHandler(const map<control, SDLKey> & keyMap);
 
     /**
      * Gère les evenement liés à la SDL, tel que les touches appuyer ou les mouvement de la souris

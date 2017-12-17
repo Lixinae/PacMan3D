@@ -36,6 +36,7 @@ private:
  
 	map<Model, vector<BoardPosition>> _modelsPositions;
 
+	//static const vector<Model> buildVector();
 };
 
 #endif

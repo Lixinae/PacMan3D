@@ -12,12 +12,39 @@
 #include <Renderer3D.h>
 #include <EventHandler.h>
 #include <TrackballCamera.h>
+#include <TexModel3D.h>
+#include <NormalModel3D.h>
 
 using namespace glimac;
 using namespace std;
 using namespace glm;
 
 using json = nlohmann::json;
+
+// Todo mettre ailleurs -> Besoin pour creer la map avant de le faire dans le rendere
+// Pour correspondre au nouveau constructeur
+//AbstractModel3D* get3DModel(GameRepresentation::Model model) {
+//    mat4 modelTransform(1);
+//    switch (model) {
+//        case GameRepresentation::Model::PACMAN:
+//            modelTransform = scale(modelTransform, vec3(0.006, 0.006, 0.006));
+//            return new TexModel3D("assets/models/tennisball.obj", "assets/textures/EarthMap.jpg", modelTransform);
+//        case GameRepresentation::Model::WALL:
+//            modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
+//            return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
+//        case GameRepresentation::Model::FLOOR:
+//            modelTransform = scale(modelTransform, vec3(0.5, 0.1, 0.5));
+//            return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
+//        case GameRepresentation::Model::TUNNEL:
+//            modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
+//            return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
+//        case GameRepresentation::Model::PAC_GOMME:
+//            modelTransform = scale(modelTransform, vec3(0.0025, 0.0025, 0.0025));
+//            //return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
+//            return new NormalModel3D("assets/models/tennisball.obj", modelTransform);
+//    }
+//}
+
 
 int realMain() {
 
@@ -26,7 +53,6 @@ int realMain() {
     int windowWidth = configuration.getWidth();
     int windowHeight = configuration.getHeight();
     SDLWindowManager windowManager(windowWidth, windowHeight, "GLImac");
-
     GLenum glewInitError = glewInit();
     if (GLEW_OK != glewInitError) {
         std::cerr << glewGetErrorString(glewInitError) << std::endl;
@@ -38,6 +64,16 @@ int realMain() {
     Game game = Game::fromJSONFile("assets/games/game.json");
 
 	EventHandler eventHandler(configuration.getControlMap());
+
+//    map<GameRepresentation::Model, AbstractModel3D *> map_model3D;
+//
+//    // todo -> Change -> bug toujours, MODELS pas totalement initialisé
+//    for (auto &model : GameRepresentation::MODELS) {
+//        cout << "model : " << (int)model << endl;
+//        AbstractModel3D *model3d = get3DModel(model);
+//        map_model3D[model] = model3d;
+//    }
+//    Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(),map_model3D);
     Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView());
 
     bool done = false;

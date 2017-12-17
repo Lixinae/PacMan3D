@@ -28,7 +28,8 @@ Mesh Mesh::fromOBJFile(const string & filePath) {
 				aiVector3D position = mesh->mVertices[face.mIndices[k]];
 				aiVector3D normal = mesh->mNormals[face.mIndices[k]];
 				// texCoords is a 3D vector but we only use the 2 first dimensions
-				aiVector3D texCoords = position; // TODO use : mesh->mTextureCoords[0][face.mIndices[k]]
+//				aiVector3D texCoords = position; // TODO use : mesh->mTextureCoords[0][face.mIndices[k]]
+				aiVector3D texCoords = mesh->mTextureCoords[0][face.mIndices[k]];
 				ShapeVertex shapeVertex;
 				shapeVertex.position = glm::vec3(position.x, position.y, position.z);
 				shapeVertex.normal = glm::vec3(normal.x, normal.y, normal.z);

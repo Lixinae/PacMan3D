@@ -49,9 +49,9 @@ private:
 	GLuint _vao;
 	GLsizei _size;
 
-	GLuint _uMVPmatrix; 
-    GLuint _uMVmatrix;
-    GLuint _uNormalmatrix;
+	GLint _uMVPmatrix;
+    GLint _uMVmatrix;
+    GLint _uNormalmatrix;
     
     mat4 _modelTransform;
     

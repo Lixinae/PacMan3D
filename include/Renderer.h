@@ -9,9 +9,7 @@ public:
 
 	virtual void render(const GameRepresentation & repr) const = 0;
 	
-	virtual ~Renderer() {
-		
-	};
+	virtual ~Renderer() = default;;
 
 };
 

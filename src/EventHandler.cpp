@@ -7,21 +7,17 @@ EventHandler::EventHandler(const map<control, SDLKey> & keyMap) : _keyMap(keyMap
 }
 
 bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
-	bool finish = false;
 	bool changeCamera = false;
-	SDL_Event event;
+	SDL_Event event{};
 	while (windowManager.pollEvent(event)) {
 		if (event.type == SDL_QUIT) {
-			finish = true;
+			return true;
 		}
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == _keyMap[control::CHANGE_CAMERA]) {
 				changeCamera = true;
 			}
 		}
-	}
-	if (finish) {
-		return true;
 	}
 	if (changeCamera) {
 		game.getPointOfView()->setNextCamera();

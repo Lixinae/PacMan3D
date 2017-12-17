@@ -8,14 +8,14 @@
 class PacGomme : public Bonus {
 
 public:
-	
-	PacGomme();
-	
-	GameRepresentation::Model getModel() const;
-	
-	void apply(Pacman & pacman);
-	
-	Bonus * clone() const;
+
+    PacGomme();
+
+    GameRepresentation::Model getModel() const;
+
+    void apply(Pacman &pacman);
+
+    Bonus *clone() const;
 
 };
 
