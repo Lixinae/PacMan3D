@@ -25,15 +25,18 @@ Mesh Mesh::fromOBJFile(const string & filePath) {
 		for (unsigned int j = 0; j < mesh->mNumFaces; j++) {
 			const aiFace & face = mesh->mFaces[j];
 			for (unsigned int k = 0; k < 3; k++) {
-				aiVector3D position = mesh->mVertices[face.mIndices[k]];
-				aiVector3D normal = mesh->mNormals[face.mIndices[k]];
-				// texCoords is a 3D vector but we only use the 2 first dimensions
-//				aiVector3D texCoords = position; // TODO use : mesh->mTextureCoords[0][face.mIndices[k]]
-				aiVector3D texCoords = mesh->mTextureCoords[0][face.mIndices[k]];
 				ShapeVertex shapeVertex;
+				aiVector3D position = mesh->mVertices[face.mIndices[k]];
 				shapeVertex.position = glm::vec3(position.x, position.y, position.z);
+				aiVector3D normal = mesh->mNormals[face.mIndices[k]];
 				shapeVertex.normal = glm::vec3(normal.x, normal.y, normal.z);
-				shapeVertex.texCoords = glm::vec2(texCoords.x, texCoords.y); // TODO maybe x,z or y,z , ...
+				aiVector3D * uv = mesh->mTextureCoords[0];
+				// if uv if null there is no texture coords
+				if (uv != nullptr) {
+					// texCoords is a 3D vector but we only use the 2 first dimensions
+					aiVector3D texCoords = uv[face.mIndices[k]];
+					shapeVertex.texCoords = glm::vec2(texCoords.x, texCoords.y);
+				}
 				vertices.push_back(shapeVertex);
 			}
 		}
