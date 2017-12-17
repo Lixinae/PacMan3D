@@ -17,7 +17,6 @@ Game::Game(const Board & board, const Pacman & pacman) : _board(board), _pacman(
 
 Game Game::fromJSON(const json &jsonGame) {
     Board board = Board::fromJSON(jsonGame["board"]);
-     cerr << "totoche" << endl;
     Pacman pacman = Pacman::fromJSON(jsonGame["pacman"]);
     return Game(board, pacman);
 }

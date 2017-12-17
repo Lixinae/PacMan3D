@@ -1,7 +1,7 @@
 #include <Configuration.h>
 #include <fstream>
 
-Configuration::Configuration(map<control, SDLKey> keyMap, int windowWidth, int windowHeight) :
+Configuration::Configuration(const map<control, SDLKey> & keyMap, int windowWidth, int windowHeight) :
 	_keyMap(keyMap),
 	_windowWidth(windowWidth),
 	_windowHeight(windowHeight) 
