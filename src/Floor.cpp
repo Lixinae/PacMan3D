@@ -38,8 +38,8 @@ bool Floor::isWalkable() const {
 }
 	
 void Floor::receive(BoardSquare::Context & context) {
+	//context.pacman.setPosition(context.pacman.getPosition().translate(context.pacman.getOrientation()));
 	if (_bonus != nullptr) {
-		//_bonus->apply(pacman);
 		_bonus->apply(context.pacman);
 		delete _bonus;
 		_bonus = nullptr;

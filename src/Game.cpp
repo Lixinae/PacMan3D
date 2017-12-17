@@ -59,10 +59,12 @@ void Game::iterate() {
 		BoardSquare::Context context(_pacman);
 		square.receive(context);
 		// Reset model
+		/* TODO better : add new pacman pos */
 		for (const GameRepresentation::Model & model : square.getModels()) {
 			_representation.add(model, nextPosition);
 		}
-		_representation.add(pacmanModel, nextPosition);
+		/* *** */
+		_representation.add(pacmanModel, _pacman.getPosition());
 	}
 	_pacman.iterate();
 }
