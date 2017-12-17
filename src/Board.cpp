@@ -1,11 +1,5 @@
 #include <Board.h>
 
-#include <BoardPosition.h>
-#include <BoardSquare.h>
-#include <GameRepresentation.h>
-#include <map>
-#include <vector>
-
 using namespace std;
 
 Board::Board(const map<BoardPosition, BoardSquare *> & squares) : _squares(squares) {
@@ -27,9 +21,9 @@ Board::~Board() {
 Board Board::fromJSON(const json & jsonBoard) {
 	map<BoardPosition, BoardSquare *> squares;
 	json casesArray = jsonBoard["cases"];
-	for (json::iterator it = casesArray.begin(); it != casesArray.end(); ++it) {
-		BoardPosition position = BoardPosition::fromJSON((*it)["position"]);
-		BoardSquare * square = BoardSquare::fromJSON((*it)["case"]);
+    for (auto &it : casesArray) {
+        BoardPosition position = BoardPosition::fromJSON(it["position"]);
+        BoardSquare *square = BoardSquare::fromJSON(it["case"]);
 		squares[position] = square;
 	}
 	return Board(squares);

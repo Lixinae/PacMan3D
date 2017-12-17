@@ -1,63 +1,98 @@
 #include <Configuration.h>
-#include <fstream>
 
-Configuration::Configuration(const map<control, SDLKey> & keyMap, int windowWidth, int windowHeight) :
-	_keyMap(keyMap),
-	_windowWidth(windowWidth),
-	_windowHeight(windowHeight) 
-{
+
+Configuration::Configuration(const map<control, SDLKey> &keyMap,
+                             const map<GameRepresentation::Model, AbstractModel3D *> &modelMap, int windowWidth,
+                             int windowHeight) :
+        _keyMap(keyMap),
+        _windowWidth(windowWidth),
+        _windowHeight(windowHeight),
+        _map_model3D(modelMap) {
 
 }
 
 Configuration Configuration::defaultConfiguration() {
-	map<control, SDLKey> keyMap;
-	keyMap[control::UP] = stringToKey("z");
+    map<control, SDLKey> keyMap;
+    keyMap[control::UP] = stringToKey("z");
     keyMap[control::DOWN] = stringToKey("s");
     keyMap[control::LEFT] = stringToKey("q");
     keyMap[control::RIGHT] = stringToKey("d");
     keyMap[control::CHANGE_CAMERA] = stringToKey("c");
     keyMap[control::ZOOM_IN] = stringToKey("b");
     keyMap[control::ZOOM_OUT] = stringToKey("n");
-    return Configuration(keyMap, 800, 600);
+    map<GameRepresentation::Model, AbstractModel3D *> modelMap;
+    // todo -> Add default modelMap
+    return Configuration(keyMap, modelMap, 800, 600);
 }
 
-map<control, SDLKey> Configuration::keyMapFromJSON(const json & json) {
-	map<control, SDLKey> keyMap;
-	keyMap[control::UP] = stringToKey(json["Up"]);
+map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
+    map<control, SDLKey> keyMap;
+    keyMap[control::UP] = stringToKey(json["Up"]);
     keyMap[control::DOWN] = stringToKey(json["Down"]);
     keyMap[control::LEFT] = stringToKey(json["Left"]);
     keyMap[control::RIGHT] = stringToKey(json["Right"]);
     keyMap[control::CHANGE_CAMERA] = stringToKey(json["ChangeCamera"]);
     keyMap[control::ZOOM_IN] = stringToKey(json["ZoomIn"]);
     keyMap[control::ZOOM_OUT] = stringToKey(json["ZoomOut"]);
-	return keyMap;
+    return keyMap;
 }
 
-Configuration Configuration::fromJSON(const json & json) {
-	map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
-	int windowWidth = json["windowSize"]["width"];
-	int windowHeight = json["windowSize"]["height"];
-    return Configuration(keyMap, windowWidth, windowHeight);
+map<GameRepresentation::Model, AbstractModel3D *> Configuration::modelMapFromJSON(const json &jsonData) {
+
+    map<GameRepresentation::Model, AbstractModel3D *> modelMap;
+    json modelsArray = jsonData["models"];
+    for (auto &it : modelsArray) {
+        modelMap.insert(modelFromJson(it));
+    }
+
+    return modelMap;
 }
 
-Configuration Configuration::fromJSONFile(const string & filePath) {
-	json jsonConfig;
-	ifstream configFile(filePath);
-	configFile >> jsonConfig;
+pair<GameRepresentation::Model, AbstractModel3D *> Configuration::modelFromJson(const json &json) {
+
+    GameRepresentation::Model model = fromString(json["name"]);
+    mat4 modelTransform(1);
+
+    modelTransform = scale(modelTransform, vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
+//    modelTransform = rotation(modelTransform.,vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
+//    modelTransform = rotation(modelTransform,vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
+    AbstractModel3D *model3D = new TexModel3D(json["objPath"], json["texPath"], modelTransform);
+    return pair<GameRepresentation::Model, AbstractModel3D *>(model, model3D);
+}
+
+Configuration Configuration::fromJSON(const json &json) {
+    map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
+    int windowWidth = json["windowSize"]["width"];
+    int windowHeight = json["windowSize"]["height"];
+
+    map<GameRepresentation::Model, AbstractModel3D *> modelMap = modelMapFromJSON(json);
+    return Configuration(keyMap, modelMap, windowWidth, windowHeight);
+}
+
+
+Configuration Configuration::fromJSONFile(const string &filePath) {
+    json jsonConfig;
+    ifstream configFile(filePath);
+//    cout << configFile.get() << endl;
+    configFile >> jsonConfig;
     configFile.close();
-	return fromJSON(jsonConfig);
+    return fromJSON(jsonConfig);
 }
 
-int Configuration::getWidth() const {
+uint32_t Configuration::getWidth() const {
     return _windowWidth;
 }
 
-int Configuration::getHeight() const {
+uint32_t Configuration::getHeight() const {
     return _windowHeight;
 }
 
 const map<control, SDLKey> Configuration::getControlMap() const {
     return _keyMap;
+}
+
+const map<GameRepresentation::Model, AbstractModel3D *> Configuration::getModelMap() const {
+    return _map_model3D;
 }
 
 SDLKey Configuration::stringToKey(string s) {
@@ -147,4 +182,12 @@ SDLKey Configuration::stringToKey(string s) {
     if (s == "f14") return SDLK_F14;
     if (s == "f15") return SDLK_F15;
     if (s == "esc") return SDLK_ESCAPE;
+}
+
+GameRepresentation::Model Configuration::fromString(const string &s) {
+    if (s == "Pacman") return GameRepresentation::Model::PACMAN;
+    if (s == "Wall") return GameRepresentation::Model::WALL;
+    if (s == "Floor") return GameRepresentation::Model::FLOOR;
+    if (s == "Tunnel") return GameRepresentation::Model::TUNNEL;
+    if (s == "Pac_gomme") return GameRepresentation::Model::PAC_GOMME;
 }

@@ -11,5 +11,27 @@
   "windowSize": {
     "width": 800,
     "height": 600
-  }
+  },
+  "models": [
+    {
+      "name": "Pacman",
+      "objPath": "",
+      "texPath": "",
+      "translate": {
+        "x": 0.5,
+        "y": 0,
+        "z": 2.3
+      },
+      "rotate": {
+        "x": 0.5,
+        "y": 0,
+        "z": 2.3
+      },
+      "scale": {
+        "x": 0.5,
+        "y": 0,
+        "z": 2.3
+      }
+    }
+  ]
 }

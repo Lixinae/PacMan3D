@@ -19,8 +19,8 @@ public:
 		PAC_GOMME
 		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...
 	};
-	
-	static const vector<Model> MODELS;
+
+    static vector<Model> MODELS;
 
 	GameRepresentation(); 
 	
@@ -36,7 +36,7 @@ private:
  
 	map<Model, vector<BoardPosition>> _modelsPositions;
 
-	//static const vector<Model> buildVector();
+    static vector<Model> buildVector();
 };
 
 #endif

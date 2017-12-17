@@ -2,30 +2,23 @@
 
 using namespace std;
 
-const vector<GameRepresentation::Model> GameRepresentation::MODELS = {
-        GameRepresentation::Model::PACMAN,
-        GameRepresentation::Model::WALL,
-        GameRepresentation::Model::FLOOR,
-        GameRepresentation::Model::TUNNEL,
-        GameRepresentation::Model::PAC_GOMME
-        //TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...
-};
+// Laisser cette ligne sinon erreur !
+vector<GameRepresentation::Model> GameRepresentation::MODELS;
 
-//const vector<GameRepresentation::Model> GameRepresentation::MODELS = GameRepresentation::buildVector();
-// Ne corrige pas le bug =/
-//const vector<GameRepresentation::Model> GameRepresentation::buildVector() {
-//	vector<GameRepresentation::Model> models;
-//	models.push_back(GameRepresentation::Model::PACMAN);
-//	models.push_back(GameRepresentation::Model::WALL);
-//	models.push_back(GameRepresentation::Model::FLOOR);
-//	models.push_back(GameRepresentation::Model::TUNNEL);
-//	models.push_back(GameRepresentation::Model::PAC_GOMME);
-//	return models;
-//}
+vector<GameRepresentation::Model> GameRepresentation::buildVector() {
+	vector<GameRepresentation::Model> models;
+	models.push_back(GameRepresentation::Model::PACMAN);
+	models.push_back(GameRepresentation::Model::WALL);
+	models.push_back(GameRepresentation::Model::FLOOR);
+	models.push_back(GameRepresentation::Model::TUNNEL);
+	models.push_back(GameRepresentation::Model::PAC_GOMME);
+	return models;
+}
 
 
 GameRepresentation::GameRepresentation() :
 		_modelsPositions() {
+	GameRepresentation::MODELS = buildVector();
 	for (auto & model : GameRepresentation::MODELS) {
 		_modelsPositions[model] = vector<BoardPosition>();
 	}
