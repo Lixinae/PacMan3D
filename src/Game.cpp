@@ -30,8 +30,8 @@ Game Game::fromJSONFile(const string &filePath) {
 }
 
 void Game::orientPacman(Utils::Orientation orientation) {
-	BoardPosition nextPosition = _pacman.getPosition().translate(orientation);
-	BoardSquare * square = _board[nextPosition];
+	BoardPosition position = _pacman.getPosition().translate(orientation);
+	BoardSquare * square = _board[position];
 	if (square != nullptr && square->isWalkable()) {
 		_pacman.setOrientation(orientation);
 	}
@@ -41,30 +41,44 @@ PointOfView * Game::getPointOfView() {
     return &_pointOfView;
 }
 
-GameRepresentation Game::getRepresentation() const {
+const GameRepresentation & Game::getRepresentation() const {
     return _representation;
 }
 
+void Game::setSquare(const BoardPosition & position) {
+	for (const GameRepresentation::Model & model : _board[position]->getModels()) {
+		_representation.add(model, position);
+	}
+}	
+
+void Game::setPacman() {
+	_representation.add(_pacman.getModel(), _pacman.getPosition());
+}
+
+void Game::cleanSquare(const BoardPosition & position) {
+	for (const GameRepresentation::Model & model : _board[position]->getModels()) {
+		_representation.remove(model, position);
+	}
+}	
+
+void Game::cleanPacman() {
+	_representation.remove(_pacman.getModel(), _pacman.getPosition());
+}
+	
 void Game::iterate() {
 	BoardPosition nextPosition = _pacman.getPosition().translate(_pacman.getOrientation());
-	BoardSquare * square = _board[nextPosition];
-    if (square != nullptr && square->isWalkable()) {
-		// Clean model
-		for (const GameRepresentation::Model & model : square->getModels()) {
-			_representation.remove(model, nextPosition);
-		}
-		_representation.remove(_pacman.getModel(), _pacman.getPosition());
+	BoardSquare * nextSquare = _board[nextPosition];
+    if (nextSquare != nullptr && nextSquare->isWalkable()) {
+		// Clean models
+		cleanSquare(nextPosition);
+		cleanPacman();
 		// Update
 		_pacman.setPosition(nextPosition);
 		BoardSquare::Context context(_pacman);
-		square->receive(context);
-		// Reset model
-		/* TODO better : add new pacman pos */
-		for (const GameRepresentation::Model & model : square->getModels()) {
-			_representation.add(model, nextPosition);
-		}
-		/* *** */
-		_representation.add(_pacman.getModel(), _pacman.getPosition());
+		nextSquare->receive(context);
+		// Reset models
+		setSquare(nextPosition);
+		setPacman();
 	}
 	_pacman.iterate();
 }

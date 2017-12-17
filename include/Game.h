@@ -23,7 +23,7 @@ public:
 	
 	void orientPacman(Utils::Orientation orientation);
 	
-	GameRepresentation getRepresentation() const;
+	const GameRepresentation & getRepresentation() const;
 	
 	void iterate();
 	
@@ -36,6 +36,12 @@ private:
 	GameRepresentation _representation;
 	
 	Game(const Board & board, const Pacman & pacman);
+	
+	void setSquare(const BoardPosition & position);
+	void setPacman();
+	
+	void cleanSquare(const BoardPosition & position);
+	void cleanPacman();
 
 };
 
