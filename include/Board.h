@@ -18,12 +18,14 @@ public:
 
 	static Board fromJSON(const json & jsonBoard);
 	
+	Board(const Board & other);
+	
 	~Board();
 
 	vector<BoardPosition> getPositions() const;
 
-	BoardSquare & getSquare(const BoardPosition & position) const;
-	BoardSquare & operator[](const BoardPosition & position) const;
+	BoardSquare * getSquare(const BoardPosition & position) const;
+	BoardSquare * operator[](const BoardPosition & position) const;
 			
 private:
  

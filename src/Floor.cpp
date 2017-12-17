@@ -37,12 +37,16 @@ bool Floor::isWalkable() const {
 	return true;
 }
 	
-void Floor::receive(Pacman & pacman) {
+void Floor::receive(BoardSquare::Context & context) {
 	if (_bonus != nullptr) {
-		_bonus->apply(pacman);
+		_bonus->apply(context.pacman);
 		delete _bonus;
 		_bonus = nullptr;
 	}
+}
+	
+BoardSquare * Floor::clone() {
+	return new Floor(*this);
 }
 
 Floor & Floor::operator=(const Floor & floor) {

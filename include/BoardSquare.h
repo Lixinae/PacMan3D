@@ -12,7 +12,13 @@ class BoardSquare {
 
 public:
 
-	// TODO add struct BoardSquareArgs and use it in argument of receive
+	struct Context {
+		
+		Pacman & pacman;
+		
+		Context(Pacman & pacman);
+		
+	};
 	
 	static BoardSquare * fromJSON(const json & jsonSquare);
 	
@@ -20,7 +26,9 @@ public:
 	
 	virtual bool isWalkable() const = 0;
 	
-	virtual void receive(Pacman & pacman) = 0;
+	virtual void receive(Context & context) = 0;
+	
+	virtual BoardSquare * clone() = 0;
 	
 	virtual ~BoardSquare() {
 		

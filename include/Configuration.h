@@ -25,7 +25,7 @@ class Configuration {
 
 private:
 
-    Configuration(map<control, SDLKey> keyMap, int windowWidth, int windowHeight);
+    Configuration(const map<control, SDLKey> & keyMap, int windowWidth, int windowHeight);
 
     map<control, SDLKey> _keyMap;
     int _windowWidth;
@@ -34,8 +34,6 @@ private:
     static SDLKey stringToKey(string s);
     
     static map<control, SDLKey> keyMapFromJSON(const json & json);
-
-    static pair<int, int> windowSizeFromJson(const json &json);
 
     static Configuration fromJSON(const json &json);
 

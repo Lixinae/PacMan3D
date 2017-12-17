@@ -6,10 +6,10 @@ using json = nlohmann::json;
 
 using namespace std;
 
-Game::Game(Board board, Pacman pacman) : _board(board), _pacman(pacman), _pointOfView(), _representation() {
+Game::Game(const Board & board, const Pacman & pacman) : _board(board), _pacman(pacman), _pointOfView(), _representation() {
 	_representation.add(_pacman.getModel(), _pacman.getPosition());
     for (const BoardPosition & position : _board.getPositions()) {
-		for (const GameRepresentation::Model & model : _board[position].getModels()) {
+		for (const GameRepresentation::Model & model : _board[position]->getModels()) {
 			_representation.add(model, position);
 		}
     }
@@ -30,8 +30,9 @@ Game Game::fromJSONFile(const string &filePath) {
 }
 
 void Game::orientPacman(Utils::Orientation orientation) {
-	BoardPosition nextPosition = _pacman.getPosition().translate(orientation);
-	if (_board[nextPosition].isWalkable()) {
+	BoardPosition position = _pacman.getPosition().translate(orientation);
+	BoardSquare * square = _board[position];
+	if (square != nullptr && square->isWalkable()) {
 		_pacman.setOrientation(orientation);
 	}
 }
@@ -40,28 +41,44 @@ PointOfView * Game::getPointOfView() {
     return &_pointOfView;
 }
 
-GameRepresentation Game::getRepresentation() const {
+const GameRepresentation & Game::getRepresentation() const {
     return _representation;
 }
 
+void Game::setSquare(const BoardPosition & position) {
+	for (const GameRepresentation::Model & model : _board[position]->getModels()) {
+		_representation.add(model, position);
+	}
+}	
+
+void Game::setPacman() {
+	_representation.add(_pacman.getModel(), _pacman.getPosition());
+}
+
+void Game::cleanSquare(const BoardPosition & position) {
+	for (const GameRepresentation::Model & model : _board[position]->getModels()) {
+		_representation.remove(model, position);
+	}
+}	
+
+void Game::cleanPacman() {
+	_representation.remove(_pacman.getModel(), _pacman.getPosition());
+}
+	
 void Game::iterate() {
 	BoardPosition nextPosition = _pacman.getPosition().translate(_pacman.getOrientation());
-	BoardSquare & square = _board[nextPosition];
-    if (square.isWalkable()) {
-		// Clean model
-		GameRepresentation::Model pacmanModel = _pacman.getModel();
-		for (const GameRepresentation::Model & model : square.getModels()) {
-			_representation.remove(model, nextPosition);
-		}
-		_representation.remove(pacmanModel, _pacman.getPosition());
+	BoardSquare * nextSquare = _board[nextPosition];
+    if (nextSquare != nullptr && nextSquare->isWalkable()) {
+		// Clean models
+		cleanSquare(nextPosition);
+		cleanPacman();
 		// Update
-		_pacman.setPosition(nextPosition); //TODO outofrange when move in tunnel : maybe wall in map problem
-		square.receive(_pacman);
-		// Reset model
-		for (const GameRepresentation::Model & model : square.getModels()) {
-			_representation.add(model, nextPosition);
-		}
-		_representation.add(pacmanModel, nextPosition);
+		_pacman.setPosition(nextPosition);
+		BoardSquare::Context context(_pacman);
+		nextSquare->receive(context);
+		// Reset models
+		setSquare(nextPosition);
+		setPacman();
 	}
 	_pacman.iterate();
 }
