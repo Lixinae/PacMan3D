@@ -7,6 +7,10 @@
 
 using json = nlohmann::json;
 
+BoardSquare::Context::Context(Pacman & pacman) : pacman(pacman) {
+	
+}
+
 BoardSquare * BoardSquare::fromJSON(const json & jsonSquare) {
 	string type = jsonSquare["type"];
 	if (type == "wall") {

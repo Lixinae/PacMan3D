@@ -32,10 +32,12 @@ bool Tunnel::isWalkable() const {
 	return true;
 }
 	
-void Tunnel::receive(Pacman & pacman) {
+void Tunnel::receive(BoardSquare::Context & context) {
 	// TODO clean current position in gamerepr
-	pacman.setPosition(_dest);	
-	pacman.setOrientation(_destOrientation);
+	//pacman.setPosition(_dest);	
+	//pacman.setOrientation(_destOrientation);
+	context.pacman.setPosition(_dest);	
+	context.pacman.setOrientation(_destOrientation);
 }
 
 BoardSquare * Tunnel::clone() {

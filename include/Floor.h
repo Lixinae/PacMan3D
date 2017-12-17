@@ -20,7 +20,7 @@ public:
 	
 	bool isWalkable() const;
 	
-	void receive(Pacman & pacman);
+	void receive(BoardSquare::Context & context);
 	
 	BoardSquare * clone();
 	

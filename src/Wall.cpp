@@ -16,7 +16,7 @@ bool Wall::isWalkable() const {
 	return false;
 }
 	
-void Wall::receive(Pacman &) {
+void Wall::receive(BoardSquare::Context &) {
 	// Do nothing : should never be call
 }
 
