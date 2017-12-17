@@ -22,6 +22,8 @@ public:
 	
 	virtual void receive(Pacman & pacman) = 0;
 	
+	virtual BoardSquare * clone() = 0;
+	
 	virtual ~BoardSquare() {
 		
 	};

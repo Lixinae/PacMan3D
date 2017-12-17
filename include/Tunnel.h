@@ -19,6 +19,8 @@ public:
 	
 	void receive(Pacman & pacman);
 	
+	BoardSquare * clone();
+	
 private:
 
 	Utils::Orientation _orientation;

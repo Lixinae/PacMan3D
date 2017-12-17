@@ -19,3 +19,7 @@ bool Wall::isWalkable() const {
 void Wall::receive(Pacman &) {
 	// Do nothing : should never be call
 }
+
+BoardSquare * Wall::clone() {
+	return new Wall(*this);
+}

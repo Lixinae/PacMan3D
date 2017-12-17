@@ -17,6 +17,8 @@ public:
 	
 	void receive(Pacman & pacman);
 	
+	BoardSquare * clone();
+	
 };
 
 #endif

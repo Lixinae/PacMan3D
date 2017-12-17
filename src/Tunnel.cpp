@@ -37,3 +37,7 @@ void Tunnel::receive(Pacman & pacman) {
 	pacman.setPosition(_dest);	
 	pacman.setOrientation(_destOrientation);
 }
+
+BoardSquare * Tunnel::clone() {
+	return new Tunnel(*this);
+}

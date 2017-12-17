@@ -44,6 +44,10 @@ void Floor::receive(Pacman & pacman) {
 		_bonus = nullptr;
 	}
 }
+	
+BoardSquare * Floor::clone() {
+	return new Floor(*this);
+}
 
 Floor & Floor::operator=(const Floor & floor) {
 	if (&floor != this) {

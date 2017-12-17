@@ -12,7 +12,7 @@ public:
 
 	Floor();
 	Floor(const Bonus * bonus);
-	Floor(const Floor & floor);
+	Floor(const Floor & other);
 	
 	~Floor();
 	
@@ -21,6 +21,8 @@ public:
 	bool isWalkable() const;
 	
 	void receive(Pacman & pacman);
+	
+	BoardSquare * clone();
 	
 	Floor & operator=(const Floor & floor);
 	
