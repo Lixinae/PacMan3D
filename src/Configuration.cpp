@@ -45,24 +45,28 @@ map<GameRepresentation::Model, AbstractModel3D *> Configuration::modelMapFromJSO
     map<GameRepresentation::Model, AbstractModel3D *> modelMap;
     json modelsArray = jsonData["models"];
     for (auto & it : modelsArray) {
-        modelMap.insert(modelFromJSON(it));
-        // TODO changer :
-        // modelMap[jsonData[Model::fromString(it.first)]] = AbstractModel::fromJSON(it.second);
+        cout << "test" << endl;
+        modelMap[fromString(it["name"])] = modelFromJSON(it["model"]);
+        cout << "test 2" << endl;
     }
 
     return modelMap;
 }
 
-pair<GameRepresentation::Model, AbstractModel3D *> Configuration::modelFromJSON(const json &json) {
+AbstractModel3D *Configuration::modelFromJSON(const json &json) {
 
-    GameRepresentation::Model model = fromString(json["name"]);
     mat4 modelTransform(1);
-
     modelTransform = scale(modelTransform, vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
-//    modelTransform = rotation(modelTransform.,vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
-//    modelTransform = rotation(modelTransform,vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
+    //modelTransform = rotate(modelTransform,vec3(json["rotate"]["x"], json["rotate"]["y"], json["rotate"]["z"]));
+    //modelTransform = translate(modelTransform,vec3(json["translate"]["x"], json["translate"]["y"], json["translate"]["z"]));
+    string s = json["objPath"];
+    string s1 = json["texPath"];
+    cout << s << endl;
+    cout << s1 << endl;
+    // todo -> Segfault sans raison
     AbstractModel3D *model3D = new TexModel3D(json["objPath"], json["texPath"], modelTransform);
-    return pair<GameRepresentation::Model, AbstractModel3D *>(model, model3D);
+    cout << "fuuuu" << endl;
+    return model3D;
 }
 
 Configuration Configuration::fromJSON(const json &json) {
@@ -70,7 +74,7 @@ Configuration Configuration::fromJSON(const json &json) {
     int windowWidth = json["windowSize"]["width"];
     int windowHeight = json["windowSize"]["height"];
 
-    map<GameRepresentation::Model, AbstractModel3D *> modelMap;// TODO = modelMapFromJSON(json);
+    map<GameRepresentation::Model, AbstractModel3D *> modelMap;//todo corriger la segfault = modelMapFromJSON(json);
     return Configuration(keyMap, modelMap, windowWidth, windowHeight);
 }
 
@@ -105,7 +109,7 @@ GameRepresentation::Model Configuration::fromString(const string &s) {
     if (s == "Wall") return GameRepresentation::Model::WALL;
     if (s == "Floor") return GameRepresentation::Model::FLOOR;
     if (s == "Tunnel") return GameRepresentation::Model::TUNNEL;
-    if (s == "Pac_gomme") return GameRepresentation::Model::PAC_GOMME;
+    if (s == "PacGomme") return GameRepresentation::Model::PAC_GOMME;
 }
 
 SDLKey Configuration::stringToKey(string s) {

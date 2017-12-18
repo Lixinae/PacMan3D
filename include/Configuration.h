@@ -49,7 +49,7 @@ private:
 
     static map<GameRepresentation::Model, AbstractModel3D *> modelMapFromJSON(const json &jsonData);
 
-    static pair<GameRepresentation::Model, AbstractModel3D *> modelFromJSON(const json &json);
+    static AbstractModel3D *modelFromJSON(const json &json);
 
     static Configuration fromJSON(const json &json);
 
