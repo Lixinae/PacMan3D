@@ -2,7 +2,7 @@
 
 //TODO static
 
-Model3DNormal::Model3DNormal(Program & program, const Mesh & mesh) : 
+Model3DNormal::Model3DNormal(Program & program, const Mesh & mesh, const mat4 & transformations) : 
 	AbstractModel(
 		program,
 		mesh.getDataPointer(),
@@ -13,15 +13,15 @@ Model3DNormal::Model3DNormal(Program & program, const Mesh & mesh) :
 			AbstractModel::Attribute(1, 3, GL_FLOAT, offsetof(ShapeVertex, normal)),
 			AbstractModel::Attribute(2, 2, GL_FLOAT, offsetof(ShapeVertex, texCoords))
 		},
-		mat4(1)
+		transformations
 	)
 {
 	
 }
 
-Model3DNormal Model3DNormal::load(const string & meshPath) {
-	Program program = loadProgram("shaders/3D.vs.glsl", "normal3D.fs.glsl");
+AbstractModel * Model3DNormal::load(const string & meshPath, const mat4 & transformations) {
+	Program program = loadProgram("shaders/3D.vs.glsl", "shaders/normal3D.fs.glsl");
 	// TODO except if null
 	Mesh mesh = Mesh::fromOBJFile(meshPath);
-	return Model3DNormal(program, mesh);
+	return new Model3DNormal(program, mesh, transformations);
 }

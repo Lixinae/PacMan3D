@@ -3,7 +3,7 @@
 //TODO static
 //attribute vertex pos = 0 ....
 
-Model3DTex::Model3DTex(Program & program, const Mesh & mesh, const unique_ptr<Image> & imageTexture) : 
+Model3DTex::Model3DTex(Program & program, const Mesh & mesh, const unique_ptr<Image> & imageTexture, const mat4 & transformations) : 
 	AbstractModel(
 		program,
 		mesh.getDataPointer(),
@@ -14,7 +14,7 @@ Model3DTex::Model3DTex(Program & program, const Mesh & mesh, const unique_ptr<Im
 			AbstractModel::Attribute(1, 3, GL_FLOAT, offsetof(ShapeVertex, normal)),
 			AbstractModel::Attribute(2, 2, GL_FLOAT, offsetof(ShapeVertex, texCoords))
 		},
-		mat4(1)
+		transformations
 	)
 {
 	_uTexture = getUniformLocation("uTexture");
@@ -26,12 +26,12 @@ Model3DTex::Model3DTex(Program & program, const Mesh & mesh, const unique_ptr<Im
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-Model3DTex Model3DTex::load(const string & meshPath, const string & texturePath) {
-	Program program = loadProgram("shaders/3D.vs.glsl", "tex3D.fs.glsl");
+AbstractModel * Model3DTex::load(const string & meshPath, const string & texturePath, const mat4 & transformations) {
+	Program program = loadProgram("shaders/3D.vs.glsl", "shaders/tex3D.fs.glsl");
 	// TODO except if null
 	Mesh mesh = Mesh::fromOBJFile(meshPath);
 	unique_ptr<Image> imageTexture = loadImage(texturePath); // todo null check
-	return Model3DTex(program, mesh, imageTexture);
+	return new Model3DTex(program, mesh, imageTexture, transformations);
 }
 
 void Model3DTex::bind() {

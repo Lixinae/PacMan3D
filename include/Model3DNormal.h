@@ -9,11 +9,11 @@ class Model3DNormal : public AbstractModel {
 
 public:
 
-	static Model3DNormal load(const string & meshPath);
+	static AbstractModel * load(const string & meshPath, const mat4 & transformations);
 
 private:
 
-	Model3DNormal(Program & program, const Mesh & mesh);
+	Model3DNormal(Program & program, const Mesh & mesh, const mat4 & transformations);
 
 };
 

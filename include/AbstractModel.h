@@ -25,7 +25,7 @@ public:
 		
 	};
 	
-	AbstractModel(Program & program, const void * data, GLsizei count, int size, vector<Attribute> attributes, const mat4 & modelTransfor);
+	AbstractModel(Program & program, const void * data, GLsizei count, int size, vector<Attribute> attributes, const mat4 & modelTransform);
 
 	~AbstractModel();
 	
