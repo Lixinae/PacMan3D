@@ -27,7 +27,8 @@ public:
 	
 	AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform); 
 																			//TODO should be protected
-																		   // Make factory
+																		   // mesh class and not string
+	
 	virtual ~AbstractModel3D();
 	
 	virtual void bind();
@@ -35,15 +36,13 @@ public:
 	
 	GLsizei count() const;
 	
-	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix); // TODO maybe remove
-
-protected:
-
-	Program _program;
+	GLuint getUniformLocation(const GLchar * uniform);
+	
+	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix);
 
 private:
 
-	// TODO model may have a matrix for init transform (scale, ...) 
+	Program _program;
 
 	GLuint _vbo;
 	GLuint _vao;
@@ -55,7 +54,7 @@ private:
     
     mat4 _modelTransform;
     
-    void initPoints(Mesh mesh);
+    void initPoints(const Mesh & mesh);
     void initProgram(const string & fragmentShader);
 
 };
