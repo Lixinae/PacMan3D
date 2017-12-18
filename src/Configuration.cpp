@@ -1,13 +1,16 @@
 #include <Configuration.h>
 
 
-Configuration::Configuration(const map<control, SDLKey> &keyMap,
-                             const map<GameRepresentation::Model, AbstractModel3D *> &modelMap, int windowWidth,
-                             int windowHeight) :
+Configuration::Configuration(
+	const map<control, SDLKey> &keyMap,
+	const map<GameRepresentation::Model, AbstractModel3D *> &modelMap,
+	int windowWidth,
+	int windowHeight):
         _keyMap(keyMap),
         _windowWidth(windowWidth),
         _windowHeight(windowHeight),
-        _map_model3D(modelMap) {
+        _map_model3D(modelMap) 
+{
 
 }
 
@@ -41,14 +44,16 @@ map<GameRepresentation::Model, AbstractModel3D *> Configuration::modelMapFromJSO
 
     map<GameRepresentation::Model, AbstractModel3D *> modelMap;
     json modelsArray = jsonData["models"];
-    for (auto &it : modelsArray) {
-        modelMap.insert(modelFromJson(it));
+    for (auto & it : modelsArray) {
+        modelMap.insert(modelFromJSON(it));
+        // TODO changer :
+        // modelMap[jsonData[Model::fromString(it.first)]] = AbstractModel::fromJSON(it.second);
     }
 
     return modelMap;
 }
 
-pair<GameRepresentation::Model, AbstractModel3D *> Configuration::modelFromJson(const json &json) {
+pair<GameRepresentation::Model, AbstractModel3D *> Configuration::modelFromJSON(const json &json) {
 
     GameRepresentation::Model model = fromString(json["name"]);
     mat4 modelTransform(1);
@@ -65,7 +70,7 @@ Configuration Configuration::fromJSON(const json &json) {
     int windowWidth = json["windowSize"]["width"];
     int windowHeight = json["windowSize"]["height"];
 
-    map<GameRepresentation::Model, AbstractModel3D *> modelMap = modelMapFromJSON(json);
+    map<GameRepresentation::Model, AbstractModel3D *> modelMap;// TODO = modelMapFromJSON(json);
     return Configuration(keyMap, modelMap, windowWidth, windowHeight);
 }
 
@@ -73,17 +78,16 @@ Configuration Configuration::fromJSON(const json &json) {
 Configuration Configuration::fromJSONFile(const string &filePath) {
     json jsonConfig;
     ifstream configFile(filePath);
-//    cout << configFile.get() << endl;
     configFile >> jsonConfig;
     configFile.close();
     return fromJSON(jsonConfig);
 }
 
-uint32_t Configuration::getWidth() const {
+int Configuration::getWidth() const {
     return _windowWidth;
 }
 
-uint32_t Configuration::getHeight() const {
+int Configuration::getHeight() const {
     return _windowHeight;
 }
 
@@ -93,6 +97,15 @@ const map<control, SDLKey> Configuration::getControlMap() const {
 
 const map<GameRepresentation::Model, AbstractModel3D *> Configuration::getModelMap() const {
     return _map_model3D;
+}
+
+
+GameRepresentation::Model Configuration::fromString(const string &s) {
+    if (s == "Pacman") return GameRepresentation::Model::PACMAN;
+    if (s == "Wall") return GameRepresentation::Model::WALL;
+    if (s == "Floor") return GameRepresentation::Model::FLOOR;
+    if (s == "Tunnel") return GameRepresentation::Model::TUNNEL;
+    if (s == "Pac_gomme") return GameRepresentation::Model::PAC_GOMME;
 }
 
 SDLKey Configuration::stringToKey(string s) {
@@ -182,12 +195,4 @@ SDLKey Configuration::stringToKey(string s) {
     if (s == "f14") return SDLK_F14;
     if (s == "f15") return SDLK_F15;
     if (s == "esc") return SDLK_ESCAPE;
-}
-
-GameRepresentation::Model Configuration::fromString(const string &s) {
-    if (s == "Pacman") return GameRepresentation::Model::PACMAN;
-    if (s == "Wall") return GameRepresentation::Model::WALL;
-    if (s == "Floor") return GameRepresentation::Model::FLOOR;
-    if (s == "Tunnel") return GameRepresentation::Model::TUNNEL;
-    if (s == "Pac_gomme") return GameRepresentation::Model::PAC_GOMME;
 }

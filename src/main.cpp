@@ -50,9 +50,10 @@ int realMain() {
 
     Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
 
-    uint32_t windowWidth = configuration.getWidth();
-    uint32_t windowHeight = configuration.getHeight();
+    int windowWidth = configuration.getWidth();
+    int windowHeight = configuration.getHeight();
     SDLWindowManager windowManager(windowWidth, windowHeight, "GLImac");
+    
     GLenum glewInitError = glewInit();
     if (GLEW_OK != glewInitError) {
         std::cerr << glewGetErrorString(glewInitError) << std::endl;
