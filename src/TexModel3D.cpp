@@ -26,5 +26,5 @@ void TexModel3D::bind() {
 
 void TexModel3D::unbind() {
 	glBindTexture(GL_TEXTURE_2D, 0);
-	AbstractModel3D::bind();
+	AbstractModel3D::unbind();
 }
