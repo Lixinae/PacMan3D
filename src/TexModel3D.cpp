@@ -8,7 +8,7 @@
 using namespace std;
 
 TexModel3D::TexModel3D(const string & meshPath, const string & texturePath, const mat4 & modelTransform) : AbstractModel3D(meshPath, "shaders/tex3D.fs.glsl", modelTransform) {
-	_uTexture = glGetUniformLocation(_program.getGLId(), "uTexture");
+	_uTexture = getUniformLocation("uTexture");
 	unique_ptr<Image> imageTexture = loadImage(texturePath); // todo null check : factory
 	glGenTextures(1, &_textureObject);
 	glBindTexture(GL_TEXTURE_2D, _textureObject);

@@ -28,6 +28,7 @@ public:
 	AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform); 
 																			//TODO should be protected
 																		   // Make factory
+	
 	virtual ~AbstractModel3D();
 	
 	virtual void bind();
@@ -35,15 +36,13 @@ public:
 	
 	GLsizei count() const;
 	
+	GLuint getUniformLocation(const GLchar * uniform);
+	
 	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix); // TODO maybe remove
-
-protected:
-
-	Program _program;
 
 private:
 
-	// TODO model may have a matrix for init transform (scale, ...) 
+	Program _program;
 
 	GLuint _vbo;
 	GLuint _vao;

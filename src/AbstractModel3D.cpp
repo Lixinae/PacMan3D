@@ -36,9 +36,9 @@ void AbstractModel3D::initPoints(Mesh mesh) {
 
 void AbstractModel3D::initProgram(const string & fragmentShader) {
 	_program = loadProgram(VERTEX_SHADER_3D, fragmentShader);
-	_uMVPmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_MVP_MATRIX);
-    _uMVmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_MV_MATRIX);
-    _uNormalmatrix = glGetUniformLocation(_program.getGLId(), VERTEX_UNIFORM_NORMAL_MATRIX);
+	_uMVPmatrix = getUniformLocation(VERTEX_UNIFORM_MVP_MATRIX);
+    _uMVmatrix = getUniformLocation(VERTEX_UNIFORM_MV_MATRIX);
+    _uNormalmatrix = getUniformLocation(VERTEX_UNIFORM_NORMAL_MATRIX);
 }
 	
 AbstractModel3D::AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform) {
@@ -63,6 +63,10 @@ void AbstractModel3D::unbind() {
 
 GLsizei AbstractModel3D::count() const {
 	return _size;
+}
+
+GLuint AbstractModel3D::getUniformLocation(const GLchar * uniform) {
+	return glGetUniformLocation(_program.getGLId(), uniform);
 }
 
 void AbstractModel3D::setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix) {
