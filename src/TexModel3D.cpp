@@ -18,6 +18,10 @@ TexModel3D::TexModel3D(const string & meshPath, const string & texturePath, cons
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+TexModel3D::~TexModel3D() {
+	glDeleteTextures(1, &_textureObject);
+}
+
 void TexModel3D::bind() {
 	AbstractModel3D::bind();
 	glBindTexture(GL_TEXTURE_2D, _textureObject);

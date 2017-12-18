@@ -6,6 +6,7 @@ using namespace glm;
 
 //const string AbstractModel3D::VERTEX_SHADER_3D = Utils::SHADER_PATH + "/" + "3D.vs.glsl";
 const string AbstractModel3D::VERTEX_SHADER_3D = "shaders/3D.vs.glsl";
+
 const GLuint AbstractModel3D::VERTEX_ATTR_POSITION = 0;
 const GLuint AbstractModel3D::VERTEX_ATTR_NORMAL = 1;
 const GLuint AbstractModel3D::VERTEX_ATTR_TEXTURE = 2;
@@ -15,7 +16,7 @@ const GLchar * AbstractModel3D::VERTEX_UNIFORM_MV_MATRIX = "uMVMatrix";
 const GLchar * AbstractModel3D::VERTEX_UNIFORM_NORMAL_MATRIX = "uNormalMatrix";
 
 
-void AbstractModel3D::initPoints(Mesh mesh) {
+void AbstractModel3D::initPoints(const Mesh & mesh) {
 	glGenBuffers(1, &_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 	_size = mesh.getVertexCount();
@@ -41,10 +42,11 @@ void AbstractModel3D::initProgram(const string & fragmentShader) {
     _uNormalmatrix = getUniformLocation(VERTEX_UNIFORM_NORMAL_MATRIX);
 }
 	
-AbstractModel3D::AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform) {
+AbstractModel3D::AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform):
+	_modelTransform(modelTransform)
+{
 	initPoints(Mesh::fromOBJFile(mesh));
 	initProgram(fragmentShader);
-	_modelTransform = modelTransform; // TODO Init list
 }
 
 AbstractModel3D::~AbstractModel3D()  {

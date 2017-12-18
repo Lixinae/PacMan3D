@@ -14,6 +14,8 @@ public:
 	
 	TexModel3D(const string & meshPath, const string & texturePath, const mat4 & modelTransform);
 	
+	~TexModel3D();
+	
 	void bind() override;
 	void unbind() override;
 	
