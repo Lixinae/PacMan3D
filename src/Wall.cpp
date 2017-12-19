@@ -12,11 +12,11 @@ vector<GameRepresentation::Model> Wall::getModels() const {
 	return {GameRepresentation::Model::WALL};
 }
 	
-bool Wall::isWalkable() const {
+bool Wall::isPacmanWalkable(const BoardSquare::PacmanContext &) const {
 	return false;
 }
 	
-void Wall::receive(BoardSquare::Context &) {
+void Wall::receivePacman(BoardSquare::PacmanContext &) {
 	// Do nothing : should never be call
 }
 

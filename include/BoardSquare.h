@@ -12,11 +12,11 @@ class BoardSquare {
 
 public:
 
-	struct Context {
+	struct PacmanContext {
 		
 		Pacman & pacman;
 		
-		Context(Pacman & pacman);
+		PacmanContext(Pacman & pacman);
 		
 	};
 	
@@ -24,9 +24,9 @@ public:
 	
 	virtual vector<GameRepresentation::Model> getModels() const = 0;
 	
-	virtual bool isWalkable() const = 0;
+	virtual bool isPacmanWalkable(const PacmanContext & context) const = 0;
 	
-	virtual void receive(Context & context) = 0;
+	virtual void receivePacman(PacmanContext & context) = 0;
 	
 	virtual BoardSquare * clone() = 0;
 	
