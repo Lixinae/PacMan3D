@@ -49,22 +49,6 @@ map<GameRepresentation::Model, AbstractModel3D *> Configuration::modelMapFromJSO
     return modelMap;
 }
 
-AbstractModel3D *Configuration::modelFromJSON(const json &json) {
-
-    mat4 modelTransform(1);
-    modelTransform = scale(modelTransform, vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
-    //modelTransform = rotate(modelTransform,vec3(json["rotate"]["x"], json["rotate"]["y"], json["rotate"]["z"]));
-    //modelTransform = translate(modelTransform,vec3(json["translate"]["x"], json["translate"]["y"], json["translate"]["z"]));
-    string s = json["objPath"];
-    string s1 = json["texPath"];
-    cout << s << endl;
-    cout << s1 << endl;
-    // todo -> Segfault sans raison
-    AbstractModel3D *model3D = new TexModel3D(json["objPath"], json["texPath"], modelTransform);
-    cout << "fuuuu" << endl;
-    return model3D;
-}
-
 Configuration Configuration::fromJSON(const json &json) {
     map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
 	map<GameRepresentation::Model, AbstractModel3D *> modelMap = modelMapFromJSON(json);
