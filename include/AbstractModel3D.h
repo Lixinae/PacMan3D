@@ -25,10 +25,6 @@ public:
 	static const GLchar * VERTEX_UNIFORM_MV_MATRIX;
 	static const GLchar * VERTEX_UNIFORM_NORMAL_MATRIX;
 	
-	AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform); 
-																			//TODO should be protected
-																		   // mesh class and not string
-	
 	virtual ~AbstractModel3D();
 	
 	virtual void bind();
@@ -39,6 +35,11 @@ public:
 	GLuint getUniformLocation(const GLchar * uniform);
 	
 	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix);
+
+protected:
+
+	AbstractModel3D(const Mesh & mesh, const string & fragmentShader, const mat4 & modelTransform); 
+	
 
 private:
 

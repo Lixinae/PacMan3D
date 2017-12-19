@@ -26,22 +26,22 @@ AbstractModel3D *get3DModel(GameRepresentation::Model model) {
     switch (model) {
         case GameRepresentation::Model::PACMAN:
             modelTransform = scale(modelTransform, vec3(0.006, 0.006, 0.006));
-            return new TexModel3D("assets/models/tennisball.obj", "assets/textures/EarthMap.jpg", modelTransform);
+            return TexModel3D::create("assets/models/tennisball.obj", "assets/textures/EarthMap.jpg", modelTransform);
         case GameRepresentation::Model::WALL:
 //            modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
             //return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
             modelTransform = scale(modelTransform, vec3(0.4, 0.2, 0.08));
-            return new TexModel3D("assets/models/wall.obj", "assets/textures/wall.jpg", modelTransform);
+            return TexModel3D::create("assets/models/wall.obj", "assets/textures/wall.jpg", modelTransform);
         case GameRepresentation::Model::FLOOR:
             modelTransform = scale(modelTransform, vec3(0.5, 0.1, 0.5));
-            return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
+            return TexModel3D::create("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
         case GameRepresentation::Model::TUNNEL:
             modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
-            return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
+            return TexModel3D::create("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
         case GameRepresentation::Model::PAC_GOMME:
             modelTransform = scale(modelTransform, vec3(0.0025, 0.0025, 0.0025));
             //return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
-            return new NormalModel3D("assets/models/tennisball.obj", modelTransform);
+            return NormalModel3D::create("assets/models/tennisball.obj", modelTransform);
     }
 }
 

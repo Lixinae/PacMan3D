@@ -45,7 +45,7 @@ map<GameRepresentation::Model, AbstractModel3D *> Configuration::modelMapFromJSO
     map<GameRepresentation::Model, AbstractModel3D *> modelMap;
     json modelsArray = jsonData["models"];
     for (auto & it : modelsArray) {
-        modelMap.insert(modelFromJSON(it));
+        //modelMap.insert(modelFromJSON(it));
         // TODO changer :
         // modelMap[jsonData[Model::fromString(it.first)]] = AbstractModel::fromJSON(it.second);
     }
@@ -53,6 +53,7 @@ map<GameRepresentation::Model, AbstractModel3D *> Configuration::modelMapFromJSO
     return modelMap;
 }
 
+/*
 pair<GameRepresentation::Model, AbstractModel3D *> Configuration::modelFromJSON(const json &json) {
 
     GameRepresentation::Model model = fromString(json["name"]);
@@ -64,7 +65,7 @@ pair<GameRepresentation::Model, AbstractModel3D *> Configuration::modelFromJSON(
     AbstractModel3D *model3D = new TexModel3D(json["objPath"], json["texPath"], modelTransform);
     return pair<GameRepresentation::Model, AbstractModel3D *>(model, model3D);
 }
-
+*/
 Configuration Configuration::fromJSON(const json &json) {
     map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
     int windowWidth = json["windowSize"]["width"];

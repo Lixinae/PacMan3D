@@ -3,6 +3,7 @@
 
 #include <AbstractModel3D.h>
 #include <string>
+#include <glimac/Image.hpp>
 
 using namespace std;
 
@@ -12,7 +13,9 @@ public:
 
 	//TODO static const path
 	
-	TexModel3D(const string & meshPath, const string & texturePath, const mat4 & modelTransform);
+	
+	//TODO maybe refactoring : translate,rotate,scale instead of transform
+	static TexModel3D * create(const string & meshPath, const string & texturePath, const mat4 & modelTransform);
 	
 	~TexModel3D();
 	
@@ -23,6 +26,8 @@ private:
 
 	GLuint _textureObject;
 	GLint _uTexture;
+	
+	TexModel3D(const Mesh & mesh, const unique_ptr<Image> & texture, const mat4 & modelTransform);
 
 };
 

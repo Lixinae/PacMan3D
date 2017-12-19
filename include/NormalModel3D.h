@@ -9,8 +9,12 @@ class NormalModel3D : public AbstractModel3D {
 public:
 
 	static const string FRAGMENT_SHADER_NORMAL_3D;
+
+	static NormalModel3D * create(const string & meshPath, const mat4 & modelTransform);
 	
-	NormalModel3D(const string & meshPath, const mat4 & modelTransform);
+private:
+
+	NormalModel3D(const Mesh & mesh, const mat4 & modelTransform);
 
 };
 

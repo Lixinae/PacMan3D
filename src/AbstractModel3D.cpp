@@ -42,10 +42,10 @@ void AbstractModel3D::initProgram(const string & fragmentShader) {
     _uNormalmatrix = getUniformLocation(VERTEX_UNIFORM_NORMAL_MATRIX);
 }
 	
-AbstractModel3D::AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform):
+AbstractModel3D::AbstractModel3D(const Mesh & mesh, const string & fragmentShader, const mat4 & modelTransform):
 	_modelTransform(modelTransform)
 {
-	initPoints(Mesh::fromOBJFile(mesh));
+	initPoints(mesh);
 	initProgram(fragmentShader);
 }
 
