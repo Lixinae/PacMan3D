@@ -1,8 +1,8 @@
 {
   "keybinds": {
-    "Up": "w",
+    "Up": "z",
     "Down": "s",
-    "Left": "a",
+    "Left": "q",
     "Right": "d",
     "ChangeCamera": "c",
     "ZoomIn": "b",
@@ -18,8 +18,8 @@
       "model": {
          "type":"texture",
          "args": {
-           "objPath": "tennisball.obj",
-           "texPath": "MoonMap.jpg"
+           "objPath": "boo.obj",
+           "texPath": "boo.png"
          },
          "translate": {
            "x": 0,
@@ -32,9 +32,9 @@
            "z": 0
          },
          "scale": {
-           "x": 0.006,
-           "y": 0.006,
-           "z": 0.006
+           "x": 0.025,
+           "y": 0.025,
+           "z": 0.025
          }
       }
     },
@@ -69,7 +69,7 @@
          "type":"texture",
          "args": {
            "objPath": "cube.obj",
-           "texPath": "EarthMap.jpg"
+           "texPath": "MoonMap.jpg"
          },
          "translate": {
            "x": 0,
