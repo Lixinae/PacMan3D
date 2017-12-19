@@ -16,111 +16,125 @@
     {
       "name": "Pacman",
       "model": {
-        "objPath": "assets/models/tennisball.obj",
-        "texPath": "assets/textures/EarthMap.jpg",
-        "translate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "rotate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "scale": {
-          "x": 0.006,
-          "y": 0.006,
-          "z": 0.006
-        }
+         "type":"texture",
+         "args": {
+           "objPath": "tennisball.obj",
+           "texPath": "MoonMap.jpg"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.006,
+           "y": 0.006,
+           "z": 0.006
+         }
       }
     },
     {
       "name": "Wall",
       "model": {
-        "objPath": "assets/models/wall.obj",
-        "texPath": "assets/textures/wall.jpg",
-        "translate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "rotate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "scale": {
-          "x": 0.4,
-          "y": 0.2,
-          "z": 0.08
-        }
-      }
-    },
-    {
-      "name": "PacGomme",
-      "model": {
-        "objPath": "assets/models/tennisball.obj",
-        "texPath": "assets/textures/MoonMap.jpg",
-        "translate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "rotate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "scale": {
-          "x": 0.5,
-          "y": 0,
-          "z": 2.3
-        }
+         "type":"texture",
+         "args": {
+           "objPath": "wall.obj",
+           "texPath": "wall.jpg"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.4,
+           "y": 0.2,
+           "z": 0.08
+         }
       }
     },
     {
       "name": "Floor",
       "model": {
-        "objPath": "assets/models/cube.obj",
-        "texPath": "assets/textures/EarthMap.jpg",
-        "translate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "rotate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "scale": {
-          "x": 0.5,
-          "y": 0.1,
-          "z": 0.5
-        }
+         "type":"texture",
+         "args": {
+           "objPath": "cube.obj",
+           "texPath": "EarthMap.jpg"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.5,
+           "y": 0.1,
+           "z": 0.5
+         }
       }
     },
     {
       "name": "Tunnel",
       "model": {
-        "objPath": "assets/models/cube.obj",
-        "texPath": "assets/textures/EarthMap.jpg",
-        "translate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "rotate": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "scale": {
-          "x": 0.4,
-          "y": 0.4,
-          "z": 0.4
-        }
+         "type":"texture",
+         "args": {
+           "objPath": "cube.obj",
+           "texPath": "EarthMap.jpg"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.4,
+           "y": 0.4,
+           "z": 0.4
+         }
+      }
+    },
+    {
+      "name": "Pac_gomme",
+      "model": {
+         "type":"normal",
+         "args": {
+           "objPath": "tennisball.obj"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.0025,
+           "y": 0.0025,
+           "z": 0.0025
+         }
       }
     }
   ]

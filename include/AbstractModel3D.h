@@ -6,10 +6,13 @@
 #include <string>
 #include <glimac/glm.hpp>
 #include <glimac/Program.hpp>
+#include <json/json.hpp>
 
 using namespace std;
 using namespace glimac;
 using namespace glm;
+
+using json = nlohmann::json;
 
 class AbstractModel3D {
 
@@ -25,9 +28,8 @@ public:
 	static const GLchar * VERTEX_UNIFORM_MV_MATRIX;
 	static const GLchar * VERTEX_UNIFORM_NORMAL_MATRIX;
 	
-	AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform); 
-																			//TODO should be protected
-																		   // Make factory
+	static AbstractModel3D * fromJSON(const json & jsonModel);
+	
 	virtual ~AbstractModel3D();
 	
 	virtual void bind();
@@ -35,15 +37,18 @@ public:
 	
 	GLsizei count() const;
 	
-	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix); // TODO maybe remove
+	GLuint getUniformLocation(const GLchar * uniform);
+	
+	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix);
 
 protected:
 
-	Program _program;
+	AbstractModel3D(const Mesh & mesh, const string & fragmentShader, const mat4 & modelTransform); 
+	
 
 private:
 
-	// TODO model may have a matrix for init transform (scale, ...) 
+	Program _program;
 
 	GLuint _vbo;
 	GLuint _vao;
@@ -55,7 +60,7 @@ private:
     
     mat4 _modelTransform;
     
-    void initPoints(Mesh mesh);
+    void initPoints(const Mesh & mesh);
     void initProgram(const string & fragmentShader);
 
 };

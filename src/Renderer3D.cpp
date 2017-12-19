@@ -7,53 +7,14 @@ using namespace glm;
 
 const float Renderer3D::SQUARE_SIZE = 1;
 
-AbstractModel3D * Renderer3D::get3DModel(GameRepresentation::Model model) {
-	mat4 modelTransform(1);
-	switch (model) {
-		case GameRepresentation::Model::PACMAN:
-			modelTransform = scale(modelTransform, vec3(0.006, 0.006, 0.006));
-			return new TexModel3D("assets/models/tennisball.obj", "assets/textures/EarthMap.jpg", modelTransform);
-		case GameRepresentation::Model::WALL:
-			//modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
-			//return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
-			modelTransform = scale(modelTransform, vec3(0.4, 0.2, 0.08));
-			return new TexModel3D("assets/models/wall.obj", "assets/textures/wall.jpg", modelTransform);
-		case GameRepresentation::Model::FLOOR:
-			modelTransform = scale(modelTransform, vec3(0.5, 0.1, 0.5));
-			return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
-		case GameRepresentation::Model::TUNNEL:
-			modelTransform = scale(modelTransform, vec3(0.4, 0.4, 0.4));
-			return new TexModel3D("assets/models/cube.obj", "assets/textures/EarthMap.jpg", modelTransform);
-		case GameRepresentation::Model::PAC_GOMME:
-			modelTransform = scale(modelTransform, vec3(0.0025, 0.0025, 0.0025));
-			//return new TexModel3D("assets/models/cube.obj", "assets/textures/MoonMap.jpg", modelTransform);
-			return new NormalModel3D("assets/models/tennisball.obj", modelTransform);
-	}
-}
-
-Renderer3D::Renderer3D(int windowWidth, int windowHeight, PointOfView *pointOfView) :
-        _pointOfView(pointOfView),
-        _ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
-        _models() {
-
-    // todo BUG , ne charge que 2 modèle sur les 5 -> Viens du fait que MODELS est static const et donc soucis d'initialisation
-    for (auto &model : GameRepresentation::MODELS) {
-        cout << "Model : " << (int)model << endl;
-        AbstractModel3D *model3d = get3DModel(model); // TODO free
-        _models[model] = model3d;
-    }
-}
-
 Renderer3D::Renderer3D(int windowWidth, int windowHeight, PointOfView *pointOfView, const map<GameRepresentation::Model, AbstractModel3D *>& map_model3D) :
         _pointOfView(pointOfView),
         _ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
-        _models(map_model3D) {
+        _models(map_model3D) 
+{
 
 }
 
-/* TODO -> Ajouter l'utilisation de shaders differents selon les objets à dessiner
- * On peut se servir de la structure "Program" que le prof avait donné dans le tp sur le multi-texturing
- * */
 void Renderer3D::render(const GameRepresentation &repr) const {
     mat4 GlobalMVMatrix = _pointOfView->getCurrentCamera().getViewMatrix();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

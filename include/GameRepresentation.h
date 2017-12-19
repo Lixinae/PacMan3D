@@ -12,15 +12,21 @@ class GameRepresentation {
 public:
 
 	enum class Model {
+		
 		PACMAN,
 		WALL,
 		FLOOR,
 		TUNNEL,
 		PAC_GOMME
 		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...
+		
+		
+		
 	};
-
+	
     static vector<Model> MODELS;
+
+	static Model modelFromString(const string & strModel);
 
 	GameRepresentation(); 
 	
