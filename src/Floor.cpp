@@ -44,6 +44,14 @@ void Floor::receivePacman(BoardSquare::PacmanContext & context) {
 		_bonus = nullptr;
 	}
 }
+
+bool Floor::isGhostWalkable(const BoardSquare::GhostContext &) const {
+	return true;
+}
+	
+void Floor::receiveGhost(BoardSquare::GhostContext &) {
+	
+}
 	
 BoardSquare * Floor::clone() {
 	return new Floor(*this);

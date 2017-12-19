@@ -13,6 +13,11 @@ BoardSquare::PacmanContext::PacmanContext(Pacman & pacman) :
 	
 }
 
+BoardSquare::GhostContext::GhostContext()
+{
+	
+}
+
 BoardSquare * BoardSquare::fromJSON(const json & jsonSquare) {
 	string type = jsonSquare["type"];
 	if (type == "wall") {

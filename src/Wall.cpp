@@ -17,7 +17,15 @@ bool Wall::isPacmanWalkable(const BoardSquare::PacmanContext &) const {
 }
 	
 void Wall::receivePacman(BoardSquare::PacmanContext &) {
-	// Do nothing : should never be call
+
+}
+
+bool Wall::isGhostWalkable(const BoardSquare::GhostContext &) const {
+	return false;
+}
+	
+void Wall::receiveGhost(BoardSquare::GhostContext &) {
+	
 }
 
 BoardSquare * Wall::clone() {

@@ -20,6 +20,12 @@ public:
 		
 	};
 	
+	struct GhostContext {
+		
+		GhostContext();
+		
+	};
+	
 	static BoardSquare * fromJSON(const json & jsonSquare);
 	
 	virtual vector<GameRepresentation::Model> getModels() const = 0;
@@ -27,6 +33,10 @@ public:
 	virtual bool isPacmanWalkable(const PacmanContext & context) const = 0;
 	
 	virtual void receivePacman(PacmanContext & context) = 0;
+	
+	virtual bool isGhostWalkable(const GhostContext & context) const = 0;
+	
+	virtual void receiveGhost(GhostContext & context) = 0;
 	
 	virtual BoardSquare * clone() = 0;
 	
