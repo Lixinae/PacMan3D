@@ -1,8 +1,8 @@
 {
   "keybinds": {
-    "Up": "w",
+    "Up": "z",
     "Down": "s",
-    "Left": "a",
+    "Left": "q",
     "Right": "d",
     "ChangeCamera": "c",
     "ZoomIn": "b",
@@ -15,22 +15,27 @@
   "models": [
     {
       "name": "Pacman",
-      "objPath": "",
-      "texPath": "",
-      "translate": {
-        "x": 0.5,
-        "y": 0,
-        "z": 2.3
-      },
-      "rotate": {
-        "x": 0.5,
-        "y": 0,
-        "z": 2.3
-      },
-      "scale": {
-        "x": 0.5,
-        "y": 0,
-        "z": 2.3
+      "model": {
+         "type":"texture",
+         "args": {
+           "objPath": "tennisball.obj",
+           "texPath": "EarthMap.jpg"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0.2,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 1,
+           "y": 1,
+           "z": 1
+         }
       }
     }
   ]

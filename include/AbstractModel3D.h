@@ -6,10 +6,13 @@
 #include <string>
 #include <glimac/glm.hpp>
 #include <glimac/Program.hpp>
+#include <json/json.hpp>
 
 using namespace std;
 using namespace glimac;
 using namespace glm;
+
+using json = nlohmann::json;
 
 class AbstractModel3D {
 
@@ -24,6 +27,8 @@ public:
 	static const GLchar * VERTEX_UNIFORM_MVP_MATRIX;
 	static const GLchar * VERTEX_UNIFORM_MV_MATRIX;
 	static const GLchar * VERTEX_UNIFORM_NORMAL_MATRIX;
+	
+	static AbstractModel3D * fromJSON(const json & jsonModel);
 	
 	virtual ~AbstractModel3D();
 	

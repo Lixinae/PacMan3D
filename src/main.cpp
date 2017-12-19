@@ -47,7 +47,7 @@ AbstractModel3D *get3DModel(GameRepresentation::Model model) {
 
 
 int realMain() {
-
+	
     Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
 
     int windowWidth = configuration.getWidth();
@@ -73,8 +73,8 @@ int realMain() {
         AbstractModel3D *model3d = get3DModel(model);
         map_model3D.insert(pair<GameRepresentation::Model, AbstractModel3D *>(model, model3d));
     }
+    //Get map from config
     Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), map_model3D);
-//    Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView());
 
     bool done = false;
     while (!done) {
