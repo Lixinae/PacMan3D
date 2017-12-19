@@ -7,29 +7,14 @@ using namespace glm;
 
 const float Renderer3D::SQUARE_SIZE = 1;
 
-Renderer3D::Renderer3D(int windowWidth, int windowHeight, PointOfView *pointOfView) :
-        _pointOfView(pointOfView),
-        _ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
-        _models() {
-
-    // todo BUG , ne charge que 2 modèle sur les 5 -> Viens du fait que MODELS est static const et donc soucis d'initialisation
-    for (auto &model : GameRepresentation::MODELS) {
-        cout << "Model : " << (int)model << endl;
-       // AbstractModel3D *model3d = get3DModel(model); // TODO free
-       // _models[model] = model3d;
-    }
-}
-
 Renderer3D::Renderer3D(int windowWidth, int windowHeight, PointOfView *pointOfView, const map<GameRepresentation::Model, AbstractModel3D *>& map_model3D) :
         _pointOfView(pointOfView),
         _ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
-        _models(map_model3D) {
+        _models(map_model3D) 
+{
 
 }
 
-/* TODO -> Ajouter l'utilisation de shaders differents selon les objets à dessiner
- * On peut se servir de la structure "Program" que le prof avait donné dans le tp sur le multi-texturing
- * */
 void Renderer3D::render(const GameRepresentation &repr) const {
     mat4 GlobalMVMatrix = _pointOfView->getCurrentCamera().getViewMatrix();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
