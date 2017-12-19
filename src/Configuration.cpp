@@ -42,10 +42,9 @@ map<GameRepresentation::Model, AbstractModel3D *> Configuration::modelMapFromJSO
     map<GameRepresentation::Model, AbstractModel3D *> modelMap;
     json modelsArray = jsonModels["models"];
     for (auto & it : modelsArray) {
-		//TODO
-		//GameRepresentation::Model model = GameRepresentation::modelFromString(it["name"]);
-		//AbstractModel3D * model_3d = AbstractModel3D::fromJSON(it["model"]);
-		//modelMap[model] = model_3d;
+		GameRepresentation::Model model = GameRepresentation::modelFromString(it["name"]);
+		AbstractModel3D * model_3d = AbstractModel3D::fromJSON(it["model"]);
+		modelMap[model] = model_3d;
     }
     return modelMap;
 }

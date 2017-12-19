@@ -48,10 +48,9 @@ AbstractModel3D *get3DModel(GameRepresentation::Model model) {
 
 int realMain() {
 	
-    Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
-
-    int windowWidth = configuration.getWidth();
-    int windowHeight = configuration.getHeight();
+    int windowWidth = 800;
+    int windowHeight = 600;
+    
     SDLWindowManager windowManager(windowWidth, windowHeight, "GLImac");
     
     GLenum glewInitError = glewInit();
@@ -60,14 +59,15 @@ int realMain() {
         return EXIT_FAILURE;
     }
 
-    glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
+	
+	Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
 
     Game game = Game::fromJSONFile("assets/games/game.json");
 
 	EventHandler eventHandler(configuration.getControlMap());
 
     map<GameRepresentation::Model, AbstractModel3D *> map_model3D;
-
     // todo -> virer plus tard
     for (auto &model : GameRepresentation::MODELS) {
         AbstractModel3D *model3d = get3DModel(model);
