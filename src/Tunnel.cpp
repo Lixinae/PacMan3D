@@ -28,13 +28,21 @@ vector<GameRepresentation::Model> Tunnel::getModels() const {
 	return {modelTunel};
 }
 
-bool Tunnel::isWalkable() const {
+bool Tunnel::isPacmanWalkable(const BoardSquare::PacmanContext &) const {
 	return true;
 }
 	
-void Tunnel::receive(BoardSquare::Context & context) {
+void Tunnel::receivePacman(BoardSquare::PacmanContext & context) {
 	context.pacman.setPosition(_dest.translate(_destOrientation));	
 	context.pacman.setOrientation(_destOrientation);
+}
+
+bool Tunnel::isGhostWalkable(const BoardSquare::GhostContext &) const {
+	return true;
+}
+	
+void Tunnel::receiveGhost(BoardSquare::GhostContext &) {
+	//TODO implement
 }
 
 BoardSquare * Tunnel::clone() {

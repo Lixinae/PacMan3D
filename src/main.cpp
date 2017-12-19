@@ -74,5 +74,4 @@ int main(int argc, char **argv) {
 // Main for windows
 int WinMain(int argc, char **argv) {
     return realMain();
-
 } 

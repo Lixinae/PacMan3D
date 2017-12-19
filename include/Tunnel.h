@@ -15,9 +15,13 @@ public:
 	
 	vector<GameRepresentation::Model> getModels() const;
 	
-	bool isWalkable() const;
+	bool isPacmanWalkable(const BoardSquare::PacmanContext & context) const;
 	
-	void receive(BoardSquare::Context & context);
+	void receivePacman(BoardSquare::PacmanContext & context);
+	
+	bool isGhostWalkable(const BoardSquare::GhostContext & context) const ;
+	
+	void receiveGhost(BoardSquare::GhostContext & context);
 	
 	BoardSquare * clone();
 	

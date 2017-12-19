@@ -7,8 +7,13 @@
 
 using json = nlohmann::json;
 
-BoardSquare::Context::Context(Pacman & pacman) : 
+BoardSquare::PacmanContext::PacmanContext(Pacman & pacman) : 
 	pacman(pacman)
+{
+	
+}
+
+BoardSquare::GhostContext::GhostContext()
 {
 	
 }

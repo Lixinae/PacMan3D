@@ -33,16 +33,24 @@ vector<GameRepresentation::Model> Floor::getModels() const {
 	return models;
 }
 
-bool Floor::isWalkable() const {
+bool Floor::isPacmanWalkable(const BoardSquare::PacmanContext &) const {
 	return true;
 }
 	
-void Floor::receive(BoardSquare::Context & context) {
+void Floor::receivePacman(BoardSquare::PacmanContext & context) {
 	if (_bonus != nullptr) {
 		_bonus->apply(context.pacman);
 		delete _bonus;
 		_bonus = nullptr;
 	}
+}
+
+bool Floor::isGhostWalkable(const BoardSquare::GhostContext &) const {
+	return true;
+}
+	
+void Floor::receiveGhost(BoardSquare::GhostContext &) {
+	
 }
 	
 BoardSquare * Floor::clone() {

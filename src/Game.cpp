@@ -36,7 +36,8 @@ Game Game::fromJSONFile(const string &filePath) {
 void Game::orientPacman(Utils::Orientation orientation) {
     BoardPosition position = _pacman.getPosition().translate(orientation);
     BoardSquare *square = _board[position];
-    if (square != nullptr && square->isWalkable()) {
+    BoardSquare::PacmanContext context(_pacman);
+    if (square != nullptr && square->isPacmanWalkable(context)) {
         _pacman.setOrientation(orientation);
     }
 }
@@ -72,14 +73,14 @@ void Game::cleanPacman() {
 void Game::iterate() {
     BoardPosition nextPosition = _pacman.getPosition().translate(_pacman.getOrientation());
     BoardSquare *nextSquare = _board[nextPosition];
-    if (nextSquare != nullptr && nextSquare->isWalkable()) {
+    BoardSquare::PacmanContext context(_pacman);
+    if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
         // Clean models
         cleanSquare(nextPosition);
         cleanPacman();
         // Update
         _pacman.setPosition(nextPosition);
-        BoardSquare::Context context(_pacman);
-        nextSquare->receive(context);
+        nextSquare->receivePacman(context);
         // Reset models
         setSquare(nextPosition);
         setPacman();
