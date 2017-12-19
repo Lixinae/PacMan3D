@@ -43,13 +43,8 @@ private:
 
     static SDLKey stringToKey(string s);
 
-    static GameRepresentation::Model fromString(const string &s);
-
     static map<control, SDLKey> keyMapFromJSON(const json &json);
-
-    static map<GameRepresentation::Model, AbstractModel3D *> modelMapFromJSON(const json &jsonData);
-
-    static pair<GameRepresentation::Model, AbstractModel3D *> modelFromJSON(const json &json);
+    static map<GameRepresentation::Model, AbstractModel3D *> modelMapFromJSON(const json &json);
 
     static Configuration fromJSON(const json &json);
 

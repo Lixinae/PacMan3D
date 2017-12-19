@@ -1,6 +1,5 @@
 #include <Configuration.h>
 
-
 Configuration::Configuration(
 	const map<control, SDLKey> &keyMap,
 	const map<GameRepresentation::Model, AbstractModel3D *> &modelMap,
@@ -24,7 +23,6 @@ Configuration Configuration::defaultConfiguration() {
     keyMap[control::ZOOM_IN] = stringToKey("b");
     keyMap[control::ZOOM_OUT] = stringToKey("n");
     map<GameRepresentation::Model, AbstractModel3D *> modelMap;
-    // todo -> Add default modelMap
     return Configuration(keyMap, modelMap, 800, 600);
 }
 
@@ -40,37 +38,23 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
     return keyMap;
 }
 
-map<GameRepresentation::Model, AbstractModel3D *> Configuration::modelMapFromJSON(const json &jsonData) {
-
+map<GameRepresentation::Model, AbstractModel3D *> Configuration::modelMapFromJSON(const json &jsonModels) {
     map<GameRepresentation::Model, AbstractModel3D *> modelMap;
-    json modelsArray = jsonData["models"];
+    json modelsArray = jsonModels["models"];
     for (auto & it : modelsArray) {
-        modelMap.insert(modelFromJSON(it));
-        // TODO changer :
-        // modelMap[jsonData[Model::fromString(it.first)]] = AbstractModel::fromJSON(it.second);
+		//TODO
+		//GameRepresentation::Model model = GameRepresentation::modelFromString(it["name"]);
+		//AbstractModel3D * model_3d = AbstractModel3D::fromJSON(it["model"]);
+		//modelMap[model] = model_3d;
     }
-
     return modelMap;
-}
-
-pair<GameRepresentation::Model, AbstractModel3D *> Configuration::modelFromJSON(const json &json) {
-
-    GameRepresentation::Model model = fromString(json["name"]);
-    mat4 modelTransform(1);
-
-    modelTransform = scale(modelTransform, vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
-//    modelTransform = rotation(modelTransform.,vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
-//    modelTransform = rotation(modelTransform,vec3(json["scale"]["x"], json["scale"]["y"], json["scale"]["z"]));
-    AbstractModel3D *model3D = new TexModel3D(json["objPath"], json["texPath"], modelTransform);
-    return pair<GameRepresentation::Model, AbstractModel3D *>(model, model3D);
 }
 
 Configuration Configuration::fromJSON(const json &json) {
     map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
+	map<GameRepresentation::Model, AbstractModel3D *> modelMap = modelMapFromJSON(json);
     int windowWidth = json["windowSize"]["width"];
     int windowHeight = json["windowSize"]["height"];
-
-    map<GameRepresentation::Model, AbstractModel3D *> modelMap;// TODO = modelMapFromJSON(json);
     return Configuration(keyMap, modelMap, windowWidth, windowHeight);
 }
 
@@ -97,15 +81,6 @@ const map<control, SDLKey> Configuration::getControlMap() const {
 
 const map<GameRepresentation::Model, AbstractModel3D *> Configuration::getModelMap() const {
     return _map_model3D;
-}
-
-
-GameRepresentation::Model Configuration::fromString(const string &s) {
-    if (s == "Pacman") return GameRepresentation::Model::PACMAN;
-    if (s == "Wall") return GameRepresentation::Model::WALL;
-    if (s == "Floor") return GameRepresentation::Model::FLOOR;
-    if (s == "Tunnel") return GameRepresentation::Model::TUNNEL;
-    if (s == "Pac_gomme") return GameRepresentation::Model::PAC_GOMME;
 }
 
 SDLKey Configuration::stringToKey(string s) {

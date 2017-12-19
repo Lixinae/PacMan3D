@@ -15,10 +15,27 @@ vector<GameRepresentation::Model> GameRepresentation::buildVector() {
 	return models;
 }
 
+GameRepresentation::Model GameRepresentation::modelFromString(const string & strModel) {
+    if (strModel == "Pacman") {
+		 return GameRepresentation::Model::PACMAN;
+    }
+    if (strModel == "Wall") {
+		return GameRepresentation::Model::WALL;
+    }
+    if (strModel == "Floor") {
+		return GameRepresentation::Model::FLOOR;
+	}
+    if (strModel == "Tunnel") {
+		return GameRepresentation::Model::TUNNEL;
+    }
+    if (strModel == "Pac_gomme") {
+		return GameRepresentation::Model::PAC_GOMME;
+	}
+}
 
 GameRepresentation::GameRepresentation() :
 		_modelsPositions() {
-	GameRepresentation::MODELS = buildVector();
+	GameRepresentation::MODELS = buildVector(); //TODO enlever
 	for (auto & model : GameRepresentation::MODELS) {
 		_modelsPositions[model] = vector<BoardPosition>();
 	}

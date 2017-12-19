@@ -1,8 +1,13 @@
 #include <AbstractModel3D.h>
 
+#include <TexModel3D.h>
+#include <NormalModel3D.h>
+
 using namespace std;
 using namespace glimac;
 using namespace glm;
+
+using json = nlohmann::json;
 
 //const string AbstractModel3D::VERTEX_SHADER_3D = Utils::SHADER_PATH + "/" + "3D.vs.glsl";
 const string AbstractModel3D::VERTEX_SHADER_3D = "shaders/3D.vs.glsl";
@@ -15,6 +20,24 @@ const GLchar * AbstractModel3D::VERTEX_UNIFORM_MVP_MATRIX = "uMVPMatrix";
 const GLchar * AbstractModel3D::VERTEX_UNIFORM_MV_MATRIX = "uMVMatrix";
 const GLchar * AbstractModel3D::VERTEX_UNIFORM_NORMAL_MATRIX = "uNormalMatrix";
 
+
+AbstractModel3D * AbstractModel3D::fromJSON(const json & jsonModel) {
+	// TODO static assets/models path in UTILS
+	string type = jsonModel["type"];
+	mat4 transformations(1.f);
+	transformations = scale(transformations, vec3(jsonModel["scale"]["x"], jsonModel["scale"]["y"], jsonModel["scale"]["z"]));
+	//TODO rotate + translate
+	if (type == "texture") {
+		string mesh = jsonModel["args"]["objPath"];
+		string texture = jsonModel["args"]["texPath"];
+		return TexModel3D::create("assets/models/" + mesh, "assets/textures/" + texture, transformations);
+	}
+	if (type == "normal") {
+		string mesh = jsonModel["args"]["objPath"];
+		return NormalModel3D::create("assets/models/" + mesh, transformations);
+	}
+	throw invalid_argument(type + " is not a valid string representation of model type");
+}
 
 void AbstractModel3D::initPoints(const Mesh & mesh) {
 	glGenBuffers(1, &_vbo);
@@ -42,10 +65,10 @@ void AbstractModel3D::initProgram(const string & fragmentShader) {
     _uNormalmatrix = getUniformLocation(VERTEX_UNIFORM_NORMAL_MATRIX);
 }
 	
-AbstractModel3D::AbstractModel3D(const string & mesh, const string & fragmentShader, const mat4 & modelTransform):
+AbstractModel3D::AbstractModel3D(const Mesh & mesh, const string & fragmentShader, const mat4 & modelTransform):
 	_modelTransform(modelTransform)
 {
-	initPoints(Mesh::fromOBJFile(mesh));
+	initPoints(mesh);
 	initProgram(fragmentShader);
 }
 
