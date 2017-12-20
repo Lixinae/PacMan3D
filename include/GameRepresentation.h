@@ -4,6 +4,7 @@
 #include <BoardPosition.h>
 #include <map>
 #include <vector>
+#include <Utils.h>
 
 using namespace std;
 
@@ -22,23 +23,32 @@ public:
 		
 	};
 	
+	struct ModelInformations {
+		
+		BoardPosition position;
+		Utils::Orientation orientation;
+		
+		ModelInformations(const BoardPosition & position, Utils::Orientation orientation);
+		
+	};
+	
     static vector<ModelType> MODELS;
 
 	static ModelType modelFromString(const string & strModel);
 
 	GameRepresentation(); 
 	
-	const vector<BoardPosition> & getPositions(ModelType modelType) const;
+	const vector<ModelInformations> & getPositions(ModelType modelType) const;
 
 	void add(ModelType modelType, const BoardPosition & position);
 	
 	void remove(ModelType modelType, const BoardPosition & position);
 	
-	const vector<BoardPosition> & operator[](ModelType modelType) const;
+	const vector<ModelInformations> & operator[](ModelType modelType) const;
 	
 private:
  
-	map<ModelType, vector<BoardPosition>> _modelsPositions;
+	map<ModelType, vector<ModelInformations>> _modelsPositions;
 
     static vector<ModelType> buildVector();
 };

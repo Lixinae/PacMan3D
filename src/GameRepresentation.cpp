@@ -33,29 +33,38 @@ GameRepresentation::ModelType GameRepresentation::modelFromString(const string &
 	}
 }
 
+GameRepresentation::ModelInformations::ModelInformations(const BoardPosition & position, Utils::Orientation orientation) :
+	position(position),
+	orientation(orientation)
+{
+	
+}
+
 GameRepresentation::GameRepresentation() :
 		_modelsPositions() {
 	GameRepresentation::MODELS = buildVector(); //TODO enlever
 	for (auto & modelType : GameRepresentation::MODELS) {
-		_modelsPositions[modelType] = vector<BoardPosition>();
+		_modelsPositions[modelType] = vector<ModelInformations>();
 	}
 }
 	
-const vector<BoardPosition> & GameRepresentation::getPositions(ModelType modelType) const {
+const vector<GameRepresentation::ModelInformations> & GameRepresentation::getPositions(ModelType modelType) const {
 	return _modelsPositions.at(modelType);
 }
 
 void GameRepresentation::add(ModelType modelType, const BoardPosition & position) {
-	_modelsPositions[modelType].push_back(position);
+	// TODO implement
+	GameRepresentation::ModelInformations information(position, Utils::Orientation::NORTH);
+	_modelsPositions[modelType].push_back(information);
 }
 	
 void GameRepresentation::remove(ModelType modelType, const BoardPosition & position) {
-	vector<BoardPosition> & positions = _modelsPositions[modelType];	
-	positions.erase(std::remove_if(positions.begin(), positions.end(), [position](const BoardPosition & p) {
-		return (p == position);
-	}), positions.end());
+	vector<GameRepresentation::ModelInformations> & informations = _modelsPositions[modelType];	
+	informations.erase(std::remove_if(informations.begin(), informations.end(), [position](const GameRepresentation::ModelInformations & information) {
+		return (information.position == position); // TODO && info.orient ==
+	}), informations.end());
 }
 	
-const vector<BoardPosition> & GameRepresentation::operator[](ModelType modelType) const {
+const vector<GameRepresentation::ModelInformations> & GameRepresentation::operator[](ModelType modelType) const {
 	return getPositions(modelType);
 }

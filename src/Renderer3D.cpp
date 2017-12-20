@@ -19,14 +19,21 @@ void Renderer3D::render(const GameRepresentation &repr) const {
     mat4 GlobalMVMatrix = _pointOfView->getCurrentCamera().getViewMatrix();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (auto & modelType : GameRepresentation::MODELS) {
-        vector<BoardPosition> positions = repr[modelType];
+        vector<GameRepresentation::ModelInformations> informations = repr[modelType];
         AbstractModel3D * model3d = _models.at(modelType);
         model3d->bind();
-        for (auto &position : positions) {
-            mat4 MVMatrix = translate(
-                    GlobalMVMatrix,
-                    vec3(position.getX() * SQUARE_SIZE, 0, -position.getY() * SQUARE_SIZE)
-            );
+        for (auto & information : informations) {
+			BoardPosition position = information.position;
+			Utils::Orientation orientation = information.orientation;
+            mat4 MVMatrix = 
+				translate(
+                    rotate(
+						GlobalMVMatrix,
+						radians(Utils::degreesOfOrientation(orientation)),
+						vec3(0,1,0)
+					),
+					vec3(position.getX() * SQUARE_SIZE, 0, -position.getY() * SQUARE_SIZE)
+				);
             model3d->setMatrices(_ProjMatrix, MVMatrix);
             glDrawArrays(GL_TRIANGLES, 0, model3d->count());
         }

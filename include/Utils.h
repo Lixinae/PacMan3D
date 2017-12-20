@@ -20,6 +20,8 @@ public:
 	
 	static Utils::Orientation orientationFromString(string strOrientation);
 
+	static float degreesOfOrientation(Utils::Orientation orientation);
+
 private:
 
 	Utils() = default;
