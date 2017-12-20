@@ -35,6 +35,6 @@ void Pacman::iterate() {
 	// TODO decrement counter when super state ect
 }
 
-GameRepresentation::ModelType Pacman::getModel() const {
-	return GameRepresentation::ModelType::PACMAN;
+GameRepresentation::Model Pacman::getModel() const {
+	return GameRepresentation::Model(GameRepresentation::ModelType::PACMAN, _orientation);
 }

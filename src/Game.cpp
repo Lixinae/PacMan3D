@@ -13,8 +13,8 @@ Game::Game(const Board &board, const Pacman &pacman) :
         _representation(){
     _representation.add(_pacman.getModel(), _pacman.getPosition());
     for (const BoardPosition &position : _board.getPositions()) {
-        for (const GameRepresentation::ModelType &modelType : _board[position]->getModels()) {
-            _representation.add(modelType, position);
+        for (const GameRepresentation::Model & model : _board[position]->getModels()) {
+            _representation.add(model, position);
         }
     }
 }
@@ -51,8 +51,8 @@ const GameRepresentation &Game::getRepresentation() const {
 }
 
 void Game::setSquare(const BoardPosition &position) {
-    for (const GameRepresentation::ModelType &modelType : _board[position]->getModels()) {
-        _representation.add(modelType, position);
+    for (const GameRepresentation::Model & model : _board[position]->getModels()) {
+        _representation.add(model, position);
     }
 }
 
@@ -61,8 +61,8 @@ void Game::setPacman() {
 }
 
 void Game::cleanSquare(const BoardPosition &position) {
-    for (const GameRepresentation::ModelType &modelType : _board[position]->getModels()) {
-        _representation.remove(modelType, position);
+    for (const GameRepresentation::Model & model : _board[position]->getModels()) {
+        _representation.remove(model, position);
     }
 }
 

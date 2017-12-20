@@ -11,7 +11,7 @@ public:
 
     PacGomme();
 
-    GameRepresentation::ModelType getModel() const;
+    GameRepresentation::Model getModel() const;
 
     void apply(Pacman &pacman);
 

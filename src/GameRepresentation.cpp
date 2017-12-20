@@ -33,6 +33,19 @@ GameRepresentation::ModelType GameRepresentation::modelFromString(const string &
 	}
 }
 
+GameRepresentation::Model::Model(ModelType modelType, Utils::Orientation orientation) : 
+	modelType(modelType),
+	orientation(orientation)
+{
+	
+}
+
+GameRepresentation::Model::Model(ModelType modelType) : 
+	GameRepresentation::Model::Model(modelType, Utils::Orientation::SOUTH) // South is default orientation
+{
+	
+}
+
 GameRepresentation::ModelInformations::ModelInformations(const BoardPosition & position, Utils::Orientation orientation) :
 	position(position),
 	orientation(orientation)
@@ -52,14 +65,13 @@ const vector<GameRepresentation::ModelInformations> & GameRepresentation::getPos
 	return _modelsPositions.at(modelType);
 }
 
-void GameRepresentation::add(ModelType modelType, const BoardPosition & position) {
-	// TODO implement
-	GameRepresentation::ModelInformations information(position, Utils::Orientation::NORTH);
-	_modelsPositions[modelType].push_back(information);
+void GameRepresentation::add(Model model, const BoardPosition & position) {
+	GameRepresentation::ModelInformations information(position, model.orientation);
+	_modelsPositions[model.modelType].push_back(information);
 }
 	
-void GameRepresentation::remove(ModelType modelType, const BoardPosition & position) {
-	vector<GameRepresentation::ModelInformations> & informations = _modelsPositions[modelType];	
+void GameRepresentation::remove(Model model, const BoardPosition & position) {
+	vector<GameRepresentation::ModelInformations> & informations = _modelsPositions[model.modelType];	
 	informations.erase(std::remove_if(informations.begin(), informations.end(), [position](const GameRepresentation::ModelInformations & information) {
 		return (information.position == position); // TODO && info.orient ==
 	}), informations.end());

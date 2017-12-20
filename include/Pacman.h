@@ -22,7 +22,7 @@ public:
 
 	void iterate();
 	
-	GameRepresentation::ModelType getModel() const;
+	GameRepresentation::Model getModel() const;
 		
 private:
 	

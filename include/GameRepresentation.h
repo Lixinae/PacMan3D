@@ -23,6 +23,16 @@ public:
 		
 	};
 	
+	struct Model {
+		
+		ModelType modelType;
+		Utils::Orientation orientation;
+		
+		Model(ModelType modelType, Utils::Orientation orientation);
+		Model(ModelType modelType);
+		
+	};
+	
 	struct ModelInformations {
 		
 		BoardPosition position;
@@ -40,9 +50,9 @@ public:
 	
 	const vector<ModelInformations> & getPositions(ModelType modelType) const;
 
-	void add(ModelType modelType, const BoardPosition & position);
+	void add(Model model, const BoardPosition & position);
 	
-	void remove(ModelType modelType, const BoardPosition & position);
+	void remove(Model model, const BoardPosition & position);
 	
 	const vector<ModelInformations> & operator[](ModelType modelType) const;
 	

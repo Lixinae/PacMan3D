@@ -28,7 +28,7 @@ public:
 	
 	static BoardSquare * fromJSON(const json & jsonSquare);
 	
-	virtual vector<GameRepresentation::ModelType> getModels() const = 0;
+	virtual vector<GameRepresentation::Model> getModels() const = 0;
 	
 	virtual bool isPacmanWalkable(const PacmanContext & context) const = 0;
 	

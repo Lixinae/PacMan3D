@@ -5,8 +5,8 @@ PacGomme::PacGomme() {
 
 }
 
-GameRepresentation::ModelType PacGomme::getModel() const {
-    return GameRepresentation::ModelType::PAC_GOMME;
+GameRepresentation::Model PacGomme::getModel() const {
+    return GameRepresentation::Model(GameRepresentation::ModelType::PAC_GOMME);
 }
 
 void PacGomme::apply(Pacman & /*pacman*/) {

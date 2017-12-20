@@ -25,8 +25,8 @@ Floor::~Floor() {
 	}
 }
 	
-vector<GameRepresentation::ModelType> Floor::getModels() const {
-	vector<GameRepresentation::ModelType> models = {GameRepresentation::ModelType::FLOOR};
+vector<GameRepresentation::Model> Floor::getModels() const {
+	vector<GameRepresentation::Model> models = {GameRepresentation::Model(GameRepresentation::ModelType::FLOOR)};
 	if (_bonus != nullptr) {
 		models.push_back(_bonus->getModel());
 	}

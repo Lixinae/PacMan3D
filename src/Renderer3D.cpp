@@ -25,14 +25,24 @@ void Renderer3D::render(const GameRepresentation &repr) const {
         for (auto & information : informations) {
 			BoardPosition position = information.position;
 			Utils::Orientation orientation = information.orientation;
-            mat4 MVMatrix = 
+            /*mat4 MVMatrix = 
 				translate(
                     rotate(
 						GlobalMVMatrix,
-						radians(Utils::degreesOfOrientation(orientation)),
+						radians(0.f),
 						vec3(0,1,0)
 					),
 					vec3(position.getX() * SQUARE_SIZE, 0, -position.getY() * SQUARE_SIZE)
+				);
+				*/
+            mat4 MVMatrix = 
+				rotate(
+                    translate(
+						GlobalMVMatrix,
+						vec3(position.getX() * SQUARE_SIZE, 0, -position.getY() * SQUARE_SIZE)
+					),
+					radians(Utils::degreesOfOrientation(orientation)),
+					vec3(0,1,0)
 				);
             model3d->setMatrices(_ProjMatrix, MVMatrix);
             glDrawArrays(GL_TRIANGLES, 0, model3d->count());

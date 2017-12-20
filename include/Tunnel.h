@@ -13,7 +13,7 @@ public:
 
 	Tunnel(Utils::Orientation orientation, const BoardPosition & dest, Utils::Orientation destOrientation);
 	
-	vector<GameRepresentation::ModelType> getModels() const;
+	vector<GameRepresentation::Model> getModels() const;
 	
 	bool isPacmanWalkable(const BoardSquare::PacmanContext & context) const;
 	

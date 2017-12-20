@@ -8,9 +8,9 @@ Tunnel::Tunnel(Utils::Orientation orientation, const BoardPosition & dest, Utils
 
 }
 	
-vector<GameRepresentation::ModelType> Tunnel::getModels() const {
+vector<GameRepresentation::Model> Tunnel::getModels() const {
 	GameRepresentation::ModelType modelTunel;
-	// TODO use different model in function of orientation
+	// TODO use orientation for orient Model
 	switch (_orientation) {
 		case Utils::Orientation::NORTH:
 			modelTunel = GameRepresentation::ModelType::TUNNEL;
@@ -25,7 +25,7 @@ vector<GameRepresentation::ModelType> Tunnel::getModels() const {
 			modelTunel = GameRepresentation::ModelType::TUNNEL;
 			break;
 	}
-	return {modelTunel};
+	return {GameRepresentation::Model(modelTunel)};
 }
 
 bool Tunnel::isPacmanWalkable(const BoardSquare::PacmanContext &) const {
