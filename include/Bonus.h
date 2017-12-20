@@ -13,7 +13,7 @@ public:
 
 	static Bonus * fromJSON(const json & jsonBonus);
 
-	virtual GameRepresentation::Model getModel() const = 0;
+	virtual GameRepresentation::ModelType getModel() const = 0;
 
 	virtual void apply(Pacman & pacman) = 0;
 	

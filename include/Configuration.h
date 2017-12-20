@@ -31,20 +31,20 @@ private:
 
     Configuration(
 		const map<control, SDLKey> &keyMap, 
-		const map<GameRepresentation::Model, AbstractModel3D *> &modelMap,
+		const map<GameRepresentation::ModelType, AbstractModel3D *> &modelMap,
 		int windowWidth,
 		int windowHeight
 	);
 
     map<control, SDLKey> _keyMap;
-    map<GameRepresentation::Model, AbstractModel3D *> _map_model3D;
+    map<GameRepresentation::ModelType, AbstractModel3D *> _map_model3D;
     int _windowWidth;
     int _windowHeight;
 
     static SDLKey stringToKey(string s);
 
     static map<control, SDLKey> keyMapFromJSON(const json &json);
-    static map<GameRepresentation::Model, AbstractModel3D *> modelMapFromJSON(const json &json);
+    static map<GameRepresentation::ModelType, AbstractModel3D *> modelMapFromJSON(const json &json);
 
     static Configuration fromJSON(const json &json);
 
@@ -65,7 +65,7 @@ public:
 
     const map<control, SDLKey> getControlMap() const;
 
-    const map<GameRepresentation::Model, AbstractModel3D *> getModelMap() const;
+    const map<GameRepresentation::ModelType, AbstractModel3D *> getModelMap() const;
 
     int getWidth() const;
 

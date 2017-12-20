@@ -11,7 +11,7 @@ public:
 
 	Wall();
 	
-	vector<GameRepresentation::Model> getModels() const;
+	vector<GameRepresentation::ModelType> getModels() const;
 	
 	bool isPacmanWalkable(const BoardSquare::PacmanContext & context) const;
 	

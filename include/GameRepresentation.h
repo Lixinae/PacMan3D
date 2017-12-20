@@ -11,38 +11,36 @@ class GameRepresentation {
 
 public:
 
-	enum class Model {
+	enum class ModelType {
 		
 		PACMAN,
 		WALL,
 		FLOOR,
 		TUNNEL,
 		PAC_GOMME
-		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...
-		
-		
+		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...	
 		
 	};
 	
-    static vector<Model> MODELS;
+    static vector<ModelType> MODELS;
 
-	static Model modelFromString(const string & strModel);
+	static ModelType modelFromString(const string & strModel);
 
 	GameRepresentation(); 
 	
-	const vector<BoardPosition> & getPositions(Model model) const;
+	const vector<BoardPosition> & getPositions(ModelType modelType) const;
 
-	void add(Model model, const BoardPosition & position);
+	void add(ModelType modelType, const BoardPosition & position);
 	
-	void remove(Model model, const BoardPosition & position);
+	void remove(ModelType modelType, const BoardPosition & position);
 	
-	const vector<BoardPosition> & operator[](Model model) const;
+	const vector<BoardPosition> & operator[](ModelType modelType) const;
 	
 private:
  
-	map<Model, vector<BoardPosition>> _modelsPositions;
+	map<ModelType, vector<BoardPosition>> _modelsPositions;
 
-    static vector<Model> buildVector();
+    static vector<ModelType> buildVector();
 };
 
 #endif

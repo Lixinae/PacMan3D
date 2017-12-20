@@ -8,21 +8,21 @@ Tunnel::Tunnel(Utils::Orientation orientation, const BoardPosition & dest, Utils
 
 }
 	
-vector<GameRepresentation::Model> Tunnel::getModels() const {
-	GameRepresentation::Model modelTunel;
+vector<GameRepresentation::ModelType> Tunnel::getModels() const {
+	GameRepresentation::ModelType modelTunel;
 	// TODO use different model in function of orientation
 	switch (_orientation) {
 		case Utils::Orientation::NORTH:
-			modelTunel = GameRepresentation::Model::TUNNEL;
+			modelTunel = GameRepresentation::ModelType::TUNNEL;
 			break;
 		case Utils::Orientation::SOUTH:
-			modelTunel = GameRepresentation::Model::TUNNEL;
+			modelTunel = GameRepresentation::ModelType::TUNNEL;
 			break;
 		case Utils::Orientation::EAST:
-			modelTunel = GameRepresentation::Model::TUNNEL;
+			modelTunel = GameRepresentation::ModelType::TUNNEL;
 			break;
 		case Utils::Orientation::WEST:
-			modelTunel = GameRepresentation::Model::TUNNEL;
+			modelTunel = GameRepresentation::ModelType::TUNNEL;
 			break;
 	}
 	return {modelTunel};

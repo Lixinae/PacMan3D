@@ -8,8 +8,8 @@ Wall::Wall() {
 
 }
 	
-vector<GameRepresentation::Model> Wall::getModels() const {
-	return {GameRepresentation::Model::WALL};
+vector<GameRepresentation::ModelType> Wall::getModels() const {
+	return {GameRepresentation::ModelType::WALL};
 }
 	
 bool Wall::isPacmanWalkable(const BoardSquare::PacmanContext &) const {
