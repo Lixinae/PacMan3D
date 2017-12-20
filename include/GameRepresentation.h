@@ -4,6 +4,7 @@
 #include <BoardPosition.h>
 #include <map>
 #include <vector>
+#include <Utils.h>
 
 using namespace std;
 
@@ -11,38 +12,55 @@ class GameRepresentation {
 
 public:
 
-	enum class Model {
+	enum class ModelType {
 		
 		PACMAN,
 		WALL,
 		FLOOR,
 		TUNNEL,
 		PAC_GOMME
-		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...
-		
-		
+		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...	
 		
 	};
 	
-    static vector<Model> MODELS;
+	struct Model {
+		
+		ModelType modelType;
+		Utils::Orientation orientation;
+		
+		Model(ModelType modelType, Utils::Orientation orientation);
+		Model(ModelType modelType);
+		
+	};
+	
+	struct ModelInformations {
+		
+		BoardPosition position;
+		Utils::Orientation orientation;
+		
+		ModelInformations(const BoardPosition & position, Utils::Orientation orientation);
+		
+	};
+	
+    static vector<ModelType> MODELS;
 
-	static Model modelFromString(const string & strModel);
+	static ModelType modelFromString(const string & strModel);
 
 	GameRepresentation(); 
 	
-	const vector<BoardPosition> & getPositions(Model model) const;
+	const vector<ModelInformations> & getPositions(ModelType modelType) const;
 
 	void add(Model model, const BoardPosition & position);
 	
 	void remove(Model model, const BoardPosition & position);
 	
-	const vector<BoardPosition> & operator[](Model model) const;
+	const vector<ModelInformations> & operator[](ModelType modelType) const;
 	
 private:
  
-	map<Model, vector<BoardPosition>> _modelsPositions;
+	map<ModelType, vector<ModelInformations>> _modelsPositions;
 
-    static vector<Model> buildVector();
+    static vector<ModelType> buildVector();
 };
 
 #endif

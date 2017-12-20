@@ -36,5 +36,5 @@ void Pacman::iterate() {
 }
 
 GameRepresentation::Model Pacman::getModel() const {
-	return GameRepresentation::Model::PACMAN;
+	return GameRepresentation::Model(GameRepresentation::ModelType::PACMAN, _orientation);
 }

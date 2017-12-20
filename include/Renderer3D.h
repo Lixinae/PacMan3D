@@ -16,7 +16,7 @@ public:
 
 	static const float SQUARE_SIZE;
 
-	Renderer3D(int windowWidth, int windowHeight, PointOfView * pointOfView,const map<GameRepresentation::Model, AbstractModel3D *>& map_model3D);
+	Renderer3D(int windowWidth, int windowHeight, PointOfView * pointOfView,const map<GameRepresentation::ModelType, AbstractModel3D *> & map_model3D);
 
 	void render(const GameRepresentation & repr) const override;
 
@@ -26,9 +26,7 @@ private:
 
 	mat4 _ProjMatrix;
 	PointOfView * _pointOfView;
-	map<GameRepresentation::Model, AbstractModel3D *> _models;
-
-	static AbstractModel3D * get3DModel(GameRepresentation::Model model);
+	map<GameRepresentation::ModelType, AbstractModel3D *> _models;
 
 };
 

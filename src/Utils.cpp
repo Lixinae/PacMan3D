@@ -19,3 +19,16 @@ Utils::Orientation Utils::orientationFromString(string strOrientation) {
 	} 
 	throw invalid_argument(strOrientation + " is not a valid string representation of orientation");
 }
+
+float Utils::degreesOfOrientation(Utils::Orientation orientation) {
+	switch (orientation) {
+		case Utils::Orientation::NORTH:
+			return 180;
+		case Utils::Orientation::SOUTH:
+			return 0;
+		case Utils::Orientation::EAST:
+			return 90;
+		case Utils::Orientation::WEST:
+			return -90;
+	}
+}
