@@ -2,16 +2,31 @@
 #define __GHOST_H__
 
 #include <BoardPosition.h>
+#include <GameRepresentation.h>
+#include <Utils.h>
 
 class Ghost {
 
 public:
 
-	explicit Ghost(const BoardPosition & position);
+	Ghost(const BoardPosition & position, Utils::Orientation orientation);
+	
+	Utils::Orientation getOrientation() const;
+	
+	BoardPosition getPosition() const;
+	void setPosition(const BoardPosition & position);
+
+	void iterate();
+
+	virtual Utils::Orientation getNextOrientation() const = 0;
+	
+	virtual GameRepresentation::Model getModel() const = 0;
 
 private:
 
 	BoardPosition _position;
+	Utils::Orientation _orientation;
+	int _count;
 
 };
 

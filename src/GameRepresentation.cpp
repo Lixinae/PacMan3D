@@ -8,6 +8,10 @@ vector<GameRepresentation::ModelType> GameRepresentation::MODELS;
 vector<GameRepresentation::ModelType> GameRepresentation::buildVector() {
 	vector<GameRepresentation::ModelType> models;
 	models.push_back(GameRepresentation::ModelType::PACMAN);
+	models.push_back(GameRepresentation::ModelType::GHOST_BLINKY);
+	models.push_back(GameRepresentation::ModelType::GHOST_PINKY);
+	models.push_back(GameRepresentation::ModelType::GHOST_INKY);
+	models.push_back(GameRepresentation::ModelType::GHOST_CLYDE);
 	models.push_back(GameRepresentation::ModelType::WALL);
 	models.push_back(GameRepresentation::ModelType::FLOOR);
 	models.push_back(GameRepresentation::ModelType::TUNNEL);
@@ -18,6 +22,18 @@ vector<GameRepresentation::ModelType> GameRepresentation::buildVector() {
 GameRepresentation::ModelType GameRepresentation::modelFromString(const string & strModel) {
     if (strModel == "Pacman") {
 		 return GameRepresentation::ModelType::PACMAN;
+    }
+    if (strModel == "Ghost_blinky") {
+		 return GameRepresentation::ModelType::GHOST_BLINKY;
+    }
+    if (strModel == "Ghost_pinky") {
+		 return GameRepresentation::ModelType::GHOST_PINKY;
+    }
+    if (strModel == "Ghost_inky") {
+		 return GameRepresentation::ModelType::GHOST_INKY;
+    }
+    if (strModel == "Ghost_clyde") {
+		 return GameRepresentation::ModelType::GHOST_CLYDE;
     }
     if (strModel == "Wall") {
 		return GameRepresentation::ModelType::WALL;

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstddef>
+#include <cstdlib>
+#include <ctime>
 #include <chrono>
 #include <thread>
 #include <json/json.hpp>
@@ -31,6 +33,8 @@ int realMain() {
         std::cerr << glewGetErrorString(glewInitError) << std::endl;
         return EXIT_FAILURE;
     }
+
+	srand(time(nullptr)); 
 
 	glEnable(GL_DEPTH_TEST);
 	

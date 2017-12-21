@@ -14,7 +14,7 @@ public:
 
 	static Pacman fromJSON(const json & jsonPacman);
 	
-	Utils::Orientation getOrientation();
+	Utils::Orientation getOrientation() const;
 	void setOrientation(Utils::Orientation orientation);
 	
 	BoardPosition getPosition() const;
