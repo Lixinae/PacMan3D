@@ -1,5 +1,9 @@
 #include <GhostBlinky.h>
 
-GameRepresentation::Model GhostBlinky::getModel() {
+Utils::Orientation GhostBlinky::getNextOrientation() const {
+	return Utils::randomOrientation();
+}
+
+GameRepresentation::Model GhostBlinky::getModel() const {
 	return GameRepresentation::Model(GameRepresentation::ModelType::GHOST_BLINKY, Ghost::getOrientation());
 }

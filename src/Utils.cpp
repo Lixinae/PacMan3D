@@ -1,6 +1,10 @@
 #include <Utils.h>
 
 #include <stdexcept>
+#include <vector>
+#include <cstdlib>
+
+using namespace std;
 
 const string Utils::SHADER_PATH = "shaders";
 
@@ -31,4 +35,14 @@ float Utils::degreesOfOrientation(Utils::Orientation orientation) {
 		case Utils::Orientation::WEST:
 			return -90;
 	}
+}
+
+Utils::Orientation Utils::randomOrientation() {
+	vector<Utils::Orientation> orientations = {
+		Utils::Orientation::NORTH,
+		Utils::Orientation::SOUTH,
+		Utils::Orientation::EAST,
+		Utils::Orientation::WEST
+	};
+	return orientations[rand() % orientations.size()];
 }

@@ -5,9 +5,13 @@
 
 class GhostClyde : public Ghost {
 
+using Ghost::Ghost;
+
 public:
 
-	GameRepresentation::Model getModel();
+	Utils::Orientation getNextOrientation() const;
+
+	GameRepresentation::Model getModel() const;
 
 };
 

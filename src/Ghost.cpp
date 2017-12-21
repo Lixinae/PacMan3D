@@ -4,17 +4,14 @@
 
 Ghost::Ghost(const BoardPosition &position, Utils::Orientation orientation): 
 	_position(position),
-	_orientation(orientation)
+	_orientation(orientation),
+	_count()
 {
 
 }
 
-Utils::Orientation Ghost::getOrientation() {
+Utils::Orientation Ghost::getOrientation() const {
 	return _orientation;
-}
-	
-void Ghost::setOrientation(Utils::Orientation orientation) {
-	_orientation = orientation;
 }
 	
 BoardPosition Ghost::getPosition() const {
@@ -26,5 +23,8 @@ void Ghost::setPosition(const BoardPosition & position) {
 }
 
 void Ghost::iterate() {
-	
+	_count = (_count + 1)%3;
+	if (_count == 0) {
+		_orientation = getNextOrientation();
+	}
 }
