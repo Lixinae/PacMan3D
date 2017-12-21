@@ -39,6 +39,106 @@
       }
     },
     {
+      "name": "Ghost_blinky",
+      "model": {
+         "type":"texture",
+         "args": {
+           "objPath": "boo.obj",
+           "texPath": "red_boo.png"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.025,
+           "y": 0.025,
+           "z": 0.025
+         }
+      }
+    },
+    {
+      "name": "Ghost_pinky",
+      "model": {
+         "type":"texture",
+         "args": {
+           "objPath": "boo.obj",
+           "texPath": "pink_boo.png"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.025,
+           "y": 0.025,
+           "z": 0.025
+         }
+      }
+    },
+    {
+      "name": "Ghost_inky",
+      "model": {
+         "type":"texture",
+         "args": {
+           "objPath": "boo.obj",
+           "texPath": "blue_boo.png"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.025,
+           "y": 0.025,
+           "z": 0.025
+         }
+      }
+    },
+    {
+      "name": "Ghost_clyde",
+      "model": {
+         "type":"texture",
+         "args": {
+           "objPath": "boo.obj",
+           "texPath": "orange_boo.png"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.025,
+           "y": 0.025,
+           "z": 0.025
+         }
+      }
+    },
+    {
       "name": "Wall",
       "model": {
          "type":"texture",

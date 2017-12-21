@@ -15,11 +15,15 @@ public:
 	enum class ModelType {
 		
 		PACMAN,
+		GHOST_BLINKY,
+		GHOST_PINKY,
+		GHOST_INKY,
+		GHOST_CLYDE,
 		WALL,
 		FLOOR,
 		TUNNEL,
 		PAC_GOMME
-		//TODO SUPER_PAC_GOMME, GHOST_SPEEDY, FRUIT_CHERRY, ...	
+		//TODO SUPER_PAC_GOMME, FRUIT_CHERRY, ...	
 		
 	};
 	
