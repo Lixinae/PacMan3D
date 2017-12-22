@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstddef>
-#include <cstdlib>
 #include <ctime>
 #include <chrono>
 #include <thread>
@@ -13,7 +12,8 @@
 #include <Renderer.h>
 #include <Renderer3D.h>
 #include <EventHandler.h>
-#include <NormalModel3D.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 using namespace glimac;
 using namespace std;
@@ -22,7 +22,18 @@ using namespace glm;
 using json = nlohmann::json;
 
 int realMain() {
-	
+
+    FT_Library ft;
+    if (FT_Init_FreeType(&ft))
+        std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+
+    FT_Face face;
+    if (FT_New_Face(ft, "assets/fonts/arial.ttf", 0, &face))
+        std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+    // Todo -> Tester l'écriture dans la boucle de rendu
+    // Voir lien https://learnopengl.com/#!In-Practice/Text-Rendering
+
+
     int windowWidth = 800;
     int windowHeight = 600;
     
@@ -78,4 +89,4 @@ int main(int argc, char **argv) {
 // Main for windows
 int WinMain(int argc, char **argv) {
     return realMain();
-} 
+}

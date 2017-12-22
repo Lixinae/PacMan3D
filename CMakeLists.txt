@@ -4,6 +4,7 @@ project(Pacman3D)
 
 find_package(OpenGL REQUIRED)
 
+
 if (WIN32)
     #Set the windows variables
     #Set the variables used for glew
@@ -12,31 +13,21 @@ if (WIN32)
     set(SDL_INCLUDE_DIR "D:/OpenGlUtils/SDL-1.2.15/include")
     set(SDL_LIBRARY "D:/OpenGlUtils/SDL-1.2.15/lib/libSDL.dll.a;D:/OpenGlUtils/SDL-1.2.15/lib/libSDLmain.a")
 
-    #SET(CMAKE_INSTALL_PREFIX "D:/Program Files/Assimp/")
-    #Set the assimp library_files
-    #set(ASSIMP_LIBRARY "D:/Program Files/Assimp/lib/libassimp.dll.a;D:/Program Files/Assimp/lib/libzlibstatic.a")
-    set(ALL_LIBRARIES
-            glimac
-            ${SDL_LIBRARY}
-            ${OPENGL_LIBRARIES}
-            ${GLEW_LIBRARY}
-            #${ASSIMP_LIBRARY}
-            assimp
-            )
 else (WIN32)
     # Set the linux variables
     find_package(SDL REQUIRED)
     find_package(GLEW REQUIRED)
-    #find_package(assimp REQUIRED)
-    set(ALL_LIBRARIES
-            glimac
-            ${SDL_LIBRARY}
-            ${OPENGL_LIBRARIES}
-            ${GLEW_LIBRARY}
-            assimp
-            )
-endif (WIN32)
 
+endif (WIN32)
+# Set all the library files
+set(ALL_LIBRARIES
+        glimac
+        ${SDL_LIBRARY}
+        ${OPENGL_LIBRARIES}
+        ${GLEW_LIBRARY}
+        assimp
+        freetype
+        )
 set(EXECUTABLE_OUTPUT_PATH bin/)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -std=c++11 -g")
@@ -45,10 +36,12 @@ include_directories(
         ${SDL_INCLUDE_DIR}
         ${OPENGL_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIR}
+        #${GLUT_INCLUDE_DIRS}
         include/
         /usr/include/
         glimac/include
         third-party/assimp/include/
+        third-party/freetype-2.8.1/include
         third-party/include)
 
 add_subdirectory(glimac)
@@ -62,6 +55,7 @@ set(SYSTEM_IRRXML OFF)
 set(ASSIMP_BUILD_STATIC_LIB ON)
 
 add_subdirectory(third-party/assimp/)
+add_subdirectory(third-party/freetype-2.8.1/)
 
 file(GLOB_RECURSE source_files src/*)
 file(GLOB_RECURSE SHADER_FILES *.glsl)
