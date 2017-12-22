@@ -25,6 +25,9 @@ public:
 	static float degreesOfOrientation(Utils::Orientation orientation);
 	
 	static Utils::Orientation randomOrientation();
+	static Utils::Orientation randomOrientation(vector<Utils::Orientation> orientations);
+	
+	static Utils::Orientation oppositeOrientation(Utils::Orientation orientation);
 	
 	template<typename T>
 	static void cleanVector(vector<T*> vector) {
