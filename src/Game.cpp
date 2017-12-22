@@ -1,6 +1,7 @@
 #include <Game.h>
 
 #include <fstream>
+#include <Utils.h>
 
 using json = nlohmann::json;
 
@@ -9,12 +10,13 @@ using namespace std;
 Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & ghosts) :
         _board(board),
         _pacman(pacman),
-        _ghosts(ghosts),
+        _ghosts(),
         _pointOfView(),
         _representation()
 {
     _representation.add(_pacman.getModel(), _pacman.getPosition());
-    for (const Ghost * ghost : _ghosts) {
+    for (const Ghost * ghost : ghosts) {
+		_ghosts.push_back(ghost->clone());
 		_representation.add(ghost->getModel(), ghost->getPosition());
 	}
     for (const BoardPosition & position : _board.getPositions()) {
@@ -22,6 +24,10 @@ Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & g
             _representation.add(model, position);
         }
     }
+}
+
+Game::~Game() {
+	Utils::cleanVector(_ghosts);
 }
 
 Game Game::fromJSON(const json &jsonGame) {
@@ -32,9 +38,7 @@ Game Game::fromJSON(const json &jsonGame) {
         ghosts.push_back(Ghost::fromJSON(it));
 	}
     Game game(board, pacman, ghosts);
-    for (Ghost * ghost : ghosts) {
-		delete ghost;
-	}
+    Utils::cleanVector(ghosts);
     return game;
 }
 

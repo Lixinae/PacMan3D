@@ -12,8 +12,8 @@
 #include <Renderer.h>
 #include <Renderer3D.h>
 #include <EventHandler.h>
-#include <ft2build.h>
-#include FT_FREETYPE_H
+//#include <ft2build.h>
+//#include FT_FREETYPE_H
 
 using namespace glimac;
 using namespace std;
@@ -23,6 +23,7 @@ using json = nlohmann::json;
 
 int realMain() {
 
+	/*
     FT_Library ft;
     if (FT_Init_FreeType(&ft))
         std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
@@ -30,6 +31,7 @@ int realMain() {
     FT_Face face;
     if (FT_New_Face(ft, "assets/fonts/arial.ttf", 0, &face))
         std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+     */
     // Todo -> Tester l'écriture dans la boucle de rendu
     // Voir lien https://learnopengl.com/#!In-Practice/Text-Rendering
 

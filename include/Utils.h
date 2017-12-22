@@ -2,6 +2,8 @@
 #define __UTILS_H__
 
 #include <string>
+#include <vector>
+#include <map>
 
 using namespace std;
 
@@ -23,6 +25,18 @@ public:
 	static float degreesOfOrientation(Utils::Orientation orientation);
 	
 	static Utils::Orientation randomOrientation();
+	
+	template<typename T>
+	static void cleanVector(vector<T*> vector) {
+		for (T * value : vector) {
+			delete value;
+		}
+	}
+	
+	template<typename K, typename V>
+	static void cleanMap(map<K, V*> map) {
+		//TODO
+	}
 
 private:
 
