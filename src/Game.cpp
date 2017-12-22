@@ -116,7 +116,7 @@ void Game::iteratePacman() {
 void Game::iterateGhost(Ghost * ghost) {
 	BoardPosition nextPosition = ghost->getPosition().translate(ghost->getOrientation());
     BoardSquare *nextSquare = _board[nextPosition];
-    BoardSquare::GhostContext context;
+    BoardSquare::GhostContext context(*ghost);
 	if (nextSquare != nullptr && nextSquare->isGhostWalkable(context)) {
 		cleanSquare(nextPosition);
 		cleanGhost(ghost);

@@ -13,7 +13,8 @@ BoardSquare::PacmanContext::PacmanContext(Pacman & pacman) :
 	
 }
 
-BoardSquare::GhostContext::GhostContext()
+BoardSquare::GhostContext::GhostContext(Ghost & ghost) :
+	ghost(ghost)
 {
 	
 }

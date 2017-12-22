@@ -41,8 +41,9 @@ bool Tunnel::isGhostWalkable(const BoardSquare::GhostContext &) const {
 	return true;
 }
 	
-void Tunnel::receiveGhost(BoardSquare::GhostContext &) {
-	//TODO implement
+void Tunnel::receiveGhost(BoardSquare::GhostContext & context) {
+	context.ghost.setPosition(_dest.translate(_destOrientation));	
+	context.ghost.setOrientation(_destOrientation);
 }
 
 BoardSquare * Tunnel::clone() {

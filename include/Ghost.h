@@ -14,6 +14,7 @@ public:
 	Ghost(const BoardPosition & position, Utils::Orientation orientation);
 	
 	Utils::Orientation getOrientation() const;
+	void setOrientation(Utils::Orientation orientation);
 	
 	BoardPosition getPosition() const;
 	void setPosition(const BoardPosition & position);

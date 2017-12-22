@@ -2,6 +2,7 @@
 #define __BOARD_SQUARE_H__
 
 #include <Pacman.h>
+#include <Ghost.h>
 #include <GameRepresentation.h>
 #include <vector>
 #include <json/json.hpp>
@@ -22,7 +23,9 @@ public:
 	
 	struct GhostContext {
 		
-		GhostContext();
+		Ghost & ghost;
+		
+		GhostContext(Ghost & ghost);
 		
 	};
 	

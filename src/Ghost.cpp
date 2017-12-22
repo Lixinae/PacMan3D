@@ -34,6 +34,11 @@ Ghost::Ghost(const BoardPosition &position, Utils::Orientation orientation):
 Utils::Orientation Ghost::getOrientation() const {
 	return _orientation;
 }
+
+void Ghost::setOrientation(Utils::Orientation orientation) {
+	_count = 0;
+	_orientation = orientation;
+}
 	
 BoardPosition Ghost::getPosition() const {
 	return _position;
