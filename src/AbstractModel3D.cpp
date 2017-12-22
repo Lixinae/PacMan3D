@@ -26,7 +26,10 @@ AbstractModel3D * AbstractModel3D::fromJSON(const json & jsonModel) {
 	string type = jsonModel["type"];
 	mat4 transformations(1.f);
 	transformations = scale(transformations, vec3(jsonModel["scale"]["x"], jsonModel["scale"]["y"], jsonModel["scale"]["z"]));
-	//TODO rotate + translate
+    transformations = translate(transformations,vec3(jsonModel["translate"]["x"], jsonModel["translate"]["y"], jsonModel["translate"]["z"]));
+
+//    transformations = rotate(transformations,0,vec3(jsonModel["rotate"]["x"], jsonModel["rotate"]["y"], jsonModel["rotate"]["z"]));
+	//TODO rotate
 	if (type == "texture") {
 		string mesh = jsonModel["args"]["objPath"];
 		string texture = jsonModel["args"]["texPath"];
