@@ -24,6 +24,8 @@ public:
 	
 	virtual GameRepresentation::Model getModel() const = 0;
 
+	virtual Ghost * clone() const = 0;
+
 private:
 
 	BoardPosition _position;

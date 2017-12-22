@@ -12,6 +12,8 @@ public:
 	Utils::Orientation getNextOrientation() const;
 	
 	GameRepresentation::Model getModel() const;
+	
+	Ghost * clone() const;
 
 };
 
