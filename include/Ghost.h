@@ -9,9 +9,12 @@ class Ghost {
 
 public:
 
+	static Ghost * fromJSON(const json & jsonGhost);
+
 	Ghost(const BoardPosition & position, Utils::Orientation orientation);
 	
 	Utils::Orientation getOrientation() const;
+	void setOrientation(Utils::Orientation orientation);
 	
 	BoardPosition getPosition() const;
 	void setPosition(const BoardPosition & position);
@@ -21,6 +24,8 @@ public:
 	virtual Utils::Orientation getNextOrientation() const = 0;
 	
 	virtual GameRepresentation::Model getModel() const = 0;
+
+	virtual Ghost * clone() const = 0;
 
 private:
 

@@ -37,12 +37,28 @@ float Utils::degreesOfOrientation(Utils::Orientation orientation) {
 	}
 }
 
+Utils::Orientation Utils::randomOrientation(vector<Utils::Orientation> orientations) {
+	return orientations[rand() % orientations.size()];
+}
+
 Utils::Orientation Utils::randomOrientation() {
-	vector<Utils::Orientation> orientations = {
+	return randomOrientation({
 		Utils::Orientation::NORTH,
 		Utils::Orientation::SOUTH,
 		Utils::Orientation::EAST,
 		Utils::Orientation::WEST
-	};
-	return orientations[rand() % orientations.size()];
+	});
+}
+
+Utils::Orientation Utils::oppositeOrientation(Utils::Orientation orientation) {
+	switch (orientation) {
+		case Utils::Orientation::NORTH:
+			return Utils::Orientation::SOUTH;
+		case Utils::Orientation::SOUTH:
+			return Utils::Orientation::NORTH;
+		case Utils::Orientation::EAST:
+			return Utils::Orientation::WEST;
+		case Utils::Orientation::WEST:
+			return Utils::Orientation::EAST;
+	}
 }

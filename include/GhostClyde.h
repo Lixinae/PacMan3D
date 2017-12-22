@@ -13,6 +13,8 @@ public:
 
 	GameRepresentation::Model getModel() const;
 
+	Ghost * clone() const;
+
 };
 
 #endif

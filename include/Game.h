@@ -21,6 +21,8 @@ public:
     static Game fromJSON(const json &jsonGame);
 
     static Game fromJSONFile(const string &filePath);
+    
+    ~Game();
 
     PointOfView *getPointOfView();
 

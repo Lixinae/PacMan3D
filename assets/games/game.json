@@ -11183,6 +11183,40 @@
             }
         ]
     },
+    "ghosts": [
+        {
+            "orientation": "south",
+            "position": {
+                "x": 0,
+                "y": 6
+            },
+            "type": "blinky"
+        },
+        {
+            "orientation": "north",
+            "position": {
+                "x": 0,
+                "y": -6
+            },
+            "type": "pinky"
+        },
+        {
+            "orientation": "east",
+            "position": {
+                "x": 6,
+                "y": 0
+            },
+            "type": "inky"
+        },
+        {
+            "orientation": "west",
+            "position": {
+                "x": -6,
+                "y": 0
+            },
+            "type": "clyde"
+        }
+    ],
     "pacman": {
         "orientation": "west",
         "position": {

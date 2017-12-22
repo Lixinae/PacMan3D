@@ -1,13 +1,7 @@
 #include <Game.h>
 
 #include <fstream>
-
-//TODO RM
-#include <GhostBlinky.h>
-#include <GhostPinky.h>
-#include <GhostInky.h>
-#include <GhostClyde.h>
-//
+#include <Utils.h>
 
 using json = nlohmann::json;
 
@@ -16,12 +10,13 @@ using namespace std;
 Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & ghosts) :
         _board(board),
         _pacman(pacman),
-        _ghosts(ghosts),
+        _ghosts(),
         _pointOfView(),
         _representation()
 {
     _representation.add(_pacman.getModel(), _pacman.getPosition());
-    for (const Ghost * ghost : _ghosts) {
+    for (const Ghost * ghost : ghosts) {
+		_ghosts.push_back(ghost->clone());
 		_representation.add(ghost->getModel(), ghost->getPosition());
 	}
     for (const BoardPosition & position : _board.getPositions()) {
@@ -31,17 +26,20 @@ Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & g
     }
 }
 
+Game::~Game() {
+	Utils::cleanVector(_ghosts);
+}
+
 Game Game::fromJSON(const json &jsonGame) {
     Board board = Board::fromJSON(jsonGame["board"]);
     Pacman pacman = Pacman::fromJSON(jsonGame["pacman"]);
-    // TODO ghost from JSON
-    Ghost * g1 = new GhostBlinky(BoardPosition(0,6),Utils::Orientation::SOUTH);
-    Ghost * g2 = new GhostPinky(BoardPosition(0,-6),Utils::Orientation::NORTH);
-    Ghost * g3 = new GhostInky(BoardPosition(-6,0),Utils::Orientation::EAST);
-    Ghost * g4 = new GhostClyde(BoardPosition(6,0),Utils::Orientation::WEST);
-    vector<Ghost *> ghosts = {g1, g2, g3, g4};
-    // ///////      ///
-    return Game(board, pacman, ghosts);
+    vector<Ghost *> ghosts;
+    for (const auto &it : jsonGame["ghosts"]) {
+        ghosts.push_back(Ghost::fromJSON(it));
+	}
+    Game game(board, pacman, ghosts);
+    Utils::cleanVector(ghosts);
+    return game;
 }
 
 Game Game::fromJSONFile(const string &filePath) {
@@ -118,7 +116,7 @@ void Game::iteratePacman() {
 void Game::iterateGhost(Ghost * ghost) {
 	BoardPosition nextPosition = ghost->getPosition().translate(ghost->getOrientation());
     BoardSquare *nextSquare = _board[nextPosition];
-    BoardSquare::GhostContext context;
+    BoardSquare::GhostContext context(*ghost);
 	if (nextSquare != nullptr && nextSquare->isGhostWalkable(context)) {
 		cleanSquare(nextPosition);
 		cleanGhost(ghost);
@@ -126,6 +124,24 @@ void Game::iterateGhost(Ghost * ghost) {
         nextSquare->receiveGhost(context);
         setSquare(nextPosition);
 		setGhost(ghost);
+	} else {
+		// get all the direction and choose one of the possible
+		vector<Utils::Orientation> walkableOrientations;
+		vector<Utils::Orientation> orientations = {
+			Utils::Orientation::NORTH,
+			Utils::Orientation::SOUTH,
+			Utils::Orientation::EAST,
+			Utils::Orientation::WEST,
+			//One more chance to go to the opposite of the unwalkable square
+			Utils::oppositeOrientation(ghost->getOrientation()) 
+		};
+		for (Utils::Orientation orientation : orientations) {
+			BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
+			if (square != nullptr && square->isGhostWalkable(context)) {
+				walkableOrientations.push_back(orientation);
+			}
+		}
+		ghost->setOrientation(Utils::randomOrientation(walkableOrientations));
 	}
 	ghost->iterate();
 }
