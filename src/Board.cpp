@@ -21,7 +21,7 @@ Board::~Board() {
 Board Board::fromJSON(const json & jsonBoard) {
 	map<BoardPosition, BoardSquare *> squares;
 	json casesArray = jsonBoard["cases"];
-    for (auto &it : casesArray) {
+    for (const auto &it : casesArray) {
         BoardPosition position = BoardPosition::fromJSON(it["position"]);
         BoardSquare *square = BoardSquare::fromJSON(it["case"]);
 		squares[position] = square;

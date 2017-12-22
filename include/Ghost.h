@@ -9,6 +9,8 @@ class Ghost {
 
 public:
 
+	static Ghost * fromJSON(const json & jsonGhost);
+
 	Ghost(const BoardPosition & position, Utils::Orientation orientation);
 	
 	Utils::Orientation getOrientation() const;

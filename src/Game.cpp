@@ -2,13 +2,6 @@
 
 #include <fstream>
 
-//TODO RM
-#include <GhostBlinky.h>
-#include <GhostPinky.h>
-#include <GhostInky.h>
-#include <GhostClyde.h>
-//
-
 using json = nlohmann::json;
 
 using namespace std;
@@ -34,14 +27,15 @@ Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & g
 Game Game::fromJSON(const json &jsonGame) {
     Board board = Board::fromJSON(jsonGame["board"]);
     Pacman pacman = Pacman::fromJSON(jsonGame["pacman"]);
-    // TODO ghost from JSON
-    Ghost * g1 = new GhostBlinky(BoardPosition(0,6),Utils::Orientation::SOUTH);
-    Ghost * g2 = new GhostPinky(BoardPosition(0,-6),Utils::Orientation::NORTH);
-    Ghost * g3 = new GhostInky(BoardPosition(-6,0),Utils::Orientation::EAST);
-    Ghost * g4 = new GhostClyde(BoardPosition(6,0),Utils::Orientation::WEST);
-    vector<Ghost *> ghosts = {g1, g2, g3, g4};
-    // ///////      ///
-    return Game(board, pacman, ghosts);
+    vector<Ghost *> ghosts;
+    for (const auto &it : jsonGame["ghosts"]) {
+        ghosts.push_back(Ghost::fromJSON(it));
+	}
+    Game game(board, pacman, ghosts);
+    for (Ghost * ghost : ghosts) {
+		delete ghost;
+	}
+    return game;
 }
 
 Game Game::fromJSONFile(const string &filePath) {
