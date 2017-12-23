@@ -236,6 +236,30 @@
            "z": 0.0025
          }
       }
+    },
+    {
+      "name": "Super_pac_gomme",
+      "model": {
+         "type":"normal",
+         "args": {
+           "objPath": "tennisball.obj"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.005,
+           "y": 0.005,
+           "z": 0.005
+         }
+      }
     }
   ]
 }

@@ -14,5 +14,5 @@ void PacGomme::apply(Pacman & /*pacman*/) {
 }
 
 Bonus *PacGomme::clone() const {
-    return new PacGomme;
+    return new PacGomme(*this);
 }

@@ -22,8 +22,8 @@ public:
 		WALL,
 		FLOOR,
 		TUNNEL,
-		PAC_GOMME
-		//TODO SUPER_PAC_GOMME, FRUIT_CHERRY, ...	
+		PAC_GOMME,
+		SUPER_PAC_GOMME	
 		
 	};
 	
