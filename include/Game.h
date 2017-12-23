@@ -5,6 +5,7 @@
 #include <Pacman.h>
 #include <Ghost.h>
 #include <PointOfView.h>
+#include <GameInformations.h>
 #include <GameRepresentation.h>
 #include <json/json.hpp>
 #include <string>
@@ -40,6 +41,7 @@ private:
     
     PointOfView _pointOfView;
 
+	GameInformations _informations;
     GameRepresentation _representation;
 
     Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & ghosts);

@@ -12,6 +12,7 @@ Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & g
         _pacman(pacman),
         _ghosts(),
         _pointOfView(),
+        _informations(),
         _representation()
 {
 	_representation.add(pacman.getModel(), pacman.getPosition());
@@ -53,7 +54,7 @@ Game Game::fromJSONFile(const string &filePath) {
 void Game::orientPacman(Utils::Orientation orientation) {
     BoardPosition position = _pacman.getPosition().translate(orientation);
     BoardSquare *square = _board[position];
-    BoardSquare::PacmanContext context(_pacman, _ghosts);
+    BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
     if (square != nullptr && square->isPacmanWalkable(context)) {
         _pacman.setOrientation(orientation);
     }
@@ -106,7 +107,7 @@ void Game::cleanGhost(const Ghost * ghost) {
 void Game::iteratePacman() {
 	BoardPosition nextPosition = _pacman.getPosition().translate(_pacman.getOrientation());
     BoardSquare *nextSquare = _board[nextPosition];
-    BoardSquare::PacmanContext context(_pacman, _ghosts);
+    BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
     if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
         // Clean models
         cleanSquare(nextPosition);
