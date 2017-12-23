@@ -5,6 +5,11 @@
 
 using json = nlohmann::json;
 
+Bonus::Context::Context()
+{
+	
+}
+
 Bonus * Bonus::fromJSON(const json & jsonBonus) {
 	string type = jsonBonus["type"];
 	if (type == "pacgomme") {
