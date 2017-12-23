@@ -4,8 +4,8 @@ Utils::Orientation GhostPinky::getNextOrientation() const {
 	return Utils::randomOrientation();
 }
 
-GameRepresentation::Model GhostPinky::getModel() const {
-	return GameRepresentation::Model(GameRepresentation::ModelType::GHOST_PINKY, Ghost::getOrientation());
+GameRepresentation::ModelType GhostPinky::getModelType() const {
+	return GameRepresentation::ModelType::GHOST_PINKY;
 }
 
 Ghost * GhostPinky::clone() const {

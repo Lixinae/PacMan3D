@@ -26,6 +26,7 @@ Ghost * Ghost::fromJSON(const json & jsonGhost) {
 Ghost::Ghost(const BoardPosition &position, Utils::Orientation orientation): 
 	_position(position),
 	_orientation(orientation),
+	_weakCounter(),
 	_count()
 {
 
@@ -48,9 +49,31 @@ void Ghost::setPosition(const BoardPosition & position) {
 	_position = position;
 }
 
+bool Ghost::isWeak() const {
+	return (_weakCounter > 0);
+}
+
+void Ghost::setWeak(int time) {
+	_weakCounter = time;
+}
+
 void Ghost::iterate() {
+	if (_weakCounter > 0) {
+		_weakCounter--;
+	}
+	
 	_count = (_count + 1)%3;
 	if (_count == 0) {
 		_orientation = getNextOrientation();
 	}
+}
+
+GameRepresentation::Model Ghost::getModel() const {
+	GameRepresentation::ModelType modelType;
+	if (isWeak()) {
+		modelType = GameRepresentation::ModelType::GHOST_WEAK;
+	} else {
+		modelType = getModelType();
+	}
+	return GameRepresentation::Model(modelType, getOrientation());
 }
