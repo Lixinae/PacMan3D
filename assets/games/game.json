@@ -11180,6 +11180,62 @@
                     "x": 2,
                     "y": 2
                 }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "super_pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": -10,
+                    "y": -10
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "super_pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 10,
+                    "y": -10
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "super_pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": -10,
+                    "y": 10
+                }
+            },
+            {
+                "case": {
+                    "args": {
+                        "bonus": {
+                            "type": "super_pacgomme"
+                        }
+                    },
+                    "type": "floor"
+                },
+                "position": {
+                    "x": 10,
+                    "y": 10
+                }
             }
         ]
     },
