@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 2.8)
 project(Pacman3D)
 
 find_package(OpenGL REQUIRED)
-
+find_package(SDL REQUIRED)
+find_package(GLEW REQUIRED)
 
 if (WIN32)
     #Set the windows variables
@@ -36,7 +37,6 @@ include_directories(
         ${SDL_INCLUDE_DIR}
         ${OPENGL_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIR}
-        #${GLUT_INCLUDE_DIRS}
         include/
         /usr/include/
         glimac/include
