@@ -1,8 +1,8 @@
 #ifndef __BONUS_H__
 #define __BONUS_H__
 
-#include <Pacman.h>
 #include <Ghost.h>
+#include <GameInformations.h>
 #include <GameRepresentation.h>
 #include <json/json.hpp>
 
@@ -15,8 +15,9 @@ public:
 	struct Context {
 		
 		vector<Ghost *> & ghosts;
+		GameInformations & informations;
 		
-		Context(vector<Ghost *> & ghosts);
+		Context(vector<Ghost *> & ghosts, GameInformations & informations);
 		
 	};
 

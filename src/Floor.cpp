@@ -39,7 +39,7 @@ bool Floor::isPacmanWalkable(const BoardSquare::PacmanContext &) const {
 	
 void Floor::receivePacman(BoardSquare::PacmanContext & context) {
 	if (_bonus != nullptr) {
-		Bonus::Context bonusContext(context.ghosts);
+		Bonus::Context bonusContext(context.ghosts, context.informations);
 		_bonus->apply(bonusContext);
 		delete _bonus;
 		_bonus = nullptr;
