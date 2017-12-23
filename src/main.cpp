@@ -116,19 +116,19 @@ void init2D(int windowWidth, int windowHeight, const Program &m_Program,const st
 
 /**
  *
- * @param shader Shader a utiliser
+ * @param m_Program Shader a utiliser
  * @param text Texte a afficher
  * @param x Coordonnée X en bas a gauche du texte
  * @param y Coordonnée Y en bas a gauche du texte
  * @param scale
  * @param color Couleur du texte
  */
-void renderText(Program &shader, std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color) {
+void renderText(const Program &m_Program, const string& text, GLfloat x, GLfloat y, GLfloat scale, const vec3& color) {
     // Activate corresponding render state
-    shader.use();
+    m_Program.use();
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glUniform3f(glGetUniformLocation(shader.getGLId(), "textColor"), color.x, color.y, color.z);
+    glUniform3f(glGetUniformLocation(m_Program.getGLId(), "textColor"), color.x, color.y, color.z);
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(VAO);
 
