@@ -7,8 +7,9 @@
 
 using json = nlohmann::json;
 
-BoardSquare::PacmanContext::PacmanContext(Pacman & pacman) : 
-	pacman(pacman)
+BoardSquare::PacmanContext::PacmanContext(Pacman & pacman, vector<Ghost *> & ghosts) : 
+	pacman(pacman),
+	ghosts(ghosts)
 {
 	
 }

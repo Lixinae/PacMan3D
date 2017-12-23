@@ -19,11 +19,16 @@ public:
 	BoardPosition getPosition() const;
 	void setPosition(const BoardPosition & position);
 
+	bool isWeak() const;
+	void setWeak(int time);
+
 	void iterate();
+	
+	GameRepresentation::Model getModel() const;
 
 	virtual Utils::Orientation getNextOrientation() const = 0;
 	
-	virtual GameRepresentation::Model getModel() const = 0;
+	virtual GameRepresentation::ModelType getModelType() const = 0;
 
 	virtual Ghost * clone() const = 0;
 
@@ -31,6 +36,7 @@ private:
 
 	BoardPosition _position;
 	Utils::Orientation _orientation;
+	int _weakCounter;
 	int _count;
 
 };

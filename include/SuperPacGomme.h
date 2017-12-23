@@ -1,15 +1,15 @@
-#ifndef __PAC_GOMME_H__
-#define __PAC_GOMME_H__
+#ifndef __SUPER_PAC_GOMME_H__
+#define __SUPER_PAC_GOMME_H__
 
 #include <Pacman.h>
 #include <Bonus.h>
 #include <GameRepresentation.h>
 
-class PacGomme : public Bonus {
+class SuperPacGomme : public Bonus {
 
 public:
 
-    PacGomme();
+    SuperPacGomme();
 
     GameRepresentation::Model getModel() const;
 

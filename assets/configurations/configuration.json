@@ -139,6 +139,31 @@
       }
     },
     {
+      "name": "Ghost_weak",
+      "model": {
+         "type":"texture",
+         "args": {
+           "objPath": "boo.obj",
+           "texPath": "black_boo.png"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.025,
+           "y": 0.025,
+           "z": 0.025
+         }
+      }
+    },
+    {
       "name": "Wall",
       "model": {
          "type":"texture",
@@ -234,6 +259,30 @@
            "x": 0.0025,
            "y": 0.0025,
            "z": 0.0025
+         }
+      }
+    },
+    {
+      "name": "Super_pac_gomme",
+      "model": {
+         "type":"normal",
+         "args": {
+           "objPath": "tennisball.obj"
+         },
+         "translate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.005,
+           "y": 0.005,
+           "z": 0.005
          }
       }
     }

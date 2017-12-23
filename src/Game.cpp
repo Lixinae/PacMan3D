@@ -14,8 +14,8 @@ Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & g
         _pointOfView(),
         _representation()
 {
-    _representation.add(_pacman.getModel(), _pacman.getPosition());
-    for (const Ghost * ghost : ghosts) {
+	_representation.add(pacman.getModel(), pacman.getPosition());
+	for (const Ghost * ghost : ghosts) {
 		_ghosts.push_back(ghost->clone());
 		_representation.add(ghost->getModel(), ghost->getPosition());
 	}
@@ -53,7 +53,7 @@ Game Game::fromJSONFile(const string &filePath) {
 void Game::orientPacman(Utils::Orientation orientation) {
     BoardPosition position = _pacman.getPosition().translate(orientation);
     BoardSquare *square = _board[position];
-    BoardSquare::PacmanContext context(_pacman);
+    BoardSquare::PacmanContext context(_pacman, _ghosts);
     if (square != nullptr && square->isPacmanWalkable(context)) {
         _pacman.setOrientation(orientation);
     }
@@ -92,13 +92,19 @@ void Game::cleanPacman() {
 }
 
 void Game::cleanGhost(const Ghost * ghost) {
-	_representation.remove(ghost->getModel(), ghost->getPosition());
+	// TODO should change !!!!
+	_representation.remove(GameRepresentation::ModelType::GHOST_BLINKY, ghost->getPosition());
+	_representation.remove(GameRepresentation::ModelType::GHOST_PINKY, ghost->getPosition());
+	_representation.remove(GameRepresentation::ModelType::GHOST_INKY, ghost->getPosition());
+	_representation.remove(GameRepresentation::ModelType::GHOST_CLYDE, ghost->getPosition());
+	_representation.remove(GameRepresentation::ModelType::GHOST_WEAK, ghost->getPosition());
+	//_representation.remove(ghost->getModel(), ghost->getPosition());
 }
 
 void Game::iteratePacman() {
 	BoardPosition nextPosition = _pacman.getPosition().translate(_pacman.getOrientation());
     BoardSquare *nextSquare = _board[nextPosition];
-    BoardSquare::PacmanContext context(_pacman);
+    BoardSquare::PacmanContext context(_pacman, _ghosts);
     if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
         // Clean models
         cleanSquare(nextPosition);
@@ -122,6 +128,7 @@ void Game::iterateGhost(Ghost * ghost) {
 		cleanGhost(ghost);
         ghost->setPosition(nextPosition);
         nextSquare->receiveGhost(context);
+        cleanGhost(ghost);
         setSquare(nextPosition);
 		setGhost(ghost);
 	} else {
