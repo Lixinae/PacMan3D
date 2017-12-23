@@ -2,6 +2,7 @@
 #define __BONUS_H__
 
 #include <Pacman.h>
+#include <Ghost.h>
 #include <GameRepresentation.h>
 #include <json/json.hpp>
 
@@ -13,7 +14,9 @@ public:
 
 	struct Context {
 		
-		Context();
+		vector<Ghost *> & ghosts;
+		
+		Context(vector<Ghost *> & ghosts);
 		
 	};
 

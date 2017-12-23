@@ -16,8 +16,9 @@ public:
 	struct PacmanContext {
 		
 		Pacman & pacman;
+		vector<Ghost *> & ghosts;
 		
-		PacmanContext(Pacman & pacman);
+		PacmanContext(Pacman & pacman, vector<Ghost *> & ghosts);
 		
 	};
 	
