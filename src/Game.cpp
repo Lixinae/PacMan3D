@@ -64,6 +64,8 @@ PointOfView *Game::getPointOfView() {
 }
 
 const GameRepresentation &Game::getRepresentation() const {
+	// TODO may change :
+	// time to compute all the gamerepresentation is unsignificant compare to the time to make all the render
     return _representation;
 }
 
@@ -153,9 +155,17 @@ void Game::iterateGhost(Ghost * ghost) {
 	ghost->iterate();
 }
 
-void Game::iterate() {
+bool Game::iterate() {
     iteratePacman();
     for (Ghost * ghost : _ghosts) {
 		iterateGhost(ghost);
+		if (_pacman.getPosition() == ghost->getPosition()) {
+			if (ghost->isWeak()) {
+				// TODO Implement eat
+			} else {
+				return false;
+			}
+		}
 	}
+	return true;
 }

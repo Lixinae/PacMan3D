@@ -30,7 +30,7 @@ public:
 
     const GameRepresentation &getRepresentation() const;
 
-    void iterate();
+    bool iterate();
 
 private:
 

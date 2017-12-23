@@ -68,7 +68,9 @@ int realMain() {
 
         renderer->render(game.getRepresentation());
 
-        game.iterate();
+        if(!game.iterate()) {
+			done = true;
+		}
 
         windowManager.swapBuffers();
 
