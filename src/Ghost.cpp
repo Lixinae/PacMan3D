@@ -54,3 +54,7 @@ void Ghost::iterate() {
 		_orientation = getNextOrientation();
 	}
 }
+
+GameRepresentation::Model Ghost::getModel() const {
+	return GameRepresentation::Model(getModelType(), getOrientation());
+}

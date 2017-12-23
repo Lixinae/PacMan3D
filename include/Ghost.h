@@ -20,10 +20,12 @@ public:
 	void setPosition(const BoardPosition & position);
 
 	void iterate();
+	
+	GameRepresentation::Model getModel() const;
 
 	virtual Utils::Orientation getNextOrientation() const = 0;
 	
-	virtual GameRepresentation::Model getModel() const = 0;
+	virtual GameRepresentation::ModelType getModelType() const = 0;
 
 	virtual Ghost * clone() const = 0;
 
