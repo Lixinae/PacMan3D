@@ -19,6 +19,7 @@ public:
 		GHOST_PINKY,
 		GHOST_INKY,
 		GHOST_CLYDE,
+		GHOST_WEAK,
 		WALL,
 		FLOOR,
 		TUNNEL,

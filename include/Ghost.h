@@ -19,6 +19,9 @@ public:
 	BoardPosition getPosition() const;
 	void setPosition(const BoardPosition & position);
 
+	bool isWeak() const;
+	void setWeak(int time);
+
 	void iterate();
 	
 	GameRepresentation::Model getModel() const;
@@ -33,6 +36,7 @@ private:
 
 	BoardPosition _position;
 	Utils::Orientation _orientation;
+	int _weakCounter;
 	int _count;
 
 };

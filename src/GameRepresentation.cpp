@@ -12,6 +12,7 @@ vector<GameRepresentation::ModelType> GameRepresentation::buildVector() {
 	models.push_back(GameRepresentation::ModelType::GHOST_PINKY);
 	models.push_back(GameRepresentation::ModelType::GHOST_INKY);
 	models.push_back(GameRepresentation::ModelType::GHOST_CLYDE);
+	models.push_back(GameRepresentation::ModelType::GHOST_WEAK);
 	models.push_back(GameRepresentation::ModelType::WALL);
 	models.push_back(GameRepresentation::ModelType::FLOOR);
 	models.push_back(GameRepresentation::ModelType::TUNNEL);
@@ -35,6 +36,9 @@ GameRepresentation::ModelType GameRepresentation::modelFromString(const string &
     }
     if (strModel == "Ghost_clyde") {
 		 return GameRepresentation::ModelType::GHOST_CLYDE;
+    }
+    if (strModel == "Ghost_weak") {
+		 return GameRepresentation::ModelType::GHOST_WEAK;
     }
     if (strModel == "Wall") {
 		return GameRepresentation::ModelType::WALL;
