@@ -220,9 +220,13 @@ int realMain() {
 
         renderer->render(game.getRepresentation());
 
-        game.iterate();
+        if(!game.iterate()) {
+			    done = true;
+    		}
+
         string text = "Mon texte avec I = " + to_string(bidule);
         renderText(m_Program,text,100.f,100.f,1.f,glm::vec3(0.3, 0.7f, 0.9f));
+
         windowManager.swapBuffers();
         bidule++;
         //TODO sleep framerate

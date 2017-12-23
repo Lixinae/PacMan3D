@@ -3,6 +3,7 @@
 
 #include <Pacman.h>
 #include <Ghost.h>
+#include <GameInformations.h>
 #include <GameRepresentation.h>
 #include <vector>
 #include <json/json.hpp>
@@ -17,8 +18,9 @@ public:
 		
 		Pacman & pacman;
 		vector<Ghost *> & ghosts;
+		GameInformations & informations;
 		
-		PacmanContext(Pacman & pacman, vector<Ghost *> & ghosts);
+		PacmanContext(Pacman & pacman, vector<Ghost *> & ghosts, GameInformations & informations);
 		
 	};
 	

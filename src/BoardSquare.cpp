@@ -7,9 +7,10 @@
 
 using json = nlohmann::json;
 
-BoardSquare::PacmanContext::PacmanContext(Pacman & pacman, vector<Ghost *> & ghosts) : 
+BoardSquare::PacmanContext::PacmanContext(Pacman & pacman, vector<Ghost *> & ghosts, GameInformations & informations) : 
 	pacman(pacman),
-	ghosts(ghosts)
+	ghosts(ghosts),
+	informations(informations)
 {
 	
 }

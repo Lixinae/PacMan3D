@@ -5,8 +5,9 @@
 
 using json = nlohmann::json;
 
-Bonus::Context::Context(vector<Ghost *> & ghosts):
-	ghosts(ghosts)
+Bonus::Context::Context(vector<Ghost *> & ghosts, GameInformations & informations):
+	ghosts(ghosts),
+	informations(informations)
 {
 	
 }
