@@ -1,5 +1,5 @@
-#ifndef __COLOR_TEXT_2D_H__
-#define __COLOR_TEXT_2D_H__
+#ifndef __COLOR_TEXT_2D_RENDERER_H__
+#define __COLOR_TEXT_2D_RENDERER_H__
 
 #include <GL/glew.h>
 #include <glimac/glm.hpp>
@@ -7,14 +7,11 @@
 #include <map>
 #include <string>
 
-
-
-
 using namespace glimac;
 using namespace std;
 using namespace glm;
 
-class ColorText2D {
+class ColorText2DRenderer {
 
 public:
 
@@ -25,7 +22,9 @@ public:
 		GLuint Advance;
 	};
 	
-	ColorText2D(int windowWidth, int windowHeight, const string & fontPath);
+	ColorText2DRenderer(int windowWidth, int windowHeight, const string & fontPath);
+	
+	// TODO DESTRUCT
 	
 	void render(const string & text, GLfloat x, GLfloat y, GLfloat scale, const vec3 & color);
 	

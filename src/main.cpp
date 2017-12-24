@@ -14,7 +14,7 @@
 #include <EventHandler.h>
 
 
-#include <ColorText2D.h>
+#include <ColorText2DRenderer.h>
 
 
 using namespace glimac;
@@ -45,11 +45,7 @@ int realMain() {
 	EventHandler eventHandler(configuration.getControlMap());
 
 	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap());
-
-    ////// INIT 2D //////
-    string fontLoc = "./assets/fonts/arial.ttf";
-    ColorText2D colorText(windowWidth,windowHeight,fontLoc);
-    ///// INIT 2D //////
+    ColorText2DRenderer textRenderer(windowWidth, windowHeight, "assets/fonts/arial.ttf");
 
     bool done = false;
     int bidule=0;
@@ -66,7 +62,7 @@ int realMain() {
     		}
 
         string text = "Mon texte avec I = " + to_string(bidule);
-        colorText.render(text,100.f,100.f,1.f,glm::vec3(0.3, 0.7f, 0.9f));
+        textRenderer.render(text, 100.f, 100.f, 1.f, vec3(0.3, 0.7f, 0.9f));
 
         windowManager.swapBuffers();
         bidule++;

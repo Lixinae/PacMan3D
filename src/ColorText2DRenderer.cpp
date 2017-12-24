@@ -1,18 +1,18 @@
-#include <ColorText2D.h>
+#include <ColorText2DRenderer.h>
 
 #include <iostream>
 #include <ft2build.h>
 
 #include FT_FREETYPE_H
 
-void ColorText2D::initProgram() {
+void ColorText2DRenderer::initProgram() {
 	// TODO static const for fs vs
-	_program =  loadProgram("shaders/text.vs.glsl", "shaders/text.fs.glsl");
-	_uProjection = glGetUniformLocation(_program.getGLId(), "projection");
-	_uTextColor = glGetUniformLocation(_program.getGLId(), "textColor");
+	_program =  loadProgram("shaders/text2D.vs.glsl", "shaders/text2D.fs.glsl");
+	_uProjection = glGetUniformLocation(_program.getGLId(), "uProjection");
+	_uTextColor = glGetUniformLocation(_program.getGLId(), "uTextColor");
 }
 	
-void ColorText2D::initCharacters(int windowWidth, int windowHeight, const string & fontPath) {
+void ColorText2DRenderer::initCharacters(int windowWidth, int windowHeight, const string & fontPath) {
 	mat4 projection = ortho(0.0f, static_cast<GLfloat>(windowWidth), 0.0f, static_cast<GLfloat>(windowHeight));
 
 		
@@ -79,7 +79,7 @@ void ColorText2D::initCharacters(int windowWidth, int windowHeight, const string
 	FT_Done_FreeType(ft);
 }
 
-void ColorText2D::initQuads() {
+void ColorText2DRenderer::initQuads() {
 	glGenVertexArrays(1, &_vao);
 	glGenBuffers(1, &_vbo);
 	glBindVertexArray(_vao);
@@ -91,13 +91,13 @@ void ColorText2D::initQuads() {
 	glBindVertexArray(0);
 }
 
-ColorText2D::ColorText2D(int windowWidth, int windowHeight, const string & fontPath) {
+ColorText2DRenderer::ColorText2DRenderer(int windowWidth, int windowHeight, const string & fontPath) {
 	initProgram();
 	initCharacters(windowWidth, windowHeight, fontPath);
 	initQuads();
 }
 
-void ColorText2D::render(const string& text, GLfloat x, GLfloat y, GLfloat scale, const vec3 & color) {
+void ColorText2DRenderer::render(const string & text, GLfloat x, GLfloat y, GLfloat scale, const vec3 & color) {
 	// Activate corresponding render state
 	_program.use();
 	glEnable(GL_BLEND);
@@ -107,7 +107,7 @@ void ColorText2D::render(const string& text, GLfloat x, GLfloat y, GLfloat scale
 	glBindVertexArray(_vao);
 
 	// Iterate through all characters
-	std::string::const_iterator c;
+	string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++) {
 		Character ch = _characters[*c];
 
