@@ -30,7 +30,7 @@ int realMain() {
 
     GLenum glewInitError = glewInit();
     if (GLEW_OK != glewInitError) {
-        std::cerr << glewGetErrorString(glewInitError) << std::endl;
+        cerr << glewGetErrorString(glewInitError) << endl;
         return EXIT_FAILURE;
     }
 
@@ -47,14 +47,8 @@ int realMain() {
 	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap());
 
     ////// INIT 2D //////
-    ColorText2D colorText;
-    string vs = "text.vs.glsl";
-    string fs = "text.fs.glsl";
-    Program m_Program = loadProgram(
-            "./shaders/" + vs,
-            "./shaders/" + fs);
     string fontLoc = "./assets/fonts/arial.ttf";
-    colorText.init2D(windowWidth,windowHeight,m_Program,fontLoc);
+    ColorText2D colorText(windowWidth,windowHeight,fontLoc);
     ///// INIT 2D //////
 
     bool done = false;
@@ -72,7 +66,7 @@ int realMain() {
     		}
 
         string text = "Mon texte avec I = " + to_string(bidule);
-        colorText.renderText(m_Program,text,100.f,100.f,1.f,glm::vec3(0.3, 0.7f, 0.9f));
+        colorText.render(text,100.f,100.f,1.f,glm::vec3(0.3, 0.7f, 0.9f));
 
         windowManager.swapBuffers();
         bidule++;
