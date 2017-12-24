@@ -25,16 +25,6 @@ void Renderer3D::render(const GameRepresentation &repr) const {
         for (auto & information : informations) {
 			BoardPosition position = information.position;
 			Utils::Orientation orientation = information.orientation;
-            /*mat4 MVMatrix = 
-				translate(
-                    rotate(
-						GlobalMVMatrix,
-						radians(0.f),
-						vec3(0,1,0)
-					),
-					vec3(position.getX() * SQUARE_SIZE, 0, -position.getY() * SQUARE_SIZE)
-				);
-				*/
             mat4 MVMatrix = 
 				rotate(
                     translate(
@@ -53,6 +43,7 @@ void Renderer3D::render(const GameRepresentation &repr) const {
 
 Renderer3D::~Renderer3D() {
     for (auto &model : GameRepresentation::MODELS) {
-        free (_models[model]);
+        // TODO delete model (not free): 
+        //free (_models[model]);
     }
 }
