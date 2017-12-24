@@ -46,6 +46,39 @@ void Renderer3D::renderTexts() const {
 	bidule++;
 	string text = "Mon texte avec I = " + to_string(bidule);
 	_textRenderer.render(text, 100.f, 100.f, 1.f, vec3(0.3, 0.7f, 0.9f));
+
+    int x,y,scale;
+    vec3 color ; // -> Peut faire val.f/255.f pour avoir la valeur sur 1
+    /*
+    // TODO -> Render Lives left
+    int livesLeft = ; // todo -> get the value
+    text = "Lives : "+ to_string(livesLeft);
+    x = ; // todo -> Set X & y & scale & color
+    y = ;
+    scale = ;
+    color = ;
+    _textRenderer.render(text, x, y, scale, color);
+
+    // TODO -> Render Current Score
+    int currentScore = ;
+    text = "Score : "+ to_string(currentScore);
+    x = ; // todo -> Set X & y & scale & color
+    y = ;
+    scale = ;
+    color = ;
+    _textRenderer.render(text, x, y, scale, color);
+    // TODO -> Render multiplier
+
+    int livesLeft = ;
+    text = "Lives : "+ to_string(livesLeft);
+    x = ; // todo -> Set X & y & scale & color
+    y = ;
+    scale = ;
+    color = ;
+    _textRenderer.render(text, x, y, scale, color);
+    */
+
+
 }
 
 void Renderer3D::render(const GameRepresentation &repr) const {
