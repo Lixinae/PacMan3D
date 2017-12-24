@@ -26,7 +26,7 @@ public:
 	
 	// TODO DESTRUCT
 	
-	void render(const string & text, GLfloat x, GLfloat y, GLfloat scale, const vec3 & color);
+	void render(const string & text, GLfloat x, GLfloat y, GLfloat scale, const vec3 & color) const;
 	
 private:
 

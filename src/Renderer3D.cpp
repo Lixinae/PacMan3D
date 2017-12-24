@@ -1,7 +1,6 @@
 #include <Renderer3D.h>
-#include <NormalModel3D.h>
-#include <TexModel3D.h>
 
+using namespace std;
 using namespace glimac;
 using namespace glm;
 
@@ -10,12 +9,13 @@ const float Renderer3D::SQUARE_SIZE = 1;
 Renderer3D::Renderer3D(int windowWidth, int windowHeight, PointOfView *pointOfView, const map<GameRepresentation::ModelType, AbstractModel3D *>& map_model3D) :
         _pointOfView(pointOfView),
         _ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
-        _models(map_model3D) 
+        _models(map_model3D),
+		_textRenderer(windowWidth, windowHeight, "assets/fonts/arial.ttf") //TODO static or from config
 {
 
 }
 
-void Renderer3D::render(const GameRepresentation &repr) const {
+void Renderer3D::renderModels(const GameRepresentation &repr) const {
     mat4 GlobalMVMatrix = _pointOfView->getCurrentCamera().getViewMatrix();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (auto & modelType : GameRepresentation::MODELS) {
@@ -25,7 +25,7 @@ void Renderer3D::render(const GameRepresentation &repr) const {
         for (auto & information : informations) {
 			BoardPosition position = information.position;
 			Utils::Orientation orientation = information.orientation;
-            mat4 MVMatrix = 
+            mat4 MVMatrix =
 				rotate(
                     translate(
 						GlobalMVMatrix,
@@ -39,6 +39,18 @@ void Renderer3D::render(const GameRepresentation &repr) const {
         }
         model3d->unbind();
     }
+}
+
+void Renderer3D::renderTexts() const {
+	static int bidule = 0;
+	bidule++;
+	string text = "Mon texte avec I = " + to_string(bidule);
+	_textRenderer.render(text, 100.f, 100.f, 1.f, vec3(0.3, 0.7f, 0.9f));
+}
+
+void Renderer3D::render(const GameRepresentation &repr) const {
+	renderModels(repr);
+	renderTexts();
 }
 
 Renderer3D::~Renderer3D() {

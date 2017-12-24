@@ -45,8 +45,7 @@ int realMain() {
 	EventHandler eventHandler(configuration.getControlMap());
 
 	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap());
-    ColorText2DRenderer textRenderer(windowWidth, windowHeight, "assets/fonts/arial.ttf");
-
+   
     bool done = false;
     int bidule=0;
     while (!done) {
@@ -57,15 +56,12 @@ int realMain() {
 
         renderer->render(game.getRepresentation());
 
-        if(!game.iterate()) {
-			    done = true;
-    		}
-
-        string text = "Mon texte avec I = " + to_string(bidule);
-        textRenderer.render(text, 100.f, 100.f, 1.f, vec3(0.3, 0.7f, 0.9f));
+		if(!game.iterate()) {
+			done = true;
+		}
 
         windowManager.swapBuffers();
-        bidule++;
+        
         //TODO sleep framerate
         this_thread::sleep_for(chrono::milliseconds(50));
 

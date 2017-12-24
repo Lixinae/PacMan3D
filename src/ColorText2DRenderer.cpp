@@ -97,7 +97,7 @@ ColorText2DRenderer::ColorText2DRenderer(int windowWidth, int windowHeight, cons
 	initQuads();
 }
 
-void ColorText2DRenderer::render(const string & text, GLfloat x, GLfloat y, GLfloat scale, const vec3 & color) {
+void ColorText2DRenderer::render(const string & text, GLfloat x, GLfloat y, GLfloat scale, const vec3 & color) const {
 	// Activate corresponding render state
 	_program.use();
 	glEnable(GL_BLEND);
@@ -109,7 +109,7 @@ void ColorText2DRenderer::render(const string & text, GLfloat x, GLfloat y, GLfl
 	// Iterate through all characters
 	string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++) {
-		Character ch = _characters[*c];
+		Character ch = _characters.at(*c);
 
 		GLfloat xpos = x + ch.Bearing.x * scale;
 		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
