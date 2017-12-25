@@ -1,19 +1,40 @@
 #include <PointOfView.h>
 
+using namespace glm;
 
-PointOfView::PointOfView() : _trackballCamera(25,45,15), _trackballCamera2(25,45,-15), _current(0) {
+PointOfView::PointOfView(const BoardPosition & position, Utils::Orientation orientation) :
+	_trackballCamera(25,45,15),
+	_freeflyCamera(vec3(0,1,0), Utils::degreesOfOrientation(orientation), 0), 
+	_current(PointOfView::CameraType::TRACKBALL) 
+{
 
 
 }
 
-Camera & PointOfView::getCurrentCamera() {
-	if (_current == 0) {
+PointOfView::CameraType PointOfView::getCurrentCameraType() const {
+	return _current;
+}
+
+TrackballCamera & PointOfView::getTrackballCamera() {
+	return _trackballCamera;
+}
+
+FreeflyCamera & PointOfView::getFreeflyCamera() {
+	return _freeflyCamera;
+}
+
+const Camera & PointOfView::getCurrentCamera() const {
+	if (_current == PointOfView::CameraType::TRACKBALL) {
 		return _trackballCamera;
 	} else {
-		return _trackballCamera2;
+		return _freeflyCamera;
 	}
 }
 
 void PointOfView::setNextCamera() {
-	_current = (_current + 1)%2;
+	if (_current == PointOfView::CameraType::TRACKBALL) {
+		_current = PointOfView::CameraType::FREEFLY;
+	} else {
+		_current = PointOfView::CameraType::TRACKBALL;
+	}
 }
