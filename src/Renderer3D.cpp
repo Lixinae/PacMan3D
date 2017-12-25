@@ -41,7 +41,6 @@ void Renderer3D::renderModels(const GameRepresentation &repr) const {
 }
 
 void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
-
     // Toutes les valeurs sont ajustés pour une grille orthogonal de 800*600
     int x = 10, y,ecart = 28;
     float scale = 0.5;
@@ -65,8 +64,6 @@ void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
     text = "Multiplier : " + to_string(multiplier);
     y -= ecart;
     _textRenderer.render(text, x, y, scale, color);
-
-
 }
 
 void Renderer3D::render(const GameRepresentation &repr, const GameInformations &gameInfo) const {
