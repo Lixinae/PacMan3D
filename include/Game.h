@@ -41,6 +41,9 @@ private:
     Pacman _pacman;
     vector<Ghost *> _ghosts;
     
+    Pacman _pacman_init;
+    vector<Ghost *> _ghosts_init;
+    
     PointOfView _pointOfView;
 
 	GameInformations _informations;
