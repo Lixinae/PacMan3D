@@ -14,6 +14,7 @@ void SuperPacGomme::apply(Context & context) {
 	for (Ghost * ghost : context.ghosts) {
 		ghost->setWeak(time);
 	}
+	context.informations.setMultiplier(time);
 }
 
 Bonus *SuperPacGomme::clone() const {
