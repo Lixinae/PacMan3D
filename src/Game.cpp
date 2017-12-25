@@ -95,6 +95,10 @@ GameRepresentation Game::getRepresentation() const {
     return representation;
 }
 
+const GameInformations & Game::getInformations() const {
+	return _informations;
+}
+
 void Game::iteratePacman() {
 	BoardPosition nextPosition = _pacman.getPosition().translate(_pacman.getOrientation());
     BoardSquare *nextSquare = _board[nextPosition];
@@ -140,18 +144,24 @@ void Game::iterateGhost(Ghost * ghost) {
 bool Game::iterate() {
     iteratePacman();
     for (unsigned int i = 0; i < _ghosts.size(); i++) {
-		iterateGhost(_ghosts[i]);
+		iterateGhost(_ghosts[i]); //TODO maybe after pos check
 		if (_pacman.getPosition() == _ghosts[i]->getPosition()) {
 			if (_ghosts[i]->isWeak()) {
+				_informations.increaseMultiplier();
+				_informations.updateMultipliedScore(100);
 				delete _ghosts[i];
 				_ghosts[i] = _ghosts_init[i]->clone();
 			} else {
 				// todo -> Kill pacman -> decrease life -> reset multiplier
 				//_pacman = _pacman_init;
 				// update camera pos and angle
-				return false;
+				_informations.decreaseLife();
+				if (_informations.isDead()) {
+					return false;
+				}
 			}
 		}
 	}
+	_informations.iterate();
 	return true;
 }

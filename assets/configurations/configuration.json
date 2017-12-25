@@ -18,8 +18,8 @@
       "model": {
          "type":"texture",
          "args": {
-           "objPath": "boo.obj",
-           "texPath": "boo.png"
+           "objPath": "pacman.obj",
+           "texPath": "pacman.png"
          },
          "translate": {
            "x": 0,
@@ -32,9 +32,9 @@
            "z": 0
          },
          "scale": {
-           "x": 0.025,
-           "y": 0.025,
-           "z": 0.025
+           "x": 2.25,
+           "y": 2.25,
+           "z": 2.25
          }
       }
     },
@@ -168,12 +168,12 @@
       "model": {
          "type":"texture",
          "args": {
-           "objPath": "wall.obj",
-           "texPath": "wall.jpg"
+           "objPath": "cube.obj",
+           "texPath": "blue.png"
          },
          "translate": {
            "x": 0,
-           "y": 0,
+           "y": 1.05,
            "z": 0
          },
          "rotate": {
@@ -182,9 +182,9 @@
            "z": 0
          },
          "scale": {
-           "x": 0.4,
-           "y": 0.2,
-           "z": 0.08
+           "x": 0.5,
+           "y": 0.5,
+           "z": 0.5
          }
       }
     },
@@ -194,7 +194,7 @@
          "type":"texture",
          "args": {
            "objPath": "cube.obj",
-           "texPath": "MoonMap.jpg"
+           "texPath": "gray.png"
          },
          "translate": {
            "x": 0,
@@ -219,11 +219,11 @@
          "type":"texture",
          "args": {
            "objPath": "cube.obj",
-           "texPath": "EarthMap.jpg"
+           "texPath": "blue.png"
          },
          "translate": {
            "x": 0,
-           "y": 0,
+           "y": 1.05,
            "z": 0
          },
          "rotate": {
@@ -232,9 +232,9 @@
            "z": 0
          },
          "scale": {
-           "x": 0.4,
-           "y": 0.4,
-           "z": 0.4
+           "x": 0.5,
+           "y": 0.5,
+           "z": 0.5
          }
       }
     },

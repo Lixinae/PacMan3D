@@ -26,7 +26,7 @@ int realMain() {
     int windowWidth = 800;
     int windowHeight = 600;
 
-    SDLWindowManager windowManager(windowWidth, windowHeight, "GLImac");
+    SDLWindowManager windowManager(windowWidth, windowHeight, "Pacman3D");
 
     GLenum glewInitError = glewInit();
     if (GLEW_OK != glewInitError) {
@@ -45,7 +45,7 @@ int realMain() {
 	EventHandler eventHandler(configuration.getControlMap());
 
 	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap());
-    GameInformations gameInformations(3); // todo -> le passer dans le json pour etre dynamique sans besoin de recompiler
+
     bool done = false;
     while (!done) {
 
@@ -53,7 +53,7 @@ int realMain() {
             done = true;
         }
 
-        renderer->render(game.getRepresentation(),gameInformations);
+        renderer->render(game.getRepresentation(), game.getInformations());
 
 		if(!game.iterate()) {
 			//done = true;
@@ -62,7 +62,7 @@ int realMain() {
         windowManager.swapBuffers();
         
         //TODO sleep framerate
-        this_thread::sleep_for(chrono::milliseconds(70));
+        this_thread::sleep_for(chrono::milliseconds(66));
 
     }
 

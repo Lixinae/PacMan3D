@@ -7,12 +7,12 @@ private:
 	int _score;
 	int _lives;
 	int _multiplier;
+	int _multiplierCounter;
 
 public:
 
 	GameInformations();
-
-	explicit GameInformations(int _lives);
+	explicit GameInformations(int lives);
 
 	/**
 	 *
@@ -25,39 +25,41 @@ public:
 	 * @param value used to upgrade the score
 	 */
 	void updateScore(int value);
+	
+	void updateMultipliedScore(int value);
 
 	/**
 	 * Decrease the life count of the player by one
 	 */
 	void decreaseLife();
 
-	/**
-	 * Resets the score multiplier
-	 */
-	void resetMultiplier();
+	
+	void setMultiplier(int time);
 
 	/**
 	 * Increase the multiplier
 	 */
 	void increaseMultiplier();
 
+	void iterate();
+
 	/**
 	 *
 	 * @return The score
 	 */
-	int get_score() const;
+	int getScore() const;
 
 	/**
 	 *
 	 * @return The lives left
 	 */
-	int get_lives() const;
+	int getLives() const;
 
 	/**
 	 *
 	 * @return The multiplier
 	 */
-	int get_multiplier() const;
+	int getMultiplier() const;
 
 
 };
