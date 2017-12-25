@@ -15,8 +15,6 @@ class Renderer3D : public Renderer {
 
 public:
 
-	static const float SQUARE_SIZE;
-
 	Renderer3D(int windowWidth, int windowHeight, const PointOfView & pointOfView, const map<GameRepresentation::ModelType, AbstractModel3D *> & map_model3D);
 
 	void render(const GameRepresentation & repr) const;

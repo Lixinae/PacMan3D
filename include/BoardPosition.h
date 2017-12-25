@@ -4,6 +4,7 @@
 #include <iostream>
 #include <json/json.hpp>
 #include <Utils.h>
+#include <glimac/common.hpp>
 
 using namespace std;
 
@@ -21,6 +22,8 @@ public:
 	int getY() const;
 	
 	BoardPosition translate(Utils::Orientation orientation) const;
+	
+	glm::vec3 inSpace();
 	
 	bool operator==(const BoardPosition & other) const;
 	bool operator!=(const BoardPosition & other) const;

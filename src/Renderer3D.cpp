@@ -4,8 +4,6 @@ using namespace std;
 using namespace glimac;
 using namespace glm;
 
-const float Renderer3D::SQUARE_SIZE = 1;
-
 Renderer3D::Renderer3D(int windowWidth, int windowHeight, const PointOfView & pointOfView, const map<GameRepresentation::ModelType, AbstractModel3D *>& map_model3D) :
         _pointOfView(pointOfView),
         _ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
@@ -29,7 +27,7 @@ void Renderer3D::renderModels(const GameRepresentation &repr) const {
 				rotate(
                     translate(
 						GlobalMVMatrix,
-						vec3(position.getX() * SQUARE_SIZE, 0, -position.getY() * SQUARE_SIZE)
+						position.inSpace()
 					),
 					radians(Utils::degreesOfOrientation(orientation)),
 					vec3(0,1,0)

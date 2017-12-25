@@ -71,7 +71,9 @@ void Game::moveFrontCamera(float distance) {
 
 GameRepresentation Game::getRepresentation() const {
     GameRepresentation representation;
-    representation.add(_pacman.getModel(), _pacman.getPosition());
+    if (_pointOfView.getCurrentCameraType() != PointOfView::CameraType::FREEFLY) {
+		representation.add(_pacman.getModel(), _pacman.getPosition());
+	}
 	for (const Ghost * ghost : _ghosts) {
 		representation.add(ghost->getModel(), ghost->getPosition());
 	}
@@ -91,10 +93,8 @@ void Game::iteratePacman() {
         _pacman.setPosition(nextPosition);
         nextSquare->receivePacman(context);
          if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::FREEFLY) {
-			// TODO
-			int SQUARE_SIZE = 1;
-			glm::vec3 pospos(_pacman.getPosition().getX() * SQUARE_SIZE, 3, -_pacman.getPosition().getY() * SQUARE_SIZE);
-			_pointOfView.getFreeflyCamera().setPosition(pospos);
+			glm::vec3 cameraPos = _pacman.getPosition().inSpace() + glm::vec3(0, 1.5, 0);
+			_pointOfView.getFreeflyCamera().setPosition(cameraPos);
 		} 
     }
     _pacman.iterate();

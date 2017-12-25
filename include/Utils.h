@@ -34,12 +34,12 @@ public:
 		for (T * value : vector) {
 			delete value;
 		}
-	}
+	};
 	
 	template<typename K, typename V>
 	static void cleanMap(map<K, V*> map) {
 		//TODO
-	}
+	};
 
 private:
 
