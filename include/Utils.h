@@ -29,6 +29,8 @@ public:
 	
 	static Utils::Orientation oppositeOrientation(Utils::Orientation orientation);
 	
+	static Utils::Orientation relativeOrientation(Utils::Orientation viewOrientation, Utils::Orientation orientation);
+	
 	template<typename T>
 	static void cleanVector(vector<T*> vector) {
 		for (T * value : vector) {

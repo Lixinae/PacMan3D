@@ -46,12 +46,18 @@ Game Game::fromJSONFile(const string &filePath) {
 void Game::orientPacman(Utils::Orientation orientation) {
 	//TODO not orientation but
 	// but relative orientation of current pacman orientation
-    BoardPosition position = _pacman.getPosition().translate(orientation);
+	Utils::Orientation realOrientation;
+	if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::TRACKBALL) {
+		realOrientation = orientation;
+	} else {
+		realOrientation = Utils::relativeOrientation(_pacman.getOrientation(), orientation);
+	}
+    BoardPosition position = _pacman.getPosition().translate(realOrientation);
     BoardSquare *square = _board[position];
     BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
     if (square != nullptr && square->isPacmanWalkable(context)) {
-        _pacman.setOrientation(orientation);
-        _pointOfView.getFreeflyCamera().setHorizontalAngle(Utils::degreesOfOrientation(orientation));
+        _pacman.setOrientation(realOrientation);
+        _pointOfView.getFreeflyCamera().setHorizontalAngle(Utils::degreesOfOrientation(realOrientation));
     }
 }
 
@@ -92,10 +98,8 @@ void Game::iteratePacman() {
     if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
         _pacman.setPosition(nextPosition);
         nextSquare->receivePacman(context);
-         if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::FREEFLY) {
-			glm::vec3 cameraPos = _pacman.getPosition().inSpace() + glm::vec3(0, 1.5, 0);
-			_pointOfView.getFreeflyCamera().setPosition(cameraPos);
-		} 
+        glm::vec3 cameraPos = _pacman.getPosition().inSpace() + glm::vec3(0, 1.5, 0);
+		_pointOfView.getFreeflyCamera().setPosition(cameraPos);
     }
     _pacman.iterate();
 }

@@ -22,6 +22,7 @@ bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
 	if (changeCamera) {
 		game.changeCamera();
 	}
+	//TODO not use is pressed but event type of sdl
 	if (windowManager.isKeyPressed(_keyMap[control::UP])) {
 		game.orientPacman(Utils::Orientation::NORTH);
 	}
