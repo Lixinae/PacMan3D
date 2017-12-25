@@ -9,8 +9,8 @@ GameRepresentation::Model PacGomme::getModel() const {
     return GameRepresentation::Model(GameRepresentation::ModelType::PAC_GOMME);
 }
 
-void PacGomme::apply(Bonus::Context & /*context*/) {
-	//TODO update score
+void PacGomme::apply(Bonus::Context & context) {
+	context.informations.updateScore(10);
 }
 
 Bonus *PacGomme::clone() const {

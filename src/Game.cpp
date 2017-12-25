@@ -147,6 +147,8 @@ bool Game::iterate() {
 		iterateGhost(_ghosts[i]); //TODO maybe after pos check
 		if (_pacman.getPosition() == _ghosts[i]->getPosition()) {
 			if (_ghosts[i]->isWeak()) {
+				_informations.increaseMultiplier();
+				_informations.updateMultipliedScore(100);
 				delete _ghosts[i];
 				_ghosts[i] = _ghosts_init[i]->clone();
 			} else {
@@ -159,5 +161,6 @@ bool Game::iterate() {
 			}
 		}
 	}
+	_informations.iterate();
 	return true;
 }

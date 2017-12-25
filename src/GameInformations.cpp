@@ -1,25 +1,29 @@
 #include <GameInformations.h>
 
 GameInformations::GameInformations() :
-        _score(0),
-        _lives(3),
-        _multiplier(1) {
+		GameInformations::GameInformations(3)
+{
+	
 }
 
 GameInformations::GameInformations(int lives) :
         _score(0),
         _lives(lives),
-        _multiplier(1) {}
+        _multiplier(1),
+        _multiplierCounter(0)
+{
+	
+}
 
-int GameInformations::get_score() const {
+int GameInformations::getScore() const {
     return _score;
 }
 
-int GameInformations::get_lives() const {
+int GameInformations::getLives() const {
     return _lives;
 }
 
-int GameInformations::get_multiplier() const {
+int GameInformations::getMultiplier() const {
     return _multiplier;
 }
 
@@ -28,18 +32,32 @@ bool GameInformations::isDead() const {
 }
 
 void GameInformations::updateScore(int value) {
+    _score += value;
+}
+
+void GameInformations::updateMultipliedScore(int value) {
     _score += (value * _multiplier);
 }
 
 void GameInformations::decreaseLife() {
-    if (_lives > 0)
+    if (_lives > 0) {
         _lives--;
+	}
 }
 
-void GameInformations::resetMultiplier() {
-    _multiplier = 1;
+void GameInformations::setMultiplier(int time) {
+	_multiplierCounter = time;
 }
 
 void GameInformations::increaseMultiplier() {
-    _multiplier++;
+    _multiplier *= 2;
+}
+
+void GameInformations::iterate() {
+	if (_multiplierCounter > 0) {
+		_multiplierCounter--;
+		if (_multiplierCounter == 0) {
+			_multiplier = 1;
+		}
+	}
 }

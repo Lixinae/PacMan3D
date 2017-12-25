@@ -4,8 +4,12 @@ using namespace std;
 using namespace glimac;
 using namespace glm;
 
-Renderer3D::Renderer3D(int windowWidth, int windowHeight, const PointOfView &pointOfView,
-                       const map<GameRepresentation::ModelType, AbstractModel3D *> &map_model3D) :
+Renderer3D::Renderer3D(
+		int windowWidth, 
+		int windowHeight, 
+		const PointOfView &pointOfView,
+		const map<GameRepresentation::ModelType, AbstractModel3D *> &map_model3D
+	) :
         _pointOfView(pointOfView),
         _ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
         _models(map_model3D),
@@ -48,22 +52,19 @@ void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
     vec3 color = vec3(255.f / divid, 229.f / divid,
                       204.f / divid); // -> Peut faire val.f/255.f pour avoir la valeur sur 1
 
-    int livesLeft = gameInfo.get_lives();
-    string text = "Lives : " + to_string(livesLeft);
+    int livesLeft = gameInfo.getLives();
     y = 560;
-    _textRenderer.render(text, x, y, scale, color);
+    _textRenderer.render("Lives : " + to_string(livesLeft), x, y, scale, color);
 
 
-    int currentScore = gameInfo.get_score();
-    text = "Score : " + to_string(currentScore);
+    int currentScore = gameInfo.getScore();
     y -= ecart;
-    _textRenderer.render(text, x, y, scale, color);
+    _textRenderer.render("Score : " + to_string(currentScore), x, y, scale, color);
 
 
-    int multiplier = gameInfo.get_multiplier();
-    text = "Multiplier : " + to_string(multiplier);
+    int multiplier = gameInfo.getMultiplier();
     y -= ecart;
-    _textRenderer.render(text, x, y, scale, color);
+    _textRenderer.render("Multiplier : " + to_string(multiplier), x, y, scale, color);
 }
 
 void Renderer3D::render(const GameRepresentation &repr, const GameInformations &gameInfo) const {
