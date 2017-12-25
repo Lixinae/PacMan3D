@@ -17,7 +17,7 @@ public:
 
 	Renderer3D(int windowWidth, int windowHeight, const PointOfView & pointOfView, const map<GameRepresentation::ModelType, AbstractModel3D *> & map_model3D);
 
-	void render(const GameRepresentation & repr) const;
+	void render(const GameRepresentation & repr,const GameInformations& gameInfo) const;
 
     ~Renderer3D() override;
 
@@ -29,7 +29,7 @@ private:
 	ColorText2DRenderer _textRenderer;
 	
 	void renderModels(const GameRepresentation & repr) const;
-	void renderTexts() const;
+	void renderTexts(const GameInformations &informations) const;
 
 };
 

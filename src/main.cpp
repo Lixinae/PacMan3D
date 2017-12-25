@@ -45,16 +45,15 @@ int realMain() {
 	EventHandler eventHandler(configuration.getControlMap());
 
 	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap());
-   
+    GameInformations gameInformations(3); // todo -> le passer dans le json pour etre dynamique sans besoin de recompiler
     bool done = false;
-    int bidule=0;
     while (!done) {
 
         if (eventHandler.handleEvent(windowManager, game)) {
             done = true;
         }
 
-        renderer->render(game.getRepresentation());
+        renderer->render(game.getRepresentation(),gameInformations);
 
 		if(!game.iterate()) {
 			//done = true;

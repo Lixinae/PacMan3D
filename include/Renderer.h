@@ -2,12 +2,12 @@
 #define __RENDERER_H__
 
 #include <GameRepresentation.h>
-
+#include <GameInformations.h>
 class Renderer {
 
 public:
 
-	virtual void render(const GameRepresentation & repr) const = 0;
+	virtual void render(const GameRepresentation & repr,const GameInformations& gameInfo) const = 0;
 	
 	virtual ~Renderer() = default;;
 
