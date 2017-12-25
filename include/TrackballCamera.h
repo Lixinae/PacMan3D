@@ -20,24 +20,16 @@ public:
      * Permet d'avancer ou de reculer la camera
      * @param t : valeur a enlever ou rajouter
      */
-    void moveFront(float delta) override;
+    void moveFront(float delta);
 
 
-    void rotateHorizontal(float degrees) override;
+    void rotateLeft(float degrees);
 
     /**
     * Permet de faire tourner la camera vers le haut ou le bas(en ajoutant ou en enlevant des degrées)
     * @param degrees : valeur en degrees a enlever ou ajouter
     */
-    void rotateVertical(float degrees) override;
-
-    /**
-     * Permet de deplacer la camera vers la gauche ou la droite
-     * /!\ Non implementé pour cette camera
-     * @param t : valeur a enlever ou rajouter
-     *
-     */
-    void moveHorizontal(float t) override;
+    void rotateUp(float degrees);
 
     /**
      * Calcul la viewMatrix de la camera et la renvoie

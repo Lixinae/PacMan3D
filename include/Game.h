@@ -25,7 +25,9 @@ public:
     
     ~Game();
 
-    PointOfView *getPointOfView();
+    const PointOfView & getPointOfView() const;
+    void changeCamera();
+    void moveFrontCamera(float distance); // TODO Maybe not distance in arg
 
     void orientPacman(Utils::Orientation orientation);
 

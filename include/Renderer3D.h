@@ -17,7 +17,7 @@ public:
 
 	static const float SQUARE_SIZE;
 
-	Renderer3D(int windowWidth, int windowHeight, PointOfView * pointOfView,const map<GameRepresentation::ModelType, AbstractModel3D *> & map_model3D);
+	Renderer3D(int windowWidth, int windowHeight, const PointOfView & pointOfView, const map<GameRepresentation::ModelType, AbstractModel3D *> & map_model3D);
 
 	void render(const GameRepresentation & repr) const;
 
@@ -26,7 +26,7 @@ public:
 private:
 
 	mat4 _ProjMatrix;
-	PointOfView * _pointOfView;
+	const PointOfView & _pointOfView;
 	map<GameRepresentation::ModelType, AbstractModel3D *> _models;
 	ColorText2DRenderer _textRenderer;
 	

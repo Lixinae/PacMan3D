@@ -3,21 +3,36 @@
 
 #include <Camera.h>
 #include <TrackballCamera.h>
+#include <FreeflyCamera.h>
+#include <BoardPosition.h>
+#include <Utils.h>
 
 class PointOfView {
 
 public:
 
-	PointOfView();
+	enum class CameraType {
+		TRACKBALL,
+		FREEFLY
+	};
+
+	PointOfView(const BoardPosition & position, Utils::Orientation orientation);
 	
-	Camera & getCurrentCamera();
+	
+	TrackballCamera & getTrackballCamera();
+	FreeflyCamera & getFreeflyCamera();
+	
+	const Camera & getCurrentCamera() const;
+	
+	CameraType getCurrentCameraType() const;
+	
 	void setNextCamera();
 
 private:
 	
 	TrackballCamera _trackballCamera;
-	TrackballCamera _trackballCamera2;
-	int _current;
+	FreeflyCamera _freeflyCamera;
+	CameraType _current;
 	
 };
 

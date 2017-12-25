@@ -11,7 +11,7 @@ Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & g
         _board(board),
         _pacman(pacman),
         _ghosts(),
-        _pointOfView(),
+        _pointOfView(pacman.getPosition(), pacman.getOrientation()),
         _informations(),
         _representation()
 {
@@ -52,16 +52,29 @@ Game Game::fromJSONFile(const string &filePath) {
 }
 
 void Game::orientPacman(Utils::Orientation orientation) {
+	//TODO not orientation but
+	// but relative orientation of current pacman orientation
     BoardPosition position = _pacman.getPosition().translate(orientation);
     BoardSquare *square = _board[position];
     BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
     if (square != nullptr && square->isPacmanWalkable(context)) {
         _pacman.setOrientation(orientation);
+        _pointOfView.getFreeflyCamera().setHorizontalAngle(Utils::degreesOfOrientation(orientation));
     }
 }
 
-PointOfView *Game::getPointOfView() {
-    return &_pointOfView;
+const PointOfView & Game::getPointOfView() const {
+    return _pointOfView;
+}
+
+void Game::changeCamera() {
+	_pointOfView.setNextCamera();
+}
+
+void Game::moveFrontCamera(float distance) {
+	if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::TRACKBALL) {
+		_pointOfView.getTrackballCamera().moveFront(distance);
+	}
 }
 
 const GameRepresentation &Game::getRepresentation() const {
@@ -115,6 +128,12 @@ void Game::iteratePacman() {
         // Update
         _pacman.setPosition(nextPosition);
         nextSquare->receivePacman(context);
+         if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::FREEFLY) {
+			// TODO
+			int SQUARE_SIZE = 1;
+			glm::vec3 pospos(_pacman.getPosition().getX() * SQUARE_SIZE, 3, -_pacman.getPosition().getY() * SQUARE_SIZE);
+			_pointOfView.getFreeflyCamera().setPosition(pospos);
+		} 
         // Reset models
         setSquare(nextPosition);
         setPacman();
