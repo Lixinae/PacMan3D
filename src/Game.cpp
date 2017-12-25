@@ -146,6 +146,7 @@ bool Game::iterate() {
 				delete _ghosts[i];
 				_ghosts[i] = _ghosts_init[i]->clone();
 			} else {
+				// todo -> Kill pacman -> decrease life -> reset multiplier
 				//_pacman = _pacman_init;
 				// update camera pos and angle
 				return false;

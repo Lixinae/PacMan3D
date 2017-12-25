@@ -62,7 +62,7 @@ int realMain() {
         windowManager.swapBuffers();
         
         //TODO sleep framerate
-        this_thread::sleep_for(chrono::milliseconds(50));
+        this_thread::sleep_for(chrono::milliseconds(70));
 
     }
 
