@@ -62,3 +62,42 @@ Utils::Orientation Utils::oppositeOrientation(Utils::Orientation orientation) {
 			return Utils::Orientation::EAST;
 	}
 }
+
+Utils::Orientation Utils::relativeOrientation(Utils::Orientation viewOrientation, Utils::Orientation orientation) {
+	vector<Utils::Orientation> orientations = {
+		Utils::Orientation::NORTH,
+		Utils::Orientation::WEST,
+		Utils::Orientation::SOUTH,
+		Utils::Orientation::EAST
+	};
+	int viewOrientationIndex, orientationIndex;
+	switch (viewOrientation) {
+		case Utils::Orientation::NORTH:
+			viewOrientationIndex = 0;
+			break;
+		case Utils::Orientation::SOUTH:
+			viewOrientationIndex = 2;
+			break;
+		case Utils::Orientation::EAST:
+			viewOrientationIndex = 3;
+			break;
+		case Utils::Orientation::WEST:
+			viewOrientationIndex = 1;
+			break;
+	}
+	switch (orientation) {
+		case Utils::Orientation::NORTH:
+			orientationIndex = 0;
+			break;
+		case Utils::Orientation::SOUTH:
+			orientationIndex = 2;
+			break;
+		case Utils::Orientation::EAST:
+			orientationIndex = 3;
+			break;
+		case Utils::Orientation::WEST:
+			orientationIndex = 1;
+			break;
+	}
+	return orientations[(viewOrientationIndex + orientationIndex)%orientations.size()];
+}

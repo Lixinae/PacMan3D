@@ -4,9 +4,7 @@ using namespace std;
 using namespace glimac;
 using namespace glm;
 
-const float Renderer3D::SQUARE_SIZE = 1;
-
-Renderer3D::Renderer3D(int windowWidth, int windowHeight, PointOfView *pointOfView, const map<GameRepresentation::ModelType, AbstractModel3D *>& map_model3D) :
+Renderer3D::Renderer3D(int windowWidth, int windowHeight, const PointOfView & pointOfView, const map<GameRepresentation::ModelType, AbstractModel3D *>& map_model3D) :
         _pointOfView(pointOfView),
         _ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
         _models(map_model3D),
@@ -16,7 +14,7 @@ Renderer3D::Renderer3D(int windowWidth, int windowHeight, PointOfView *pointOfVi
 }
 
 void Renderer3D::renderModels(const GameRepresentation &repr) const {
-    mat4 GlobalMVMatrix = _pointOfView->getCurrentCamera().getViewMatrix();
+    mat4 GlobalMVMatrix = _pointOfView.getCurrentCamera().getViewMatrix();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (auto & modelType : GameRepresentation::MODELS) {
         vector<GameRepresentation::ModelInformations> informations = repr[modelType];
@@ -29,7 +27,7 @@ void Renderer3D::renderModels(const GameRepresentation &repr) const {
 				rotate(
                     translate(
 						GlobalMVMatrix,
-						vec3(position.getX() * SQUARE_SIZE, 0, -position.getY() * SQUARE_SIZE)
+						position.inSpace()
 					),
 					radians(Utils::degreesOfOrientation(orientation)),
 					vec3(0,1,0)

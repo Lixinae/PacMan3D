@@ -20,8 +20,9 @@ bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
 		}
 	}
 	if (changeCamera) {
-		game.getPointOfView()->setNextCamera();
+		game.changeCamera();
 	}
+	//TODO not use is pressed but event type of sdl
 	if (windowManager.isKeyPressed(_keyMap[control::UP])) {
 		game.orientPacman(Utils::Orientation::NORTH);
 	}
@@ -35,10 +36,10 @@ bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
 		game.orientPacman(Utils::Orientation::EAST);
 	}
 	if (windowManager.isKeyPressed(SDLK_b)) { // TODO should not be key
-		game.getPointOfView()->getCurrentCamera().moveFront(1);
+		game.moveFrontCamera(1);
 	}
-	if (windowManager.isKeyPressed(SDLK_n)) { // TODO should not be key
-		game.getPointOfView()->getCurrentCamera().moveFront(-1);
+	if (windowManager.isKeyPressed(SDLK_n)) {
+		game.moveFrontCamera(-1);
 	}
 	return false;
 }
