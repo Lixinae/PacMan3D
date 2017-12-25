@@ -10,17 +10,21 @@ using namespace std;
 Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & ghosts) :
         _board(board),
         _pacman(pacman),
+        _pacman_init(pacman),
         _ghosts(ghosts.size()),
+        _ghosts_init(ghosts.size()),
         _pointOfView(pacman.getPosition(), pacman.getOrientation()),
         _informations()
 {
 	for (unsigned int i = 0; i < ghosts.size(); i++) {
 		_ghosts[i] = ghosts[i]->clone();
+		_ghosts_init[i] = ghosts[i]->clone();
 	}
 }
 
 Game::~Game() {
 	Utils::cleanVector(_ghosts);
+	Utils::cleanVector(_ghosts_init);
 }
 
 Game Game::fromJSON(const json &jsonGame) {
@@ -135,12 +139,15 @@ void Game::iterateGhost(Ghost * ghost) {
 
 bool Game::iterate() {
     iteratePacman();
-    for (Ghost * ghost : _ghosts) {
-		iterateGhost(ghost);
-		if (_pacman.getPosition() == ghost->getPosition()) {
-			if (ghost->isWeak()) {
-				// TODO Implement eat
+    for (unsigned int i = 0; i < _ghosts.size(); i++) {
+		iterateGhost(_ghosts[i]);
+		if (_pacman.getPosition() == _ghosts[i]->getPosition()) {
+			if (_ghosts[i]->isWeak()) {
+				delete _ghosts[i];
+				_ghosts[i] = _ghosts_init[i]->clone();
 			} else {
+				//_pacman = _pacman_init;
+				// update camera pos and angle
 				return false;
 			}
 		}
