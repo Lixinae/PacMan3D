@@ -31,7 +31,7 @@ public:
 
     void orientPacman(Utils::Orientation orientation);
 
-    const GameRepresentation &getRepresentation() const;
+    GameRepresentation getRepresentation() const;
 
     bool iterate();
 
@@ -44,17 +44,8 @@ private:
     PointOfView _pointOfView;
 
 	GameInformations _informations;
-    GameRepresentation _representation;
 
     Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & ghosts);
-
-    void setSquare(const BoardPosition &position);
-    void setPacman();
-    void setGhost(const Ghost * ghost);
-
-    void cleanSquare(const BoardPosition &position);
-    void cleanPacman();
-    void cleanGhost(const Ghost * ghost);
     
     void iteratePacman();
     void iterateGhost(Ghost * ghost);

@@ -10,21 +10,13 @@ using namespace std;
 Game::Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & ghosts) :
         _board(board),
         _pacman(pacman),
-        _ghosts(),
+        _ghosts(ghosts.size()),
         _pointOfView(pacman.getPosition(), pacman.getOrientation()),
-        _informations(),
-        _representation()
+        _informations()
 {
-	_representation.add(pacman.getModel(), pacman.getPosition());
-	for (const Ghost * ghost : ghosts) {
-		_ghosts.push_back(ghost->clone());
-		_representation.add(ghost->getModel(), ghost->getPosition());
+	for (unsigned int i = 0; i < ghosts.size(); i++) {
+		_ghosts[i] = ghosts[i]->clone();
 	}
-    for (const BoardPosition & position : _board.getPositions()) {
-        for (const GameRepresentation::Model & model : _board[position]->getModels()) {
-            _representation.add(model, position);
-        }
-    }
 }
 
 Game::~Game() {
@@ -77,44 +69,18 @@ void Game::moveFrontCamera(float distance) {
 	}
 }
 
-const GameRepresentation &Game::getRepresentation() const {
-	// TODO may change :
-	// time to compute all the gamerepresentation is unsignificant compare to the time to make all the render
-    return _representation;
-}
-
-void Game::setSquare(const BoardPosition &position) {
-    for (const GameRepresentation::Model & model : _board[position]->getModels()) {
-        _representation.add(model, position);
+GameRepresentation Game::getRepresentation() const {
+    GameRepresentation representation;
+    representation.add(_pacman.getModel(), _pacman.getPosition());
+	for (const Ghost * ghost : _ghosts) {
+		representation.add(ghost->getModel(), ghost->getPosition());
+	}
+    for (const BoardPosition & position : _board.getPositions()) {
+        for (const GameRepresentation::Model & model : _board[position]->getModels()) {
+            representation.add(model, position);
+        }
     }
-}
-
-void Game::setPacman() {
-    _representation.add(_pacman.getModel(), _pacman.getPosition());
-}
-
-void Game::setGhost(const Ghost * ghost) {
-	 _representation.add(ghost->getModel(), ghost->getPosition());
-}
-
-void Game::cleanSquare(const BoardPosition &position) {
-    for (const GameRepresentation::Model & model : _board[position]->getModels()) {
-        _representation.remove(model, position);
-    }
-}
-
-void Game::cleanPacman() {
-    _representation.remove(_pacman.getModel(), _pacman.getPosition());
-}
-
-void Game::cleanGhost(const Ghost * ghost) {
-	// TODO should change !!!!
-	_representation.remove(GameRepresentation::ModelType::GHOST_BLINKY, ghost->getPosition());
-	_representation.remove(GameRepresentation::ModelType::GHOST_PINKY, ghost->getPosition());
-	_representation.remove(GameRepresentation::ModelType::GHOST_INKY, ghost->getPosition());
-	_representation.remove(GameRepresentation::ModelType::GHOST_CLYDE, ghost->getPosition());
-	_representation.remove(GameRepresentation::ModelType::GHOST_WEAK, ghost->getPosition());
-	//_representation.remove(ghost->getModel(), ghost->getPosition());
+    return representation;
 }
 
 void Game::iteratePacman() {
@@ -122,10 +88,6 @@ void Game::iteratePacman() {
     BoardSquare *nextSquare = _board[nextPosition];
     BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
     if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
-        // Clean models
-        cleanSquare(nextPosition);
-        cleanPacman();
-        // Update
         _pacman.setPosition(nextPosition);
         nextSquare->receivePacman(context);
          if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::FREEFLY) {
@@ -134,9 +96,6 @@ void Game::iteratePacman() {
 			glm::vec3 pospos(_pacman.getPosition().getX() * SQUARE_SIZE, 3, -_pacman.getPosition().getY() * SQUARE_SIZE);
 			_pointOfView.getFreeflyCamera().setPosition(pospos);
 		} 
-        // Reset models
-        setSquare(nextPosition);
-        setPacman();
     }
     _pacman.iterate();
 }
@@ -146,13 +105,8 @@ void Game::iterateGhost(Ghost * ghost) {
     BoardSquare *nextSquare = _board[nextPosition];
     BoardSquare::GhostContext context(*ghost);
 	if (nextSquare != nullptr && nextSquare->isGhostWalkable(context)) {
-		cleanSquare(nextPosition);
-		cleanGhost(ghost);
         ghost->setPosition(nextPosition);
         nextSquare->receiveGhost(context);
-        cleanGhost(ghost);
-        setSquare(nextPosition);
-		setGhost(ghost);
 	} else {
 		// get all the direction and choose one of the possible
 		vector<Utils::Orientation> walkableOrientations;
