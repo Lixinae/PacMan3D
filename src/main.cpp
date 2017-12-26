@@ -13,13 +13,94 @@
 #include <Renderer3D.h>
 #include <EventHandler.h>
 
-
-#include <ColorText2DRenderer.h>
-
-
 using namespace glimac;
 using namespace std;
 using namespace glm;
+
+void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, EventHandler & eventHandler) {
+
+	// TODO renderer::renderBeginTitle//
+	cout << "DEBUT DU JEU" << endl;
+	cout << "APPUYEZ SUR UNE TOUCHE" << endl;
+	//
+	
+	//eventHandler::handleBeginTitleEvent//
+	SDL_Event event;
+	bool stop = false;
+	while (!stop) {
+		while (windowManager.pollEvent(event)) {
+			if (event.type == SDL_QUIT) {
+				return;
+			}
+			if (event.type == SDL_KEYDOWN) {
+				stop = true;
+			}
+		}
+	}
+	
+    while (!game.isFinish()) {
+
+		renderer.render(game.getRepresentation(), game.getInformations());
+		windowManager.swapBuffers();
+
+		//
+		cout << "APPUYEZ SUR ENTREE POUR COMMENCER" << endl;
+		//
+	
+		//
+		SDL_Event event;
+		bool stop = false;
+		while (!stop) {
+			while (windowManager.pollEvent(event)) {
+				if (event.type == SDL_QUIT) {
+					return;
+				}
+				if (event.type == SDL_KEYDOWN) {
+					if (event.key.keysym.sym == SDLK_RETURN){
+						stop = true;
+					}
+				}
+			}
+		}
+		//
+		
+		while (game.iterate()) {
+			
+			if (eventHandler.handleEvent(windowManager, game)) {
+				return;
+			}
+
+			renderer.render(game.getRepresentation(), game.getInformations());
+
+			windowManager.swapBuffers();
+		
+			this_thread::sleep_for(chrono::milliseconds(66));
+		}
+		game.reset();
+
+    }
+    
+    
+    //
+	cout << "FIN DU JEU" << endl;
+	cout << "APPUYEZ SUR UNE TOUCHE POUR FINIR" << endl;
+	//
+	
+	//
+	stop = false;
+	while (!stop) {
+		while (windowManager.pollEvent(event)) {
+			if (event.type == SDL_QUIT) {
+				return;
+			}
+			if (event.type == SDL_KEYDOWN) {
+				stop = true;
+			}
+		}
+	}
+	//
+	
+}
 
 int realMain() {
 
@@ -46,26 +127,8 @@ int realMain() {
 
 	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap());
 
-    bool done = false;
-    while (!done) {
-
-        if (eventHandler.handleEvent(windowManager, game)) {
-            done = true;
-        }
-
-        renderer->render(game.getRepresentation(), game.getInformations());
-
-		if(!game.iterate()) {
-			//done = true;
-		}
-
-        windowManager.swapBuffers();
-        
-        //TODO sleep framerate
-        this_thread::sleep_for(chrono::milliseconds(66));
-
-    }
-
+	play(game, windowManager, *renderer, eventHandler);
+    
     delete renderer;
 
     return EXIT_SUCCESS;

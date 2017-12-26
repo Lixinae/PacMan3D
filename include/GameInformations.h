@@ -11,6 +11,13 @@ private:
 
 public:
 
+	enum class State {
+		BEGIN,
+		WAIT_TO_PLAY,
+		PLAY,
+		END,
+	};
+
 	GameInformations();
 	explicit GameInformations(int lives);
 

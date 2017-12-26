@@ -7,7 +7,7 @@ EventHandler::EventHandler(const map<control, SDLKey> & keyMap) : _keyMap(keyMap
 }
 
 bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
-	SDL_Event event{};
+	SDL_Event event;
 	while (windowManager.pollEvent(event)) {
 		if (event.type == SDL_QUIT) {
 			return true;
@@ -30,20 +30,6 @@ bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
 			}
 		}
 	}
-
-	//TODO not use is pressed but event type of sdl
-//	if (windowManager.isKeyPressed(_keyMap[control::UP])) {
-//		game.orientPacman(Utils::Orientation::NORTH);
-//	}
-//	if (windowManager.isKeyPressed(_keyMap[control::DOWN])) {
-//		game.orientPacman(Utils::Orientation::SOUTH);
-//	}
-//	if (windowManager.isKeyPressed(_keyMap[control::LEFT])) {
-//		game.orientPacman(Utils::Orientation::WEST);
-//	}
-//	if (windowManager.isKeyPressed(_keyMap[control::RIGHT])) {
-//		game.orientPacman(Utils::Orientation::EAST);
-//	}
 	if (windowManager.isKeyPressed(SDLK_b)) { // TODO should not be key
 		game.moveFrontCamera(1);
 	}

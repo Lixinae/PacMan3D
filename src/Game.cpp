@@ -160,12 +160,22 @@ bool Game::iterate() {
 				//_pacman = _pacman_init;
 				// update camera pos and angle
 				_informations.decreaseLife();
-				if (_informations.isDead()) {
-					return false;
-				}
+				return false;
 			}
 		}
 	}
 	_informations.iterate();
 	return true;
+}
+
+void Game::reset() {
+	Utils::cleanVector(_ghosts);
+	for (unsigned int i = 0; i < _ghosts.size(); i++) {
+		_ghosts[i] = _ghosts_init[i]->clone();
+	}
+	_pacman = _pacman_init;
+}
+
+bool Game::isFinish() {
+	return _informations.isDead();
 }
