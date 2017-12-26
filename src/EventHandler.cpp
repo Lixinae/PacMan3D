@@ -6,53 +6,65 @@ EventHandler::EventHandler(const map<control, SDLKey> & keyMap) : _keyMap(keyMap
 
 }
 
-bool EventHandler::handleBeginTitleEvent(SDLWindowManager & windowManager) {
+EventHandler::State EventHandler::handleBeginTitleEvent(SDLWindowManager & windowManager) {
 	SDL_Event event;
-	while (true) {
-		while (windowManager.pollEvent(event)) {
-			if (event.type == SDL_QUIT) {
-				return true;
-			}
-			if (event.type == SDL_KEYDOWN) {
-				return false;
-			}
-		}
-	}
-}
-
-bool EventHandler::handleEndTitleEvent(SDLWindowManager & windowManager) {
-	SDL_Event event;
-	while (true) {
-		while (windowManager.pollEvent(event)) {
-			if (event.type == SDL_QUIT) {
-				return true;
-			}
-			if (event.type == SDL_KEYDOWN) {
-				return false;
-			}
-		}
-	}
-}
-
-bool EventHandler::handleBeginGameEvent(SDLWindowManager & windowManager) {
-	SDL_Event event;
-	while (true) {
-		while (windowManager.pollEvent(event)) {
-			if (event.type == SDL_QUIT) {
-				return true;
-			}
-		}
-		if (windowManager.isKeyPressed(SDLK_RETURN)) {
-			return false;
-		}
-	}
-}
-
-bool EventHandler::handleGameEvent(SDLWindowManager & windowManager, Game & game) {
-	SDL_Event event;
+	EventHandler::State state = EventHandler::State::CONTINUE;
 	while (windowManager.pollEvent(event)) {
 		if (event.type == SDL_QUIT) {
-			return true;
+			state = EventHandler::State::QUIT;
+		}
+		if (event.type == SDL_KEYDOWN) {
+			state = EventHandler::State::NEXT;
+		}
+	}
+	return state;
+}
+
+EventHandler::State EventHandler::handleEndTitleEvent(SDLWindowManager & windowManager) {
+	SDL_Event event;
+	EventHandler::State state = EventHandler::State::CONTINUE;
+	while (windowManager.pollEvent(event)) {
+		if (event.type == SDL_QUIT) {
+			state = EventHandler::State::QUIT;
+		}
+		if (event.type == SDL_KEYDOWN) {
+			state = EventHandler::State::NEXT;
+		}
+	}
+	return state;
+}
+
+EventHandler::State EventHandler::handleBeginGameEvent(SDLWindowManager & windowManager, Game & game) {
+	SDL_Event event;
+	EventHandler::State state = EventHandler::State::CONTINUE;
+	while (windowManager.pollEvent(event)) {
+		if (event.type == SDL_QUIT) {
+			state = EventHandler::State::QUIT;
+		}
+		if (event.type == SDL_KEYDOWN) {
+			if (event.key.keysym.sym == SDLK_RETURN) {
+				state = EventHandler::State::NEXT;
+			}
+			if (event.key.keysym.sym == _keyMap[control::CHANGE_CAMERA]) {
+				game.changeCamera();
+			}
+		}
+	}
+	if (windowManager.isKeyPressed(SDLK_b)) { // TODO should not be key
+		game.moveFrontCamera(1);
+	}
+	if (windowManager.isKeyPressed(SDLK_n)) {
+		game.moveFrontCamera(-1);
+	}
+	return state;
+}
+
+EventHandler::State EventHandler::handleGameEvent(SDLWindowManager & windowManager, Game & game) {
+	SDL_Event event;
+	EventHandler::State state = EventHandler::State::CONTINUE;
+	while (windowManager.pollEvent(event)) {
+		if (event.type == SDL_QUIT) {
+			state = EventHandler::State::QUIT;
 		}
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == _keyMap[control::CHANGE_CAMERA]) {
@@ -70,6 +82,7 @@ bool EventHandler::handleGameEvent(SDLWindowManager & windowManager, Game & game
 			if (event.key.keysym.sym == _keyMap[control::RIGHT]){
 				game.orientPacman(Utils::Orientation::EAST);
 			}
+			//TODO pause
 		}
 	}
 	if (windowManager.isKeyPressed(SDLK_b)) { // TODO should not be key
@@ -78,5 +91,5 @@ bool EventHandler::handleGameEvent(SDLWindowManager & windowManager, Game & game
 	if (windowManager.isKeyPressed(SDLK_n)) {
 		game.moveFrontCamera(-1);
 	}
-	return false;
+	return state;
 }

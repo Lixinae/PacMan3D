@@ -20,16 +20,24 @@ private:
 
 public:
 
+	enum class State {
+		NEXT,
+		CONTINUE,
+		PAUSE,
+		QUIT
+	};
+
+
     explicit EventHandler(const map<control, SDLKey> & keyMap);
 
-	bool handleBeginTitleEvent(SDLWindowManager & windowManager);
-	bool handleBeginGameEvent(SDLWindowManager & windowManager);
+	State handleBeginTitleEvent(SDLWindowManager & windowManager);
+	State handleBeginGameEvent(SDLWindowManager & windowManager, Game & game);
     /**
      * Gère les evenement liés à la SDL, tel que les touches appuyer ou les mouvement de la souris
      * @param windowManager Window Manager
      */
-    bool handleGameEvent(SDLWindowManager & windowManager, Game & game);
-    bool handleEndTitleEvent(SDLWindowManager & windowManager);
+    State handleGameEvent(SDLWindowManager & windowManager, Game & game);
+    State handleEndTitleEvent(SDLWindowManager & windowManager);
 
 };
 

@@ -17,14 +17,24 @@ using namespace glimac;
 using namespace std;
 using namespace glm;
 
+void waitFrameRate() {
+	this_thread::sleep_for(chrono::milliseconds(66));
+}
+
 void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, EventHandler & eventHandler) {
 
+	EventHandler::State state;
+	
 	// TODO renderer::renderBeginTitle//
 	cout << "DEBUT DU JEU" << endl;
 	cout << "APPUYEZ SUR UNE TOUCHE" << endl;
 	//
 	
-	if (eventHandler.handleBeginTitleEvent(windowManager)) {
+	state = EventHandler::State::CONTINUE;
+	while (state == EventHandler::State::CONTINUE) {
+		state = eventHandler.handleBeginTitleEvent(windowManager);
+	}
+	if (state == EventHandler::State::QUIT) {
 		return;
 	}
 	
@@ -36,21 +46,31 @@ void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, Ev
 		//
 		cout << "APPUYEZ SUR ENTREE POUR COMMENCER" << endl;
 		//
-		if (eventHandler.handleBeginGameEvent(windowManager)) {
+		state = EventHandler::State::CONTINUE;
+		while (state == EventHandler::State::CONTINUE) {
+			state = eventHandler.handleBeginGameEvent(windowManager, game);
+			renderer.render(game.getRepresentation(), game.getInformations());
+			windowManager.swapBuffers();
+			waitFrameRate();
+		}
+		if (state == EventHandler::State::QUIT) {
 			return;
 		}
 		
 		while (game.iterate()) {
 			
-			if (eventHandler.handleGameEvent(windowManager, game)) {
+			state = eventHandler.handleGameEvent(windowManager, game);
+			if (state == EventHandler::State::QUIT) {
 				return;
+			}
+			if (state == EventHandler::State::PAUSE) {
+				//TODO
+				while (true) {}
 			}
 
 			renderer.render(game.getRepresentation(), game.getInformations());
-
 			windowManager.swapBuffers();
-		
-			this_thread::sleep_for(chrono::milliseconds(66));
+			waitFrameRate();
 		}
 		game.reset();
 
@@ -61,7 +81,10 @@ void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, Ev
 	cout << "FIN DU JEU" << endl;
 	cout << "APPUYEZ SUR UNE TOUCHE POUR FINIR" << endl;
 	//
-	eventHandler.handleEndTitleEvent(windowManager);
+	state = EventHandler::State::CONTINUE;
+	while (state == EventHandler::State::CONTINUE) {
+		state = eventHandler.handleEndTitleEvent(windowManager);
+	}
 	
 }
 
