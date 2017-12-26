@@ -30,7 +30,7 @@ void LightTexModel3D::initLight() {
 }
 
 LightTexModel3D::LightTexModel3D(const Mesh & mesh, const unique_ptr<Image> & texture, const mat4 & modelTransform) :
-		AbstractModel3D(mesh, "shaders/lighTex3D.fs.glsl", modelTransform)
+		AbstractModel3D(mesh, "shaders/lightTex3D.fs.glsl", modelTransform)
 {
 	initTexture(texture);
 	initLight();
