@@ -51,17 +51,17 @@ void Game::orientPacman(Utils::Orientation orientation) {
 	//TODO not orientation but
 	// but relative orientation of current pacman orientation
 	Utils::Orientation realOrientation;
-	if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::TRACKBALL) {
-		realOrientation = orientation;
-	} else {
+	if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::FIRST_PERSON) {
 		realOrientation = Utils::relativeOrientation(_pacman.getOrientation(), orientation);
+	} else {
+		realOrientation = orientation;
 	}
     BoardPosition position = _pacman.getPosition().translate(realOrientation);
     BoardSquare *square = _board[position];
     BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
     if (square != nullptr && square->isPacmanWalkable(context)) {
         _pacman.setOrientation(realOrientation);
-        _pointOfView.getFreeflyCamera().setHorizontalAngle(Utils::degreesOfOrientation(realOrientation));
+        _pointOfView.getFirstPersonCamera().setHorizontalAngle(Utils::degreesOfOrientation(realOrientation));
     }
 }
 
@@ -74,14 +74,18 @@ void Game::changeCamera() {
 }
 
 void Game::moveFrontCamera(float distance) {
-	if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::TRACKBALL) {
-		_pointOfView.getTrackballCamera().moveFront(distance);
+	if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::UPPER_LEFT) {
+		_pointOfView.getUpperLeftCamera().moveFront(distance);
+	} else if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::UPPER) {
+		_pointOfView.getUpperCamera().moveFront(distance);
+	} else if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::UPPER_RIGHT) {
+		_pointOfView.getUpperRightCamera().moveFront(distance);
 	}
 }
 
 GameRepresentation Game::getRepresentation() const {
     GameRepresentation representation;
-    if (_pointOfView.getCurrentCameraType() != PointOfView::CameraType::FREEFLY) {
+    if (_pointOfView.getCurrentCameraType() != PointOfView::CameraType::FIRST_PERSON) {
 		representation.add(_pacman.getModel(), _pacman.getPosition());
 	}
 	for (const Ghost * ghost : _ghosts) {
@@ -107,7 +111,7 @@ void Game::iteratePacman() {
         _pacman.setPosition(nextPosition);
         nextSquare->receivePacman(context);
         glm::vec3 cameraPos = _pacman.getPosition().inSpace() + glm::vec3(0, 1.5, 0);
-		_pointOfView.getFreeflyCamera().setPosition(cameraPos);
+		_pointOfView.getFirstPersonCamera().setPosition(cameraPos);
     }
     _pacman.iterate();
 }

@@ -8,7 +8,7 @@ TrackballCamera::TrackballCamera() :
 
 }
 
-TrackballCamera::TrackballCamera(float Distance, float AngleX, float AngleY) :
+TrackballCamera::TrackballCamera(glm::vec3 center, float Distance, float AngleX, float AngleY) :
         m_fDistance(Distance),
         m_fAngleX(AngleX),
         m_fAngleY(AngleY) 

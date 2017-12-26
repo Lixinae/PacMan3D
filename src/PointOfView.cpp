@@ -3,9 +3,11 @@
 using namespace glm;
 
 PointOfView::PointOfView(const BoardPosition & position, Utils::Orientation orientation) :
-	_trackballCamera(25,45,15),
-	_freeflyCamera(vec3(0,1,0), Utils::degreesOfOrientation(orientation), 0), 
-	_current(PointOfView::CameraType::TRACKBALL) 
+	_leftTrackballCamera(position.inSpace(),25,45,15), 
+	_upperTrackballCamera(position.inSpace(),25,90,0), 
+	_rightTrackballCamera(position.inSpace(),25,45,-15),
+	_freeflyCamera(position.inSpace(), Utils::degreesOfOrientation(orientation), 0), 
+	_current(PointOfView::CameraType::UPPER_LEFT) 
 {
 
 
@@ -15,26 +17,42 @@ PointOfView::CameraType PointOfView::getCurrentCameraType() const {
 	return _current;
 }
 
-TrackballCamera & PointOfView::getTrackballCamera() {
-	return _trackballCamera;
+TrackballCamera & PointOfView::getUpperLeftCamera() {
+	return _leftTrackballCamera;
 }
 
-FreeflyCamera & PointOfView::getFreeflyCamera() {
+TrackballCamera & PointOfView::getUpperCamera() {
+	return _upperTrackballCamera;
+}
+
+TrackballCamera & PointOfView::getUpperRightCamera() {
+	return _rightTrackballCamera;
+}
+
+FreeflyCamera & PointOfView::getFirstPersonCamera() {
 	return _freeflyCamera;
 }
 
 const Camera & PointOfView::getCurrentCamera() const {
-	if (_current == PointOfView::CameraType::TRACKBALL) {
-		return _trackballCamera;
+	if (_current == PointOfView::CameraType::UPPER_LEFT) {
+		return _leftTrackballCamera;
+	} else if (_current == PointOfView::CameraType::UPPER) {
+		return _upperTrackballCamera;
+	} else if (_current == PointOfView::CameraType::UPPER_RIGHT) {
+		return _rightTrackballCamera;
 	} else {
 		return _freeflyCamera;
 	}
 }
 
 void PointOfView::setNextCamera() {
-	if (_current == PointOfView::CameraType::TRACKBALL) {
-		_current = PointOfView::CameraType::FREEFLY;
+	if (_current == PointOfView::CameraType::UPPER_LEFT) {
+		_current = PointOfView::CameraType::UPPER;
+	} else if (_current == PointOfView::CameraType::UPPER) {
+		_current = PointOfView::CameraType::UPPER_RIGHT;
+	} else if (_current == PointOfView::CameraType::UPPER_RIGHT) {
+		_current = PointOfView::CameraType::FIRST_PERSON;
 	} else {
-		_current = PointOfView::CameraType::TRACKBALL;
+		_current = PointOfView::CameraType::UPPER_LEFT;
 	}
 }

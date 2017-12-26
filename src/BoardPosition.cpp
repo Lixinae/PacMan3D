@@ -43,7 +43,7 @@ BoardPosition BoardPosition::translate(Utils::Orientation orientation) const {
 	return BoardPosition(_x + dx, _y + dy);
 }
 
-glm::vec3 BoardPosition::inSpace() {
+glm::vec3 BoardPosition::inSpace() const {
 	float SQUARE_SIZE = 1; //TODO static const
 	return glm::vec3(_x * SQUARE_SIZE, 0, -_y * SQUARE_SIZE);
 }

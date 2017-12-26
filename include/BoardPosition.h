@@ -23,7 +23,7 @@ public:
 	
 	BoardPosition translate(Utils::Orientation orientation) const;
 	
-	glm::vec3 inSpace();
+	glm::vec3 inSpace() const;
 	
 	bool operator==(const BoardPosition & other) const;
 	bool operator!=(const BoardPosition & other) const;
