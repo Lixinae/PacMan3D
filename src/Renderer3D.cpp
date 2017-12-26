@@ -20,7 +20,6 @@ Renderer3D::Renderer3D(
 
 void Renderer3D::renderModels(const GameRepresentation &repr) const {
     mat4 GlobalMVMatrix = _pointOfView.getCurrentCamera().getViewMatrix();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (auto &modelType : GameRepresentation::MODELS) {
         vector<GameRepresentation::ModelInformations> informations = repr[modelType];
         AbstractModel3D *model3d = _models.at(modelType);
@@ -48,9 +47,7 @@ void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
     // Toutes les valeurs sont ajustés pour une grille orthogonal de 800*600
     int x = 10, y,ecart = 28;
     float scale = 0.5;
-    const float divid = 255.f;
-    vec3 color = vec3(255.f / divid, 229.f / divid,
-                      204.f / divid); // -> Peut faire val.f/255.f pour avoir la valeur sur 1
+    vec3 color = vec3(1, 0.89, 0.8);
 
     int livesLeft = gameInfo.getLives();
     y = 560;
@@ -67,9 +64,26 @@ void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
     _textRenderer.render("Multiplier : " + to_string(multiplier), x, y, scale, color);
 }
 
-void Renderer3D::render(const GameRepresentation &repr, const GameInformations &gameInfo) const {
+void Renderer3D::renderGame(const GameRepresentation &repr, const GameInformations &gameInfo) const {
     renderModels(repr);
     renderTexts(gameInfo);
+}
+
+void Renderer3D::renderBeginTitle() const {
+	vec3 color = vec3(1, 0.89, 0.8);
+    _textRenderer.render("PACMAN 3D", 100, 450, 0.75, color);
+    _textRenderer.render("APPUYER SUR UNE TOUCHE", 100, 400, 0.65, color);
+}
+	
+void Renderer3D::renderBeginGame() const {
+	vec3 color = vec3(1, 0.89, 0.8);
+    _textRenderer.render("APPUYER SUR ENTREE POUR COMMENCER", 100, 400, 0.65, color);
+}
+	
+void Renderer3D::renderEndTitle() const {
+	vec3 color = vec3(1, 0.89, 0.8);
+    _textRenderer.render("FIN DE LA PARTIE", 70, 450, 0.65, color);
+    _textRenderer.render("APPUYER SUR UNE TOUCHE POUR QUITTER", 100, 400, 0.6, color);
 }
 
 Renderer3D::~Renderer3D() {

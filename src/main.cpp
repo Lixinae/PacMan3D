@@ -22,43 +22,31 @@ void waitFrameRate() {
 }
 
 void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, EventHandler & eventHandler) {
-
 	EventHandler::State state;
-	
-	// TODO renderer::renderBeginTitle//
-	cout << "DEBUT DU JEU" << endl;
-	cout << "APPUYEZ SUR UNE TOUCHE" << endl;
-	//
-	
 	state = EventHandler::State::CONTINUE;
 	while (state == EventHandler::State::CONTINUE) {
 		state = eventHandler.handleBeginTitleEvent(windowManager);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		renderer.renderBeginTitle();
+		windowManager.swapBuffers();
 	}
 	if (state == EventHandler::State::QUIT) {
 		return;
 	}
-	
     while (!game.isFinish()) {
-
-		renderer.render(game.getRepresentation(), game.getInformations());
-		windowManager.swapBuffers();
-
-		//
-		cout << "APPUYEZ SUR ENTREE POUR COMMENCER" << endl;
-		//
 		state = EventHandler::State::CONTINUE;
 		while (state == EventHandler::State::CONTINUE) {
 			state = eventHandler.handleBeginGameEvent(windowManager, game);
-			renderer.render(game.getRepresentation(), game.getInformations());
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			renderer.renderGame(game.getRepresentation(), game.getInformations());
+			renderer.renderBeginGame();
 			windowManager.swapBuffers();
 			waitFrameRate();
 		}
 		if (state == EventHandler::State::QUIT) {
 			return;
 		}
-		
 		while (game.iterate()) {
-			
 			state = eventHandler.handleGameEvent(windowManager, game);
 			if (state == EventHandler::State::QUIT) {
 				return;
@@ -67,23 +55,20 @@ void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, Ev
 				//TODO
 				while (true) {}
 			}
-
-			renderer.render(game.getRepresentation(), game.getInformations());
+			 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			renderer.renderGame(game.getRepresentation(), game.getInformations());
 			windowManager.swapBuffers();
 			waitFrameRate();
 		}
 		game.reset();
 
     }
-    
-    
-    //
-	cout << "FIN DU JEU" << endl;
-	cout << "APPUYEZ SUR UNE TOUCHE POUR FINIR" << endl;
-	//
 	state = EventHandler::State::CONTINUE;
 	while (state == EventHandler::State::CONTINUE) {
 		state = eventHandler.handleEndTitleEvent(windowManager);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		renderer.renderEndTitle();
+		windowManager.swapBuffers();
 	}
 	
 }
@@ -100,6 +85,7 @@ int realMain() {
         cerr << glewGetErrorString(glewInitError) << endl;
         return EXIT_FAILURE;
     }
+    
 
 	srand(time(nullptr));
 
