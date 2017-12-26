@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstddef>
 #include <ctime>
 #include <chrono>
 #include <thread>
@@ -7,14 +6,10 @@
 #include <GL/glew.h>
 #include <glimac/SDLWindowManager.hpp>
 #include <glimac/Program.hpp>
-#include <glimac/Image.hpp>
 #include <Game.h>
 #include <Renderer.h>
 #include <Renderer3D.h>
 #include <EventHandler.h>
-
-
-#include <ColorText2DRenderer.h>
 
 
 using namespace glimac;
