@@ -20,13 +20,6 @@ const GLchar *AbstractModel3D::VERTEX_UNIFORM_MVP_MATRIX = "uMVPMatrix";
 const GLchar *AbstractModel3D::VERTEX_UNIFORM_MV_MATRIX = "uMVMatrix";
 const GLchar *AbstractModel3D::VERTEX_UNIFORM_NORMAL_MATRIX = "uNormalMatrix";
 
-const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_SHININESS = "uShininess";
-const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_LIGHT_DIRECTION = "uLightDirection";
-const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_AMBIANT_COLOR = "uAmbiantColor";
-const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_DIFFUSE_COLOR = "uDiffuseColor";
-const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_LIGHT_COLOR = "uLightColor";
-const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_LIGHT_INTENSITY = "uLightIntensity";
-
 
 AbstractModel3D *AbstractModel3D::fromJSON(const json &jsonModel) {
 	// TODO static assets/models path in UTILS
@@ -73,13 +66,6 @@ void AbstractModel3D::initProgram(const string &fragmentShader) {
 	_uMVPmatrix = getUniformLocation(VERTEX_UNIFORM_MVP_MATRIX);
 	_uMVmatrix = getUniformLocation(VERTEX_UNIFORM_MV_MATRIX);
 	_uNormalmatrix = getUniformLocation(VERTEX_UNIFORM_NORMAL_MATRIX);
-
-	_uShininess = getUniformLocation(FRAGMENT_UNIFORM_SHININESS); // Brillance de l'objet
-	_uLightDirection = getUniformLocation(FRAGMENT_UNIFORM_LIGHT_DIRECTION); // Direction de la lumiere
-	_uAmbiantColor = getUniformLocation(FRAGMENT_UNIFORM_AMBIANT_COLOR); // Couleur de la lumiere ambiante
-	_uDiffuseColor = getUniformLocation(FRAGMENT_UNIFORM_DIFFUSE_COLOR); // Couleur de la lumiere diffuse
-	_uLightColor = getUniformLocation(FRAGMENT_UNIFORM_LIGHT_COLOR); // Couleur de la lumiere
-	_uLightIntensity = getUniformLocation(FRAGMENT_UNIFORM_LIGHT_INTENSITY); // Intensité de la lumiere
 }
 
 AbstractModel3D::AbstractModel3D(const Mesh &mesh, const string &fragmentShader, const mat4 &modelTransform) :
@@ -117,30 +103,8 @@ void AbstractModel3D::setMatrices(const mat4 &ProjMatrix, const mat4 &MVMatrix) 
 	glUniformMatrix4fv(_uNormalmatrix, 1, GL_FALSE, value_ptr(transpose(inverse(transformMVMatrix))));
 }
 
-// todo -> add shininess en parametre
-// todo -> Recuperer les valeurs à partir de la lumiere directionnel créé
-void AbstractModel3D::setLightComponents(float shininess) const {
+void AbstractModel3D::setLightComponents(float shininess){
 
-//	float shininess = 10.f; // brillance de l'objet
-	glUniform1f(_uShininess, shininess);
-
-	vec3 lightDir = vec3(1, 1, 1); // Light dir
-	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
-
-	const float divider = 255.f;
-	vec3 lightColor = vec3(255.f / divider, 255.f / divider, 255.f / divider); // Light color
-	glUniform3f(_uLightColor, lightColor.x, lightColor.y, lightColor.z);
-
-	float ratio = 0.1f; // light AmbiantIntensity
-	vec3 ambiantColor = vec3(lightColor.x * ratio, lightColor.y * ratio, lightColor.y * ratio);
-	glUniform3f(_uAmbiantColor, ambiantColor.x, ambiantColor.y, ambiantColor.z);
-
-	ratio = 0.5f; // Light diffuseIntensity
-	vec3 diffuseColor = vec3(lightColor.x * ratio, lightColor.y * ratio, lightColor.y * ratio);
-	glUniform3f(_uDiffuseColor, diffuseColor.x, diffuseColor.y, diffuseColor.z);
-
-	float lightIntensity = 10; // Light intenstity
-	glUniform1f(_uLightIntensity, lightIntensity);
 
 }
 
