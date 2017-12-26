@@ -14,10 +14,10 @@ public:
 	//TODO static const path
 	
 	static const GLchar *FRAGMENT_UNIFORM_TEXTURE;
+	static const GLchar *FRAGMENT_UNIFORM_DIFFUSE;
+	static const GLchar *FRAGMENT_UNIFORM_GLOSSY;
 	static const GLchar *FRAGMENT_UNIFORM_SHININESS;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_DIRECTION;
-	static const GLchar *FRAGMENT_UNIFORM_AMBIANT_COLOR;
-	static const GLchar *FRAGMENT_UNIFORM_DIFFUSE_COLOR;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_COLOR;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_INTENSITY;
 	
@@ -33,9 +33,9 @@ private:
 	GLuint _textureObject;
 	GLint _uTexture;
 	GLint _uShininess;
+	GLint _uDiffuse;
+	GLint _uGlossy;
 	GLint _uLightDirection;
-	GLint _uAmbiantColor;
-	GLint _uDiffuseColor;
 	GLint _uLightColor;
 	GLint _uLightIntensity;
 	
