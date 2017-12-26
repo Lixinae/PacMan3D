@@ -22,11 +22,14 @@ public:
 
     explicit EventHandler(const map<control, SDLKey> & keyMap);
 
+	bool handleBeginTitleEvent(SDLWindowManager & windowManager);
+	bool handleBeginGameEvent(SDLWindowManager & windowManager);
     /**
      * Gère les evenement liés à la SDL, tel que les touches appuyer ou les mouvement de la souris
      * @param windowManager Window Manager
      */
-    bool handleEvent(SDLWindowManager & windowManager, Game & game);
+    bool handleGameEvent(SDLWindowManager & windowManager, Game & game);
+    bool handleEndTitleEvent(SDLWindowManager & windowManager);
 
 };
 

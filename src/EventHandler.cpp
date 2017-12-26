@@ -6,7 +6,49 @@ EventHandler::EventHandler(const map<control, SDLKey> & keyMap) : _keyMap(keyMap
 
 }
 
-bool EventHandler::handleEvent(SDLWindowManager & windowManager, Game & game) {
+bool EventHandler::handleBeginTitleEvent(SDLWindowManager & windowManager) {
+	SDL_Event event;
+	while (true) {
+		while (windowManager.pollEvent(event)) {
+			if (event.type == SDL_QUIT) {
+				return true;
+			}
+			if (event.type == SDL_KEYDOWN) {
+				return false;
+			}
+		}
+	}
+}
+
+bool EventHandler::handleEndTitleEvent(SDLWindowManager & windowManager) {
+	SDL_Event event;
+	while (true) {
+		while (windowManager.pollEvent(event)) {
+			if (event.type == SDL_QUIT) {
+				return true;
+			}
+			if (event.type == SDL_KEYDOWN) {
+				return false;
+			}
+		}
+	}
+}
+
+bool EventHandler::handleBeginGameEvent(SDLWindowManager & windowManager) {
+	SDL_Event event;
+	while (true) {
+		while (windowManager.pollEvent(event)) {
+			if (event.type == SDL_QUIT) {
+				return true;
+			}
+		}
+		if (windowManager.isKeyPressed(SDLK_RETURN)) {
+			return false;
+		}
+	}
+}
+
+bool EventHandler::handleGameEvent(SDLWindowManager & windowManager, Game & game) {
 	SDL_Event event;
 	while (windowManager.pollEvent(event)) {
 		if (event.type == SDL_QUIT) {

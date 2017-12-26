@@ -24,18 +24,8 @@ void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, Ev
 	cout << "APPUYEZ SUR UNE TOUCHE" << endl;
 	//
 	
-	//eventHandler::handleBeginTitleEvent//
-	SDL_Event event;
-	bool stop = false;
-	while (!stop) {
-		while (windowManager.pollEvent(event)) {
-			if (event.type == SDL_QUIT) {
-				return;
-			}
-			if (event.type == SDL_KEYDOWN) {
-				stop = true;
-			}
-		}
+	if (eventHandler.handleBeginTitleEvent(windowManager)) {
+		return;
 	}
 	
     while (!game.isFinish()) {
@@ -46,27 +36,13 @@ void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, Ev
 		//
 		cout << "APPUYEZ SUR ENTREE POUR COMMENCER" << endl;
 		//
-	
-		//
-		SDL_Event event;
-		bool stop = false;
-		while (!stop) {
-			while (windowManager.pollEvent(event)) {
-				if (event.type == SDL_QUIT) {
-					return;
-				}
-				if (event.type == SDL_KEYDOWN) {
-					if (event.key.keysym.sym == SDLK_RETURN){
-						stop = true;
-					}
-				}
-			}
+		if (eventHandler.handleBeginGameEvent(windowManager)) {
+			return;
 		}
-		//
 		
 		while (game.iterate()) {
 			
-			if (eventHandler.handleEvent(windowManager, game)) {
+			if (eventHandler.handleGameEvent(windowManager, game)) {
 				return;
 			}
 
@@ -85,20 +61,7 @@ void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, Ev
 	cout << "FIN DU JEU" << endl;
 	cout << "APPUYEZ SUR UNE TOUCHE POUR FINIR" << endl;
 	//
-	
-	//
-	stop = false;
-	while (!stop) {
-		while (windowManager.pollEvent(event)) {
-			if (event.type == SDL_QUIT) {
-				return;
-			}
-			if (event.type == SDL_KEYDOWN) {
-				stop = true;
-			}
-		}
-	}
-	//
+	eventHandler.handleEndTitleEvent(windowManager);
 	
 }
 
