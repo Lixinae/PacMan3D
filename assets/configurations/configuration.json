@@ -16,7 +16,7 @@
     {
       "name": "Pacman",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "pacman.obj",
            "texPath": "pacman.png"
@@ -41,7 +41,7 @@
     {
       "name": "Ghost_blinky",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
            "texPath": "red_boo.png"
@@ -66,7 +66,7 @@
     {
       "name": "Ghost_pinky",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
            "texPath": "pink_boo.png"
@@ -91,7 +91,7 @@
     {
       "name": "Ghost_inky",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
            "texPath": "blue_boo.png"
@@ -116,7 +116,7 @@
     {
       "name": "Ghost_clyde",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
            "texPath": "orange_boo.png"
@@ -141,7 +141,7 @@
     {
       "name": "Ghost_weak",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
            "texPath": "black_boo.png"
@@ -166,7 +166,7 @@
     {
       "name": "Wall",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "cube.obj",
            "texPath": "blue.png"
@@ -191,7 +191,7 @@
     {
       "name": "Floor",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "cube.obj",
            "texPath": "gray.png"
@@ -216,7 +216,7 @@
     {
       "name": "Tunnel",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "cube.obj",
            "texPath": "blue.png"
@@ -241,7 +241,7 @@
     {
       "name": "Pac_gomme",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "sphere.obj",
 	   "texPath": "yellow_sphere.png"
@@ -266,7 +266,7 @@
     {
       "name": "Super_pac_gomme",
       "model": {
-         "type":"texture",
+         "type":"light_texture",
          "args": {
            "objPath": "sphere.obj",
 	   "texPath": "orange_sphere.png"
