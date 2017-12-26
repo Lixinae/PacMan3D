@@ -24,10 +24,7 @@ uniform vec3 uLightDirection;
 uniform vec3 uAmbiantColor;
 uniform vec3 uDiffuseColor;
 uniform vec3 uLightColor;
-
 uniform float uLightIntensity; // Intensité de la lumiere
-uniform float uAmbiantIntensity; // Intensité de la lumiere ambiante
-uniform float uDiffuseIntensity; // Intensité de la lumière diffuse
 
 // todo -> Sera changé lors du calcul avec les spots light
 
@@ -50,8 +47,8 @@ vec4 blinnPhong(){
 
 
     vec3 colorLinear = uAmbiantColor +
-                       uDiffuseColor * lambertian * uLightColor * lightPower / distance +
-                         specularColor * specular * uLightColor * lightPower / distance;
+                       uDiffuseColor * lambertian * uLightColor * uLightIntensity / distance +
+                         specularColor * specular * uLightColor * uLightIntensity / distance;
     // apply gamma correction (assume ambientColor, diffuseColor and specColor
     // have been linearized, i.e. have no gamma correction in them)
     vec3 colorGammaCorrected = pow(colorLinear, vec3(1.0/screenGamma));

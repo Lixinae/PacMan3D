@@ -16,17 +16,24 @@ const GLuint AbstractModel3D::VERTEX_ATTR_POSITION = 0;
 const GLuint AbstractModel3D::VERTEX_ATTR_NORMAL = 1;
 const GLuint AbstractModel3D::VERTEX_ATTR_TEXTURE = 2;
 
-const GLchar * AbstractModel3D::VERTEX_UNIFORM_MVP_MATRIX = "uMVPMatrix";
-const GLchar * AbstractModel3D::VERTEX_UNIFORM_MV_MATRIX = "uMVMatrix";
-const GLchar * AbstractModel3D::VERTEX_UNIFORM_NORMAL_MATRIX = "uNormalMatrix";
+const GLchar *AbstractModel3D::VERTEX_UNIFORM_MVP_MATRIX = "uMVPMatrix";
+const GLchar *AbstractModel3D::VERTEX_UNIFORM_MV_MATRIX = "uMVMatrix";
+const GLchar *AbstractModel3D::VERTEX_UNIFORM_NORMAL_MATRIX = "uNormalMatrix";
+
+const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_SHININESS = "uShininess";
+const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_LIGHT_DIRECTION = "uLightDirection";
+const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_AMBIANT_COLOR = "uAmbiantColor";
+const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_DIFFUSE_COLOR = "uDiffuseColor";
+const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_LIGHT_COLOR = "uLightColor";
+const GLchar *AbstractModel3D::FRAGMENT_UNIFORM_LIGHT_INTENSITY = "uLightIntensity";
 
 
-AbstractModel3D * AbstractModel3D::fromJSON(const json & jsonModel) {
+AbstractModel3D *AbstractModel3D::fromJSON(const json &jsonModel) {
 	// TODO static assets/models path in UTILS
 	string type = jsonModel["type"];
 	mat4 transformations(1.f);
 	transformations = scale(transformations, vec3(jsonModel["scale"]["x"], jsonModel["scale"]["y"], jsonModel["scale"]["z"]));
-    transformations = translate(transformations,vec3(jsonModel["translate"]["x"], jsonModel["translate"]["y"], jsonModel["translate"]["z"]));
+	transformations = translate(transformations, vec3(jsonModel["translate"]["x"], jsonModel["translate"]["y"], jsonModel["translate"]["z"]));
 
 //    transformations = rotate(transformations,0,vec3(jsonModel["rotate"]["x"], jsonModel["rotate"]["y"], jsonModel["rotate"]["z"]));
 	//TODO rotate
@@ -42,11 +49,11 @@ AbstractModel3D * AbstractModel3D::fromJSON(const json & jsonModel) {
 	throw invalid_argument(type + " is not a valid string representation of model type");
 }
 
-void AbstractModel3D::initPoints(const Mesh & mesh) {
+void AbstractModel3D::initPoints(const Mesh &mesh) {
 	glGenBuffers(1, &_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 	_size = mesh.getVertexCount();
-	glBufferData(GL_ARRAY_BUFFER, _size*sizeof(ShapeVertex), mesh.getDataPointer(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, _size * sizeof(ShapeVertex), mesh.getDataPointer(), GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glGenVertexArrays(1, &_vao);
 	glBindVertexArray(_vao);
@@ -54,28 +61,34 @@ void AbstractModel3D::initPoints(const Mesh & mesh) {
 	glEnableVertexAttribArray(VERTEX_ATTR_NORMAL);
 	glEnableVertexAttribArray(VERTEX_ATTR_TEXTURE);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	glVertexAttribPointer(VERTEX_ATTR_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid*)offsetof(ShapeVertex, position)); 
-	glVertexAttribPointer(VERTEX_ATTR_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid*)offsetof(ShapeVertex, normal)); 
-	glVertexAttribPointer(VERTEX_ATTR_TEXTURE, 2, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid*)offsetof(ShapeVertex, texCoords)); 
+	glVertexAttribPointer(VERTEX_ATTR_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid *) offsetof(ShapeVertex, position));
+	glVertexAttribPointer(VERTEX_ATTR_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid *) offsetof(ShapeVertex, normal));
+	glVertexAttribPointer(VERTEX_ATTR_TEXTURE, 2, GL_FLOAT, GL_FALSE, sizeof(ShapeVertex), (const GLvoid *) offsetof(ShapeVertex, texCoords));
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
 
-void AbstractModel3D::initProgram(const string & fragmentShader) {
+void AbstractModel3D::initProgram(const string &fragmentShader) {
 	_program = loadProgram(VERTEX_SHADER_3D, fragmentShader);
 	_uMVPmatrix = getUniformLocation(VERTEX_UNIFORM_MVP_MATRIX);
-    _uMVmatrix = getUniformLocation(VERTEX_UNIFORM_MV_MATRIX);
-    _uNormalmatrix = getUniformLocation(VERTEX_UNIFORM_NORMAL_MATRIX);
+	_uMVmatrix = getUniformLocation(VERTEX_UNIFORM_MV_MATRIX);
+	_uNormalmatrix = getUniformLocation(VERTEX_UNIFORM_NORMAL_MATRIX);
+
+	_uShininess = getUniformLocation(FRAGMENT_UNIFORM_SHININESS); // Brillance de l'objet
+	_uLightDirection = getUniformLocation(FRAGMENT_UNIFORM_LIGHT_DIRECTION); // Direction de la lumiere
+	_uAmbiantColor = getUniformLocation(FRAGMENT_UNIFORM_AMBIANT_COLOR); // Couleur de la lumiere ambiante
+	_uDiffuseColor = getUniformLocation(FRAGMENT_UNIFORM_DIFFUSE_COLOR); // Couleur de la lumiere diffuse
+	_uLightColor = getUniformLocation(FRAGMENT_UNIFORM_LIGHT_COLOR); // Couleur de la lumiere
+	_uLightIntensity = getUniformLocation(FRAGMENT_UNIFORM_LIGHT_INTENSITY); // Intensité de la lumiere
 }
-	
-AbstractModel3D::AbstractModel3D(const Mesh & mesh, const string & fragmentShader, const mat4 & modelTransform):
-	_modelTransform(modelTransform)
-{
+
+AbstractModel3D::AbstractModel3D(const Mesh &mesh, const string &fragmentShader, const mat4 &modelTransform) :
+		_modelTransform(modelTransform) {
 	initPoints(mesh);
 	initProgram(fragmentShader);
 }
 
-AbstractModel3D::~AbstractModel3D()  {
+AbstractModel3D::~AbstractModel3D() {
 	glDeleteBuffers(1, &_vbo);
 	glDeleteVertexArrays(1, &_vao);
 }
@@ -93,14 +106,41 @@ GLsizei AbstractModel3D::count() const {
 	return _size;
 }
 
-GLuint AbstractModel3D::getUniformLocation(const GLchar * uniform) {
+GLint AbstractModel3D::getUniformLocation(const GLchar *uniform) {
 	return glGetUniformLocation(_program.getGLId(), uniform);
 }
 
-void AbstractModel3D::setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix) {
+void AbstractModel3D::setMatrices(const mat4 &ProjMatrix, const mat4 &MVMatrix) {
 	mat4 transformMVMatrix = MVMatrix * _modelTransform;
 	glUniformMatrix4fv(_uMVPmatrix, 1, GL_FALSE, value_ptr(ProjMatrix * transformMVMatrix));
 	glUniformMatrix4fv(_uMVmatrix, 1, GL_FALSE, value_ptr(transformMVMatrix));
 	glUniformMatrix4fv(_uNormalmatrix, 1, GL_FALSE, value_ptr(transpose(inverse(transformMVMatrix))));
+}
+
+// todo -> add shininess en parametre
+// todo -> Recuperer les valeurs à partir de la lumiere directionnel créé
+void AbstractModel3D::setLightComponents(float shininess) const {
+
+//	float shininess = 10.f; // brillance de l'objet
+	glUniform1f(_uShininess, shininess);
+
+	vec3 lightDir = vec3(1, 1, 1); // Light dir
+	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
+
+	const float divider = 255.f;
+	vec3 lightColor = vec3(255.f / divider, 255.f / divider, 255.f / divider); // Light color
+	glUniform3f(_uLightColor, lightColor.x, lightColor.y, lightColor.z);
+
+	float ratio = 0.1f; // light AmbiantIntensity
+	vec3 ambiantColor = vec3(lightColor.x * ratio, lightColor.y * ratio, lightColor.y * ratio);
+	glUniform3f(_uAmbiantColor, ambiantColor.x, ambiantColor.y, ambiantColor.z);
+
+	ratio = 0.5f; // Light diffuseIntensity
+	vec3 diffuseColor = vec3(lightColor.x * ratio, lightColor.y * ratio, lightColor.y * ratio);
+	glUniform3f(_uDiffuseColor, diffuseColor.x, diffuseColor.y, diffuseColor.z);
+
+	float lightIntensity = 10; // Light intenstity
+	glUniform1f(_uLightIntensity, lightIntensity);
+
 }
 
