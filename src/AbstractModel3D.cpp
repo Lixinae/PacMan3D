@@ -1,6 +1,7 @@
 #include <AbstractModel3D.h>
 
 #include <TexModel3D.h>
+#include <LightTexModel3D.h>
 #include <NormalModel3D.h>
 
 using namespace std;
@@ -34,6 +35,11 @@ AbstractModel3D *AbstractModel3D::fromJSON(const json &jsonModel) {
 		string mesh = jsonModel["args"]["objPath"];
 		string texture = jsonModel["args"]["texPath"];
 		return TexModel3D::create("assets/models/" + mesh, "assets/textures/" + texture, transformations);
+	}
+	if (type == "light_texture") {
+		string mesh = jsonModel["args"]["objPath"];
+		string texture = jsonModel["args"]["texPath"];
+		return LightTexModel3D::create("assets/models/" + mesh, "assets/textures/" + texture, transformations);
 	}
 	if (type == "normal") {
 		string mesh = jsonModel["args"]["objPath"];

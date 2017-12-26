@@ -14,12 +14,6 @@ public:
 	//TODO static const path
 	
 	static const GLchar *FRAGMENT_UNIFORM_TEXTURE;
-	static const GLchar *FRAGMENT_UNIFORM_SHININESS;
-	static const GLchar *FRAGMENT_UNIFORM_LIGHT_DIRECTION;
-	static const GLchar *FRAGMENT_UNIFORM_AMBIANT_COLOR;
-	static const GLchar *FRAGMENT_UNIFORM_DIFFUSE_COLOR;
-	static const GLchar *FRAGMENT_UNIFORM_LIGHT_COLOR;
-	static const GLchar *FRAGMENT_UNIFORM_LIGHT_INTENSITY;
 	
 	static TexModel3D * create(const string & meshPath, const string & texturePath, const mat4 & modelTransform);
 	
@@ -32,17 +26,10 @@ private:
 
 	GLuint _textureObject;
 	GLint _uTexture;
-	GLint _uShininess;
-	GLint _uLightDirection;
-	GLint _uAmbiantColor;
-	GLint _uDiffuseColor;
-	GLint _uLightColor;
-	GLint _uLightIntensity;
 	
 	TexModel3D(const Mesh & mesh, const unique_ptr<Image> & texture, const mat4 & modelTransform);
 	
 	void initTexture(const unique_ptr<Image> & texture);
-	void initLight();
 
 };
 
