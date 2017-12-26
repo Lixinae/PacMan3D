@@ -41,7 +41,6 @@ public:
 	GLint getUniformLocation(const GLchar *uniform);
 	
 	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix);
-	virtual void setLightComponents(float shininess);
 
 protected:
 

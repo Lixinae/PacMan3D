@@ -38,8 +38,6 @@ void Renderer3D::renderModels(const GameRepresentation &repr) const {
                             vec3(0, 1, 0)
                     );
             model3d->setMatrices(_ProjMatrix, MVMatrix);
-            // todo -> ajout le materiau de l'objet pour les parametres
-            model3d->setLightComponents(10.f);
             glDrawArrays(GL_TRIANGLES, 0, model3d->count());
         }
         model3d->unbind();

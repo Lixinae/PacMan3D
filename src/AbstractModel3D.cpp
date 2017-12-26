@@ -103,8 +103,3 @@ void AbstractModel3D::setMatrices(const mat4 &ProjMatrix, const mat4 &MVMatrix) 
 	glUniformMatrix4fv(_uNormalmatrix, 1, GL_FALSE, value_ptr(transpose(inverse(transformMVMatrix))));
 }
 
-void AbstractModel3D::setLightComponents(float shininess){
-
-
-}
-

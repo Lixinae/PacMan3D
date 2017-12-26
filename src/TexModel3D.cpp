@@ -53,34 +53,24 @@ void TexModel3D::bind() {
     AbstractModel3D::bind();
     glBindTexture(GL_TEXTURE_2D, _textureObject);
     glUniform1i(_uTexture, 0);
+    float shininess = 10.f;
+	glUniform1f(_uShininess, shininess);
+	vec3 lightDir = vec3(1, 1, 1); // Light dir
+	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
+	const float divider = 255.f;
+	vec3 lightColor = vec3(255.f / divider, 255.f / divider, 255.f / divider); // Light color
+	glUniform3f(_uLightColor, lightColor.x, lightColor.y, lightColor.z);
+	float ratio = 0.1f; // light AmbiantIntensity
+	vec3 ambiantColor = vec3(lightColor.x * ratio, lightColor.y * ratio, lightColor.y * ratio);
+	glUniform3f(_uAmbiantColor, ambiantColor.x, ambiantColor.y, ambiantColor.z);
+	ratio = 0.5f; // Light diffuseIntensity
+	vec3 diffuseColor = vec3(lightColor.x * ratio, lightColor.y * ratio, lightColor.y * ratio);
+	glUniform3f(_uDiffuseColor, diffuseColor.x, diffuseColor.y, diffuseColor.z);
+	float lightIntensity = 10; // Light intenstity
+	glUniform1f(_uLightIntensity, lightIntensity);
 }
 
 void TexModel3D::unbind() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	AbstractModel3D::unbind();
-}
-
-void TexModel3D::setLightComponents(float shininess){
-
-//	float shininess = 10.f; // brillance de l'objet
-	glUniform1f(_uShininess, shininess);
-
-	vec3 lightDir = vec3(1, 1, 1); // Light dir
-	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
-
-	const float divider = 255.f;
-	vec3 lightColor = vec3(255.f / divider, 255.f / divider, 255.f / divider); // Light color
-	glUniform3f(_uLightColor, lightColor.x, lightColor.y, lightColor.z);
-
-	float ratio = 0.1f; // light AmbiantIntensity
-	vec3 ambiantColor = vec3(lightColor.x * ratio, lightColor.y * ratio, lightColor.y * ratio);
-	glUniform3f(_uAmbiantColor, ambiantColor.x, ambiantColor.y, ambiantColor.z);
-
-	ratio = 0.5f; // Light diffuseIntensity
-	vec3 diffuseColor = vec3(lightColor.x * ratio, lightColor.y * ratio, lightColor.y * ratio);
-	glUniform3f(_uDiffuseColor, diffuseColor.x, diffuseColor.y, diffuseColor.z);
-
-	float lightIntensity = 10; // Light intenstity
-	glUniform1f(_uLightIntensity, lightIntensity);
-
 }

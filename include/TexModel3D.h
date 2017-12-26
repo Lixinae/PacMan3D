@@ -28,8 +28,6 @@ public:
 	void bind() override;
 	void unbind() override;
 	
-	virtual void setLightComponents(float shininess);
-	
 private:
 
 	GLuint _textureObject;
