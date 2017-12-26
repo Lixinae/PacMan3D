@@ -17,7 +17,13 @@ public:
 
 	Renderer3D(int windowWidth, int windowHeight, const PointOfView & pointOfView, const map<GameRepresentation::ModelType, AbstractModel3D *> & map_model3D);
 
-	void render(const GameRepresentation & repr,const GameInformations& gameInfo) const;
+	void renderGame(const GameRepresentation & repr,const GameInformations& gameInfo) const;
+
+	void renderBeginTitle() const;
+	
+	void renderBeginGame() const;
+	
+	void renderEndTitle() const;
 
     ~Renderer3D() override;
 

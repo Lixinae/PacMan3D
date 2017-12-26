@@ -13,13 +13,65 @@
 #include <Renderer3D.h>
 #include <EventHandler.h>
 
-
-#include <ColorText2DRenderer.h>
-
-
 using namespace glimac;
 using namespace std;
 using namespace glm;
+
+void waitFrameRate() {
+	this_thread::sleep_for(chrono::milliseconds(66));
+}
+
+void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, EventHandler & eventHandler) {
+	EventHandler::State state;
+	state = EventHandler::State::CONTINUE;
+	while (state == EventHandler::State::CONTINUE) {
+		state = eventHandler.handleBeginTitleEvent(windowManager);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		renderer.renderBeginTitle();
+		windowManager.swapBuffers();
+	}
+	if (state == EventHandler::State::QUIT) {
+		return;
+	}
+    while (!game.isFinish()) {
+		state = EventHandler::State::CONTINUE;
+		while (state == EventHandler::State::CONTINUE) {
+			state = eventHandler.handleBeginGameEvent(windowManager, game);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			renderer.renderGame(game.getRepresentation(), game.getInformations());
+			renderer.renderBeginGame();
+			windowManager.swapBuffers();
+			waitFrameRate();
+		}
+		if (state == EventHandler::State::QUIT) {
+			return;
+		}
+		while (game.iterate()) {
+			state = eventHandler.handleGameEvent(windowManager, game);
+			if (state == EventHandler::State::QUIT) {
+				return;
+			}
+			if (state == EventHandler::State::PAUSE) {
+				//TODO
+				while (true) {}
+			}
+			 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			renderer.renderGame(game.getRepresentation(), game.getInformations());
+			windowManager.swapBuffers();
+			waitFrameRate();
+		}
+		game.reset();
+
+    }
+	state = EventHandler::State::CONTINUE;
+	while (state == EventHandler::State::CONTINUE) {
+		state = eventHandler.handleEndTitleEvent(windowManager);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		renderer.renderEndTitle();
+		windowManager.swapBuffers();
+	}
+	
+}
 
 int realMain() {
 
@@ -33,6 +85,7 @@ int realMain() {
         cerr << glewGetErrorString(glewInitError) << endl;
         return EXIT_FAILURE;
     }
+    
 
 	srand(time(nullptr));
 
@@ -46,26 +99,8 @@ int realMain() {
 
 	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap());
 
-    bool done = false;
-    while (!done) {
-
-        if (eventHandler.handleEvent(windowManager, game)) {
-            done = true;
-        }
-
-        renderer->render(game.getRepresentation(), game.getInformations());
-
-		if(!game.iterate()) {
-			//done = true;
-		}
-
-        windowManager.swapBuffers();
-        
-        //TODO sleep framerate
-        this_thread::sleep_for(chrono::milliseconds(66));
-
-    }
-
+	play(game, windowManager, *renderer, eventHandler);
+    
     delete renderer;
 
     return EXIT_SUCCESS;

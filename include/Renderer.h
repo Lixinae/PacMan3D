@@ -7,9 +7,15 @@ class Renderer {
 
 public:
 
-	virtual void render(const GameRepresentation & repr,const GameInformations& gameInfo) const = 0;
+	virtual void renderGame(const GameRepresentation & repr,const GameInformations& gameInfo) const = 0;
 	
-	virtual ~Renderer() = default;;
+	virtual void renderBeginTitle() const = 0;
+	
+	virtual void renderBeginGame() const = 0;
+	
+	virtual void renderEndTitle() const = 0;
+	
+	virtual ~Renderer() = default;
 
 };
 
