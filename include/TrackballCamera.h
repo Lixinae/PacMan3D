@@ -14,7 +14,8 @@ public:
 
     TrackballCamera();
 
-    TrackballCamera(float Distance, float AngleX, float AngleY);
+	//TODO field m_Center and use it in getViewMatrix (do translation -center before all in function)
+    TrackballCamera(glm::vec3 center, float Distance, float AngleX, float AngleY);
 
     /**
      * Permet d'avancer ou de reculer la camera

@@ -3,10 +3,10 @@
 using namespace glm;
 
 PointOfView::PointOfView(const BoardPosition & position, Utils::Orientation orientation) :
-	_leftTrackballCamera(25,45,15), // TODO compute in function of position
-	_upperTrackballCamera(25,90,0), //
-	_rightTrackballCamera(25,45,-15), //
-	_freeflyCamera(vec3(0,1,0), Utils::degreesOfOrientation(orientation), 0), 
+	_leftTrackballCamera(position.inSpace(),25,45,15), 
+	_upperTrackballCamera(position.inSpace(),25,90,0), 
+	_rightTrackballCamera(position.inSpace(),25,45,-15),
+	_freeflyCamera(position.inSpace(), Utils::degreesOfOrientation(orientation), 0), 
 	_current(PointOfView::CameraType::UPPER_LEFT) 
 {
 
