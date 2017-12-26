@@ -12,15 +12,19 @@ class PointOfView {
 public:
 
 	enum class CameraType {
-		TRACKBALL,
-		FREEFLY
+		UPPER_LEFT,
+		UPPER,
+		UPPER_RIGHT,
+		FIRST_PERSON
 	};
 
 	PointOfView(const BoardPosition & position, Utils::Orientation orientation);
 	
 	
-	TrackballCamera & getTrackballCamera();
-	FreeflyCamera & getFreeflyCamera();
+	TrackballCamera & getUpperLeftCamera();
+	TrackballCamera & getUpperCamera();
+	TrackballCamera & getUpperRightCamera();
+	FreeflyCamera & getFirstPersonCamera();
 	
 	const Camera & getCurrentCamera() const;
 	
@@ -30,7 +34,9 @@ public:
 
 private:
 	
-	TrackballCamera _trackballCamera;
+	TrackballCamera _leftTrackballCamera;
+	TrackballCamera _upperTrackballCamera;
+	TrackballCamera _rightTrackballCamera;
 	FreeflyCamera _freeflyCamera;
 	CameraType _current;
 	
