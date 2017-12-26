@@ -8,35 +8,35 @@ class TrackballCamera : public Camera {
 
 private:
 
-    float m_fDistance, m_fAngleX, m_fAngleY;
+	float m_fDistance, m_fAngleX, m_fAngleY;
 
 public:
 
-    TrackballCamera();
+	TrackballCamera();
 
 	//TODO field m_Center and use it in getViewMatrix (do translation -center before all in function)
-    TrackballCamera(glm::vec3 center, float Distance, float AngleX, float AngleY);
+	TrackballCamera(glm::vec3 center, float Distance, float AngleX, float AngleY);
 
-    /**
-     * Permet d'avancer ou de reculer la camera
-     * @param t : valeur a enlever ou rajouter
-     */
-    void moveFront(float delta);
+	/**
+	 * Permet d'avancer ou de reculer la camera
+	 * @param t : valeur a enlever ou rajouter
+	 */
+	void moveFront(float delta);
 
 
-    void rotateLeft(float degrees);
+	void rotateLeft(float degrees);
 
-    /**
-    * Permet de faire tourner la camera vers le haut ou le bas(en ajoutant ou en enlevant des degrées)
-    * @param degrees : valeur en degrees a enlever ou ajouter
-    */
-    void rotateUp(float degrees);
+	/**
+	* Permet de faire tourner la camera vers le haut ou le bas(en ajoutant ou en enlevant des degrées)
+	* @param degrees : valeur en degrees a enlever ou ajouter
+	*/
+	void rotateUp(float degrees);
 
-    /**
-     * Calcul la viewMatrix de la camera et la renvoie
-     * @return La viewMatrix de la camera
-     */
-    glm::mat4 getViewMatrix() const override;
+	/**
+	 * Calcul la viewMatrix de la camera et la renvoie
+	 * @return La viewMatrix de la camera
+	 */
+	glm::mat4 getViewMatrix() const override;
 
 };
 

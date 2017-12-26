@@ -21,27 +21,29 @@ public:
 		ivec2 Bearing;
 		GLuint Advance;
 	};
-	
-	ColorText2DRenderer(int windowWidth, int windowHeight, const string & fontPath);
-	
+
+	ColorText2DRenderer(int windowWidth, int windowHeight, const string &fontPath);
+
 	// TODO DESTRUCT
-	
-	void render(const string & text, GLfloat x, GLfloat y, GLfloat scale, const vec3 & color) const;
-	
+
+	void render(const string &text, GLfloat x, GLfloat y, GLfloat scale, const vec3 &color) const;
+
 private:
 
 	map<GLchar, Character> _characters;
-		
+
 	Program _program;
-	
+
 	GLuint _vbo;
 	GLuint _vao;
-	
+
 	GLuint _uProjection;
 	GLuint _uTextColor;
-	
+
 	void initProgram();
-	void initCharacters(int windowWidth, int windowHeight, const string & fontPath);
+
+	void initCharacters(int windowWidth, int windowHeight, const string &fontPath);
+
 	void initQuads();
 
 };

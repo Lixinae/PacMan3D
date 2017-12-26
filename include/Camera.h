@@ -8,13 +8,13 @@ class Camera {
 
 public:
 
-    Camera() = default;
+	Camera() = default;
 
-    /**
-     * Calcul la viewMatrix de la camera et la renvoie
-     * @return La viewMatrix de la camera
-     */
-    virtual glm::mat4 getViewMatrix() const = 0;
+	/**
+	 * Calcul la viewMatrix de la camera et la renvoie
+	 * @return La viewMatrix de la camera
+	 */
+	virtual glm::mat4 getViewMatrix() const = 0;
 
 };
 

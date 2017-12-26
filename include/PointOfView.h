@@ -18,28 +18,30 @@ public:
 		FIRST_PERSON
 	};
 
-	PointOfView(const BoardPosition & position, Utils::Orientation orientation);
-	
-	
-	TrackballCamera & getUpperLeftCamera();
-	TrackballCamera & getUpperCamera();
-	TrackballCamera & getUpperRightCamera();
-	FreeflyCamera & getFirstPersonCamera();
-	
-	const Camera & getCurrentCamera() const;
-	
+	PointOfView(const BoardPosition &position, Utils::Orientation orientation);
+
+	TrackballCamera &getUpperLeftCamera();
+
+	TrackballCamera &getUpperCamera();
+
+	TrackballCamera &getUpperRightCamera();
+
+	FreeflyCamera &getFirstPersonCamera();
+
+	const Camera &getCurrentCamera() const;
+
 	CameraType getCurrentCameraType() const;
-	
+
 	void setNextCamera();
 
 private:
-	
+
 	TrackballCamera _leftTrackballCamera;
 	TrackballCamera _upperTrackballCamera;
 	TrackballCamera _rightTrackballCamera;
 	FreeflyCamera _freeflyCamera;
 	CameraType _current;
-	
+
 };
 
 #endif

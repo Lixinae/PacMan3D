@@ -13,7 +13,7 @@ class GameRepresentation {
 public:
 
 	enum class ModelType {
-		
+
 		PACMAN,
 		GHOST_BLINKY,
 		GHOST_PINKY,
@@ -24,48 +24,49 @@ public:
 		FLOOR,
 		TUNNEL,
 		PAC_GOMME,
-		SUPER_PAC_GOMME	
-		
+		SUPER_PAC_GOMME
+
 	};
-	
+
 	struct Model {
-		
+
 		ModelType modelType;
 		Utils::Orientation orientation;
-		
+
 		Model(ModelType modelType, Utils::Orientation orientation);
+
 		Model(ModelType modelType);
-		
+
 	};
-	
+
 	struct ModelInformations {
-		
+
 		BoardPosition position;
 		Utils::Orientation orientation;
-		
-		ModelInformations(const BoardPosition & position, Utils::Orientation orientation);
-		
+
+		ModelInformations(const BoardPosition &position, Utils::Orientation orientation);
+
 	};
-	
-    static vector<ModelType> MODELS;
 
-	static ModelType modelFromString(const string & strModel);
+	static vector<ModelType> MODELS;
 
-	GameRepresentation(); 
-	
-	const vector<ModelInformations> & getPositions(ModelType modelType) const;
+	static ModelType modelFromString(const string &strModel);
 
-	void add(Model model, const BoardPosition & position);
-	
-	void remove(Model model, const BoardPosition & position);
-	
-	const vector<ModelInformations> & operator[](ModelType modelType) const;
-	
+	GameRepresentation();
+
+	const vector<ModelInformations> &getPositions(ModelType modelType) const;
+
+	void add(Model model, const BoardPosition &position);
+
+	void remove(Model model, const BoardPosition &position);
+
+	const vector<ModelInformations> &operator[](ModelType modelType) const;
+
 private:
- 
+
 	map<ModelType, vector<ModelInformations>> _modelsPositions;
 
-    static vector<ModelType> buildVector();
+	static vector<ModelType> buildVector();
 };
 
 #endif

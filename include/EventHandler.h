@@ -28,16 +28,19 @@ public:
 	};
 
 
-    explicit EventHandler(const map<control, SDLKey> & keyMap);
+	explicit EventHandler(const map<control, SDLKey> &keyMap);
 
-	State handleBeginTitleEvent(SDLWindowManager & windowManager);
-	State handleBeginGameEvent(SDLWindowManager & windowManager, Game & game);
-    /**
-     * Gère les evenement liés à la SDL, tel que les touches appuyer ou les mouvement de la souris
-     * @param windowManager Window Manager
-     */
-    State handleGameEvent(SDLWindowManager & windowManager, Game & game);
-    State handleEndTitleEvent(SDLWindowManager & windowManager);
+	State handleBeginTitleEvent(SDLWindowManager &windowManager);
+
+	State handleBeginGameEvent(SDLWindowManager &windowManager, Game &game);
+
+	/**
+	 * Gère les evenement liés à la SDL, tel que les touches appuyer ou les mouvement de la souris
+	 * @param windowManager Window Manager
+	 */
+	State handleGameEvent(SDLWindowManager &windowManager, Game &game);
+
+	State handleEndTitleEvent(SDLWindowManager &windowManager);
 
 };
 

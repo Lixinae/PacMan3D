@@ -5,7 +5,7 @@
 
 class GhostClyde : public Ghost {
 
-using Ghost::Ghost;
+	using Ghost::Ghost;
 
 public:
 
@@ -13,7 +13,7 @@ public:
 
 	GameRepresentation::ModelType getModelType() const;
 
-	Ghost * clone() const;
+	Ghost *clone() const;
 
 };
 

@@ -1,9 +1,5 @@
 #include <Utils.h>
 
-#include <stdexcept>
-#include <vector>
-#include <cstdlib>
-
 using namespace std;
 
 const string Utils::SHADER_PATH = "shaders";
@@ -20,7 +16,7 @@ Utils::Orientation Utils::orientationFromString(string strOrientation) {
 	}
 	if (strOrientation == "west") {
 		return Utils::Orientation::WEST;
-	} 
+	}
 	throw invalid_argument(strOrientation + " is not a valid string representation of orientation");
 }
 
@@ -65,10 +61,10 @@ Utils::Orientation Utils::oppositeOrientation(Utils::Orientation orientation) {
 
 Utils::Orientation Utils::relativeOrientation(Utils::Orientation viewOrientation, Utils::Orientation orientation) {
 	vector<Utils::Orientation> orientations = {
-		Utils::Orientation::NORTH,
-		Utils::Orientation::WEST,
-		Utils::Orientation::SOUTH,
-		Utils::Orientation::EAST
+			Utils::Orientation::NORTH,
+			Utils::Orientation::WEST,
+			Utils::Orientation::SOUTH,
+			Utils::Orientation::EAST
 	};
 	int viewOrientationIndex, orientationIndex;
 	switch (viewOrientation) {
@@ -99,5 +95,5 @@ Utils::Orientation Utils::relativeOrientation(Utils::Orientation viewOrientation
 			orientationIndex = 1;
 			break;
 	}
-	return orientations[(viewOrientationIndex + orientationIndex)%orientations.size()];
+	return orientations[(viewOrientationIndex + orientationIndex) % orientations.size()];
 }

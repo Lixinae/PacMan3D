@@ -24,28 +24,29 @@ public:
 	static const GLuint VERTEX_ATTR_POSITION;
 	static const GLuint VERTEX_ATTR_NORMAL;
 	static const GLuint VERTEX_ATTR_TEXTURE;
-	
-	static const GLchar * VERTEX_UNIFORM_MVP_MATRIX;
-	static const GLchar * VERTEX_UNIFORM_MV_MATRIX;
-	static const GLchar * VERTEX_UNIFORM_NORMAL_MATRIX;
 
-	static AbstractModel3D * fromJSON(const json & jsonModel);
-	
+	static const GLchar *VERTEX_UNIFORM_MVP_MATRIX;
+	static const GLchar *VERTEX_UNIFORM_MV_MATRIX;
+	static const GLchar *VERTEX_UNIFORM_NORMAL_MATRIX;
+
+	static AbstractModel3D *fromJSON(const json &jsonModel);
+
 	virtual ~AbstractModel3D();
-	
+
 	virtual void bind();
+
 	virtual void unbind();
-	
+
 	GLsizei count() const;
 
 	GLint getUniformLocation(const GLchar *uniform);
-	
-	void setMatrices(const mat4 & ProjMatrix, const mat4 & MVMatrix);
+
+	void setMatrices(const mat4 &ProjMatrix, const mat4 &MVMatrix);
 
 protected:
 
-	AbstractModel3D(const Mesh & mesh, const string & fragmentShader, const mat4 & modelTransform); 
-	
+	AbstractModel3D(const Mesh &mesh, const string &fragmentShader, const mat4 &modelTransform);
+
 
 private:
 
@@ -56,13 +57,14 @@ private:
 	GLsizei _size;
 
 	GLint _uMVPmatrix;
-    GLint _uMVmatrix;
-    GLint _uNormalmatrix;
+	GLint _uMVmatrix;
+	GLint _uNormalmatrix;
 
 	mat4 _modelTransform;
 
-    void initPoints(const Mesh & mesh);
-    void initProgram(const string & fragmentShader);
+	void initPoints(const Mesh &mesh);
+
+	void initProgram(const string &fragmentShader);
 
 };
 

@@ -5,7 +5,6 @@
 #include <json/json.hpp>
 #include <GL/glew.h>
 #include <glimac/SDLWindowManager.hpp>
-#include <glimac/Program.hpp>
 #include <Game.h>
 #include <Renderer.h>
 #include <Renderer3D.h>

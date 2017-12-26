@@ -15,26 +15,28 @@ class Renderer3D : public Renderer {
 
 public:
 
-	Renderer3D(int windowWidth, int windowHeight, const PointOfView & pointOfView, const map<GameRepresentation::ModelType, AbstractModel3D *> & map_model3D);
+	Renderer3D(int windowWidth, int windowHeight, const PointOfView &pointOfView,
+	           const map<GameRepresentation::ModelType, AbstractModel3D *> &map_model3D);
 
-	void renderGame(const GameRepresentation & repr,const GameInformations& gameInfo) const;
+	void renderGame(const GameRepresentation &repr, const GameInformations &gameInfo) const;
 
 	void renderBeginTitle() const;
-	
+
 	void renderBeginGame() const;
-	
+
 	void renderEndTitle() const;
 
-    ~Renderer3D() override;
+	~Renderer3D() override;
 
 private:
 
 	mat4 _ProjMatrix;
-	const PointOfView & _pointOfView;
+	const PointOfView &_pointOfView;
 	map<GameRepresentation::ModelType, AbstractModel3D *> _models;
 	ColorText2DRenderer _textRenderer;
-	
-	void renderModels(const GameRepresentation & repr) const;
+
+	void renderModels(const GameRepresentation &repr) const;
+
 	void renderTexts(const GameInformations &informations) const;
 
 };

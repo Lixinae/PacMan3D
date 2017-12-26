@@ -5,15 +5,15 @@
 
 class GhostInky : public Ghost {
 
-using Ghost::Ghost;
+	using Ghost::Ghost;
 
 public:
 
 	Utils::Orientation getNextOrientation() const;
 
 	GameRepresentation::ModelType getModelType() const;
-	
-	Ghost * clone() const;
+
+	Ghost *clone() const;
 
 };
 

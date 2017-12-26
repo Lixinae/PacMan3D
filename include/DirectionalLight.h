@@ -11,17 +11,17 @@ using namespace glm;
 class DirectionalLight : public Light {
 
 private:
-    float _intensity;
-    vec3 _direction;
+	float _intensity;
+	vec3 _direction;
 
 
 public:
-    DirectionalLight(const vec3 &color, float ambientIntensity, float diffuseIntensity,
-                     const vec3 &_direction, float intensity);
+	DirectionalLight(const vec3 &color, float ambientIntensity, float diffuseIntensity,
+	                 const vec3 &_direction, float intensity);
 
-    float getIntensity() const;
+	float getIntensity() const;
 
-    const vec3 &getDirection() const;
+	const vec3 &getDirection() const;
 
 };
 

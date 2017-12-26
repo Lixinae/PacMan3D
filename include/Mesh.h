@@ -11,16 +11,17 @@ using namespace glimac;
 class Mesh {
 
 public:
-	
-	static Mesh fromOBJFile(const string & filePath);
 
-	const ShapeVertex * getDataPointer() const;
+	static Mesh fromOBJFile(const string &filePath);
+
+	const ShapeVertex *getDataPointer() const;
+
 	GLsizei getVertexCount() const;
 
 private:
 
 	vector<ShapeVertex> _vertices;
-	
+
 	Mesh(vector<ShapeVertex> vertices);
 
 };

@@ -12,6 +12,7 @@ private:
 public:
 
 	GameInformations();
+
 	explicit GameInformations(int lives);
 
 	/**
@@ -25,7 +26,7 @@ public:
 	 * @param value used to upgrade the score
 	 */
 	void updateScore(int value);
-	
+
 	void updateMultipliedScore(int value);
 
 	/**
@@ -33,7 +34,7 @@ public:
 	 */
 	void decreaseLife();
 
-	
+
 	void setMultiplier(int time);
 
 	/**

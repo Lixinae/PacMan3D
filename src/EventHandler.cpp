@@ -1,12 +1,10 @@
 #include <EventHandler.h>
 
-#include <Utils.h>
-
-EventHandler::EventHandler(const map<control, SDLKey> & keyMap) : _keyMap(keyMap) {
+EventHandler::EventHandler(const map<control, SDLKey> &keyMap) : _keyMap(keyMap) {
 
 }
 
-EventHandler::State EventHandler::handleBeginTitleEvent(SDLWindowManager & windowManager) {
+EventHandler::State EventHandler::handleBeginTitleEvent(SDLWindowManager &windowManager) {
 	SDL_Event event;
 	EventHandler::State state = EventHandler::State::CONTINUE;
 	while (windowManager.pollEvent(event)) {
@@ -20,7 +18,7 @@ EventHandler::State EventHandler::handleBeginTitleEvent(SDLWindowManager & windo
 	return state;
 }
 
-EventHandler::State EventHandler::handleEndTitleEvent(SDLWindowManager & windowManager) {
+EventHandler::State EventHandler::handleEndTitleEvent(SDLWindowManager &windowManager) {
 	SDL_Event event;
 	EventHandler::State state = EventHandler::State::CONTINUE;
 	while (windowManager.pollEvent(event)) {
@@ -34,7 +32,7 @@ EventHandler::State EventHandler::handleEndTitleEvent(SDLWindowManager & windowM
 	return state;
 }
 
-EventHandler::State EventHandler::handleBeginGameEvent(SDLWindowManager & windowManager, Game & game) {
+EventHandler::State EventHandler::handleBeginGameEvent(SDLWindowManager &windowManager, Game &game) {
 	SDL_Event event;
 	EventHandler::State state = EventHandler::State::CONTINUE;
 	while (windowManager.pollEvent(event)) {
@@ -59,7 +57,7 @@ EventHandler::State EventHandler::handleBeginGameEvent(SDLWindowManager & window
 	return state;
 }
 
-EventHandler::State EventHandler::handleGameEvent(SDLWindowManager & windowManager, Game & game) {
+EventHandler::State EventHandler::handleGameEvent(SDLWindowManager &windowManager, Game &game) {
 	SDL_Event event;
 	EventHandler::State state = EventHandler::State::CONTINUE;
 	while (windowManager.pollEvent(event)) {
@@ -70,16 +68,16 @@ EventHandler::State EventHandler::handleGameEvent(SDLWindowManager & windowManag
 			if (event.key.keysym.sym == _keyMap[control::CHANGE_CAMERA]) {
 				game.changeCamera();
 			}
-			if (event.key.keysym.sym == _keyMap[control::UP]){
+			if (event.key.keysym.sym == _keyMap[control::UP]) {
 				game.orientPacman(Utils::Orientation::NORTH);
 			}
-			if (event.key.keysym.sym ==_keyMap[control::DOWN]){
+			if (event.key.keysym.sym == _keyMap[control::DOWN]) {
 				game.orientPacman(Utils::Orientation::SOUTH);
 			}
-			if (event.key.keysym.sym == _keyMap[control::LEFT]){
+			if (event.key.keysym.sym == _keyMap[control::LEFT]) {
 				game.orientPacman(Utils::Orientation::WEST);
 			}
-			if (event.key.keysym.sym == _keyMap[control::RIGHT]){
+			if (event.key.keysym.sym == _keyMap[control::RIGHT]) {
 				game.orientPacman(Utils::Orientation::EAST);
 			}
 			//TODO pause

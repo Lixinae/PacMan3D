@@ -13,29 +13,35 @@ using json = nlohmann::json;
 class BoardPosition {
 
 public:
-	
+
 	BoardPosition(int x, int y);
-	
-	static BoardPosition fromJSON(const json & jsonPosition);
-	
+
+	static BoardPosition fromJSON(const json &jsonPosition);
+
 	int getX() const;
+
 	int getY() const;
-	
+
 	BoardPosition translate(Utils::Orientation orientation) const;
-	
+
 	glm::vec3 inSpace() const;
-	
-	bool operator==(const BoardPosition & other) const;
-	bool operator!=(const BoardPosition & other) const;
-	bool operator<(const BoardPosition & other) const;
-	bool operator>(const BoardPosition & other) const;
-	bool operator<=(const BoardPosition & other) const;
-	bool operator>=(const BoardPosition & other) const;
-	
-	friend ostream & operator<<(ostream & os, BoardPosition position);
-	
+
+	bool operator==(const BoardPosition &other) const;
+
+	bool operator!=(const BoardPosition &other) const;
+
+	bool operator<(const BoardPosition &other) const;
+
+	bool operator>(const BoardPosition &other) const;
+
+	bool operator<=(const BoardPosition &other) const;
+
+	bool operator>=(const BoardPosition &other) const;
+
+	friend ostream &operator<<(ostream &os, BoardPosition position);
+
 private:
-	
+
 	int _x;
 	int _y;
 

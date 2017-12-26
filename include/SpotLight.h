@@ -8,13 +8,13 @@ using namespace glm;
 
 class SpotLight : public Light {
 
-    glm::vec3 _position;
+	glm::vec3 _position;
 
-    struct {
-        float _constant;
-        float _linear;
-        float _exp;
-    } _Attenuation;
+	struct {
+		float _constant;
+		float _linear;
+		float _exp;
+	} _Attenuation;
 
 };
 

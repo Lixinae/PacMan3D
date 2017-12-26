@@ -1,17 +1,14 @@
 #include <Pacman.h>
 
-#include <BoardPosition.h>
-#include <json/json.hpp>
-
 using json = nlohmann::json;
 
-Pacman::Pacman(const BoardPosition & position, Utils::Orientation orientation) : _position(position), _orientation(orientation) {
+Pacman::Pacman(const BoardPosition &position, Utils::Orientation orientation) : _position(position), _orientation(orientation) {
 
 }
 
-Pacman Pacman::fromJSON(const json & jsonPacman) {
+Pacman Pacman::fromJSON(const json &jsonPacman) {
 	BoardPosition position = BoardPosition::fromJSON(jsonPacman["position"]);
-	Utils::Orientation orientation = Utils::orientationFromString(jsonPacman["orientation"]); 
+	Utils::Orientation orientation = Utils::orientationFromString(jsonPacman["orientation"]);
 	return Pacman(position, orientation);
 }
 
@@ -27,7 +24,7 @@ BoardPosition Pacman::getPosition() const {
 	return _position;
 }
 
-void Pacman::setPosition(const BoardPosition & position) {
+void Pacman::setPosition(const BoardPosition &position) {
 	_position = position;
 }
 

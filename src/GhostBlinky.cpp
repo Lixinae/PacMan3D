@@ -8,6 +8,6 @@ GameRepresentation::ModelType GhostBlinky::getModelType() const {
 	return GameRepresentation::ModelType::GHOST_BLINKY;
 }
 
-Ghost * GhostBlinky::clone() const {
+Ghost *GhostBlinky::clone() const {
 	return new GhostBlinky(Ghost::getPosition(), Ghost::getOrientation());
 }

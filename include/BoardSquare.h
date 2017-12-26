@@ -15,39 +15,39 @@ class BoardSquare {
 public:
 
 	struct PacmanContext {
-		
-		Pacman & pacman;
-		vector<Ghost *> & ghosts;
-		GameInformations & informations;
-		
-		PacmanContext(Pacman & pacman, vector<Ghost *> & ghosts, GameInformations & informations);
-		
+
+		Pacman &pacman;
+		vector<Ghost *> &ghosts;
+		GameInformations &informations;
+
+		PacmanContext(Pacman &pacman, vector<Ghost *> &ghosts, GameInformations &informations);
+
 	};
-	
+
 	struct GhostContext {
-		
-		Ghost & ghost;
-		
-		GhostContext(Ghost & ghost);
-		
+
+		Ghost &ghost;
+
+		GhostContext(Ghost &ghost);
+
 	};
-	
-	static BoardSquare * fromJSON(const json & jsonSquare);
-	
+
+	static BoardSquare *fromJSON(const json &jsonSquare);
+
 	virtual vector<GameRepresentation::Model> getModels() const = 0;
-	
-	virtual bool isPacmanWalkable(const PacmanContext & context) const = 0;
-	
-	virtual void receivePacman(PacmanContext & context) = 0;
-	
-	virtual bool isGhostWalkable(const GhostContext & context) const = 0;
-	
-	virtual void receiveGhost(GhostContext & context) = 0;
-	
-	virtual BoardSquare * clone() = 0;
-	
+
+	virtual bool isPacmanWalkable(const PacmanContext &context) const = 0;
+
+	virtual void receivePacman(PacmanContext &context) = 0;
+
+	virtual bool isGhostWalkable(const GhostContext &context) const = 0;
+
+	virtual void receiveGhost(GhostContext &context) = 0;
+
+	virtual BoardSquare *clone() = 0;
+
 	virtual ~BoardSquare() {
-		
+
 	};
 
 };

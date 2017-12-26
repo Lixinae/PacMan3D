@@ -12,7 +12,7 @@ class LightTexModel3D : public AbstractModel3D {
 public:
 
 	//TODO static const path
-	
+
 	static const GLchar *FRAGMENT_UNIFORM_TEXTURE;
 	static const GLchar *FRAGMENT_UNIFORM_DIFFUSE;
 	static const GLchar *FRAGMENT_UNIFORM_GLOSSY;
@@ -20,14 +20,15 @@ public:
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_DIRECTION;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_COLOR;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_INTENSITY;
-	
-	static LightTexModel3D * create(const string & meshPath, const string & texturePath, const mat4 & modelTransform);
-	
+
+	static LightTexModel3D *create(const string &meshPath, const string &texturePath, const mat4 &modelTransform);
+
 	~LightTexModel3D();
-	
+
 	void bind() override;
+
 	void unbind() override;
-	
+
 private:
 
 	GLuint _textureObject;
@@ -38,10 +39,11 @@ private:
 	GLint _uLightDirection;
 	GLint _uLightColor;
 	GLint _uLightIntensity;
-	
-	LightTexModel3D(const Mesh & mesh, const unique_ptr<Image> & texture, const mat4 & modelTransform);
-	
-	void initTexture(const unique_ptr<Image> & texture);
+
+	LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const mat4 &modelTransform);
+
+	void initTexture(const unique_ptr<Image> &texture);
+
 	void initLight();
 
 };

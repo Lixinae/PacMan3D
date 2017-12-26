@@ -3,16 +3,16 @@
 
 DirectionalLight::DirectionalLight(const vec3 &color, float ambientIntensity, float diffuseIntensity,
                                    const vec3 &direction, float intensity) :
-        Light::Light(color, ambientIntensity, diffuseIntensity),
-        _direction(direction),
-        _intensity(intensity) {
+		Light::Light(color, ambientIntensity, diffuseIntensity),
+		_direction(direction),
+		_intensity(intensity) {
 
 }
 
 float DirectionalLight::getIntensity() const {
-    return _intensity;
+	return _intensity;
 }
 
 const vec3 &DirectionalLight::getDirection() const {
-    return _direction;
+	return _direction;
 }

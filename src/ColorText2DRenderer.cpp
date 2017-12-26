@@ -7,15 +7,15 @@
 
 void ColorText2DRenderer::initProgram() {
 	// TODO static const for fs vs
-	_program =  loadProgram("shaders/text2D.vs.glsl", "shaders/text2D.fs.glsl");
+	_program = loadProgram("shaders/text2D.vs.glsl", "shaders/text2D.fs.glsl");
 	_uProjection = glGetUniformLocation(_program.getGLId(), "uProjection");
 	_uTextColor = glGetUniformLocation(_program.getGLId(), "uTextColor");
 }
-	
-void ColorText2DRenderer::initCharacters(int windowWidth, int windowHeight, const string & fontPath) {
+
+void ColorText2DRenderer::initCharacters(int windowWidth, int windowHeight, const string &fontPath) {
 	mat4 projection = ortho(0.0f, static_cast<GLfloat>(windowWidth), 0.0f, static_cast<GLfloat>(windowHeight));
 
-		
+
 	_program.use();
 	glUniformMatrix4fv(_uProjection, 1, GL_FALSE, value_ptr(projection));
 
@@ -25,7 +25,7 @@ void ColorText2DRenderer::initCharacters(int windowWidth, int windowHeight, cons
 	if (FT_Init_FreeType(&ft)) {
 		cerr << "ERROR::FREETYPE: Could not init FreeType Library" << endl;
 	}
-	
+
 	// Load font as face
 	FT_Face face;
 	if (FT_New_Face(ft, fontPath.c_str(), 0, &face)) {
@@ -91,13 +91,13 @@ void ColorText2DRenderer::initQuads() {
 	glBindVertexArray(0);
 }
 
-ColorText2DRenderer::ColorText2DRenderer(int windowWidth, int windowHeight, const string & fontPath) {
+ColorText2DRenderer::ColorText2DRenderer(int windowWidth, int windowHeight, const string &fontPath) {
 	initProgram();
 	initCharacters(windowWidth, windowHeight, fontPath);
 	initQuads();
 }
 
-void ColorText2DRenderer::render(const string & text, GLfloat x, GLfloat y, GLfloat scale, const vec3 & color) const {
+void ColorText2DRenderer::render(const string &text, GLfloat x, GLfloat y, GLfloat scale, const vec3 &color) const {
 	// Activate corresponding render state
 	_program.use();
 	glEnable(GL_BLEND);
@@ -136,7 +136,8 @@ void ColorText2DRenderer::render(const string & text, GLfloat x, GLfloat y, GLfl
 		// Render quad
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-		x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+		x += (ch.Advance >> 6) *
+		     scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
 	}
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);

@@ -19,47 +19,50 @@ class Game {
 
 public:
 
-    static Game fromJSON(const json &jsonGame);
+	static Game fromJSON(const json &jsonGame);
 
-    static Game fromJSONFile(const string &filePath);
-    
-    ~Game();
+	static Game fromJSONFile(const string &filePath);
 
-    const PointOfView & getPointOfView() const;
-    void changeCamera();
-    void moveFrontCamera(float distance); // TODO Maybe not distance in arg
+	~Game();
 
-    void orientPacman(Utils::Orientation orientation);
+	const PointOfView &getPointOfView() const;
 
-    GameRepresentation getRepresentation() const;
-    
-    const GameInformations & getInformations() const;
+	void changeCamera();
 
-    bool iterate();
-    
-    void reset();
-    
-    bool isFinish();
+	void moveFrontCamera(float distance); // TODO Maybe not distance in arg
+
+	void orientPacman(Utils::Orientation orientation);
+
+	GameRepresentation getRepresentation() const;
+
+	const GameInformations &getInformations() const;
+
+	bool iterate();
+
+	void reset();
+
+	bool isFinish();
 
 private:
 
-    Board _board;
-    Pacman _pacman;
-    vector<Ghost *> _ghosts;
-    
-    Pacman _pacman_init;
-    vector<Ghost *> _ghosts_init;
-    
-    PointOfView _pointOfView;
+	Board _board;
+	Pacman _pacman;
+	vector<Ghost *> _ghosts;
+
+	Pacman _pacman_init;
+	vector<Ghost *> _ghosts_init;
+
+	PointOfView _pointOfView;
 
 	GameInformations _informations;
 
-    Game(const Board & board, const Pacman & pacman, const vector<Ghost *> & ghosts);
-    
-    void pacmanCollision(Ghost * ghost);
-    
-    void iteratePacman();
-    void iterateGhost(Ghost * ghost);
+	Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts);
+
+	void pacmanCollision(Ghost *ghost);
+
+	void iteratePacman();
+
+	void iterateGhost(Ghost *ghost);
 
 };
 

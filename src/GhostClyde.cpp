@@ -8,6 +8,6 @@ GameRepresentation::ModelType GhostClyde::getModelType() const {
 	return GameRepresentation::ModelType::GHOST_CLYDE;
 }
 
-Ghost * GhostClyde::clone() const {
+Ghost *GhostClyde::clone() const {
 	return new GhostClyde(Ghost::getPosition(), Ghost::getOrientation());
 }

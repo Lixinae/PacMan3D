@@ -5,14 +5,12 @@
 
 using json = nlohmann::json;
 
-Bonus::Context::Context(vector<Ghost *> & ghosts, GameInformations & informations):
-	ghosts(ghosts),
-	informations(informations)
-{
-	
+Bonus::Context::Context(vector<Ghost *> &ghosts, GameInformations &informations) :
+		ghosts(ghosts),
+		informations(informations) {
 }
 
-Bonus * Bonus::fromJSON(const json & jsonBonus) {
+Bonus *Bonus::fromJSON(const json &jsonBonus) {
 	string type = jsonBonus["type"];
 	if (type == "pacgomme") {
 		return new PacGomme;

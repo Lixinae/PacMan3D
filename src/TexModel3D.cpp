@@ -4,7 +4,7 @@ using namespace std;
 
 const GLchar *TexModel3D::FRAGMENT_UNIFORM_TEXTURE = "uTexture";
 
-void TexModel3D::initTexture(const unique_ptr<Image> & texture) {
+void TexModel3D::initTexture(const unique_ptr<Image> &texture) {
 	_uTexture = getUniformLocation(TexModel3D::FRAGMENT_UNIFORM_TEXTURE);
 	glGenTextures(1, &_textureObject);
 	glBindTexture(GL_TEXTURE_2D, _textureObject);
@@ -14,13 +14,12 @@ void TexModel3D::initTexture(const unique_ptr<Image> & texture) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-TexModel3D::TexModel3D(const Mesh & mesh, const unique_ptr<Image> & texture, const mat4 & modelTransform) :
-	AbstractModel3D(mesh, "shaders/tex3D.fs.glsl", modelTransform)
-{
+TexModel3D::TexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const mat4 &modelTransform) :
+		AbstractModel3D(mesh, "shaders/tex3D.fs.glsl", modelTransform) {
 	initTexture(texture);
 }
 
-TexModel3D * TexModel3D::create(const string & meshPath, const string & texturePath, const mat4 & modelTransform) {
+TexModel3D *TexModel3D::create(const string &meshPath, const string &texturePath, const mat4 &modelTransform) {
 	Mesh mesh = Mesh::fromOBJFile(meshPath);
 	unique_ptr<Image> texture = loadImage(texturePath);
 	//TODO nullcheck
@@ -32,9 +31,9 @@ TexModel3D::~TexModel3D() {
 }
 
 void TexModel3D::bind() {
-    AbstractModel3D::bind();
-    glBindTexture(GL_TEXTURE_2D, _textureObject);
-    glUniform1i(_uTexture, 0);
+	AbstractModel3D::bind();
+	glBindTexture(GL_TEXTURE_2D, _textureObject);
+	glUniform1i(_uTexture, 0);
 }
 
 void TexModel3D::unbind() {
