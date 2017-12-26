@@ -20,7 +20,7 @@ void waitFrameRate() {
 	this_thread::sleep_for(chrono::milliseconds(66));
 }
 
-void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, EventHandler & eventHandler) {
+void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, EventHandler &eventHandler) {
 	EventHandler::State state;
 	state = EventHandler::State::CONTINUE;
 	while (state == EventHandler::State::CONTINUE) {
@@ -32,7 +32,7 @@ void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, Ev
 	if (state == EventHandler::State::QUIT) {
 		return;
 	}
-    while (!game.isFinish()) {
+	while (!game.isFinish()) {
 		state = EventHandler::State::CONTINUE;
 		while (state == EventHandler::State::CONTINUE) {
 			state = eventHandler.handleBeginGameEvent(windowManager, game);
@@ -54,14 +54,14 @@ void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, Ev
 				//TODO
 				while (true) {}
 			}
-			 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			renderer.renderGame(game.getRepresentation(), game.getInformations());
 			windowManager.swapBuffers();
 			waitFrameRate();
 		}
 		game.reset();
 
-    }
+	}
 	state = EventHandler::State::CONTINUE;
 	while (state == EventHandler::State::CONTINUE) {
 		state = eventHandler.handleEndTitleEvent(windowManager);
@@ -74,16 +74,16 @@ void play(Game & game, SDLWindowManager & windowManager, Renderer & renderer, Ev
 
 int realMain() {
 
-    int windowWidth = 800;
-    int windowHeight = 600;
+	int windowWidth = 800;
+	int windowHeight = 600;
 
-    SDLWindowManager windowManager(windowWidth, windowHeight, "Pacman3D");
+	SDLWindowManager windowManager(windowWidth, windowHeight, "Pacman3D");
 
-    GLenum glewInitError = glewInit();
-    if (GLEW_OK != glewInitError) {
-        cerr << glewGetErrorString(glewInitError) << endl;
-        return EXIT_FAILURE;
-    }
+	GLenum glewInitError = glewInit();
+	if (GLEW_OK != glewInitError) {
+		cerr << glewGetErrorString(glewInitError) << endl;
+		return EXIT_FAILURE;
+	}
 
 	srand(time(nullptr));
 
@@ -99,18 +99,18 @@ int realMain() {
 
 	play(game, windowManager, *renderer, eventHandler);
 
-    delete renderer;
+	delete renderer;
 
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 
 }
 
 // Main for linux
 int main(int argc, char **argv) {
-    return realMain();
+	return realMain();
 }
 
 // Main for windows
 int WinMain(int argc, char **argv) {
-    return realMain();
+	return realMain();
 }
