@@ -156,16 +156,26 @@ bool Game::iterate() {
 				delete _ghosts[i];
 				_ghosts[i] = _ghosts_init[i]->clone();
 			} else {
-				// todo -> Kill pacman -> decrease life -> reset multiplier
-				//_pacman = _pacman_init;
-				// update camera pos and angle
 				_informations.decreaseLife();
-				if (_informations.isDead()) {
-					return false;
-				}
+				return false;
 			}
 		}
 	}
 	_informations.iterate();
 	return true;
+}
+
+void Game::reset() {
+	// todo -> Kill pacman -> decrease life -> reset multiplier
+	// update camera pos and angle
+	Utils::cleanVector(_ghosts);
+	for (unsigned int i = 0; i < _ghosts.size(); i++) {
+		_ghosts[i] = _ghosts_init[i]->clone();
+	}
+	_pacman = _pacman_init;
+	_pointOfView = PointOfView(_pacman.getPosition(), _pacman.getOrientation());
+}
+
+bool Game::isFinish() {
+	return _informations.isDead();
 }

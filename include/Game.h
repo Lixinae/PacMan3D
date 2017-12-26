@@ -36,6 +36,10 @@ public:
     const GameInformations & getInformations() const;
 
     bool iterate();
+    
+    void reset();
+    
+    bool isFinish();
 
 private:
 
