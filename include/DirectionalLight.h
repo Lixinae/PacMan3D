@@ -1,4 +1,3 @@
-
 #ifndef PACMAN3D_DIRECTIONALLIGHT_H
 #define PACMAN3D_DIRECTIONALLIGHT_H
 
@@ -12,7 +11,6 @@ using namespace glm;
 class DirectionalLight : public Light {
 
 private:
-    Light _baseLight;
     float _intensity;
     vec3 _direction;
 
@@ -28,4 +26,4 @@ public:
 };
 
 
-#endif //PACMAN3D_DIRECTIONALLIGHT_H
+#endif
