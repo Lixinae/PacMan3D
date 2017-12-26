@@ -35,7 +35,7 @@ int realMain() {
 
 	Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
 
-    Game game = Game::fromJSONFile("assets/games/game.json");
+	Game game = Game::fromJSONFile("assets/games/gameRealBoard.json");
 
 	EventHandler eventHandler(configuration.getControlMap());
 
@@ -57,6 +57,7 @@ int realMain() {
         windowManager.swapBuffers();
         
         //TODO sleep framerate
+	    // TODO -> Virer ce truc , framerate et vitesse devraient être indépendant !
         this_thread::sleep_for(chrono::milliseconds(66));
 
     }
