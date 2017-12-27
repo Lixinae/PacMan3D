@@ -55,15 +55,14 @@ void LightTexModel3D::bind() {
 	float shininess = 10.f;
 	glUniform1f(_uShininess, shininess);
 
-	vec3 diffuse = vec3(0.1, 0.1, 0.1);
+	vec3 diffuse = vec3(0.2, 0.2, 0.2);
 	glUniform3f(_uDiffuse, diffuse.x, diffuse.y, diffuse.z);
 
-	vec3 glossy = vec3(0.5, 0.5, 0.5);
+	vec3 glossy = vec3(0.7, 0.7, 0.7);
 	glUniform3f(_uGlossy, glossy.x, glossy.y, glossy.z);
 
-
 	//LIGHT
-	vec3 lightDir = vec3(1, 1, 1); // Light dir
+	vec3 lightDir = vec3(0.5f, 1.f, 0.5f); // Light dir
 	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
 
 	vec3 lightColor = vec3(1, 1, 1); // Light color
