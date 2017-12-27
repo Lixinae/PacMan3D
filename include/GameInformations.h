@@ -1,6 +1,10 @@
 #ifndef __GAME_INFORMATIONS_H__
 #define __GAME_INFORMATIONS_H__
 
+#include <json/json.hpp>
+
+using json = nlohmann::json;
+
 class GameInformations {
 
 private:
@@ -11,9 +15,11 @@ private:
 
 public:
 
+	static GameInformations fromJSON(const json &jsonInfo);
+
 	GameInformations();
 
-	explicit GameInformations(int lives);
+	explicit GameInformations(int score, int lives, int multiplier, int multiplierCounter);
 
 	/**
 	 *
@@ -61,7 +67,8 @@ public:
 	 * @return The multiplier
 	 */
 	int getMultiplier() const;
-
+	
+	json toJSON() const;
 
 };
 

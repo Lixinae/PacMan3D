@@ -9161,5 +9161,11 @@
       "x": 0,
       "y": -6
     }
+  },
+  "informations": {
+    "score":0,
+    "lives":3,
+    "multiplier":1,
+    "multiplierCounter":0
   }
 }
