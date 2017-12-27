@@ -5,7 +5,10 @@ Door::Door() {
 }
 
 vector<GameRepresentation::Model> Door::getModels() const {
-	return {GameRepresentation::Model(GameRepresentation::ModelType::WALL)};
+	return {
+		GameRepresentation::Model(GameRepresentation::ModelType::DOOR),
+		GameRepresentation::Model(GameRepresentation::ModelType::FLOOR)
+	};
 }
 
 bool Door::isPacmanWalkable(const BoardSquare::PacmanContext &) const {
@@ -30,6 +33,7 @@ BoardSquare *Door::clone() const {
 
 json Door::toJSON() const {
 	json jsonDoor;
-	
+	jsonWall["type"] = "wall";
+	jsonWall["args"] = {};
 	return jsonDoor;
 }
