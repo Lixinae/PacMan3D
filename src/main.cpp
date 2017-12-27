@@ -50,8 +50,18 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 				return;
 			}
 			if (state == EventHandler::State::PAUSE) {
-				//TODO
-				while (true) {}
+				state = EventHandler::State::CONTINUE;
+				while (state == EventHandler::State::CONTINUE) {
+					state = eventHandler.handlePauseMenuEvent(windowManager, game);
+					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+					renderer.renderGame(game.getRepresentation(), game.getInformations());
+					renderer.renderPauseMenu();
+					windowManager.swapBuffers();
+					waitFrameRate();
+				}
+				if (state == EventHandler::State::QUIT) {
+					return;
+				}
 			}
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			renderer.renderGame(game.getRepresentation(), game.getInformations());
@@ -59,7 +69,6 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 			waitFrameRate();
 		}
 		game.reset();
-
 	}
 	state = EventHandler::State::CONTINUE;
 	while (state == EventHandler::State::CONTINUE) {
