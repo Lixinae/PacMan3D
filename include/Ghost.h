@@ -26,6 +26,10 @@ public:
 	bool isWeak() const;
 
 	void setWeak(int time);
+	
+	bool canCrossDoor();
+	
+	void crossDoor();
 
 	void iterate();
 
@@ -45,6 +49,7 @@ private:
 	Utils::Orientation _orientation;
 	int _weakCounter;
 	int _count;
+	bool _crossDoor;
 
 };
 
