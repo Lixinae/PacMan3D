@@ -42,6 +42,10 @@ public:
 	void reset();
 
 	bool isFinish();
+	
+	json toJSON() const;
+	
+	void toJSONFile(const string &filePath) const;
 
 private:
 

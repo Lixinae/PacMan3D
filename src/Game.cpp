@@ -37,12 +37,30 @@ Game Game::fromJSON(const json &jsonGame) {
 	return game;
 }
 
+json Game::toJSON() const {
+	json jsonGame;
+	jsonGame["board"] = _board.toJSON();
+	jsonGame["pacman"] = _pacman.toJSON();
+	json jsonGhosts;
+	for (const Ghost * ghost : _ghosts) {
+		jsonGhosts.push_back(ghost->toJSON());
+	}
+	jsonGame["ghosts"] = jsonGhosts;
+	return jsonGame;
+}
+
 Game Game::fromJSONFile(const string &filePath) {
 	json jsonGame;
 	ifstream gameFile(filePath);
 	gameFile >> jsonGame;
 	gameFile.close();
 	return fromJSON(jsonGame);
+}
+
+void Game::toJSONFile(const string &filePath) const {
+	ofstream gameFile(filePath);
+	gameFile << toJSON().dump(4);
+	gameFile.close();
 }
 
 void Game::orientPacman(Utils::Orientation orientation) {

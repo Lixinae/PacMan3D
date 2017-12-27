@@ -12,6 +12,13 @@ Pacman Pacman::fromJSON(const json &jsonPacman) {
 	return Pacman(position, orientation);
 }
 
+json Pacman::toJSON() const {
+	json jsonPacman;
+	jsonPacman["position"] = _position.toJSON();
+	jsonPacman["orientation"] = Utils::orientationToString(_orientation);
+	return jsonPacman;
+}
+
 Utils::Orientation Pacman::getOrientation() const {
 	return _orientation;
 }

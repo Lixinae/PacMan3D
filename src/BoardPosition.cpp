@@ -10,7 +10,14 @@ BoardPosition::BoardPosition(int x, int y) : _x(x), _y(y) {
 
 BoardPosition BoardPosition::fromJSON(const json & jsonPosition) {
 	return BoardPosition(jsonPosition["x"], jsonPosition["y"]);
-};
+}
+
+json BoardPosition::toJSON() const {
+	json jsonPosition;
+	jsonPosition["x"] = _x;
+	jsonPosition["y"] = _y;
+	return jsonPosition;
+}
 
 int BoardPosition::getX() const {
 	return _x;

@@ -16,3 +16,9 @@ void PacGomme::apply(Bonus::Context &context) {
 Bonus *PacGomme::clone() const {
 	return new PacGomme(*this);
 }
+
+json PacGomme::toJSON() const {
+	json jsonBonus;
+	jsonBonus["type"] = "pacgomme";
+	return jsonBonus;
+}

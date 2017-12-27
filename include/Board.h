@@ -27,6 +27,8 @@ public:
 	BoardSquare * getSquare(const BoardPosition & position) const;
 
 	BoardSquare *operator[](const BoardPosition &position) const;
+	
+	json toJSON() const;
 			
 private:
  

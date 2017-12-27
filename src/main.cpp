@@ -16,7 +16,7 @@ using namespace std;
 using namespace glm;
 
 void waitFrameRate() {
-	this_thread::sleep_for(chrono::milliseconds(66));
+	this_thread::sleep_for(chrono::milliseconds(100));
 }
 
 void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, EventHandler &eventHandler) {

@@ -21,6 +21,8 @@ public:
 	static const string SHADER_PATH;
 
 	static Utils::Orientation orientationFromString(string strOrientation);
+	
+	static string orientationToString(Utils::Orientation orientation);
 
 	static float degreesOfOrientation(Utils::Orientation orientation);
 

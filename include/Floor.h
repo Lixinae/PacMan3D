@@ -28,7 +28,9 @@ public:
 
 	void receiveGhost(BoardSquare::GhostContext &context);
 
-	BoardSquare *clone();
+	BoardSquare *clone() const;
+
+	json toJSON() const;
 
 	Floor &operator=(const Floor &floor);
 

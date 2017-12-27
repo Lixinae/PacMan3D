@@ -14,6 +14,8 @@ public:
 	GameRepresentation::ModelType getModelType() const;
 
 	Ghost *clone() const;
+	
+	json toJSON() const;
 
 };
 

@@ -17,6 +17,8 @@ public:
 
 	Bonus *clone() const;
 
+	json toJSON() const;
+
 };
 
 #endif

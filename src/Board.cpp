@@ -29,6 +29,19 @@ Board Board::fromJSON(const json &jsonBoard) {
 	return Board(squares);
 }
 
+json Board::toJSON() const {
+	json jsonBoard;
+	json jsonSquares;
+	for (const auto &entry : _squares) {
+		json jsonSquare;
+		jsonSquare["position"] = entry.first.toJSON();
+		jsonSquare["case"] = entry.second->toJSON(); 
+		jsonSquares.push_back(jsonSquare);
+	}
+	jsonBoard["cases"] = jsonSquares;
+	return jsonBoard;
+}
+
 vector<BoardPosition> Board::getPositions() const {
 	vector<BoardPosition> positions;
 	for (const auto &pair : _squares) {

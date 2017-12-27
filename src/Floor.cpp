@@ -49,7 +49,7 @@ void Floor::receiveGhost(BoardSquare::GhostContext &) {
 
 }
 
-BoardSquare *Floor::clone() {
+BoardSquare *Floor::clone() const {
 	return new Floor(*this);
 }
 
@@ -60,3 +60,15 @@ Floor &Floor::operator=(const Floor &floor) {
 	}
 	return *this;
 }
+
+json Floor::toJSON() const {
+	json jsonFloor;
+	jsonFloor["type"] = "floor";
+	if (_bonus == nullptr) {
+		jsonFloor["args"]["bonus"] = nullptr;
+	} else {
+		jsonFloor["args"]["bonus"] = _bonus->toJSON();
+	}
+	return jsonFloor;
+}
+
