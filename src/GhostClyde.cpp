@@ -11,3 +11,11 @@ GameRepresentation::ModelType GhostClyde::getModelType() const {
 Ghost *GhostClyde::clone() const {
 	return new GhostClyde(Ghost::getPosition(), Ghost::getOrientation());
 }
+
+json GhostClyde::toJSON() const {
+	json jsonGhost;
+	jsonGhost["type"] = "clyde";
+	jsonGhost["position"] = getPosition().toJSON();
+	jsonGhost["orientation"] = Utils::orientationToString(getOrientation());
+	return jsonGhost;
+}

@@ -45,6 +45,16 @@ void Tunnel::receiveGhost(BoardSquare::GhostContext &context) {
 	context.ghost.setOrientation(_destOrientation);
 }
 
-BoardSquare *Tunnel::clone() {
+BoardSquare *Tunnel::clone() const {
 	return new Tunnel(*this);
 }
+
+json Tunnel::toJSON() const {
+	json jsonTunnel;
+	jsonTunnel["type"] = "tunnel";
+	jsonTunnel["args"]["orientation"] = Utils::orientationToString(_orientation);
+	jsonTunnel["args"]["dest"] = _dest.toJSON();
+	jsonTunnel["args"]["destOrientation"] = Utils::orientationToString(_destOrientation);
+	return jsonTunnel;
+}
+

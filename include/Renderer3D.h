@@ -23,6 +23,8 @@ public:
 	void renderBeginTitle() const;
 
 	void renderBeginGame() const;
+	
+	void renderPauseMenu() const;
 
 	void renderEndTitle() const;
 

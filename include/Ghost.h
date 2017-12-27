@@ -5,6 +5,8 @@
 #include <GameRepresentation.h>
 #include <Utils.h>
 
+using json = nlohmann::json;
+
 class Ghost {
 
 public:
@@ -34,6 +36,8 @@ public:
 	virtual GameRepresentation::ModelType getModelType() const = 0;
 
 	virtual Ghost *clone() const = 0;
+	
+	virtual json toJSON() const = 0;
 
 private:
 

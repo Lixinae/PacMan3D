@@ -25,6 +25,8 @@ public:
 	void iterate();
 
 	GameRepresentation::Model getModel() const;
+	
+	json toJSON() const;
 
 private:
 

@@ -25,6 +25,8 @@ public:
 	BoardPosition translate(Utils::Orientation orientation) const;
 
 	glm::vec3 inSpace() const;
+	
+	json toJSON() const;
 
 	bool operator==(const BoardPosition &other) const;
 

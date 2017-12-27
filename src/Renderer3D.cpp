@@ -80,6 +80,16 @@ void Renderer3D::renderBeginGame() const {
 	_textRenderer.render("APPUYER SUR ENTREE POUR COMMENCER", 100, 400, 0.65, color);
 }
 
+void Renderer3D::renderPauseMenu() const {
+	vec3 color = vec3(1, 0.89, 0.8);
+	_textRenderer.render("PAUSE", 300, 400, 0.8, color);
+	_textRenderer.render("P : REPRENDRE", 100, 350, 0.7, color);
+	_textRenderer.render("Q : QUITTER", 100, 300, 0.7, color);
+	_textRenderer.render("S : SAUVEGARDER LA PARTIE", 100, 250, 0.7, color);
+	_textRenderer.render("C : CHARGER LA DERNIERE PARTIE", 100, 200, 0.7, color);
+	//TODO ADD RESTART (also in eventHandler)
+}
+
 void Renderer3D::renderEndTitle() const {
 	vec3 color = vec3(1, 0.89, 0.8);
 	_textRenderer.render("FIN DE LA PARTIE", 70, 450, 0.65, color);

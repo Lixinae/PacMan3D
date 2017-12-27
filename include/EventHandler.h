@@ -39,6 +39,8 @@ public:
 	 * @param windowManager Window Manager
 	 */
 	State handleGameEvent(SDLWindowManager &windowManager, Game &game);
+	
+	State handlePauseMenuEvent(SDLWindowManager &windowManager, Game &game);
 
 	State handleEndTitleEvent(SDLWindowManager &windowManager);
 

@@ -44,7 +44,9 @@ public:
 
 	virtual void receiveGhost(GhostContext &context) = 0;
 
-	virtual BoardSquare *clone() = 0;
+	virtual BoardSquare *clone() const = 0;
+	
+	virtual json toJSON() const = 0;
 
 	virtual ~BoardSquare() {
 

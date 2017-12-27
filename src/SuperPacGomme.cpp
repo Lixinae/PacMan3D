@@ -20,3 +20,9 @@ void SuperPacGomme::apply(Context &context) {
 Bonus *SuperPacGomme::clone() const {
 	return new SuperPacGomme(*this);
 }
+
+json SuperPacGomme::toJSON() const {
+	json jsonBonus;
+	jsonBonus["type"] = "super_pacgomme";
+	return jsonBonus;
+}

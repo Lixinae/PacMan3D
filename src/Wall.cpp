@@ -24,6 +24,13 @@ void Wall::receiveGhost(BoardSquare::GhostContext &) {
 
 }
 
-BoardSquare *Wall::clone() {
+BoardSquare *Wall::clone() const {
 	return new Wall(*this);
+}
+
+json Wall::toJSON() const {
+	json jsonWall;
+	jsonWall["type"] = "wall";
+	jsonWall["args"] = {};
+	return jsonWall;
 }

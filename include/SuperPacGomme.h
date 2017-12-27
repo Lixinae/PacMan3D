@@ -16,6 +16,8 @@ public:
 	void apply(Bonus::Context &context);
 
 	Bonus *clone() const;
+	
+	json toJSON() const;
 
 };
 

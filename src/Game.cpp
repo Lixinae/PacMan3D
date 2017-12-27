@@ -8,6 +8,7 @@ using namespace std;
 
 Game::Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts) :
 		_board(board),
+		_board_init(board),
 		_pacman(pacman),
 		_pacman_init(pacman),
 		_ghosts(ghosts.size()),
@@ -20,9 +21,34 @@ Game::Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghos
 	}
 }
 
+Game::Game(const Game & other) :
+	Game::Game(
+		other._board, 
+		other._pacman,
+		other._ghosts
+	)
+{
+	
+}
+
 Game::~Game() {
 	Utils::cleanVector(_ghosts);
 	Utils::cleanVector(_ghosts_init);
+}
+
+Game &Game::operator=(const Game &other) {
+	if (&other != this) {
+		Game tmp(other);
+		std::swap(_board, tmp._board);
+		std::swap(_board_init, tmp._board_init);
+		std::swap(_pacman, tmp._pacman);
+		std::swap(_pacman_init, tmp._pacman_init);
+		std::swap(_ghosts, tmp._ghosts);
+		std::swap(_ghosts_init, tmp._ghosts_init);
+		std::swap(_pointOfView, tmp._pointOfView);
+		std::swap(_informations, tmp._informations);
+	}
+	return *this;
 }
 
 Game Game::fromJSON(const json &jsonGame) {
@@ -37,6 +63,18 @@ Game Game::fromJSON(const json &jsonGame) {
 	return game;
 }
 
+json Game::toJSON() const {
+	json jsonGame;
+	jsonGame["board"] = _board.toJSON();
+	jsonGame["pacman"] = _pacman.toJSON();
+	json jsonGhosts;
+	for (const Ghost * ghost : _ghosts) {
+		jsonGhosts.push_back(ghost->toJSON());
+	}
+	jsonGame["ghosts"] = jsonGhosts;
+	return jsonGame;
+}
+
 Game Game::fromJSONFile(const string &filePath) {
 	json jsonGame;
 	ifstream gameFile(filePath);
@@ -45,9 +83,13 @@ Game Game::fromJSONFile(const string &filePath) {
 	return fromJSON(jsonGame);
 }
 
+void Game::toJSONFile(const string &filePath) const {
+	ofstream gameFile(filePath);
+	gameFile << toJSON().dump(4);
+	gameFile.close();
+}
+
 void Game::orientPacman(Utils::Orientation orientation) {
-	//TODO not orientation but
-	// but relative orientation of current pacman orientation
 	Utils::Orientation realOrientation;
 	if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::FIRST_PERSON) {
 		realOrientation = Utils::relativeOrientation(_pacman.getOrientation(), orientation);
@@ -172,6 +214,11 @@ void Game::reset() {
 	}
 	_pacman = _pacman_init;
 	_pointOfView = PointOfView(_pacman.getPosition(), _pacman.getOrientation());
+}
+
+void Game::restart() {
+	reset();
+	_board = _board_init;
 }
 
 bool Game::isFinish() {

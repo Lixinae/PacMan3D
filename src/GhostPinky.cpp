@@ -11,3 +11,11 @@ GameRepresentation::ModelType GhostPinky::getModelType() const {
 Ghost *GhostPinky::clone() const {
 	return new GhostPinky(Ghost::getPosition(), Ghost::getOrientation());
 }
+
+json GhostPinky::toJSON() const {
+	json jsonGhost;
+	jsonGhost["type"] = "pinky";
+	jsonGhost["position"] = getPosition().toJSON();
+	jsonGhost["orientation"] = Utils::orientationToString(getOrientation());
+	return jsonGhost;
+}

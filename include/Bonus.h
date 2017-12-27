@@ -28,6 +28,8 @@ public:
 	virtual void apply(Context &context) = 0;
 
 	virtual Bonus *clone() const = 0;
+	
+	virtual json toJSON() const = 0;
 
 	virtual ~Bonus() {
 
