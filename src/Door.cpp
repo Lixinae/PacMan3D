@@ -33,7 +33,7 @@ BoardSquare *Door::clone() const {
 
 json Door::toJSON() const {
 	json jsonDoor;
-	jsonWall["type"] = "wall";
-	jsonWall["args"] = {};
+	jsonDoor["type"] = "door";
+	jsonDoor["args"] = {};
 	return jsonDoor;
 }
