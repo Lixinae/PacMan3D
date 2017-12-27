@@ -67,7 +67,7 @@ private:
 
 	GameInformations _informations;
 
-	Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts);
+	Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts, const GameInformations &informations);
 
 	void pacmanCollision(Ghost *ghost);
 

@@ -241,6 +241,31 @@
       }
     },
     {
+      "name": "Door",
+      "model": {
+         "type":"light_texture",
+         "args": {
+           "objPath": "cube.obj",
+           "texPath": "sky_blue.png"
+         },
+         "translate": {
+           "x": 0,
+           "y": 1.05,
+           "z": 0
+         },
+         "rotate": {
+           "x": 0,
+           "y": 0,
+           "z": 0
+         },
+         "scale": {
+           "x": 0.5,
+           "y": 0.5,
+           "z": 0.2
+         }
+      }
+    },
+    {
       "name": "Pac_gomme",
       "model": {
          "type":"light_texture",

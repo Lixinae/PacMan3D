@@ -26,7 +26,9 @@ Ghost::Ghost(const BoardPosition &position, Utils::Orientation orientation) :
 		_position(position),
 		_orientation(orientation),
 		_weakCounter(),
-		_count() {
+		_count(),
+		_crossDoor(true)
+{
 
 }
 
@@ -53,6 +55,14 @@ bool Ghost::isWeak() const {
 
 void Ghost::setWeak(int time) {
 	_weakCounter = time;
+}
+
+bool Ghost::canCrossDoor() {
+	return _crossDoor;
+}
+	
+void Ghost::crossDoor() {
+	_crossDoor = false;
 }
 
 void Ghost::iterate() {

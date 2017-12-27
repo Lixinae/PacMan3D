@@ -16,6 +16,7 @@ vector<GameRepresentation::ModelType> GameRepresentation::buildVector() {
 	models.push_back(GameRepresentation::ModelType::WALL);
 	models.push_back(GameRepresentation::ModelType::FLOOR);
 	models.push_back(GameRepresentation::ModelType::TUNNEL);
+	models.push_back(GameRepresentation::ModelType::DOOR);
 	models.push_back(GameRepresentation::ModelType::PAC_GOMME);
 	models.push_back(GameRepresentation::ModelType::SUPER_PAC_GOMME);
 	return models;
@@ -48,6 +49,9 @@ GameRepresentation::ModelType GameRepresentation::modelFromString(const string &
 	}
 	if (strModel == "Tunnel") {
 		return GameRepresentation::ModelType::TUNNEL;
+	}
+	if (strModel == "Door") {
+		return GameRepresentation::ModelType::DOOR;
 	}
 	if (strModel == "Pac_gomme") {
 		return GameRepresentation::ModelType::PAC_GOMME;
