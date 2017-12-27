@@ -5,8 +5,10 @@
     "Left": "q",
     "Right": "d",
     "ChangeCamera": "c",
-    "ZoomIn": "b",
-    "ZoomOut": "n"
+    "Pause": "p",
+    "Save": "o",
+    "Load": "i",
+    "Exit": "k"
   },
   "windowSize": {
     "width": 800,

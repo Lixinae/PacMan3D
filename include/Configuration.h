@@ -21,7 +21,11 @@ enum class control {
 	RIGHT,
 	CHANGE_CAMERA,
 	ZOOM_IN,
-	ZOOM_OUT
+	ZOOM_OUT,
+	PAUSE_GAME,
+	SAVE_GAME,
+	LOAD_GAME,
+	EXIT
 	// todo Add other possible controles if needed
 };
 

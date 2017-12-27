@@ -19,8 +19,10 @@ Configuration Configuration::defaultConfiguration() {
 	keyMap[control::LEFT] = stringToKey("q");
 	keyMap[control::RIGHT] = stringToKey("d");
 	keyMap[control::CHANGE_CAMERA] = stringToKey("c");
-	keyMap[control::ZOOM_IN] = stringToKey("b");
-	keyMap[control::ZOOM_OUT] = stringToKey("n");
+	keyMap[control::PAUSE_GAME] = stringToKey("p");
+	keyMap[control::SAVE_GAME] = stringToKey("o");
+	keyMap[control::LOAD_GAME] = stringToKey("i");
+	keyMap[control::EXIT] = stringToKey("k");
 	map<GameRepresentation::ModelType, AbstractModel3D *> modelMap; //TODO
 	return Configuration(keyMap, modelMap, 800, 600);
 }
@@ -32,8 +34,10 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
 	keyMap[control::LEFT] = stringToKey(json["Left"]);
 	keyMap[control::RIGHT] = stringToKey(json["Right"]);
 	keyMap[control::CHANGE_CAMERA] = stringToKey(json["ChangeCamera"]);
-	keyMap[control::ZOOM_IN] = stringToKey(json["ZoomIn"]);
-	keyMap[control::ZOOM_OUT] = stringToKey(json["ZoomOut"]);
+	keyMap[control::PAUSE_GAME] = stringToKey(json["Pause"]);
+	keyMap[control::SAVE_GAME] = stringToKey(json["Save"]);
+	keyMap[control::LOAD_GAME] = stringToKey(json["Load"]);
+	keyMap[control::EXIT] = stringToKey(json["Exit"]);
 	return keyMap;
 }
 
