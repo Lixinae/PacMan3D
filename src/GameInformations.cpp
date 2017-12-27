@@ -1,16 +1,27 @@
 #include <GameInformations.h>
 
 GameInformations::GameInformations() :
-		GameInformations::GameInformations(3) {
+		GameInformations::GameInformations(0,3,1,0) 
+{
 
 }
 
-GameInformations::GameInformations(int lives) :
-		_score(0),
+GameInformations::GameInformations(int score, int lives, int multiplier, int multiplierCounter) :
+		_score(score),
 		_lives(lives),
-		_multiplier(1),
-		_multiplierCounter(0) {
+		_multiplier(multiplier),
+		_multiplierCounter(multiplierCounter) 
+{
 
+}
+
+GameInformations GameInformations::fromJSON(const json &jsonInfo) {
+	return GameInformations(
+		jsonInfo["score"],
+		jsonInfo["lives"],
+		jsonInfo["multiplier"],
+		jsonInfo["multiplierCounter"]
+	);
 }
 
 int GameInformations::getScore() const {
@@ -58,4 +69,13 @@ void GameInformations::iterate() {
 			_multiplier = 1;
 		}
 	}
+}
+
+json GameInformations::toJSON() const {
+	json jsonInfo;
+	jsonInfo["score"] = _score;
+	jsonInfo["lives"] = _lives;
+	jsonInfo["multiplier"] = _multiplier;
+	jsonInfo["multiplierCounter"] = _multiplierCounter;
+	return jsonInfo; 
 }

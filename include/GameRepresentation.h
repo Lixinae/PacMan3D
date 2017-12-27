@@ -23,6 +23,7 @@ public:
 		WALL,
 		FLOOR,
 		TUNNEL,
+		DOOR,
 		PAC_GOMME,
 		SUPER_PAC_GOMME
 

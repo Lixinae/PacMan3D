@@ -9108,6 +9108,16 @@
           "x": 13,
           "y": 0
         }
+      },
+      {
+        "case": {
+          "args": {},
+          "type": "door"
+        },
+        "position": {
+          "x": 0,
+          "y": 1
+        }
       }
     ]
   },
@@ -9151,5 +9161,11 @@
       "x": 0,
       "y": -6
     }
+  },
+  "informations": {
+    "score":0,
+    "lives":3,
+    "multiplier":1,
+    "multiplierCounter":0
   }
 }
