@@ -2,19 +2,19 @@
 
 using namespace std;
 
-Board::Board(const map<BoardPosition, BoardSquare *> &squares) : _squares(squares) {
-
+Board::Board(const map<BoardPosition, BoardSquare *> &squares) : _squares() {
+	for (const auto &entry : squares) {
+		_squares[entry.first] = entry.second->clone(); //TODO CHECK IMPLEMENTATIONS FOR DESTRUCTOR
+	}
 }
 
-Board::Board(const Board &other) : _squares() {
-	for (const auto &entry : other._squares) {
-		_squares[entry.first] = entry.second->clone();
-	}
+Board::Board(const Board &other) : Board::Board(other._squares) {
+
 }
 
 Board::~Board() {
 	for (auto &entry : _squares) {
-		delete entry.second;
+		//delete entry.second; //TODO correct bug
 	}
 }
 
@@ -26,7 +26,11 @@ Board Board::fromJSON(const json &jsonBoard) {
 		BoardSquare *square = BoardSquare::fromJSON(it["case"]);
 		squares[position] = square;
 	}
-	return Board(squares);
+	Board board(squares);
+	for (auto &entry : squares) {
+		delete entry.second;
+	}
+	return board;
 }
 
 json Board::toJSON() const {

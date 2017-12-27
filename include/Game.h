@@ -23,6 +23,8 @@ public:
 
 	static Game fromJSONFile(const string &filePath);
 
+	Game(const Game & other);
+
 	~Game();
 
 	const PointOfView &getPointOfView() const;
@@ -40,12 +42,16 @@ public:
 	bool iterate();
 
 	void reset();
+	
+	void restart();
 
 	bool isFinish();
 	
 	json toJSON() const;
 	
 	void toJSONFile(const string &filePath) const;
+	
+	Game & operator=(const Game &other);
 
 private:
 
@@ -53,6 +59,7 @@ private:
 	Pacman _pacman;
 	vector<Ghost *> _ghosts;
 
+	Board _board_init;
 	Pacman _pacman_init;
 	vector<Ghost *> _ghosts_init;
 

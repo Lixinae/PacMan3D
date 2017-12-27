@@ -108,6 +108,13 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 			if (event.key.keysym.sym == SDLK_q) {
 				state = EventHandler::State::QUIT;
 			}
+			if (event.key.keysym.sym == SDLK_s) {
+				game.toJSONFile("assets/games/save.json"); //TODO static const
+			}
+			if (event.key.keysym.sym == SDLK_c) {
+				Game game2 = Game::fromJSONFile("assets/games/save.json"); //TODO static const
+				game = game2;
+			}
 		}
 	}
 	return state;

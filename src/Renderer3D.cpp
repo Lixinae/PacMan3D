@@ -87,6 +87,7 @@ void Renderer3D::renderPauseMenu() const {
 	_textRenderer.render("Q : QUITTER", 100, 300, 0.7, color);
 	_textRenderer.render("S : SAUVEGARDER LA PARTIE", 100, 250, 0.7, color);
 	_textRenderer.render("C : CHARGER LA DERNIERE PARTIE", 100, 200, 0.7, color);
+	//TODO ADD RESTART (also in eventHandler)
 }
 
 void Renderer3D::renderEndTitle() const {
