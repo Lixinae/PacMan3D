@@ -32,6 +32,8 @@ private:
 
 	BoardPosition _position;
 	Utils::Orientation _orientation;
+	BoardPosition _nextPosition;
+	int _iterPosition;
 
 	Pacman(const BoardPosition &position, Utils::Orientation orientation);
 
