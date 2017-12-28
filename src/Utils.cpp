@@ -283,3 +283,8 @@ string Utils::keyToString(SDLKey key) {
 	if (key == SDLK_F12) return "f12";
 	if (key == SDLK_ESCAPE) return "esc";
 }
+
+string Utils::stringToUpper(const string &str) {
+	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+	return str;
+}

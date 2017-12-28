@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <SDL/SDL_keysym.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -50,6 +51,8 @@ public:
 	static SDLKey stringToKey(string s);
 
 	static string keyToString(SDLKey key);
+
+	static string stringToUpper(const string &str);
 
 private:
 
