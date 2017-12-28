@@ -45,12 +45,12 @@ void Renderer3D::renderModels(const GameRepresentation &repr) const {
 
 void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
 	// Toutes les valeurs sont ajustés pour une grille orthogonal de 800*600
-	int x = 10, y, ecart = 28;
+	float x = 1.25f, y, ecart = 5.f;
 	float scale = 0.65;
 	vec3 color = vec3(1, 1, 0);
 
 	int livesLeft = gameInfo.getLives();
-	y = 560;
+	y = 95.f;
 	_textRenderer.render("Lives : " + to_string(livesLeft), x, y, scale, color);
 
 
@@ -71,35 +71,35 @@ void Renderer3D::renderGame(const GameRepresentation &repr, const GameInformatio
 
 void Renderer3D::renderBeginTitle() const {
 	vec3 color = vec3(1, 1, 0);
-	_textRenderer.renderXCentered("PACMAN 3D", 450, 1.f, color);
-	_textRenderer.renderXCentered("@", 400, 1.f, color);
-	_textRenderer.renderXCentered("Appuyer sur une touche", 350, 1.f, color);
+	_textRenderer.renderXCentered("PACMAN 3D", 76, 1.f, color);
+	_textRenderer.renderXCentered("@", 66, 1.f, color);
+	_textRenderer.renderXCentered("Appuyer sur une touche", 60, 1.f, color);
 }
 
 void Renderer3D::renderBeginGame() const {
 	vec3 color = vec3(1, 1, 0);
-	_textRenderer.renderXCentered("Appuyer sur entree pour commencer", 300, 0.7, color);
+	_textRenderer.renderXCentered("Appuyer sur entree pour commencer", 50, 0.7, color);
 }
 
 void Renderer3D::renderPauseMenu(const map<control, SDLKey> &keyMap) const {
 	vec3 color = vec3(1, 1, 0);
-	_textRenderer.renderXCentered("Pause", 400, 0.8, color);
+	_textRenderer.renderXCentered("Pause", 70, 0.8, color);
 	SDLKey key = keyMap.find(control::PAUSE_GAME)->second;
-	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Reprendre", 350, 0.7, color);
+	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Reprendre", 65, 0.7, color);
 	key = keyMap.find(control::EXIT)->second;
-	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Quitter", 300, 0.7, color);
+	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Quitter", 60, 0.7, color);
 	key = keyMap.find(control::SAVE_GAME)->second;
-	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Sauvegarder la partie", 250, 0.7, color);
+	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Sauvegarder la partie", 55, 0.7, color);
 	key = keyMap.find(control::LOAD_GAME)->second;
-	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Charger la derniere partie", 200, 0.7, color);
+	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Charger la derniere partie", 50, 0.7, color);
 	key = keyMap.find(control::RESTART)->second;
-	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Recommencer la partie", 150, 0.7, color);
+	_textRenderer.renderXCentered(Utils::stringToUpper(Utils::keyToString(key)) + " : Recommencer la partie", 45, 0.7, color);
 }
 
 void Renderer3D::renderEndTitle() const {
 	vec3 color = vec3(1, 1, 0);
-	_textRenderer.renderXCentered("Fin de la partie", 450, 0.65, color);
-	_textRenderer.renderXCentered("Appuyer sur entree pour quitter", 400, 0.6, color);
+	_textRenderer.renderXCentered("Fin de la partie", 75, 0.65, color);
+	_textRenderer.renderXCentered("Appuyer sur entree pour quitter", 65, 0.6, color);
 }
 
 Renderer3D::~Renderer3D() {
