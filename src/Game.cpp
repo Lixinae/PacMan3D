@@ -168,7 +168,7 @@ void Game::iterateGhost(Ghost *ghost) {
 	BoardSquare *nextSquare = _board[nextPosition];
 	BoardSquare::GhostContext context(*ghost);
 	if (nextSquare != nullptr && nextSquare->isGhostWalkable(context)) {
-		ghost->setPosition(nextPosition);
+		ghost->goTo(nextPosition);
 		nextSquare->receiveGhost(context);
 	} else {
 		// get all the direction and choose one of the possible
@@ -177,9 +177,7 @@ void Game::iterateGhost(Ghost *ghost) {
 				Utils::Orientation::NORTH,
 				Utils::Orientation::SOUTH,
 				Utils::Orientation::EAST,
-				Utils::Orientation::WEST,
-				//One more chance to go to the opposite of the unwalkable square
-				Utils::oppositeOrientation(ghost->getOrientation())
+				Utils::Orientation::WEST
 		};
 		for (Utils::Orientation orientation : orientations) {
 			BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
@@ -189,6 +187,7 @@ void Game::iterateGhost(Ghost *ghost) {
 		}
 		ghost->setOrientation(Utils::randomOrientation(walkableOrientations));
 	}
+	ghost->move();
 	ghost->iterate();
 }
 

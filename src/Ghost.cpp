@@ -5,6 +5,8 @@
 #include <GhostInky.h>
 #include <GhostClyde.h>
 
+int Ghost::MAX_ITERATION = 3;
+
 Ghost *Ghost::fromJSON(const json &jsonGhost) {
 	BoardPosition position = BoardPosition::fromJSON(jsonGhost["position"]);
 	Utils::Orientation orientation = Utils::orientationFromString(jsonGhost["orientation"]);
@@ -25,6 +27,8 @@ Ghost *Ghost::fromJSON(const json &jsonGhost) {
 Ghost::Ghost(const BoardPosition &position, Utils::Orientation orientation) :
 		_position(position),
 		_orientation(orientation),
+		_nextPosition(position.translate(orientation)),
+		_iterPosition(0),
 		_weakCounter(),
 		_count(),
 		_crossDoor(true)
@@ -47,6 +51,8 @@ BoardPosition Ghost::getPosition() const {
 
 void Ghost::setPosition(const BoardPosition &position) {
 	_position = position;
+	_iterPosition = 0;
+	_nextPosition = position.translate(_orientation);
 }
 
 bool Ghost::isWeak() const {
@@ -63,6 +69,21 @@ bool Ghost::canCrossDoor() {
 	
 void Ghost::crossDoor() {
 	_crossDoor = false;
+}
+
+void Ghost::goTo(const BoardPosition &position) {
+	_nextPosition = position;
+}
+
+float Ghost::getShift() const {
+	return float(_iterPosition)/Ghost::MAX_ITERATION;
+}
+	
+void Ghost::move() {
+	_iterPosition = (_iterPosition + 1)%Ghost::MAX_ITERATION;
+	if (_iterPosition == 0) {
+		_position = _nextPosition;
+	}
 }
 
 void Ghost::iterate() {
@@ -83,5 +104,5 @@ GameRepresentation::Model Ghost::getModel() const {
 	} else {
 		modelType = getModelType();
 	}
-	return GameRepresentation::Model(modelType, getOrientation(), 0);
+	return GameRepresentation::Model(modelType, getOrientation(), getShift());
 }
