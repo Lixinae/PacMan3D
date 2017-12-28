@@ -23,7 +23,8 @@ enum class control {
 	PAUSE_GAME,
 	SAVE_GAME,
 	LOAD_GAME,
-	EXIT
+	EXIT,
+	RESTART
 	// todo Add other possible controles if needed
 };
 

@@ -23,6 +23,7 @@ Configuration Configuration::defaultConfiguration() {
 	keyMap[control::SAVE_GAME] = Utils::stringToKey("o");
 	keyMap[control::LOAD_GAME] = Utils::stringToKey("i");
 	keyMap[control::EXIT] = Utils::stringToKey("k");
+	keyMap[control::RESTART] = Utils::stringToKey("r");
 	map<GameRepresentation::ModelType, AbstractModel3D *> modelMap; //TODO
 	return Configuration(keyMap, modelMap, 800, 600);
 }
@@ -39,6 +40,8 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
 	keyMap[control::SAVE_GAME] = Utils::stringToKey("o");
 	keyMap[control::LOAD_GAME] = Utils::stringToKey("i");
 	keyMap[control::EXIT] = Utils::stringToKey("k");
+	keyMap[control::RESTART] = Utils::stringToKey("r");
+
 //	keyMap[control::PAUSE_GAME] = Utils::stringToKey(json["Pause"]);
 //	keyMap[control::SAVE_GAME] = Utils::stringToKey(json["Save"]);
 //	keyMap[control::LOAD_GAME] = Utils::stringToKey(json["Load"]);
