@@ -20,8 +20,6 @@ enum class control {
 	LEFT,
 	RIGHT,
 	CHANGE_CAMERA,
-	ZOOM_IN,
-	ZOOM_OUT,
 	PAUSE_GAME,
 	SAVE_GAME,
 	LOAD_GAME,
