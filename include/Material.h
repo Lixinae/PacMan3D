@@ -2,12 +2,17 @@
 #define __MATERIAL_H__
 
 #include <glm/vec3.hpp>
+#include <json/json.hpp>
 
 using namespace glm;
+
+using json = nlohmann::json;
 
 class Material {
 
 public:
+
+	static Material fromJSON(const json & jsonMaterial);
 
 	Material(float shininess, const vec3 &diffuse, const vec3 &glossy);
 	

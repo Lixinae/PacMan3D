@@ -21,7 +21,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "pacman.obj",
-           "texPath": "pacman.png"
+           "texPath": "pacman.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -46,7 +59,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
-           "texPath": "red_boo.png"
+           "texPath": "red_boo.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -71,7 +97,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
-           "texPath": "pink_boo.png"
+           "texPath": "pink_boo.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -96,7 +135,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
-           "texPath": "blue_boo.png"
+           "texPath": "blue_boo.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -121,7 +173,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
-           "texPath": "orange_boo.png"
+           "texPath": "orange_boo.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -146,7 +211,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "boo.obj",
-           "texPath": "black_boo.png"
+           "texPath": "black_boo.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -171,7 +249,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "cube.obj",
-           "texPath": "blue.png"
+           "texPath": "blue.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -196,7 +287,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "cube.obj",
-           "texPath": "gray.png"
+           "texPath": "gray.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -221,7 +325,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "cube.obj",
-           "texPath": "blue.png"
+           "texPath": "blue.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -246,7 +363,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "cube.obj",
-           "texPath": "sky_blue.png"
+           "texPath": "sky_blue.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -271,7 +401,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "sphere.obj",
-	   "texPath": "yellow_sphere.png"
+	       "texPath": "yellow_sphere.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,
@@ -296,7 +439,20 @@
          "type":"light_texture",
          "args": {
            "objPath": "sphere.obj",
-	   "texPath": "orange_sphere.png"
+	       "texPath": "orange_sphere.png",
+           "material": {
+		     "shininess": 10,
+		     "diffuse": {
+			   "x": 0.2, 	 
+			   "y": 0.2, 	 
+			   "z": 0.2 	 
+			 },
+		     "glossy": {
+			   "x": 0.7, 	 
+			   "y": 0.7, 	 
+			   "z": 0.7 	 
+			 }
+		   }
          },
          "translate": {
            "x": 0,

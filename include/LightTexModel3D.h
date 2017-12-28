@@ -2,6 +2,7 @@
 #define __LIGHT_TEX_MODEL_3D_H__
 
 #include <AbstractModel3D.h>
+#include <Material.h>
 #include <string>
 #include <glimac/Image.hpp>
 
@@ -21,7 +22,7 @@ public:
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_COLOR;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_INTENSITY;
 
-	static LightTexModel3D *create(const string &meshPath, const string &texturePath, const mat4 &modelTransform);
+	static LightTexModel3D *create(const string &meshPath, const string &texturePath, const Material &material, const mat4 &modelTransform);
 
 	~LightTexModel3D();
 
@@ -32,6 +33,7 @@ public:
 private:
 
 	GLuint _textureObject;
+	Material _material;
 	GLint _uTexture;
 	GLint _uShininess;
 	GLint _uDiffuse;
@@ -40,7 +42,7 @@ private:
 	GLint _uLightColor;
 	GLint _uLightIntensity;
 
-	LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const mat4 &modelTransform);
+	LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const Material &material, const mat4 &modelTransform);
 
 	void initTexture(const unique_ptr<Image> &texture);
 

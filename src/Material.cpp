@@ -8,6 +8,13 @@ Material::Material(float shininess, const vec3 &diffuse, const vec3 &glossy) :
 	
 }
 
+Material Material::fromJSON(const json & jsonMaterial) {
+	float shininess = jsonMaterial["shininess"];
+	vec3 diffuse = vec3(jsonMaterial["diffuse"]["x"], jsonMaterial["diffuse"]["y"], jsonMaterial["diffuse"]["z"]);
+	vec3 glossy = vec3(jsonMaterial["glossy"]["x"], jsonMaterial["glossy"]["y"], jsonMaterial["glossy"]["z"]);
+	return Material(shininess, diffuse, glossy);
+}
+
 float Material::getShininess() const {
 	return _shininess;
 }
