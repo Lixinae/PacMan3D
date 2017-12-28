@@ -68,7 +68,7 @@ void LightTexModel3D::bind() {
 	vec3 lightColor = vec3(1, 1, 1); // Light color
 	glUniform3f(_uLightColor, lightColor.x, lightColor.y, lightColor.z);
 
-	float intensity = 10.f;
+	float intensity = 5.f;
 	glUniform1f(_uLightIntensity, intensity);
 
 }
