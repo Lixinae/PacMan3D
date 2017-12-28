@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <SDL/SDL_keysym.h>
 
 using namespace std;
 
@@ -45,6 +46,10 @@ public:
 	static void cleanMap(map<K, V *> map) {
 		//TODO
 	};
+
+	static SDLKey stringToKey(string s);
+
+	static string keyToString(SDLKey key);
 
 private:
 

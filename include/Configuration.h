@@ -45,8 +45,6 @@ private:
 	int _windowWidth;
 	int _windowHeight;
 
-	static SDLKey stringToKey(string s);
-
 	static map<control, SDLKey> keyMapFromJSON(const json &json);
 
 	static map<GameRepresentation::ModelType, AbstractModel3D *> modelMapFromJSON(const json &json);
