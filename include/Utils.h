@@ -52,7 +52,7 @@ public:
 
 	static string keyToString(SDLKey key);
 
-	static string stringToUpper(const string &str);
+	static string stringToUpper(string str);
 
 private:
 

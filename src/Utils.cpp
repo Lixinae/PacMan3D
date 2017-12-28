@@ -284,7 +284,10 @@ string Utils::keyToString(SDLKey key) {
 	if (key == SDLK_ESCAPE) return "esc";
 }
 
-string Utils::stringToUpper(const string &str) {
-	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+string Utils::stringToUpper(string str) {
+	struct convert {
+		void operator()(char &c) { c = toupper((unsigned char) c); }
+	};
+	for_each(str.begin(), str.end(), convert());
 	return str;
 }

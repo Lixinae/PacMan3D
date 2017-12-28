@@ -3,6 +3,7 @@
 
 #include <GameRepresentation.h>
 #include <GameInformations.h>
+#include <Configuration.h>
 
 class Renderer {
 
@@ -13,8 +14,8 @@ public:
 	virtual void renderBeginTitle() const = 0;
 
 	virtual void renderBeginGame() const = 0;
-	
-	virtual void renderPauseMenu() const = 0;
+
+	virtual void renderPauseMenu(const map<control, SDLKey> &keyMap) const = 0;
 
 	virtual void renderEndTitle() const = 0;
 
