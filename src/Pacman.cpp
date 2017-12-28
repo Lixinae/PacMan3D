@@ -2,6 +2,8 @@
 
 using json = nlohmann::json;
 
+int Pacman::MAX_ITERATION = 3;
+
 Pacman::Pacman(const BoardPosition &position, Utils::Orientation orientation) :
 	_position(position),
 	_orientation(orientation),
@@ -29,7 +31,7 @@ Utils::Orientation Pacman::getOrientation() const {
 }
 
 void Pacman::setOrientation(Utils::Orientation orientation) {
-	_orientation = orientation;
+	_orientation = orientation; //TODO maybe add orientTo 
 }
 
 BoardPosition Pacman::getPosition() const {
@@ -37,18 +39,30 @@ BoardPosition Pacman::getPosition() const {
 }
 
 void Pacman::setPosition(const BoardPosition &position) {
-	//_position = position;
+	_position = position;
+	_iterPosition = 0;
+	_nextPosition = position.translate(_orientation);
+}
+
+void Pacman::goTo(const BoardPosition &position) {
 	_nextPosition = position;
 }
 
-void Pacman::iterate() {
-	int max = 3;
-	_iterPosition = (_iterPosition + 1)%max;
+float Pacman::getShift() const {
+	return float(_iterPosition)/Pacman::MAX_ITERATION;
+}
+
+void Pacman::move() {
+	_iterPosition = (_iterPosition + 1)%Pacman::MAX_ITERATION;
 	if (_iterPosition == 0) {
 		_position = _nextPosition;
 	}
 }
 
+void Pacman::iterate() {
+
+}
+
 GameRepresentation::Model Pacman::getModel() const {
-	return GameRepresentation::Model(GameRepresentation::ModelType::PACMAN, _orientation);
+	return GameRepresentation::Model(GameRepresentation::ModelType::PACMAN, _orientation, getShift());
 }

@@ -151,10 +151,14 @@ void Game::iteratePacman() {
 	BoardSquare *nextSquare = _board[nextPosition];
 	BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
 	if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
-		_pacman.setPosition(nextPosition);
+		_pacman.goTo(nextPosition);
 		nextSquare->receivePacman(context);
-		glm::vec3 cameraPos = _pacman.getPosition().inSpace() + glm::vec3(0, 1.5, 0);
+		glm::vec3 cameraPos = 
+			_pacman.getPosition().inSpace() + 
+			_pacman.getShift()*Utils::vectorOfOrientation(_pacman.getOrientation()) + 
+			glm::vec3(0, 1.5, 0);
 		_pointOfView.getFirstPersonCamera().setPosition(cameraPos);
+		_pacman.move();
 	}
 	_pacman.iterate();
 }

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <glm/vec3.hpp>
 
 using namespace std;
 
@@ -25,6 +26,8 @@ public:
 	static string orientationToString(Utils::Orientation orientation);
 
 	static float degreesOfOrientation(Utils::Orientation orientation);
+	
+	static glm::vec3 vectorOfOrientation(Utils::Orientation orientation);
 
 	static Utils::Orientation randomOrientation();
 

@@ -83,5 +83,5 @@ GameRepresentation::Model Ghost::getModel() const {
 	} else {
 		modelType = getModelType();
 	}
-	return GameRepresentation::Model(modelType, getOrientation());
+	return GameRepresentation::Model(modelType, getOrientation(), 0);
 }

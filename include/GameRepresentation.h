@@ -33,8 +33,9 @@ public:
 
 		ModelType modelType;
 		Utils::Orientation orientation;
+		float shift;
 
-		Model(ModelType modelType, Utils::Orientation orientation);
+		Model(ModelType modelType, Utils::Orientation orientation, float shift);
 
 		Model(ModelType modelType);
 
@@ -44,8 +45,9 @@ public:
 
 		BoardPosition position;
 		Utils::Orientation orientation;
+		float shift;
 
-		ModelInformations(const BoardPosition &position, Utils::Orientation orientation);
+		ModelInformations(const BoardPosition &position, Utils::Orientation orientation, float shift);
 
 	};
 
@@ -55,7 +57,7 @@ public:
 
 	GameRepresentation();
 
-	const vector<ModelInformations> &getPositions(ModelType modelType) const;
+	const vector<ModelInformations> &getInformations(ModelType modelType) const;
 
 	void add(Model model, const BoardPosition &position);
 
