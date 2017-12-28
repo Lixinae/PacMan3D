@@ -29,17 +29,19 @@ void LightTexModel3D::initLight() {
 	_uLightIntensity = getUniformLocation(LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_INTENSITY);
 }
 
-LightTexModel3D::LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const mat4 &modelTransform) :
-		AbstractModel3D(mesh, "shaders/lightTex3D.fs.glsl", modelTransform) {
+LightTexModel3D::LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const Material &material, const mat4 &modelTransform) :
+		AbstractModel3D(mesh, "shaders/lightTex3D.fs.glsl", modelTransform),
+		_material(material)
+{
 	initTexture(texture);
 	initLight();
 }
 
-LightTexModel3D *LightTexModel3D::create(const string &meshPath, const string &texturePath, const mat4 &modelTransform) {
+LightTexModel3D *LightTexModel3D::create(const string &meshPath, const string &texturePath, const Material &material, const mat4 &modelTransform) {
 	Mesh mesh = Mesh::fromOBJFile(meshPath);
 	unique_ptr<Image> texture = loadImage(texturePath);
 	//TODO nullcheck
-	return new LightTexModel3D(mesh, texture, modelTransform);
+	return new LightTexModel3D(mesh, texture, material, modelTransform);
 }
 
 LightTexModel3D::~LightTexModel3D() {
@@ -50,27 +52,18 @@ void LightTexModel3D::bind() {
 	AbstractModel3D::bind();
 	glBindTexture(GL_TEXTURE_2D, _textureObject);
 	glUniform1i(_uTexture, 0);
-
-	//MATERIAL
-	float shininess = 10.f;
-	glUniform1f(_uShininess, shininess);
-
-	vec3 diffuse = vec3(0.2, 0.2, 0.2);
+	glUniform1f(_uShininess, _material.getShininess());
+	vec3 diffuse = _material.getDiffuse();
 	glUniform3f(_uDiffuse, diffuse.x, diffuse.y, diffuse.z);
-
-	vec3 glossy = vec3(0.7, 0.7, 0.7);
+	vec3 glossy = _material.getGlossy();
 	glUniform3f(_uGlossy, glossy.x, glossy.y, glossy.z);
-
 	//LIGHT
 	vec3 lightDir = vec3(0.5f, 1.f, 0.5f); // Light dir
 	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
-
 	vec3 lightColor = vec3(1, 1, 1); // Light color
 	glUniform3f(_uLightColor, lightColor.x, lightColor.y, lightColor.z);
-
-	float intensity = 10.f;
+	float intensity = 5.f;
 	glUniform1f(_uLightIntensity, intensity);
-
 }
 
 void LightTexModel3D::unbind() {
