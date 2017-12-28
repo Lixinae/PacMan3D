@@ -48,10 +48,10 @@ EventHandler::State EventHandler::handleBeginGameEvent(SDLWindowManager &windowM
 			}
 		}
 	}
-	if (windowManager.isKeyPressed(SDLK_b)) { // TODO should not be key
+	if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
 		game.moveFrontCamera(1);
 	}
-	if (windowManager.isKeyPressed(SDLK_n)) {
+	if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT)) {
 		game.moveFrontCamera(-1);
 	}
 	return state;
