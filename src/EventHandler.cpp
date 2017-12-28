@@ -115,6 +115,11 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 				Game game2 = Game::fromJSONFile("assets/games/save.json"); //TODO static const
 				game = game2;
 			}
+			if (event.key.keysym.sym == _keyMap[control::RESTART]) {
+				game.restart();
+				state = EventHandler::State::NEXT;
+			}
+
 		}
 	}
 	return state;
