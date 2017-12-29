@@ -11,19 +11,13 @@ using namespace glm;
 class Light {
 private:
 	vec3 _color;
-	float _ambientIntensity;
-	float _diffuseIntensity;
 
 public:
 	Light();
 
-	Light(const vec3 &color, float ambientIntensity, float diffuseIntensity);
+	Light(const vec3 &color);
 
 	const vec3 &getColor() const;
-
-	float getAmbientIntensity() const;
-
-	float getDiffuseIntensity() const;
 };
 
 

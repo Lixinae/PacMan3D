@@ -16,8 +16,7 @@ private:
 
 
 public:
-	DirectionalLight(const vec3 &color, float ambientIntensity, float diffuseIntensity,
-	                 const vec3 &_direction, float intensity);
+	DirectionalLight(const vec3 &color, const vec3 &_direction, float intensity);
 
 	float getIntensity() const;
 
