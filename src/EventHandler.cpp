@@ -68,30 +68,30 @@ EventHandler::State EventHandler::handleGameEvent(SDLWindowManager &windowManage
 			if (event.key.keysym.sym == _keyMap[control::CHANGE_CAMERA]) {
 				game.changeCamera();
 			}
+			if (event.key.keysym.sym == _keyMap[control::UP]) {
+				game.orientPacman(Utils::Orientation::NORTH);
+			}
+			if (event.key.keysym.sym == _keyMap[control::DOWN]) {
+				game.orientPacman(Utils::Orientation::SOUTH);
+			}
+			if (event.key.keysym.sym == _keyMap[control::LEFT]) {
+				game.orientPacman(Utils::Orientation::WEST);
+			}
+			if (event.key.keysym.sym == _keyMap[control::RIGHT]) {
+				game.orientPacman(Utils::Orientation::EAST);
+			}
 			if (event.key.keysym.sym == _keyMap[control::PAUSE_GAME]) {
 				state = EventHandler::State::PAUSE;
 			}
 		}
+		if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
+			game.moveFrontCamera(1);
+		}
+		if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT)) {
+			game.moveFrontCamera(-1);
+		}
+		return state;
 	}
-	if (windowManager.isKeyPressed(_keyMap[control::UP])) {
-		game.orientPacman(Utils::Orientation::NORTH);
-	}
-	if (windowManager.isKeyPressed(_keyMap[control::DOWN])) {
-		game.orientPacman(Utils::Orientation::SOUTH);
-	}
-	if (windowManager.isKeyPressed(_keyMap[control::LEFT])) {
-		game.orientPacman(Utils::Orientation::WEST);
-	}
-	if (windowManager.isKeyPressed(_keyMap[control::RIGHT])) {
-		game.orientPacman(Utils::Orientation::EAST);
-	}
-	if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
-		game.moveFrontCamera(1);
-	}
-	if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT)) {
-		game.moveFrontCamera(-1);
-	}
-	return state;
 }
 
 EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowManager, Game &game) {
@@ -117,7 +117,7 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 			}
 			if (event.key.keysym.sym == _keyMap[control::RESTART]) {
 				game.restart();
-				state = EventHandler::State::NEXT;
+				state = EventHandler::State::PAUSE;
 			}
 
 		}

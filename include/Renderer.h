@@ -17,7 +17,7 @@ public:
 
 	virtual void renderPauseMenu(const map<control, SDLKey> &keyMap) const = 0;
 
-	virtual void renderEndTitle() const = 0;
+	virtual void renderEndTitle(const GameInformations &gameInfo) const = 0;
 
 	virtual ~Renderer() = default;
 

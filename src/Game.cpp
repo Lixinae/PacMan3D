@@ -208,7 +208,7 @@ bool Game::iterate() {
 		}
 	}
 	_informations.iterate();
-	return true;
+	return !_informations.noMoreGums();
 }
 
 void Game::reset() {
@@ -228,5 +228,6 @@ void Game::restart() {
 }
 
 bool Game::isFinish() {
-	return _informations.isDead();
+	cout << "Gum left" << endl;
+	return _informations.isDead() || _informations.noMoreGums();
 }

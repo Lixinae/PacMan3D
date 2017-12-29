@@ -10,7 +10,7 @@ GameRepresentation::Model SuperPacGomme::getModel() const {
 
 void SuperPacGomme::apply(Context &context) {
 	// TODO static const for time
-	int time = 100;
+	int time = 150;
 	for (Ghost *ghost : context.ghosts) {
 		ghost->setWeak(time);
 	}

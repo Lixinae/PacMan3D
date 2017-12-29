@@ -1,6 +1,5 @@
 #include <iostream>
 #include <ctime>
-#include <chrono>
 #include <thread>
 #include <json/json.hpp>
 #include <GL/glew.h>
@@ -16,7 +15,7 @@ using namespace std;
 using namespace glm;
 
 void waitFrameRate() {
-	this_thread::sleep_for(chrono::milliseconds(40));
+	//this_thread::sleep_for(chrono::milliseconds(40));
 }
 
 void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, EventHandler &eventHandler, map<control, SDLKey> keyMap) {
@@ -57,7 +56,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 					renderer.renderGame(game.getRepresentation(), game.getInformations());
 					renderer.renderPauseMenu(keyMap);
 					windowManager.swapBuffers();
-					waitFrameRate();
+					//waitFrameRate();
 				}
 				if (state == EventHandler::State::QUIT) {
 					return;
@@ -74,7 +73,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 	while (state == EventHandler::State::CONTINUE) {
 		state = eventHandler.handleEndTitleEvent(windowManager);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		renderer.renderEndTitle();
+		renderer.renderEndTitle(game.getInformations());
 		windowManager.swapBuffers();
 	}
 

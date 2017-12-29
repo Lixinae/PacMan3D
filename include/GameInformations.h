@@ -12,14 +12,14 @@ private:
 	int _lives;
 	int _multiplier;
 	int _multiplierCounter;
-
+	int _pacGommeCounter;
 public:
 
 	static GameInformations fromJSON(const json &jsonInfo);
 
 	GameInformations();
 
-	explicit GameInformations(int score, int lives, int multiplier, int multiplierCounter);
+	explicit GameInformations(int score, int lives, int multiplier, int multiplierCounter, int countPacGomme);
 
 	/**
 	 *
@@ -39,7 +39,6 @@ public:
 	 * Decrease the life count of the player by one
 	 */
 	void decreaseLife();
-
 
 	void setMultiplier(int time);
 
@@ -70,6 +69,13 @@ public:
 	
 	json toJSON() const;
 
+	int getPacGommeCounter() const;
+
+	void setPacGommeCounter(int pacGommeCounter);
+
+	void decreasePacGommeCounter();
+
+	bool noMoreGums();
 };
 
 #endif

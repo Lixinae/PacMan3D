@@ -26,7 +26,7 @@ public:
 
 	void renderPauseMenu(const map<control, SDLKey> &keyMap) const override;
 
-	void renderEndTitle() const override;
+	void renderEndTitle(const GameInformations &gameInfo) const override;
 
 	~Renderer3D() override;
 

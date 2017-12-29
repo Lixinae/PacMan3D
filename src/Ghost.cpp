@@ -5,7 +5,7 @@
 #include <GhostInky.h>
 #include <GhostClyde.h>
 
-int Ghost::MAX_ITERATION = 3;
+int Ghost::MAX_ITERATION = 5;
 
 Ghost *Ghost::fromJSON(const json &jsonGhost) {
 	BoardPosition position = BoardPosition::fromJSON(jsonGhost["position"]);
@@ -91,7 +91,7 @@ void Ghost::iterate() {
 		_weakCounter--;
 	}
 
-	_count = (_count + 1) % 3;
+	_count = (_count + 1) % Ghost::MAX_ITERATION;
 	if (_count == 0) {
 		_orientation = getNextOrientation();
 	}
