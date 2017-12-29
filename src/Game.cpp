@@ -179,39 +179,22 @@ void Game::iterateGhost(Ghost *ghost) {
 		if(ghost->goTo(nextPosition)) {
 			nextSquare->receiveGhost(context);
 		}
-		//orientation = ghost->getNextOrientation();
-		vector<Utils::Orientation> walkableOrientations;
-		vector<Utils::Orientation> orientations = {
-				Utils::Orientation::NORTH,
-				Utils::Orientation::SOUTH,
-				Utils::Orientation::EAST,
-				Utils::Orientation::WEST
-		};
-		for (Utils::Orientation orientation : orientations) {
-			BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
-			if (square != nullptr && square->isGhostWalkable(context)) {
-				walkableOrientations.push_back(orientation);
-			}
-		}
-		orientation = Utils::randomOrientation(walkableOrientations);
-	} else {
-		// get all the direction and choose one of the possible
-		vector<Utils::Orientation> walkableOrientations;
-		vector<Utils::Orientation> orientations = {
-				Utils::Orientation::NORTH,
-				Utils::Orientation::SOUTH,
-				Utils::Orientation::EAST,
-				Utils::Orientation::WEST
-		};
-		for (Utils::Orientation orientation : orientations) {
-			BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
-			if (square != nullptr && square->isGhostWalkable(context)) {
-				walkableOrientations.push_back(orientation);
-			}
-		}
-		orientation = Utils::randomOrientation(walkableOrientations);
 	}
-	ghost->orientTo(orientation);
+	vector<Utils::Orientation> walkableOrientations;
+	vector<Utils::Orientation> orientations = {
+			Utils::Orientation::NORTH,
+			Utils::Orientation::SOUTH,
+			Utils::Orientation::EAST,
+			Utils::Orientation::WEST
+	};
+	for (Utils::Orientation orientation : orientations) {
+		BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
+		if (square != nullptr && square->isGhostWalkable(context)) {
+			walkableOrientations.push_back(orientation);
+		}
+	}
+	Ghost::MovingContext movingContext(walkableOrientations);
+	ghost->orientTo(ghost->getNextOrientation(movingContext));
 	ghost->iterate();
 }
 

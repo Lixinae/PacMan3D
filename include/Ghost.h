@@ -19,6 +19,7 @@ public:
 
 	};
 
+	static int CASE_REDIRECTION;
 	static int MAX_ITERATION;
 
 	static Ghost *fromJSON(const json &jsonGhost);
@@ -51,7 +52,7 @@ public:
 
 	GameRepresentation::Model getModel() const;
 
-	virtual Utils::Orientation getNextOrientation() const = 0;
+	virtual Utils::Orientation getNextOrientation(const MovingContext & context) const = 0;
 
 	virtual GameRepresentation::ModelType getModelType() const = 0;
 

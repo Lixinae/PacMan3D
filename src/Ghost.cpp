@@ -5,6 +5,7 @@
 #include <GhostInky.h>
 #include <GhostClyde.h>
 
+int Ghost::CASE_REDIRECTION = 2;
 int Ghost::MAX_ITERATION = 3;
 
 Ghost::MovingContext::MovingContext(vector<Utils::Orientation> &availableOrientation):
@@ -54,7 +55,7 @@ void Ghost::setOrientation(Utils::Orientation orientation) {
 bool Ghost::orientTo(Utils::Orientation orientation) {
 	if (_iterOrientation == 0) {
 		_orientation = orientation;
-		_iterOrientation = Ghost::MAX_ITERATION;
+		_iterOrientation = Ghost::CASE_REDIRECTION*Ghost::MAX_ITERATION;
 		_iterPosition = 0;
 		return true;
 	}
