@@ -26,7 +26,24 @@ public:
 
 	// TODO DESTRUCT
 
-	void render(const string &text, GLfloat x, GLfloat y, GLfloat scale, const vec3 &color) const;
+	/**
+	 *
+	 * @param text Texte a ecrire
+	 * @param xPercent % de taille de la largeur de la fenetre ou ecrire
+	 * @param yPercent % de taille de la hauteur de la fenetre ou ecrire
+	 * @param scale Scaling du texte , reduction ou augmentation de la taille
+	 * @param color Couleur du texte
+	 */
+	void render(const string &text, GLfloat xPercent, GLfloat yPercent, GLfloat scale, const vec3 &color) const;
+
+	/**
+	 *
+	 * @param text Texte a ecrire
+	 * @param yPercent % de taille de la hauteur de la fenetre ou ecrire
+	 * @param scale Scaling du texte , reduction ou augmentation de la taille
+	 * @param color Couleur du texte
+	 */
+	void renderXCentered(const string &text, GLfloat yPercent, GLfloat scale, const vec3 &color) const;
 
 private:
 
@@ -37,8 +54,11 @@ private:
 	GLuint _vbo;
 	GLuint _vao;
 
-	GLuint _uProjection;
-	GLuint _uTextColor;
+	GLint _uProjection;
+	GLint _uTextColor;
+
+	int _windowWidth;
+	int _windowHeight;
 
 	void initProgram();
 

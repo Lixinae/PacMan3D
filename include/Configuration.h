@@ -20,12 +20,11 @@ enum class control {
 	LEFT,
 	RIGHT,
 	CHANGE_CAMERA,
-	ZOOM_IN,
-	ZOOM_OUT,
 	PAUSE_GAME,
 	SAVE_GAME,
 	LOAD_GAME,
-	EXIT
+	EXIT,
+	RESTART
 	// todo Add other possible controles if needed
 };
 
@@ -44,8 +43,6 @@ private:
 	map<GameRepresentation::ModelType, AbstractModel3D *> _map_model3D;
 	int _windowWidth;
 	int _windowHeight;
-
-	static SDLKey stringToKey(string s);
 
 	static map<control, SDLKey> keyMapFromJSON(const json &json);
 

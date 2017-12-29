@@ -19,7 +19,7 @@ void waitFrameRate() {
 	this_thread::sleep_for(chrono::milliseconds(40));
 }
 
-void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, EventHandler &eventHandler) {
+void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, EventHandler &eventHandler, map<control, SDLKey> keyMap) {
 	EventHandler::State state;
 	state = EventHandler::State::CONTINUE;
 	while (state == EventHandler::State::CONTINUE) {
@@ -55,7 +55,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 					state = eventHandler.handlePauseMenuEvent(windowManager, game);
 					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 					renderer.renderGame(game.getRepresentation(), game.getInformations());
-					renderer.renderPauseMenu();
+					renderer.renderPauseMenu(keyMap);
 					windowManager.swapBuffers();
 					waitFrameRate();
 				}
@@ -105,7 +105,7 @@ int realMain() {
 
 	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap());
 
-	play(game, windowManager, *renderer, eventHandler);
+	play(game, windowManager, *renderer, eventHandler, configuration.getControlMap());
 
 	delete renderer;
 

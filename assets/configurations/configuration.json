@@ -4,11 +4,7 @@
     "Down": "s",
     "Left": "q",
     "Right": "d",
-    "ChangeCamera": "c",
-    "Pause": "p",
-    "Save": "o",
-    "Load": "i",
-    "Exit": "k"
+    "ChangeCamera": "c"
   },
   "windowSize": {
     "width": 800,

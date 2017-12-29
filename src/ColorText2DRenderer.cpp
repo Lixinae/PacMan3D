@@ -32,7 +32,7 @@ void ColorText2DRenderer::initCharacters(int windowWidth, int windowHeight, cons
 		cerr << "ERROR::FREETYPE: Failed to load font" << endl;
 	}
 	// Set size to load glyphs as
-	FT_Set_Pixel_Sizes(face, 0, 48);
+	FT_Set_Pixel_Sizes(face, 0, 96);
 
 	// Disable byte-alignment restriction
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -91,13 +91,15 @@ void ColorText2DRenderer::initQuads() {
 	glBindVertexArray(0);
 }
 
-ColorText2DRenderer::ColorText2DRenderer(int windowWidth, int windowHeight, const string &fontPath) {
+ColorText2DRenderer::ColorText2DRenderer(int windowWidth, int windowHeight, const string &fontPath) :
+		_windowWidth(windowWidth),
+		_windowHeight(windowHeight) {
 	initProgram();
 	initCharacters(windowWidth, windowHeight, fontPath);
 	initQuads();
 }
 
-void ColorText2DRenderer::render(const string &text, GLfloat x, GLfloat y, GLfloat scale, const vec3 &color) const {
+void ColorText2DRenderer::render(const string &text, GLfloat xPercent, GLfloat yPercent, GLfloat scale, const vec3 &color) const {
 	// Activate corresponding render state
 	_program.use();
 	glEnable(GL_BLEND);
@@ -106,8 +108,87 @@ void ColorText2DRenderer::render(const string &text, GLfloat x, GLfloat y, GLflo
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(_vao);
 
+	if (xPercent > 100.f) {
+		xPercent = 100.f;
+	}
+	if (xPercent < 0.f) {
+		xPercent = 1.f;
+	}
+	if (yPercent > 100.f) {
+		yPercent = 100.f;
+	}
+	if (yPercent < 0.f) {
+		yPercent = 1.f;
+	}
+	GLfloat x = _windowWidth * (xPercent / 100.f);
+	GLfloat y = _windowHeight * (yPercent / 100.f);
 	// Iterate through all characters
 	string::const_iterator c;
+	for (c = text.begin(); c != text.end(); c++) {
+		Character ch = _characters.at(*c);
+
+		GLfloat xpos = x + ch.Bearing.x * scale;
+		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+
+		GLfloat w = ch.Size.x * scale;
+		GLfloat h = ch.Size.y * scale;
+		// Update VBO for each character
+		GLfloat vertices[6][4] = {
+				{xpos,     ypos + h, 0.0, 0.0},
+				{xpos,     ypos,     0.0, 1.0},
+				{xpos + w, ypos,     1.0, 1.0},
+
+				{xpos,     ypos + h, 0.0, 0.0},
+				{xpos + w, ypos,     1.0, 1.0},
+				{xpos + w, ypos + h, 1.0, 0.0}
+		};
+		// Render glyph texture over quad
+		glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+		// Update content of VBO memory
+		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Be sure to use glBufferSubData and not glBufferData
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		// Render quad
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+		x += (ch.Advance >> 6) *
+		     scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+	}
+
+	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_BLEND);
+}
+
+void ColorText2DRenderer::renderXCentered(const string &text, GLfloat yPercent, GLfloat scale, const vec3 &color) const {
+	// Activate corresponding render state
+	_program.use();
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glUniform3f(_uTextColor, color.x, color.y, color.z);
+	glActiveTexture(GL_TEXTURE0);
+	glBindVertexArray(_vao);
+
+	if (yPercent > 100.f) {
+		yPercent = 100.f;
+	}
+	if (yPercent < 0.f) {
+		yPercent = 1.f;
+	}
+
+	GLfloat y = _windowHeight * (yPercent / 100.f);
+
+	// Get the total Size of the text // todo
+	float totalTextWidth = 0.f;
+	string::const_iterator c;
+	for (c = text.begin(); c != text.end(); c++) {
+		Character ch = _characters.at(*c);
+		GLfloat w = (ch.Advance >> 6) * scale;
+		totalTextWidth += w;
+	}
+	GLfloat x = ((float) _windowWidth - totalTextWidth) / 2.f;
+	// Iterate through all characters
 	for (c = text.begin(); c != text.end(); c++) {
 		Character ch = _characters.at(*c);
 

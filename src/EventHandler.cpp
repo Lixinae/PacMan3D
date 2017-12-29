@@ -48,10 +48,10 @@ EventHandler::State EventHandler::handleBeginGameEvent(SDLWindowManager &windowM
 			}
 		}
 	}
-	if (windowManager.isKeyPressed(SDLK_b)) { // TODO should not be key
+	if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
 		game.moveFrontCamera(1);
 	}
-	if (windowManager.isKeyPressed(SDLK_n)) {
+	if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT)) {
 		game.moveFrontCamera(-1);
 	}
 	return state;
@@ -115,6 +115,11 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 				Game game2 = Game::fromJSONFile("assets/games/save.json"); //TODO static const
 				game = game2;
 			}
+			if (event.key.keysym.sym == _keyMap[control::RESTART]) {
+				game.restart();
+				state = EventHandler::State::NEXT;
+			}
+
 		}
 	}
 	return state;

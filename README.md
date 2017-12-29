@@ -7,33 +7,41 @@ L’objectif de ce projet est de développer un jeu de type "PACMAN" en 3D en C+
 * OpenGL ( should be installed with your graphical drivers )
 
 
-## How to use it :
+## How to run the game it :
 
-* Usage using command line: 
+* Usage using command line to compile then run: 
   * Go in the "build" directory
   * run "cmake .."
   * run "make"
-  * run the program from inside the builde directory with the command :
+  * run the program from the command line inside the build directory with the command :
+    * On linux : ./bin/Pacman3D
+    * On windows : ./bin/Pacman3D.exe
+    
+* If it's already compiled :
+  * run the program from the command line inside the build directory with the command :
     * On linux : ./bin/Pacman3D
     * On windows : ./bin/Pacman3D.exe
   
 ## Commands 
-The keymap can be changed in the configuration.json located in the "assets/configurations/" folder
 
 ###Active only during the game
+These binds can be changed in the json configuration file located in "assets/configurations"
+
   * Movement :
     * Z : Move FORWARD
     * S : Move BACKWARD
     * Q : Move LEFT
     * D : Move RIGHT
-    * C : Change camera
+    
   
   * Camera : 
+    * C : Change camera
     * These two binds can't be changed !
     * Mouse Left click : Zoom In
     * Mouse Right click : Zoom out
     
 ###Active on the pause menu
+These binds cannot be changed 
   * Interface :
     * P : Pause
     * O : Save

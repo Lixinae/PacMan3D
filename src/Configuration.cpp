@@ -14,30 +14,38 @@ Configuration::Configuration(
 
 Configuration Configuration::defaultConfiguration() {
 	map<control, SDLKey> keyMap;
-	keyMap[control::UP] = stringToKey("z");
-	keyMap[control::DOWN] = stringToKey("s");
-	keyMap[control::LEFT] = stringToKey("q");
-	keyMap[control::RIGHT] = stringToKey("d");
-	keyMap[control::CHANGE_CAMERA] = stringToKey("c");
-	keyMap[control::PAUSE_GAME] = stringToKey("p");
-	keyMap[control::SAVE_GAME] = stringToKey("o");
-	keyMap[control::LOAD_GAME] = stringToKey("i");
-	keyMap[control::EXIT] = stringToKey("k");
+	keyMap[control::UP] = Utils::Utils::stringToKey("z");
+	keyMap[control::DOWN] = Utils::stringToKey("s");
+	keyMap[control::LEFT] = Utils::stringToKey("q");
+	keyMap[control::RIGHT] = Utils::stringToKey("d");
+	keyMap[control::CHANGE_CAMERA] = Utils::stringToKey("c");
+	keyMap[control::PAUSE_GAME] = Utils::stringToKey("p");
+	keyMap[control::SAVE_GAME] = Utils::stringToKey("o");
+	keyMap[control::LOAD_GAME] = Utils::stringToKey("i");
+	keyMap[control::EXIT] = Utils::stringToKey("k");
+	keyMap[control::RESTART] = Utils::stringToKey("r");
 	map<GameRepresentation::ModelType, AbstractModel3D *> modelMap; //TODO
 	return Configuration(keyMap, modelMap, 800, 600);
 }
 
 map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
 	map<control, SDLKey> keyMap;
-	keyMap[control::UP] = stringToKey(json["Up"]);
-	keyMap[control::DOWN] = stringToKey(json["Down"]);
-	keyMap[control::LEFT] = stringToKey(json["Left"]);
-	keyMap[control::RIGHT] = stringToKey(json["Right"]);
-	keyMap[control::CHANGE_CAMERA] = stringToKey(json["ChangeCamera"]);
-	keyMap[control::PAUSE_GAME] = stringToKey(json["Pause"]);
-	keyMap[control::SAVE_GAME] = stringToKey(json["Save"]);
-	keyMap[control::LOAD_GAME] = stringToKey(json["Load"]);
-	keyMap[control::EXIT] = stringToKey(json["Exit"]);
+	keyMap[control::UP] = Utils::stringToKey(json["Up"]);
+	keyMap[control::DOWN] = Utils::stringToKey(json["Down"]);
+	keyMap[control::LEFT] = Utils::stringToKey(json["Left"]);
+	keyMap[control::RIGHT] = Utils::stringToKey(json["Right"]);
+	keyMap[control::CHANGE_CAMERA] = Utils::stringToKey(json["ChangeCamera"]);
+
+	keyMap[control::PAUSE_GAME] = Utils::stringToKey("p");
+	keyMap[control::SAVE_GAME] = Utils::stringToKey("o");
+	keyMap[control::LOAD_GAME] = Utils::stringToKey("i");
+	keyMap[control::EXIT] = Utils::stringToKey("k");
+	keyMap[control::RESTART] = Utils::stringToKey("r");
+
+//	keyMap[control::PAUSE_GAME] = Utils::stringToKey(json["Pause"]);
+//	keyMap[control::SAVE_GAME] = Utils::stringToKey(json["Save"]);
+//	keyMap[control::LOAD_GAME] = Utils::stringToKey(json["Load"]);
+//	keyMap[control::EXIT] = Utils::stringToKey(json["Exit"]);
 	return keyMap;
 }
 
@@ -85,91 +93,4 @@ const map<GameRepresentation::ModelType, AbstractModel3D *> Configuration::getMo
 	return _map_model3D;
 }
 
-SDLKey Configuration::stringToKey(string s) {
-	if (s == "a") return SDLK_a;
-	if (s == "b") return SDLK_b;
-	if (s == "c") return SDLK_c;
-	if (s == "d") return SDLK_d;
-	if (s == "e") return SDLK_e;
-	if (s == "f") return SDLK_f;
-	if (s == "g") return SDLK_g;
-	if (s == "h") return SDLK_h;
-	if (s == "i") return SDLK_i;
-	if (s == "j") return SDLK_j;
-	if (s == "k") return SDLK_k;
-	if (s == "l") return SDLK_l;
-	if (s == "m") return SDLK_m;
-	if (s == "n") return SDLK_n;
-	if (s == "o") return SDLK_o;
-	if (s == "p") return SDLK_p;
-	if (s == "q") return SDLK_q;
-	if (s == "r") return SDLK_r;
-	if (s == "s") return SDLK_s;
-	if (s == "t") return SDLK_t;
-	if (s == "u") return SDLK_u;
-	if (s == "v") return SDLK_v;
-	if (s == "w") return SDLK_w;
-	if (s == "x") return SDLK_x;
-	if (s == "y") return SDLK_y;
-	if (s == "z") return SDLK_z;
-	if (s == "1") return SDLK_1;
-	if (s == "2") return SDLK_2;
-	if (s == "3") return SDLK_3;
-	if (s == "4") return SDLK_4;
-	if (s == "5") return SDLK_5;
-	if (s == "6") return SDLK_6;
-	if (s == "7") return SDLK_7;
-	if (s == "8") return SDLK_8;
-	if (s == "9") return SDLK_9;
-	if (s == "0") return SDLK_0;
-	if (s == "k+") return SDLK_KP_PLUS;
-	if (s == "k-") return SDLK_KP_MINUS;
-	if (s == "k*") return SDLK_KP_MULTIPLY;
-	if (s == "k/") return SDLK_KP_DIVIDE;
-	if (s == "kenter") return SDLK_KP_ENTER;
-	if (s == "k.") return SDLK_KP_PERIOD;
-	if (s == "insert") return SDLK_INSERT;
-	if (s == "home") return SDLK_HOME;
-	if (s == "pgup") return SDLK_PAGEUP;
-	if (s == "pgdown") return SDLK_PAGEDOWN;
-	if (s == "end") return SDLK_END;
-	if (s == "delete") return SDLK_DELETE;
-	if (s == "ralt") return SDLK_RALT;
-	if (s == "rshift") return SDLK_RSHIFT;
-	if (s == "rctrl") return SDLK_RCTRL;
-	if (s == "lalt") return SDLK_LALT;
-	if (s == "lshift") return SDLK_LSHIFT;
-	if (s == "lctrl") return SDLK_LCTRL;
-	if (s == "up") return SDLK_UP;
-	if (s == "down") return SDLK_DOWN;
-	if (s == "right") return SDLK_RIGHT;
-	if (s == "left") return SDLK_LEFT;
-	if (s == "`") return SDLK_BACKQUOTE;
-	if (s == "[") return SDLK_LEFTBRACKET;
-	if (s == "]") return SDLK_RIGHTBRACKET;
-	if (s == "-") return SDLK_MINUS;
-	if (s == "=") return SDLK_EQUALS;
-	if (s == "backspace") return SDLK_BACKSPACE;
-	if (s == "/") return SDLK_SLASH;
-	if (s == "\\") return SDLK_BACKSLASH;
-	if (s == ",") return SDLK_COMMA;
-	if (s == ".") return SDLK_PERIOD;
-	if (s == ";") return SDLK_SEMICOLON;
-	if (s == "'") return SDLK_QUOTE;
-	if (s == "f1") return SDLK_F1;
-	if (s == "f2") return SDLK_F2;
-	if (s == "f3") return SDLK_F3;
-	if (s == "f4") return SDLK_F4;
-	if (s == "f5") return SDLK_F5;
-	if (s == "f6") return SDLK_F6;
-	if (s == "f7") return SDLK_F7;
-	if (s == "f8") return SDLK_F8;
-	if (s == "f9") return SDLK_F9;
-	if (s == "f10") return SDLK_F10;
-	if (s == "f11") return SDLK_F11;
-	if (s == "f12") return SDLK_F12;
-	if (s == "f13") return SDLK_F13;
-	if (s == "f14") return SDLK_F14;
-	if (s == "f15") return SDLK_F15;
-	if (s == "esc") return SDLK_ESCAPE;
-}
+
