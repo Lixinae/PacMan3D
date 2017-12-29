@@ -27,4 +27,4 @@ public:
 };
 
 
-#endif //PACMAN3D_LIGHT_H
+#endif

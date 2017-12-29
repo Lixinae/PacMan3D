@@ -45,21 +45,15 @@ void Renderer3D::renderModels(const GameRepresentation &repr) const {
 }
 
 void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
-	// Toutes les valeurs sont ajustés pour une grille orthogonal de 800*600
 	float x = 1.25f, y, ecart = 5.f;
 	float scale = 0.65;
 	vec3 color = vec3(1, 1, 0);
-
 	int livesLeft = gameInfo.getLives();
 	y = 95.f;
 	_textRenderer.render("Lives : " + to_string(livesLeft), x, y, scale, color);
-
-
 	int currentScore = gameInfo.getScore();
 	y -= ecart;
 	_textRenderer.render("Score : " + to_string(currentScore), x, y, scale, color);
-
-
 	int multiplier = gameInfo.getMultiplier();
 	y -= ecart;
 	_textRenderer.render("Multiplier : " + to_string(multiplier), x, y, scale, color);

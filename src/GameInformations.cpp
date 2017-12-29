@@ -22,7 +22,7 @@ GameInformations GameInformations::fromJSON(const json &jsonInfo) {
 			jsonInfo["lives"],
 			jsonInfo["multiplier"],
 			jsonInfo["multiplierCounter"],
-			jsonInfo["pacGommeCounter"]
+			177
 	);
 }
 
@@ -79,7 +79,7 @@ json GameInformations::toJSON() const {
 	jsonInfo["lives"] = _lives;
 	jsonInfo["multiplier"] = _multiplier;
 	jsonInfo["multiplierCounter"] = _multiplierCounter;
-	jsonInfo["pacGommeCounter"] = _pacGommeCounter;
+	jsonInfo["pacGommeCounter"] = _pacGommeCounter; 
 	return jsonInfo; 
 }
 

@@ -12,6 +12,7 @@ Configuration::Configuration(
 
 }
 
+//TODO RM
 Configuration Configuration::defaultConfiguration() {
 	map<control, SDLKey> keyMap;
 	keyMap[control::UP] = Utils::Utils::stringToKey("z");
@@ -35,17 +36,11 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
 	keyMap[control::LEFT] = Utils::stringToKey(json["Left"]);
 	keyMap[control::RIGHT] = Utils::stringToKey(json["Right"]);
 	keyMap[control::CHANGE_CAMERA] = Utils::stringToKey(json["ChangeCamera"]);
-
 	keyMap[control::PAUSE_GAME] = Utils::stringToKey("p");
 	keyMap[control::SAVE_GAME] = Utils::stringToKey("o");
 	keyMap[control::LOAD_GAME] = Utils::stringToKey("i");
 	keyMap[control::EXIT] = Utils::stringToKey("k");
 	keyMap[control::RESTART] = Utils::stringToKey("r");
-
-//	keyMap[control::PAUSE_GAME] = Utils::stringToKey(json["Pause"]);
-//	keyMap[control::SAVE_GAME] = Utils::stringToKey(json["Save"]);
-//	keyMap[control::LOAD_GAME] = Utils::stringToKey(json["Load"]);
-//	keyMap[control::EXIT] = Utils::stringToKey(json["Exit"]);
 	return keyMap;
 }
 

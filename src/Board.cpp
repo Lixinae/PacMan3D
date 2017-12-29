@@ -1,5 +1,7 @@
 #include <Board.h>
 
+#include <Utils.h>
+
 using namespace std;
 
 Board::Board(const map<BoardPosition, BoardSquare *> &squares) : _squares() {
@@ -13,9 +15,7 @@ Board::Board(const Board &other) : Board::Board(other._squares) {
 }
 
 Board::~Board() {
-	for (auto &entry : _squares) {
-		//delete entry.second; //TODO correct bug
-	}
+	//Utils::cleanMap(_squares);//TODO correct bug
 }
 
 Board Board::fromJSON(const json &jsonBoard) {
@@ -27,9 +27,7 @@ Board Board::fromJSON(const json &jsonBoard) {
 		squares[position] = square;
 	}
 	Board board(squares);
-	for (auto &entry : squares) {
-		delete entry.second;
-	}
+	Utils::cleanMap(squares);
 	return board;
 }
 

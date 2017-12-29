@@ -5,7 +5,7 @@
 #include <GhostInky.h>
 #include <GhostClyde.h>
 
-int Ghost::MAX_ITERATION = 5;
+int Ghost::MAX_ITERATION = 3;
 
 Ghost *Ghost::fromJSON(const json &jsonGhost) {
 	BoardPosition position = BoardPosition::fromJSON(jsonGhost["position"]);

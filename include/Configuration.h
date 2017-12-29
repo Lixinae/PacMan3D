@@ -25,7 +25,6 @@ enum class control {
 	LOAD_GAME,
 	EXIT,
 	RESTART
-	// todo Add other possible controles if needed
 };
 
 class Configuration {
