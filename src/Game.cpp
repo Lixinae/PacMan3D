@@ -113,8 +113,9 @@ void Game::orientPacman(Utils::Orientation orientation) {
 	BoardSquare *square = _board[position];
 	BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
 	if (square != nullptr && square->isPacmanWalkable(context)) {
-		_pacman.setOrientation(realOrientation);
-		_pointOfView.getFirstPersonCamera().setHorizontalAngle(Utils::degreesOfOrientation(realOrientation));
+		if (_pacman.orientTo(realOrientation)) {
+			_pointOfView.getFirstPersonCamera().setHorizontalAngle(Utils::degreesOfOrientation(realOrientation));
+		}
 	}
 }
 
@@ -162,9 +163,10 @@ void Game::iteratePacman() {
 	BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
 	if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
 		_pacman.goTo(nextPosition);
-		nextSquare->receivePacman(context);
+		if(_pacman.move()) {
+			nextSquare->receivePacman(context);
+		}
 		updateFirstPersonCameraPosition();
-		_pacman.move();
 	}
 	_pacman.iterate();
 }
