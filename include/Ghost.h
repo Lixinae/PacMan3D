@@ -11,6 +11,15 @@ class Ghost {
 
 public:
 
+	struct MovingContext {
+
+		vector<Utils::Orientation> &availableOrientation;
+		
+		MovingContext(vector<Utils::Orientation> &availableOrientation);
+
+	};
+
+	static int CASE_REDIRECTION;
 	static int MAX_ITERATION;
 
 	static Ghost *fromJSON(const json &jsonGhost);
@@ -20,12 +29,14 @@ public:
 	Utils::Orientation getOrientation() const;
 
 	void setOrientation(Utils::Orientation orientation);
+	
+	bool orientTo(Utils::Orientation orientation);
 
 	BoardPosition getPosition() const;
 
 	void setPosition(const BoardPosition &position);
 
-	void goTo(const BoardPosition &position);
+	bool goTo(const BoardPosition &position);
 	
 	bool isWeak() const;
 
@@ -36,14 +47,12 @@ public:
 	void crossDoor();
 
 	float getShift() const;
-	
-	void move();
 
 	void iterate();
 
 	GameRepresentation::Model getModel() const;
 
-	virtual Utils::Orientation getNextOrientation() const = 0;
+	virtual Utils::Orientation getNextOrientation(const MovingContext & context) const = 0;
 
 	virtual GameRepresentation::ModelType getModelType() const = 0;
 
@@ -57,8 +66,8 @@ private:
 	Utils::Orientation _orientation;
 	BoardPosition _nextPosition;
 	int _iterPosition;
+	int _iterOrientation;
 	int _weakCounter;
-	int _count;
 	bool _crossDoor;
 
 };

@@ -9,7 +9,7 @@ class GhostPinky : public Ghost {
 
 public:
 
-	Utils::Orientation getNextOrientation() const;
+	Utils::Orientation getNextOrientation(const MovingContext & context) const;
 
 	GameRepresentation::ModelType getModelType() const;
 

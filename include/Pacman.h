@@ -26,11 +26,9 @@ public:
 
 	void setPosition(const BoardPosition &position);
 
-	void goTo(const BoardPosition &position);
+	bool goTo(const BoardPosition &position);
 
 	float getShift() const;
-	
-	bool move();
 	
 	void iterate();
 

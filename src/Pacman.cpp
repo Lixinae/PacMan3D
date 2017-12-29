@@ -33,6 +33,7 @@ Utils::Orientation Pacman::getOrientation() const {
 
 void Pacman::setOrientation(Utils::Orientation orientation) {
 	_orientation = orientation;
+	_iterOrientation = 0;
 }
 
 bool Pacman::orientTo(Utils::Orientation orientation) {
@@ -56,21 +57,18 @@ void Pacman::setPosition(const BoardPosition &position) {
 	_nextPosition = position.translate(_orientation);
 }
 
-void Pacman::goTo(const BoardPosition &position) {
+bool Pacman::goTo(const BoardPosition &position) {
 	_nextPosition = position;
-}
-
-float Pacman::getShift() const {
-	return float(_iterPosition)/Pacman::MAX_ITERATION;
-}
-
-bool Pacman::move() {
 	_iterPosition = (_iterPosition + 1)%Pacman::MAX_ITERATION;
 	if (_iterPosition == 0) {
 		_position = _nextPosition;
 		return true;
 	}
 	return false;
+}
+
+float Pacman::getShift() const {
+	return float(_iterPosition)/Pacman::MAX_ITERATION;
 }
 
 void Pacman::iterate() {

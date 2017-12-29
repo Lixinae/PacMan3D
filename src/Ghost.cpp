@@ -5,7 +5,14 @@
 #include <GhostInky.h>
 #include <GhostClyde.h>
 
+int Ghost::CASE_REDIRECTION = 2;
 int Ghost::MAX_ITERATION = 3;
+
+Ghost::MovingContext::MovingContext(vector<Utils::Orientation> &availableOrientation):
+		availableOrientation(availableOrientation)
+{
+	
+}
 
 Ghost *Ghost::fromJSON(const json &jsonGhost) {
 	BoardPosition position = BoardPosition::fromJSON(jsonGhost["position"]);
@@ -29,8 +36,8 @@ Ghost::Ghost(const BoardPosition &position, Utils::Orientation orientation) :
 		_orientation(orientation),
 		_nextPosition(position.translate(orientation)),
 		_iterPosition(0),
+		_iterOrientation(0),
 		_weakCounter(),
-		_count(),
 		_crossDoor(true)
 {
 
@@ -41,8 +48,18 @@ Utils::Orientation Ghost::getOrientation() const {
 }
 
 void Ghost::setOrientation(Utils::Orientation orientation) {
-	_count = 0;
+	_iterOrientation = 0;
 	_orientation = orientation;
+}
+
+bool Ghost::orientTo(Utils::Orientation orientation) {
+	if (_iterOrientation == 0) {
+		_orientation = orientation;
+		_iterOrientation = Ghost::CASE_REDIRECTION*Ghost::MAX_ITERATION;
+		_iterPosition = 0;
+		return true;
+	}
+	return false;
 }
 
 BoardPosition Ghost::getPosition() const {
@@ -52,6 +69,7 @@ BoardPosition Ghost::getPosition() const {
 void Ghost::setPosition(const BoardPosition &position) {
 	_position = position;
 	_iterPosition = 0;
+	_iterOrientation = 0;
 	_nextPosition = position.translate(_orientation);
 }
 
@@ -71,29 +89,31 @@ void Ghost::crossDoor() {
 	_crossDoor = false;
 }
 
-void Ghost::goTo(const BoardPosition &position) {
+bool Ghost::goTo(const BoardPosition &position) {
 	_nextPosition = position;
+	_iterPosition = (_iterPosition + 1)%Ghost::MAX_ITERATION;
+	if (_iterPosition == 0) {
+		_position = _nextPosition;
+		return true;
+	}
+	return false;
 }
 
 float Ghost::getShift() const {
 	return float(_iterPosition)/Ghost::MAX_ITERATION;
 }
 	
-void Ghost::move() {
-	_iterPosition = (_iterPosition + 1)%Ghost::MAX_ITERATION;
-	if (_iterPosition == 0) {
-		_position = _nextPosition;
-	}
-}
 
 void Ghost::iterate() {
 	if (_weakCounter > 0) {
 		_weakCounter--;
 	}
-
-	_count = (_count + 1) % Ghost::MAX_ITERATION;
-	if (_count == 0) {
+	/*_iterOrientation = (_iterOrientation + 1) % (Ghost::CASE_REDIRECTION*Ghost::MAX_ITERATION);
+	if (_iterOrientation == 0) {
 		_orientation = getNextOrientation();
+	}*/
+	if (_iterOrientation > 0) {
+		_iterOrientation--;
 	}
 }
 

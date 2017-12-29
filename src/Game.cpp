@@ -162,8 +162,7 @@ void Game::iteratePacman() {
 	BoardSquare *nextSquare = _board[nextPosition];
 	BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
 	if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
-		_pacman.goTo(nextPosition);
-		if(_pacman.move()) {
+		if(_pacman.goTo(nextPosition)){
 			nextSquare->receivePacman(context);
 		}
 		updateFirstPersonCameraPosition();
@@ -175,27 +174,27 @@ void Game::iterateGhost(Ghost *ghost) {
 	BoardPosition nextPosition = ghost->getPosition().translate(ghost->getOrientation());
 	BoardSquare *nextSquare = _board[nextPosition];
 	BoardSquare::GhostContext context(*ghost);
+	Utils::Orientation orientation;
 	if (nextSquare != nullptr && nextSquare->isGhostWalkable(context)) {
-		ghost->goTo(nextPosition);
-		nextSquare->receiveGhost(context);
-	} else {
-		// get all the direction and choose one of the possible
-		vector<Utils::Orientation> walkableOrientations;
-		vector<Utils::Orientation> orientations = {
-				Utils::Orientation::NORTH,
-				Utils::Orientation::SOUTH,
-				Utils::Orientation::EAST,
-				Utils::Orientation::WEST
-		};
-		for (Utils::Orientation orientation : orientations) {
-			BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
-			if (square != nullptr && square->isGhostWalkable(context)) {
-				walkableOrientations.push_back(orientation);
-			}
+		if(ghost->goTo(nextPosition)) {
+			nextSquare->receiveGhost(context);
 		}
-		ghost->setOrientation(Utils::randomOrientation(walkableOrientations));
 	}
-	ghost->move();
+	vector<Utils::Orientation> walkableOrientations;
+	vector<Utils::Orientation> orientations = {
+			Utils::Orientation::NORTH,
+			Utils::Orientation::SOUTH,
+			Utils::Orientation::EAST,
+			Utils::Orientation::WEST
+	};
+	for (Utils::Orientation orientation : orientations) {
+		BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
+		if (square != nullptr && square->isGhostWalkable(context)) {
+			walkableOrientations.push_back(orientation);
+		}
+	}
+	Ghost::MovingContext movingContext(walkableOrientations);
+	ghost->orientTo(ghost->getNextOrientation(movingContext));
 	ghost->iterate();
 }
 
