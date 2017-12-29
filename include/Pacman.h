@@ -19,6 +19,8 @@ public:
 	Utils::Orientation getOrientation() const;
 
 	void setOrientation(Utils::Orientation orientation);
+	
+	bool orientTo(Utils::Orientation orientation);
 
 	BoardPosition getPosition() const;
 
@@ -28,7 +30,7 @@ public:
 
 	float getShift() const;
 	
-	void move();
+	bool move();
 	
 	void iterate();
 
@@ -42,6 +44,7 @@ private:
 	Utils::Orientation _orientation;
 	BoardPosition _nextPosition;
 	int _iterPosition;
+	int _iterOrientation;
 
 	Pacman(const BoardPosition &position, Utils::Orientation orientation);
 

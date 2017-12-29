@@ -8,7 +8,8 @@ Pacman::Pacman(const BoardPosition &position, Utils::Orientation orientation) :
 	_position(position),
 	_orientation(orientation),
 	_nextPosition(position.translate(orientation)),
-	_iterPosition(0)
+	_iterPosition(0),
+	_iterOrientation(0)
 {
 
 }
@@ -31,7 +32,17 @@ Utils::Orientation Pacman::getOrientation() const {
 }
 
 void Pacman::setOrientation(Utils::Orientation orientation) {
-	_orientation = orientation; //TODO maybe add orientTo 
+	_orientation = orientation;
+}
+
+bool Pacman::orientTo(Utils::Orientation orientation) {
+	if (_iterOrientation == 0) {
+		_orientation = orientation;
+		_iterOrientation = Pacman::MAX_ITERATION;
+		_iterPosition = 0;
+		return true;
+	}
+	return false;
 }
 
 BoardPosition Pacman::getPosition() const {
@@ -41,6 +52,7 @@ BoardPosition Pacman::getPosition() const {
 void Pacman::setPosition(const BoardPosition &position) {
 	_position = position;
 	_iterPosition = 0;
+	_iterOrientation = 0;
 	_nextPosition = position.translate(_orientation);
 }
 
@@ -52,15 +64,19 @@ float Pacman::getShift() const {
 	return float(_iterPosition)/Pacman::MAX_ITERATION;
 }
 
-void Pacman::move() {
+bool Pacman::move() {
 	_iterPosition = (_iterPosition + 1)%Pacman::MAX_ITERATION;
 	if (_iterPosition == 0) {
 		_position = _nextPosition;
+		return true;
 	}
+	return false;
 }
 
 void Pacman::iterate() {
-
+	if (_iterOrientation > 0) {
+		_iterOrientation--;
+	}
 }
 
 GameRepresentation::Model Pacman::getModel() const {
