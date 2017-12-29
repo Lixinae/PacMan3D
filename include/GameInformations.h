@@ -9,11 +9,13 @@ class GameInformations {
 
 private:
 	int _score;
+	int _score_init;
 	int _lives;
 	int _lives_init;
 	int _multiplier;
 	int _multiplierCounter;
 	int _level;
+	int _level_init;
 public:
 
 	static GameInformations fromJSON(const json &jsonInfo);

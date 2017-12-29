@@ -8,11 +8,13 @@ GameInformations::GameInformations() :
 
 GameInformations::GameInformations(int score, int lives, int multiplier, int multiplierCounter, int level) :
 		_score(score),
+		_score_init(score),
 		_lives(lives),
 		_lives_init(lives),
 		_multiplier(multiplier),
 		_multiplierCounter(multiplierCounter),
-		_level(level)
+		_level(level),
+		_level_init(level)
 {
 
 }
@@ -93,11 +95,11 @@ int GameInformations::getLevel() const {
 }
 
 void GameInformations::resetScore() {
-	_score = 0;
+	_score = _score_init;
 }
 
 void GameInformations::resetLevel() {
-	_level = 1;
+	_level = _level_init;
 }
 
 void GameInformations::resetAll() {
