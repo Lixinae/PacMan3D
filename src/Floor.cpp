@@ -15,7 +15,7 @@ Floor::Floor(const Floor &other) : _bonus(nullptr) {
 }
 
 Floor::~Floor() {
-	delete _bonus; // delete sur un nullptr -> pas d'effet
+	delete _bonus;
 }
 
 vector<GameRepresentation::Model> Floor::getModels() const {
@@ -36,7 +36,7 @@ void Floor::receivePacman(BoardSquare::PacmanContext &context) {
 		_bonus->apply(bonusContext);
 		delete _bonus;
 		_bonus = nullptr;
-		context.informations.decreasePacGommeCounter();
+		context.informations.decreasePacGommeCounter(); //TODO rm
 	}
 }
 

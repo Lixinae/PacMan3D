@@ -70,6 +70,7 @@ json Game::toJSON() const {
 	json jsonGame;
 	jsonGame["board"] = _board.toJSON();
 	jsonGame["pacman"] = _pacman.toJSON();
+	jsonGame["informations"] = _informations.toJSON();
 	json jsonGhosts;
 	for (const Ghost * ghost : _ghosts) {
 		jsonGhosts.push_back(ghost->toJSON());

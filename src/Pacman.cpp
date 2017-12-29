@@ -2,7 +2,7 @@
 
 using json = nlohmann::json;
 
-int Pacman::MAX_ITERATION = 5;
+int Pacman::MAX_ITERATION = 3;
 
 Pacman::Pacman(const BoardPosition &position, Utils::Orientation orientation) :
 	_position(position),
