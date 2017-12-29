@@ -75,7 +75,7 @@ public:
 
 	void decreasePacGommeCounter();
 
-	bool noMoreGums();
+	bool noMoreGums() const;
 };
 
 #endif

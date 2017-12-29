@@ -212,7 +212,6 @@ bool Game::iterate() {
 }
 
 void Game::reset() {
-	// todo -> Kill pacman -> decrease life -> reset multiplier
 	// update camera pos and angle
 	Utils::cleanVector(_ghosts);
 	for (unsigned int i = 0; i < _ghosts.size(); i++) {
@@ -228,6 +227,6 @@ void Game::restart() {
 }
 
 bool Game::isFinish() {
-	cout << "Gum left" << endl;
+	cout << "Gum left : " << _informations.getPacGommeCounter() << endl;
 	return _informations.isDead() || _informations.noMoreGums();
 }

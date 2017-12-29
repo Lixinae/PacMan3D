@@ -99,6 +99,8 @@ void Renderer3D::renderPauseMenu(const map<control, SDLKey> &keyMap) const {
 
 void Renderer3D::renderEndTitle(const GameInformations &gameInfo) const {
 	vec3 color = vec3(1, 1, 0);
+
+	// todo -> Appliqué bonus au score si plus de pacGomme
 	_textRenderer.renderXCentered("Fin de la partie", 75, 0.65, color);
 	_textRenderer.renderXCentered("Score :" + to_string(gameInfo.getScore()), 70, 0.65, color);
 	_textRenderer.renderXCentered("Appuyer sur entree pour quitter", 65, 0.6, color);

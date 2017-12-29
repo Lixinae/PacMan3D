@@ -1,7 +1,7 @@
 #include <GameInformations.h>
 
 GameInformations::GameInformations() :
-		GameInformations::GameInformations(0, 3, 1, 0, 174)
+		GameInformations::GameInformations(0, 3, 1, 0, 172)
 {
 
 }
@@ -97,6 +97,6 @@ void GameInformations::decreasePacGommeCounter() {
 	}
 }
 
-bool GameInformations::noMoreGums() {
+bool GameInformations::noMoreGums() const {
 	return _pacGommeCounter == 0;
 }
