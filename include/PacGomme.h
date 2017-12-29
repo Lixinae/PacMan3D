@@ -15,6 +15,8 @@ public:
 
 	void apply(Bonus::Context &context);
 
+	bool isRequired() const;
+
 	Bonus *clone() const;
 
 	json toJSON() const;

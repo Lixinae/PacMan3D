@@ -22,7 +22,8 @@ public:
 	enum class State {
 		CONTINUE,
 		WIN,
-		LOOSE
+		LOOSE,
+		RESTART
 	};
 
 	static Game fromJSON(const json &jsonGame);
@@ -45,13 +46,11 @@ public:
 
 	const GameInformations &getInformations() const;
 
-	bool iterate();
+	State iterate();
 
 	void reset();
 	
 	void restart();
-
-	State getState();
 	
 	json toJSON() const;
 	

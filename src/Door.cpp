@@ -28,6 +28,10 @@ void Door::receiveGhost(BoardSquare::GhostContext & context) {
 	context.ghost.setPosition(context.ghost.getPosition().translate(context.ghost.getOrientation()));
 }
 
+bool Door::isDone() const {
+	return true;
+}
+
 BoardSquare *Door::clone() const {
 	return new Door(*this);
 }
