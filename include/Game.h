@@ -31,7 +31,7 @@ public:
 
 	void changeCamera();
 
-	void moveFrontCamera(float distance); // TODO Maybe not distance in arg
+	void moveFrontCamera(float distance);
 
 	void orientPacman(Utils::Orientation orientation);
 
@@ -69,7 +69,7 @@ private:
 
 	Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts, const GameInformations &informations);
 
-	void pacmanCollision(Ghost *ghost);
+	void updateFirstPersonCameraPosition();
 
 	void iteratePacman();
 

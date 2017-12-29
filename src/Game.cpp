@@ -20,6 +20,7 @@ Game::Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghos
 		_ghosts[i] = ghosts[i]->clone();
 		_ghosts_init[i] = ghosts[i]->clone();
 	}
+	updateFirstPersonCameraPosition();
 }
 
 Game::Game(const Game & other) :
@@ -93,6 +94,14 @@ void Game::toJSONFile(const string &filePath) const {
 	gameFile.close();
 }
 
+void Game::updateFirstPersonCameraPosition() {
+	glm::vec3 cameraPos = 
+		_pacman.getPosition().inSpace() + 
+		_pacman.getShift()*Utils::vectorOfOrientation(_pacman.getOrientation()) + 
+		glm::vec3(0, 1, 0);
+	_pointOfView.getFirstPersonCamera().setPosition(cameraPos);
+}
+
 void Game::orientPacman(Utils::Orientation orientation) {
 	Utils::Orientation realOrientation;
 	if (_pointOfView.getCurrentCameraType() == PointOfView::CameraType::FIRST_PERSON) {
@@ -154,11 +163,7 @@ void Game::iteratePacman() {
 	if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
 		_pacman.goTo(nextPosition);
 		nextSquare->receivePacman(context);
-		glm::vec3 cameraPos = 
-			_pacman.getPosition().inSpace() + 
-			_pacman.getShift()*Utils::vectorOfOrientation(_pacman.getOrientation()) + 
-			glm::vec3(0, 1.5, 0);
-		_pointOfView.getFirstPersonCamera().setPosition(cameraPos);
+		updateFirstPersonCameraPosition();
 		_pacman.move();
 	}
 	_pacman.iterate();
@@ -195,7 +200,6 @@ void Game::iterateGhost(Ghost *ghost) {
 bool Game::iterate() {
 	iteratePacman();
 	for (unsigned int i = 0; i < _ghosts.size(); i++) {
-		iterateGhost(_ghosts[i]); //TODO maybe after pos check
 		if (_pacman.getPosition() == _ghosts[i]->getPosition()) {
 			if (_ghosts[i]->isWeak()) {
 				_informations.increaseMultiplier();
@@ -207,19 +211,20 @@ bool Game::iterate() {
 				return false;
 			}
 		}
+		iterateGhost(_ghosts[i]);
 	}
 	_informations.iterate();
 	return !_informations.noMoreGums();
 }
 
 void Game::reset() {
-	// update camera pos and angle
 	Utils::cleanVector(_ghosts);
 	for (unsigned int i = 0; i < _ghosts.size(); i++) {
 		_ghosts[i] = _ghosts_init[i]->clone();
 	}
 	_pacman = _pacman_init;
 	_pointOfView = PointOfView(_pacman.getPosition(), _pacman.getOrientation());
+	updateFirstPersonCameraPosition();
 }
 
 void Game::restart() {

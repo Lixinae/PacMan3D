@@ -48,7 +48,9 @@ public:
 
 	template<typename K, typename V>
 	static void cleanMap(map<K, V *> map) {
-		//TODO
+		for (auto &entry : map) {
+			delete entry.second;
+		}
 	};
 
 	static SDLKey stringToKey(string s);

@@ -41,6 +41,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 			waitFrameRate();
 		}
 		if (state == EventHandler::State::QUIT) {
+			return;
 		}
 		while (game.iterate()) {
 			state = eventHandler.handleGameEvent(windowManager, game);

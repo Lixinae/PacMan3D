@@ -18,7 +18,6 @@ class AbstractModel3D {
 
 public:
 
-	// Informations du vertex Shader
 	static const string VERTEX_SHADER_3D;
 
 	static const GLuint VERTEX_ATTR_POSITION;

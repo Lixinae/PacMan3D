@@ -3,9 +3,9 @@
 using namespace glm;
 
 PointOfView::PointOfView(const BoardPosition &position, Utils::Orientation orientation) :
-		_leftTrackballCamera(position.inSpace(), 20, 50, 25),
-		_upperTrackballCamera(position.inSpace(), 20, 90, 0),
-		_rightTrackballCamera(position.inSpace(), 20, 50, -25),
+		_leftTrackballCamera(20, 50, 25),
+		_upperTrackballCamera(20, 90, 0),
+		_rightTrackballCamera(20, 50, -25),
 		_freeflyCamera(position.inSpace(), Utils::degreesOfOrientation(orientation), 0),
 		_current(PointOfView::CameraType::UPPER) {
 

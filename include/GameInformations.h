@@ -69,6 +69,7 @@ public:
 	
 	json toJSON() const;
 
+	//TODO rm
 	int getPacGommeCounter() const;
 
 	void setPacGommeCounter(int pacGommeCounter);
@@ -76,6 +77,7 @@ public:
 	void decreasePacGommeCounter();
 
 	bool noMoreGums() const;
+	//
 };
 
 #endif
