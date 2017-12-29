@@ -30,7 +30,8 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 	if (state == EventHandler::State::QUIT) {
 		return;
 	}
-	while (!game.isFinish()) {
+	Game::State gameState = Game::State::CONTINUE;
+	while (gameState != Game::State::LOOSE) {
 		state = EventHandler::State::CONTINUE;
 		while (state == EventHandler::State::CONTINUE) {
 			state = eventHandler.handleBeginGameEvent(windowManager, game);
@@ -67,7 +68,12 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 			windowManager.swapBuffers();
 			waitFrameRate();
 		}
-		game.reset();
+		gameState = game.getState();
+		if (gameState == Game::State::WIN) {
+			//todo set next level
+		} else {
+			game.reset();
+		}	
 	}
 	state = EventHandler::State::CONTINUE;
 	while (state == EventHandler::State::CONTINUE) {

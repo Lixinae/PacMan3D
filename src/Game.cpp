@@ -232,7 +232,9 @@ void Game::restart() {
 	_board = _board_init;
 }
 
-bool Game::isFinish() {
-	cout << "Gum left : " << _informations.getPacGommeCounter() << endl;
-	return _informations.isDead() || _informations.noMoreGums();
+Game::State Game::getState() {
+	if (_informations.isDead()) {
+		return Game::State::LOOSE;
+	}
+	return Game::State::CONTINUE;
 }
