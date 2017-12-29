@@ -10,6 +10,7 @@ class GameInformations {
 private:
 	int _score;
 	int _lives;
+	int _lives_init;
 	int _multiplier;
 	int _multiplierCounter;
 	int _level;
@@ -76,6 +77,10 @@ public:
 	void resetLevel();
 
 	void resetScore();
+
+	void resetLives();
+
+	void resetAll();
 };
 
 #endif
