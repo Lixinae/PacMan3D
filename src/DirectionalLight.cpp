@@ -1,9 +1,9 @@
 
 #include <DirectionalLight.h>
 
-DirectionalLight::DirectionalLight(const vec3 &color, float ambientIntensity, float diffuseIntensity,
+DirectionalLight::DirectionalLight(const vec3 &color,
                                    const vec3 &direction, float intensity) :
-		Light::Light(color, ambientIntensity, diffuseIntensity),
+		Light::Light(color),
 		_direction(direction),
 		_intensity(intensity) {
 
