@@ -70,7 +70,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 			waitFrameRate();
 		}
 		if (gameState == Game::State::WIN) {
-			//todo set next level
+			game.setNextLevel();
 		} else if (gameState == Game::State::RESTART) {
 			game.reset();
 		} else {

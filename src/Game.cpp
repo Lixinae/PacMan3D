@@ -242,3 +242,8 @@ void Game::restart() {
 	reset();
 	_board = _board_init;
 }
+
+void Game::setNextLevel() {
+	_informations.increaseLevel();
+	restart();
+}

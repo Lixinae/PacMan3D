@@ -51,6 +51,8 @@ public:
 	void reset();
 	
 	void restart();
+
+	void setNextLevel();
 	
 	json toJSON() const;
 	

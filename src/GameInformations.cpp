@@ -1,16 +1,17 @@
 #include <GameInformations.h>
 
 GameInformations::GameInformations() :
-		GameInformations::GameInformations(0, 3, 1, 0)
+		GameInformations::GameInformations(0, 3, 1, 0, 1)
 {
 
 }
 
-GameInformations::GameInformations(int score, int lives, int multiplier, int multiplierCounter):
+GameInformations::GameInformations(int score, int lives, int multiplier, int multiplierCounter, int level) :
 		_score(score),
 		_lives(lives),
 		_multiplier(multiplier),
-		_multiplierCounter(multiplierCounter)
+		_multiplierCounter(multiplierCounter),
+		_level(level)
 {
 
 }
@@ -20,7 +21,8 @@ GameInformations GameInformations::fromJSON(const json &jsonInfo) {
 			jsonInfo["score"],
 			jsonInfo["lives"],
 			jsonInfo["multiplier"],
-			jsonInfo["multiplierCounter"]
+			jsonInfo["multiplierCounter"],
+			jsonInfo["level"]
 	);
 }
 
@@ -77,5 +79,14 @@ json GameInformations::toJSON() const {
 	jsonInfo["lives"] = _lives;
 	jsonInfo["multiplier"] = _multiplier;
 	jsonInfo["multiplierCounter"] = _multiplierCounter;
-	return jsonInfo; 
+	jsonInfo["level"] = _level;
+	return jsonInfo;
+}
+
+void GameInformations::increaseLevel() {
+	_level++;
+}
+
+int GameInformations::getLevel() const {
+	return _level;
 }

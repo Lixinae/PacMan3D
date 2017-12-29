@@ -57,6 +57,9 @@ void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
 	int multiplier = gameInfo.getMultiplier();
 	y -= ecart;
 	_textRenderer.render("Multiplier : " + to_string(multiplier), x, y, scale, color);
+	int level = gameInfo.getLevel();
+	y -= ecart;
+	_textRenderer.render("Level : " + to_string(level), x, y, scale, color);
 }
 
 void Renderer3D::renderGame(const GameRepresentation &repr, const GameInformations &gameInfo) const {
@@ -94,10 +97,10 @@ void Renderer3D::renderPauseMenu(const map<control, SDLKey> &keyMap) const {
 void Renderer3D::renderEndTitle(const GameInformations &gameInfo) const {
 	vec3 color = vec3(1, 1, 0);
 
-	// todo -> Appliqué bonus au score si plus de pacGomme
 	_textRenderer.renderXCentered("Fin de la partie", 75, 0.65, color);
 	_textRenderer.renderXCentered("Score :" + to_string(gameInfo.getScore()), 70, 0.65, color);
-	_textRenderer.renderXCentered("Appuyer sur entree pour quitter", 65, 0.6, color);
+	_textRenderer.renderXCentered("Level : " + to_string(gameInfo.getLevel()), 65, 0.65, color);
+	_textRenderer.renderXCentered("Appuyer sur entree pour quitter", 60, 0.65, color);
 }
 
 Renderer3D::~Renderer3D() {

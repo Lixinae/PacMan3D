@@ -12,14 +12,14 @@ private:
 	int _lives;
 	int _multiplier;
 	int _multiplierCounter;
-	
+	int _level;
 public:
 
 	static GameInformations fromJSON(const json &jsonInfo);
 
 	GameInformations();
 
-	explicit GameInformations(int score, int lives, int multiplier, int multiplierCounter);
+	explicit GameInformations(int score, int lives, int multiplier, int multiplierCounter, int level);
 
 	/**
 	 *
@@ -69,6 +69,9 @@ public:
 	
 	json toJSON() const;
 
+	void increaseLevel();
+
+	int getLevel() const;
 };
 
 #endif
