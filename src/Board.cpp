@@ -1,13 +1,12 @@
 #include <Board.h>
 
-#include <Utils.h>
-
 using namespace std;
 
 Board::Board(const map<BoardPosition, BoardSquare *> &squares) : _squares() {
 	for (const auto &entry : squares) {
 		_squares[entry.first] = entry.second->clone(); //TODO CHECK IMPLEMENTATIONS FOR DESTRUCTOR
 	}
+	_squares_init = _squares;
 }
 
 Board::Board(const Board &other) : Board::Board(other._squares) {
@@ -62,4 +61,13 @@ BoardSquare *Board::getSquare(const BoardPosition &position) const {
 
 BoardSquare *Board::operator[](const BoardPosition &position) const {
 	return getSquare(position);
+}
+
+Board &Board::operator=(const Board &other) {
+	if (&other != this) {
+		Board tmp(other);
+		std::swap(_squares, tmp._squares);
+		std::swap(_squares_init, tmp._squares_init);
+	}
+	return *this;
 }

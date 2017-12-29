@@ -241,6 +241,7 @@ void Game::restart() {
 	reset();
 	_board = _board_init;
 	_informations.resetScore();
+	_informations.resetLevel();
 }
 
 void Game::restartKeepingScore() {

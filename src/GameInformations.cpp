@@ -94,3 +94,7 @@ int GameInformations::getLevel() const {
 void GameInformations::resetScore() {
 	_score = 0;
 }
+
+void GameInformations::resetLevel() {
+	_level = 1;
+}

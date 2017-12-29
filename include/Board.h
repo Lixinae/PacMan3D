@@ -27,13 +27,16 @@ public:
 	BoardSquare * getSquare(const BoardPosition & position) const;
 
 	BoardSquare *operator[](const BoardPosition &position) const;
-	
+
+	Board &operator=(const Board &other);
+
 	json toJSON() const;
 			
 private:
  
 	map<BoardPosition, BoardSquare *> _squares;
-	
+	map<BoardPosition, BoardSquare *> _squares_init;
+
 	Board(const map<BoardPosition, BoardSquare *> & squares);
 
 };

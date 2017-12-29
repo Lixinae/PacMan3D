@@ -73,6 +73,8 @@ public:
 
 	int getLevel() const;
 
+	void resetLevel();
+
 	void resetScore();
 };
 
