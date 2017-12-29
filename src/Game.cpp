@@ -197,7 +197,7 @@ void Game::iterateGhost(Ghost *ghost) {
 	ghost->iterate();
 }
 
-bool Game::iterate() {
+Game::State Game::iterate() {
 	iteratePacman();
 	for (unsigned int i = 0; i < _ghosts.size(); i++) {
 		if (_pacman.getPosition() == _ghosts[i]->getPosition()) {
@@ -208,13 +208,22 @@ bool Game::iterate() {
 				_ghosts[i] = _ghosts_init[i]->clone();
 			} else {
 				_informations.decreaseLife();
-				return false;
+				if (_informations.isDead()) {
+					return Game::State::LOOSE;
+				} else {
+					return Game::State::RESTART;
+				}
 			}
 		}
 		iterateGhost(_ghosts[i]);
 	}
 	_informations.iterate();
-	return !_informations.noMoreGums();
+	for (const BoardPosition &position : _board.getPositions()) {
+		if (!_board[position]->isDone()) {
+			return Game::State::CONTINUE;
+		}
+	}
+	return Game::State::WIN;
 }
 
 void Game::reset() {
@@ -230,9 +239,4 @@ void Game::reset() {
 void Game::restart() {
 	reset();
 	_board = _board_init;
-}
-
-bool Game::isFinish() {
-	cout << "Gum left : " << _informations.getPacGommeCounter() << endl;
-	return _informations.isDead() || _informations.noMoreGums();
 }

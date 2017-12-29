@@ -24,6 +24,10 @@ void Wall::receiveGhost(BoardSquare::GhostContext &) {
 
 }
 
+bool Wall::isDone() const {
+	return true;
+}
+
 BoardSquare *Wall::clone() const {
 	return new Wall(*this);
 }

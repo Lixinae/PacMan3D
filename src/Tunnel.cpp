@@ -45,6 +45,10 @@ void Tunnel::receiveGhost(BoardSquare::GhostContext &context) {
 	context.ghost.setOrientation(_destOrientation);
 }
 
+bool Tunnel::isDone() const {
+	return true;
+}
+
 BoardSquare *Tunnel::clone() const {
 	return new Tunnel(*this);
 }

@@ -23,6 +23,8 @@ public:
 
 	void receiveGhost(BoardSquare::GhostContext &context);
 
+	bool isDone() const;
+
 	BoardSquare *clone() const;
 	
 	json toJSON() const;

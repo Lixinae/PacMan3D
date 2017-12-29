@@ -19,6 +19,13 @@ class Game {
 
 public:
 
+	enum class State {
+		CONTINUE,
+		WIN,
+		LOOSE,
+		RESTART
+	};
+
 	static Game fromJSON(const json &jsonGame);
 
 	static Game fromJSONFile(const string &filePath);
@@ -39,13 +46,11 @@ public:
 
 	const GameInformations &getInformations() const;
 
-	bool iterate();
+	State iterate();
 
 	void reset();
 	
 	void restart();
-
-	bool isFinish();
 	
 	json toJSON() const;
 	

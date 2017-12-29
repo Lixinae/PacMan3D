@@ -17,6 +17,10 @@ void SuperPacGomme::apply(Context &context) {
 	context.informations.setMultiplier(time);
 }
 
+bool SuperPacGomme::isRequired() const {
+	return false;
+}
+
 Bonus *SuperPacGomme::clone() const {
 	return new SuperPacGomme(*this);
 }

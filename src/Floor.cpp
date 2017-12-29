@@ -36,7 +36,6 @@ void Floor::receivePacman(BoardSquare::PacmanContext &context) {
 		_bonus->apply(bonusContext);
 		delete _bonus;
 		_bonus = nullptr;
-		context.informations.decreasePacGommeCounter(); //TODO rm
 	}
 }
 
@@ -46,6 +45,13 @@ bool Floor::isGhostWalkable(const BoardSquare::GhostContext &) const {
 
 void Floor::receiveGhost(BoardSquare::GhostContext &) {
 
+}
+
+bool Floor::isDone() const {
+	if (_bonus == nullptr || !_bonus->isRequired()) {
+		return true;
+	}
+	return false;
 }
 
 BoardSquare *Floor::clone() const {

@@ -13,6 +13,10 @@ void PacGomme::apply(Bonus::Context &context) {
 	context.informations.updateScore(10);
 }
 
+bool PacGomme::isRequired() const {
+	return true;
+}
+
 Bonus *PacGomme::clone() const {
 	return new PacGomme(*this);
 }

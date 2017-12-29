@@ -1,8 +1,8 @@
 {
   "keybinds": {
-    "Up": "w",
+    "Up": "z",
     "Down": "s",
-    "Left": "a",
+    "Left": "q",
     "Right": "d",
     "ChangeCamera": "c"
   },

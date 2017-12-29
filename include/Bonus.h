@@ -26,6 +26,8 @@ public:
 	virtual GameRepresentation::Model getModel() const = 0;
 
 	virtual void apply(Context &context) = 0;
+	
+	virtual bool isRequired() const = 0;
 
 	virtual Bonus *clone() const = 0;
 	

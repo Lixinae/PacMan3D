@@ -12,14 +12,14 @@ private:
 	int _lives;
 	int _multiplier;
 	int _multiplierCounter;
-	int _pacGommeCounter;
+	
 public:
 
 	static GameInformations fromJSON(const json &jsonInfo);
 
 	GameInformations();
 
-	explicit GameInformations(int score, int lives, int multiplier, int multiplierCounter, int countPacGomme);
+	explicit GameInformations(int score, int lives, int multiplier, int multiplierCounter);
 
 	/**
 	 *
@@ -69,15 +69,6 @@ public:
 	
 	json toJSON() const;
 
-	//TODO rm
-	int getPacGommeCounter() const;
-
-	void setPacGommeCounter(int pacGommeCounter);
-
-	void decreasePacGommeCounter();
-
-	bool noMoreGums() const;
-	//
 };
 
 #endif
