@@ -151,10 +151,14 @@ void Game::iteratePacman() {
 	BoardSquare *nextSquare = _board[nextPosition];
 	BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
 	if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
-		_pacman.setPosition(nextPosition);
+		_pacman.goTo(nextPosition);
 		nextSquare->receivePacman(context);
-		glm::vec3 cameraPos = _pacman.getPosition().inSpace() + glm::vec3(0, 1.5, 0);
+		glm::vec3 cameraPos = 
+			_pacman.getPosition().inSpace() + 
+			_pacman.getShift()*Utils::vectorOfOrientation(_pacman.getOrientation()) + 
+			glm::vec3(0, 1.5, 0);
 		_pointOfView.getFirstPersonCamera().setPosition(cameraPos);
+		_pacman.move();
 	}
 	_pacman.iterate();
 }
@@ -164,7 +168,7 @@ void Game::iterateGhost(Ghost *ghost) {
 	BoardSquare *nextSquare = _board[nextPosition];
 	BoardSquare::GhostContext context(*ghost);
 	if (nextSquare != nullptr && nextSquare->isGhostWalkable(context)) {
-		ghost->setPosition(nextPosition);
+		ghost->goTo(nextPosition);
 		nextSquare->receiveGhost(context);
 	} else {
 		// get all the direction and choose one of the possible
@@ -173,9 +177,7 @@ void Game::iterateGhost(Ghost *ghost) {
 				Utils::Orientation::NORTH,
 				Utils::Orientation::SOUTH,
 				Utils::Orientation::EAST,
-				Utils::Orientation::WEST,
-				//One more chance to go to the opposite of the unwalkable square
-				Utils::oppositeOrientation(ghost->getOrientation())
+				Utils::Orientation::WEST
 		};
 		for (Utils::Orientation orientation : orientations) {
 			BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
@@ -185,6 +187,7 @@ void Game::iterateGhost(Ghost *ghost) {
 		}
 		ghost->setOrientation(Utils::randomOrientation(walkableOrientations));
 	}
+	ghost->move();
 	ghost->iterate();
 }
 

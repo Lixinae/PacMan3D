@@ -27,11 +27,12 @@ void Renderer3D::renderModels(const GameRepresentation &repr) const {
 		for (auto &information : informations) {
 			BoardPosition position = information.position;
 			Utils::Orientation orientation = information.orientation;
+			float shift = information.shift;
 			mat4 MVMatrix =
 					rotate(
 							translate(
 									GlobalMVMatrix,
-									position.inSpace()
+									position.inSpace() + shift*Utils::vectorOfOrientation(orientation)
 							),
 							radians(Utils::degreesOfOrientation(orientation)),
 							vec3(0, 1, 0)

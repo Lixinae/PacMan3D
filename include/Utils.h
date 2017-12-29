@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <glm/vec3.hpp>
 #include <SDL/SDL_keysym.h>
 #include <algorithm>
 
@@ -27,6 +28,8 @@ public:
 	static string orientationToString(Utils::Orientation orientation);
 
 	static float degreesOfOrientation(Utils::Orientation orientation);
+	
+	static glm::vec3 vectorOfOrientation(Utils::Orientation orientation);
 
 	static Utils::Orientation randomOrientation();
 

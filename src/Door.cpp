@@ -25,6 +25,7 @@ bool Door::isGhostWalkable(const BoardSquare::GhostContext & context) const {
 
 void Door::receiveGhost(BoardSquare::GhostContext & context) {
 	context.ghost.crossDoor();
+	context.ghost.setPosition(context.ghost.getPosition().translate(context.ghost.getOrientation()));
 }
 
 BoardSquare *Door::clone() const {

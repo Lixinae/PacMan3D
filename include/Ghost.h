@@ -11,6 +11,8 @@ class Ghost {
 
 public:
 
+	static int MAX_ITERATION;
+
 	static Ghost *fromJSON(const json &jsonGhost);
 
 	Ghost(const BoardPosition &position, Utils::Orientation orientation);
@@ -23,6 +25,8 @@ public:
 
 	void setPosition(const BoardPosition &position);
 
+	void goTo(const BoardPosition &position);
+	
 	bool isWeak() const;
 
 	void setWeak(int time);
@@ -30,6 +34,10 @@ public:
 	bool canCrossDoor();
 	
 	void crossDoor();
+
+	float getShift() const;
+	
+	void move();
 
 	void iterate();
 
@@ -47,6 +55,8 @@ private:
 
 	BoardPosition _position;
 	Utils::Orientation _orientation;
+	BoardPosition _nextPosition;
+	int _iterPosition;
 	int _weakCounter;
 	int _count;
 	bool _crossDoor;

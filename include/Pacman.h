@@ -12,6 +12,8 @@ class Pacman {
 
 public:
 
+	static int MAX_ITERATION;
+
 	static Pacman fromJSON(const json &jsonPacman);
 
 	Utils::Orientation getOrientation() const;
@@ -22,6 +24,12 @@ public:
 
 	void setPosition(const BoardPosition &position);
 
+	void goTo(const BoardPosition &position);
+
+	float getShift() const;
+	
+	void move();
+	
 	void iterate();
 
 	GameRepresentation::Model getModel() const;
@@ -32,6 +40,8 @@ private:
 
 	BoardPosition _position;
 	Utils::Orientation _orientation;
+	BoardPosition _nextPosition;
+	int _iterPosition;
 
 	Pacman(const BoardPosition &position, Utils::Orientation orientation);
 

@@ -46,6 +46,19 @@ float Utils::degreesOfOrientation(Utils::Orientation orientation) {
 	}
 }
 
+glm::vec3 Utils::vectorOfOrientation(Utils::Orientation orientation) {
+	switch (orientation) {
+		case Utils::Orientation::NORTH:
+			return glm::vec3(0,0,-1);
+		case Utils::Orientation::SOUTH:
+			return glm::vec3(0,0,1);
+		case Utils::Orientation::EAST:
+			return glm::vec3(1,0,0);
+		case Utils::Orientation::WEST:
+			return glm::vec3(-1,0,0);
+	}
+}
+
 Utils::Orientation Utils::randomOrientation(vector<Utils::Orientation> orientations) {
 	return orientations[rand() % orientations.size()];
 }
