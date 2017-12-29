@@ -52,6 +52,8 @@ public:
 	
 	void restart();
 
+	void restartKeepingScore();
+
 	void setNextLevel();
 	
 	json toJSON() const;

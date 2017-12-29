@@ -90,3 +90,7 @@ void GameInformations::increaseLevel() {
 int GameInformations::getLevel() const {
 	return _level;
 }
+
+void GameInformations::resetScore() {
+	_score = 0;
+}
