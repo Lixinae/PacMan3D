@@ -4,9 +4,8 @@ using namespace std;
 
 Board::Board(const map<BoardPosition, BoardSquare *> &squares) : _squares() {
 	for (const auto &entry : squares) {
-		_squares[entry.first] = entry.second->clone(); //TODO CHECK IMPLEMENTATIONS FOR DESTRUCTOR
+		_squares[entry.first] = entry.second->clone();
 	}
-	_squares_init = _squares;
 }
 
 Board::Board(const Board &other) : Board::Board(other._squares) {
@@ -14,7 +13,7 @@ Board::Board(const Board &other) : Board::Board(other._squares) {
 }
 
 Board::~Board() {
-	//Utils::cleanMap(_squares);//TODO correct bug
+	Utils::cleanMap(_squares);
 }
 
 Board Board::fromJSON(const json &jsonBoard) {
@@ -67,7 +66,6 @@ Board &Board::operator=(const Board &other) {
 	if (&other != this) {
 		Board tmp(other);
 		std::swap(_squares, tmp._squares);
-		std::swap(_squares_init, tmp._squares_init);
 	}
 	return *this;
 }
