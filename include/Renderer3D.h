@@ -16,7 +16,7 @@ class Renderer3D : public Renderer {
 public:
 
 	Renderer3D(int windowWidth, int windowHeight, const PointOfView &pointOfView,
-	           const map<GameRepresentation::ModelType, AbstractModel3D *> &map_model3D);
+	           const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &map_model3D);
 
 	void renderGame(const GameRepresentation &repr, const GameInformations &gameInfo) const override;
 
