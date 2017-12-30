@@ -35,7 +35,6 @@ public:
 private:
  
 	map<BoardPosition, BoardSquare *> _squares;
-	map<BoardPosition, BoardSquare *> _squares_init;
 
 	Board(const map<BoardPosition, BoardSquare *> & squares);
 

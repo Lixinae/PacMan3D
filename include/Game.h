@@ -76,6 +76,7 @@ private:
 
 	GameInformations _informations;
 
+	Game(const Board &board, const Board &board_init, const Pacman &pacman, const Pacman &pacman_init, const vector<Ghost *> &ghosts, const GameInformations &informations);
 	Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts, const GameInformations &informations);
 
 	void updateFirstPersonCameraPosition();

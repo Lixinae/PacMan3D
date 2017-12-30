@@ -6,11 +6,11 @@ using json = nlohmann::json;
 
 using namespace std;
 
-Game::Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts, const GameInformations &informations) :
+Game::Game(const Board &board, const Board &board_init, const Pacman &pacman, const Pacman &pacman_init, const vector<Ghost *> &ghosts, const GameInformations &informations) :
 		_board(board),
-		_board_init(board),
+		_board_init(board_init),
 		_pacman(pacman),
-		_pacman_init(pacman),
+		_pacman_init(pacman_init),
 		_ghosts(ghosts.size()),
 		_ghosts_init(ghosts.size()),
 		_pointOfView(pacman.getPosition(), pacman.getOrientation()),
@@ -23,10 +23,18 @@ Game::Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghos
 	updateFirstPersonCameraPosition();
 }
 
+Game::Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts, const GameInformations &informations) :
+	Game::Game(board, board, pacman, pacman, ghosts, informations)
+{
+	
+}
+
 Game::Game(const Game & other) :
 	Game::Game(
 		other._board, 
+		other._board_init,
 		other._pacman,
+		other._pacman_init,
 		other._ghosts,
 		other._informations
 	)
@@ -62,7 +70,15 @@ Game Game::fromJSON(const json &jsonGame) {
 	for (const auto &it : jsonGame["ghosts"]) {
 		ghosts.push_back(Ghost::fromJSON(it));
 	}
-	Game game(board, pacman, ghosts, informations);
+	json jsonInit = jsonGame["init"];
+	if (jsonInit == nullptr) {
+		Game game(board, pacman, ghosts, informations);
+		Utils::cleanVector(ghosts);
+		return game;
+	}
+	Board board_init = Board::fromJSON(jsonInit["board"]);
+	Pacman pacman_init = Pacman::fromJSON(jsonInit["pacman"]);
+	Game game(board, board_init, pacman, pacman_init, ghosts, informations);
 	Utils::cleanVector(ghosts);
 	return game;
 }
@@ -77,6 +93,8 @@ json Game::toJSON() const {
 		jsonGhosts.push_back(ghost->toJSON());
 	}
 	jsonGame["ghosts"] = jsonGhosts;
+	jsonGame["init"]["board"] = _board_init.toJSON();
+	jsonGame["init"]["pacman"] = _pacman_init.toJSON();
 	return jsonGame;
 }
 
