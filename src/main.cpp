@@ -89,8 +89,10 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 
 int realMain() {
 
-	int windowWidth = 800;
-	int windowHeight = 600;
+	Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
+
+	int windowWidth = configuration.getWidth();
+	int windowHeight = configuration.getHeight();
 
 	SDLWindowManager windowManager(windowWidth, windowHeight, "Pacman3D");
 
@@ -103,8 +105,6 @@ int realMain() {
 	srand(time(nullptr));
 
 	glEnable(GL_DEPTH_TEST);
-
-	Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
 
 	Game game = Game::fromJSONFile("assets/games/gameRealBoard.json");
 
