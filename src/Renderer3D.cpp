@@ -8,14 +8,16 @@ Renderer3D::Renderer3D(
 		int windowWidth,
 		int windowHeight,
 		const PointOfView &pointOfView,
-		const map<GameRepresentation::ModelType, AbstractModel3D *> &map_model3D
+		const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &map_model3D
 ) :
 		_pointOfView(pointOfView),
 		_ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
-		_models(map_model3D),
+		_models(),
 		_textRenderer(windowWidth, windowHeight, "assets/fonts/game_over.ttf") //TODO static or from config
 {
-
+	for (auto &entry : map_model3D) {
+		_models[entry.first] = entry.second();
+	}
 }
 
 void Renderer3D::renderModels(const GameRepresentation &repr) const {

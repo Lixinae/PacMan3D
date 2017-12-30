@@ -2,7 +2,7 @@
 
 Configuration::Configuration(
 		const map<control, SDLKey> &keyMap,
-		const map<GameRepresentation::ModelType, AbstractModel3D *> &modelMap,
+		const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &modelMap,
 		int windowWidth,
 		int windowHeight) :
 		_keyMap(keyMap),
@@ -25,7 +25,7 @@ Configuration Configuration::defaultConfiguration() {
 	keyMap[control::LOAD_GAME] = Utils::stringToKey("i");
 	keyMap[control::EXIT] = Utils::stringToKey("k");
 	keyMap[control::RESTART] = Utils::stringToKey("r");
-	map<GameRepresentation::ModelType, AbstractModel3D *> modelMap; //TODO
+	map<GameRepresentation::ModelType, function<AbstractModel3D *()>> modelMap; //TODO
 	return Configuration(keyMap, modelMap, 800, 600);
 }
 
@@ -44,20 +44,22 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
 	return keyMap;
 }
 
-map<GameRepresentation::ModelType, AbstractModel3D *> Configuration::modelMapFromJSON(const json &jsonModels) {
-	map<GameRepresentation::ModelType, AbstractModel3D *> modelMap;
+map<GameRepresentation::ModelType, function<AbstractModel3D *()>> Configuration::modelMapFromJSON(const json &jsonModels) {
+	map<GameRepresentation::ModelType, function<AbstractModel3D *()>> modelMap;
 	json modelsArray = jsonModels["models"];
 	for (auto &it : modelsArray) {
 		GameRepresentation::ModelType modelType = GameRepresentation::modelFromString(it["name"]);
-		AbstractModel3D *model_3d = AbstractModel3D::fromJSON(it["model"]);
-		modelMap[modelType] = model_3d;
+		function<AbstractModel3D * ()> generator = [it]() {
+			return AbstractModel3D::fromJSON(it["model"]);
+		};
+		modelMap[modelType] = generator;
 	}
 	return modelMap;
 }
 
 Configuration Configuration::fromJSON(const json &json) {
 	map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
-	map<GameRepresentation::ModelType, AbstractModel3D *> modelMap = modelMapFromJSON(json);
+	map<GameRepresentation::ModelType, function<AbstractModel3D *()>> modelMap = modelMapFromJSON(json);
 	int windowWidth = json["windowSize"]["width"];
 	int windowHeight = json["windowSize"]["height"];
 	return Configuration(keyMap, modelMap, windowWidth, windowHeight);
@@ -84,7 +86,7 @@ const map<control, SDLKey> Configuration::getControlMap() const {
 	return _keyMap;
 }
 
-const map<GameRepresentation::ModelType, AbstractModel3D *> Configuration::getModelMap() const {
+const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> Configuration::getModelMap() const {
 	return _map_model3D;
 }
 
