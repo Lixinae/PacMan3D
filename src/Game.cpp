@@ -1,6 +1,7 @@
 #include <Game.h>
 
 #include <fstream>
+#include <DistanceMap.h>
 
 using json = nlohmann::json;
 
@@ -198,21 +199,14 @@ void Game::iterateGhost(Ghost *ghost) {
 			nextSquare->receiveGhost(context);
 		}
 	}
-	vector<Utils::Orientation> walkableOrientations;
-	vector<Utils::Orientation> orientations = {
-			Utils::Orientation::NORTH,
-			Utils::Orientation::SOUTH,
-			Utils::Orientation::EAST,
-			Utils::Orientation::WEST
-	};
-	for (Utils::Orientation orientation : orientations) {
-		BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
-		if (square != nullptr && square->isGhostWalkable(context)) {
-			walkableOrientations.push_back(orientation);
-		}
-	}
-	Ghost::MovingContext movingContext(walkableOrientations);
-	ghost->orientTo(ghost->getNextOrientation(movingContext));
+	function<vector<Utils::Orientation>()> walkableOrientations = DistanceMap::walkableOrientations(*ghost, _board, context);
+	function<Utils::Orientation()> orientationOnPacman = DistanceMap::orientationGoToTarget(*ghost, _board, context, _pacman.getPosition());
+	// Point on the two case before pacman to try to block him
+	BoardPosition target = _pacman.getPosition().translate(_pacman.getOrientation()).translate(_pacman.getOrientation());
+	function<Utils::Orientation()> orientationBlockPacman = DistanceMap::orientationGoToTarget(*ghost, _board, context, target);
+	function<Utils::Orientation()> orientationAvoidPacman = DistanceMap::orientationAvoidTarget(*ghost, _board, context, _pacman.getPosition());
+	Ghost::MovingContext movingContext(_pacman, walkableOrientations, orientationOnPacman, orientationBlockPacman, orientationAvoidPacman);
+	ghost->orientToTarget(movingContext);
 	ghost->iterate();
 }
 
