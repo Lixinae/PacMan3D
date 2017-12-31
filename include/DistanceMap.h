@@ -14,6 +14,10 @@ class DistanceMap {
 public:
 
 	static function<vector<Utils::Orientation>()> walkableOrientations(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context);
+	
+	static function<Utils::Orientation()> orientationGoToTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const BoardPosition & target);
+	
+	static function<Utils::Orientation()> orientationAvoidTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const BoardPosition & target);
 
 };
 

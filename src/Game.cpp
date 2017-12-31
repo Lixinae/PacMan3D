@@ -200,7 +200,12 @@ void Game::iterateGhost(Ghost *ghost) {
 		}
 	}
 	function<vector<Utils::Orientation>()> walkableOrientations = DistanceMap::walkableOrientations(*ghost, _board, context);
-	Ghost::MovingContext movingContext(walkableOrientations);
+	function<Utils::Orientation()> orientationOnPacman = DistanceMap::orientationGoToTarget(*ghost, _board, context, _pacman.getPosition());
+	// Point on the two case before pacman to try to block him
+	BoardPosition target = _pacman.getPosition().translate(_pacman.getOrientation()).translate(_pacman.getOrientation());
+	function<Utils::Orientation()> orientationBlockPacman = DistanceMap::orientationGoToTarget(*ghost, _board, context, target);
+	function<Utils::Orientation()> orientationAvoidPacman = DistanceMap::orientationAvoidTarget(*ghost, _board, context, _pacman.getPosition());
+	Ghost::MovingContext movingContext(_pacman, walkableOrientations, orientationOnPacman, orientationBlockPacman, orientationAvoidPacman);
 	ghost->orientToTarget(movingContext);
 	ghost->iterate();
 }

@@ -18,3 +18,16 @@ function<vector<Utils::Orientation>()> DistanceMap::walkableOrientations(const G
 		return walkable;
 	};
 }
+
+function<Utils::Orientation()> DistanceMap::orientationGoToTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const BoardPosition & /*target*/) {
+	return [&]() {
+		return Utils::randomOrientation(DistanceMap::walkableOrientations(ghost, board, context)());
+	};
+}
+
+function<Utils::Orientation()> DistanceMap::orientationAvoidTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const BoardPosition & /*target*/) {
+	return [&]() {
+		return Utils::randomOrientation(DistanceMap::walkableOrientations(ghost, board, context)());
+	};
+}
+

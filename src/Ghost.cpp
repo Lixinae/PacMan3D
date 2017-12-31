@@ -8,8 +8,18 @@
 int Ghost::MAX_ITERATION = 3;
 int Ghost::CASE_REDIRECTION_ITERATION = 2*Ghost::MAX_ITERATION;
 
-Ghost::MovingContext::MovingContext(function<vector<Utils::Orientation>()> &availableOrientation):
-		availableOrientation(availableOrientation)
+Ghost::MovingContext::MovingContext(
+			Pacman &pacman,
+			function<vector<Utils::Orientation>()> &availableOrientation,
+			function<Utils::Orientation()> &orientationOnPacman,
+			function<Utils::Orientation()> &orientationBlockPacman,
+			function<Utils::Orientation()> &orientationAvoidPacman
+		):
+		pacman(pacman),
+		availableOrientation(availableOrientation),
+		orientationOnPacman(orientationOnPacman),
+		orientationBlockPacman(orientationBlockPacman),
+		orientationAvoidPacman(orientationAvoidPacman)
 {
 	
 }
@@ -59,7 +69,7 @@ bool Ghost::orientToTarget(const MovingContext & context) {
 	if (!_crossDoor) {
 		_orientation = Utils::randomOrientation(context.availableOrientation());
 	} else if (isWeak()) {
-		_orientation = Utils::randomOrientation(context.availableOrientation());
+		_orientation = context.orientationAvoidPacman();
 	} else {
 		_orientation = getNextOrientation(context);
 	}

@@ -14,9 +14,19 @@ public:
 
 	struct MovingContext {
 
+		Pacman &pacman;
 		function<vector<Utils::Orientation>()> &availableOrientation;
+		function<Utils::Orientation()> &orientationOnPacman;
+		function<Utils::Orientation()> &orientationBlockPacman;
+		function<Utils::Orientation()> &orientationAvoidPacman;
 		
-		MovingContext(function<vector<Utils::Orientation>()> &availableOrientation);
+		MovingContext(
+			Pacman &pacman,
+			function<vector<Utils::Orientation>()> &availableOrientation,
+			function<Utils::Orientation()> &orientationOnPacman,
+			function<Utils::Orientation()> &orientationBlockPacman,
+			function<Utils::Orientation()> &orientationAvoidPacman
+		);
 
 	};
 
