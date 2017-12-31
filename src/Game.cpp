@@ -1,6 +1,7 @@
 #include <Game.h>
 
 #include <fstream>
+#include <DistanceMap.h>
 
 using json = nlohmann::json;
 
@@ -198,21 +199,9 @@ void Game::iterateGhost(Ghost *ghost) {
 			nextSquare->receiveGhost(context);
 		}
 	}
-	vector<Utils::Orientation> walkableOrientations;
-	vector<Utils::Orientation> orientations = {
-			Utils::Orientation::NORTH,
-			Utils::Orientation::SOUTH,
-			Utils::Orientation::EAST,
-			Utils::Orientation::WEST
-	};
-	for (Utils::Orientation orientation : orientations) {
-		BoardSquare *square = _board[ghost->getPosition().translate(orientation)];
-		if (square != nullptr && square->isGhostWalkable(context)) {
-			walkableOrientations.push_back(orientation);
-		}
-	}
+	function<vector<Utils::Orientation>()> walkableOrientations = DistanceMap::walkableOrientations(*ghost, _board, context);
 	Ghost::MovingContext movingContext(walkableOrientations);
-	ghost->orientTo(ghost->getNextOrientation(movingContext));
+	ghost->orientToTarget(movingContext);
 	ghost->iterate();
 }
 

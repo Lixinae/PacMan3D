@@ -1,7 +1,7 @@
 #include <GhostClyde.h>
 
 Utils::Orientation GhostClyde::getNextOrientation(const MovingContext & context) const {
-	return Utils::randomOrientation(context.availableOrientation);
+	return Utils::randomOrientation(context.availableOrientation());
 }
 
 GameRepresentation::ModelType GhostClyde::getModelType() const {

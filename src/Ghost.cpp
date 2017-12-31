@@ -5,10 +5,10 @@
 #include <GhostInky.h>
 #include <GhostClyde.h>
 
-int Ghost::CASE_REDIRECTION = 2;
 int Ghost::MAX_ITERATION = 3;
+int Ghost::CASE_REDIRECTION_ITERATION = 2*Ghost::MAX_ITERATION;
 
-Ghost::MovingContext::MovingContext(vector<Utils::Orientation> &availableOrientation):
+Ghost::MovingContext::MovingContext(function<vector<Utils::Orientation>()> &availableOrientation):
 		availableOrientation(availableOrientation)
 {
 	
@@ -38,7 +38,7 @@ Ghost::Ghost(const BoardPosition &position, Utils::Orientation orientation) :
 		_iterPosition(0),
 		_iterOrientation(0),
 		_weakCounter(),
-		_crossDoor(true)
+		_crossDoor(false)
 {
 
 }
@@ -52,14 +52,20 @@ void Ghost::setOrientation(Utils::Orientation orientation) {
 	_orientation = orientation;
 }
 
-bool Ghost::orientTo(Utils::Orientation orientation) {
-	if (_iterOrientation == 0) {
-		_orientation = orientation;
-		_iterOrientation = Ghost::CASE_REDIRECTION*Ghost::MAX_ITERATION;
-		_iterPosition = 0;
-		return true;
+bool Ghost::orientToTarget(const MovingContext & context) {
+	if (_iterOrientation != 0) {
+		return false;
 	}
-	return false;
+	if (!_crossDoor) {
+		_orientation = Utils::randomOrientation(context.availableOrientation());
+	} else if (isWeak()) {
+		_orientation = Utils::randomOrientation(context.availableOrientation());
+	} else {
+		_orientation = getNextOrientation(context);
+	}
+	_iterOrientation = Ghost::CASE_REDIRECTION_ITERATION;
+	_iterPosition = 0;
+	return true;
 }
 
 BoardPosition Ghost::getPosition() const {
@@ -82,11 +88,11 @@ void Ghost::setWeak(int time) {
 }
 
 bool Ghost::canCrossDoor() {
-	return _crossDoor;
+	return !_crossDoor;
 }
 	
 void Ghost::crossDoor() {
-	_crossDoor = false;
+	_crossDoor = true;
 }
 
 bool Ghost::goTo(const BoardPosition &position) {
@@ -108,10 +114,6 @@ void Ghost::iterate() {
 	if (_weakCounter > 0) {
 		_weakCounter--;
 	}
-	/*_iterOrientation = (_iterOrientation + 1) % (Ghost::CASE_REDIRECTION*Ghost::MAX_ITERATION);
-	if (_iterOrientation == 0) {
-		_orientation = getNextOrientation();
-	}*/
 	if (_iterOrientation > 0) {
 		_iterOrientation--;
 	}

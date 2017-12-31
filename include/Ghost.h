@@ -3,6 +3,7 @@
 
 #include <BoardPosition.h>
 #include <GameRepresentation.h>
+#include <Pacman.h>
 #include <Utils.h>
 
 using json = nlohmann::json;
@@ -13,13 +14,13 @@ public:
 
 	struct MovingContext {
 
-		vector<Utils::Orientation> &availableOrientation;
+		function<vector<Utils::Orientation>()> &availableOrientation;
 		
-		MovingContext(vector<Utils::Orientation> &availableOrientation);
+		MovingContext(function<vector<Utils::Orientation>()> &availableOrientation);
 
 	};
 
-	static int CASE_REDIRECTION;
+	static int CASE_REDIRECTION_ITERATION;
 	static int MAX_ITERATION;
 
 	static Ghost *fromJSON(const json &jsonGhost);
@@ -30,7 +31,7 @@ public:
 
 	void setOrientation(Utils::Orientation orientation);
 	
-	bool orientTo(Utils::Orientation orientation);
+	bool orientToTarget(const MovingContext & context);
 
 	BoardPosition getPosition() const;
 

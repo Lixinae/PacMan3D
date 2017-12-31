@@ -4,6 +4,7 @@
 #include <Floor.h>
 #include <Tunnel.h>
 #include <Door.h>
+#include <Utils.h>
 
 using json = nlohmann::json;
 
@@ -16,6 +17,10 @@ BoardSquare::PacmanContext::PacmanContext(Pacman &pacman, vector<Ghost *> &ghost
 BoardSquare::GhostContext::GhostContext(Ghost &ghost) :
 		ghost(ghost) {
 
+}
+
+BoardPosition BoardSquare::neighbour(const BoardPosition & position, Utils::Orientation orientation) {
+	return position.translate(orientation);
 }
 
 BoardSquare *BoardSquare::fromJSON(const json &jsonSquare) {

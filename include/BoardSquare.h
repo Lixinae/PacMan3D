@@ -45,6 +45,8 @@ public:
 	virtual void receiveGhost(GhostContext &context) = 0;
 
 	virtual bool isDone() const = 0;
+	
+	virtual BoardPosition neighbour(const BoardPosition & position, Utils::Orientation orientation);
 
 	virtual BoardSquare *clone() const = 0;
 	

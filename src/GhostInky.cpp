@@ -1,7 +1,7 @@
 #include <GhostInky.h>
 
 Utils::Orientation GhostInky::getNextOrientation(const MovingContext & context) const {
-	return Utils::randomOrientation(context.availableOrientation);
+	return Utils::randomOrientation(context.availableOrientation());
 }
 
 GameRepresentation::ModelType GhostInky::getModelType() const {

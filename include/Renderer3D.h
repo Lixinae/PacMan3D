@@ -18,6 +18,8 @@ public:
 	Renderer3D(int windowWidth, int windowHeight, const PointOfView &pointOfView,
 	           const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &map_model3D);
 
+	~Renderer3D() override;
+
 	void renderGame(const GameRepresentation &repr, const GameInformations &gameInfo) const override;
 
 	void renderBeginTitle() const override;
@@ -27,8 +29,6 @@ public:
 	void renderPauseMenu(const map<control, SDLKey> &keyMap) const override;
 
 	void renderEndTitle(const GameInformations &gameInfo) const override;
-
-	~Renderer3D() override;
 
 private:
 

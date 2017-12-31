@@ -20,6 +20,10 @@ Renderer3D::Renderer3D(
 	}
 }
 
+Renderer3D::~Renderer3D() {
+	Utils::cleanMap(_models);
+}
+
 void Renderer3D::renderModels(const GameRepresentation &repr) const {
 	mat4 GlobalMVMatrix = _pointOfView.getCurrentCamera().getViewMatrix();
 	for (auto &modelType : GameRepresentation::MODELS) {
@@ -103,11 +107,4 @@ void Renderer3D::renderEndTitle(const GameInformations &gameInfo) const {
 	_textRenderer.renderXCentered("Score :" + to_string(gameInfo.getScore()), 70, 0.65, color);
 	_textRenderer.renderXCentered("Level : " + to_string(gameInfo.getLevel()), 65, 0.65, color);
 	_textRenderer.renderXCentered("Appuyer sur entree pour quitter", 60, 0.65, color);
-}
-
-Renderer3D::~Renderer3D() {
-	for (auto &model : GameRepresentation::MODELS) {
-		// TODO delete model (not free):
-		//free (_models[model]);
-	}
 }
