@@ -53,16 +53,44 @@ public:
 
 	static vector<ModelType> MODELS;
 
+	/**
+	 * Créer un modele a partir de sa representation en chaine de caracteres
+	 * @param strModel : la representation du modele en chaine de caracteres
+	 * @return le modele
+	 **/
 	static ModelType modelFromString(const string &strModel);
 
+	/**
+	 * Construit une representation du jeu
+	 **/
 	GameRepresentation();
 
+	/**
+	 * Renvoie les informations du modele en argument
+	 * @param modelType : le modele
+	 * @return les informations
+	 **/
 	const vector<ModelInformations> &getInformations(ModelType modelType) const;
 
+	/**
+	 * Ajoute un modele a la representation
+	 * @param model : le model
+	 * @param position : la position
+	 **/
 	void add(Model model, const BoardPosition &position);
 
+	/**
+	 * Supprime un modele de la representation
+	 * @param model : le model
+	 * @param position : la position
+	 **/
 	void remove(Model model, const BoardPosition &position);
 
+	/**
+	 * Renvoie les informations du modele en argument
+	 * @param modelType : le modele
+	 * @return les informations
+	 **/
 	const vector<ModelInformations> &operator[](ModelType modelType) const;
 
 private:

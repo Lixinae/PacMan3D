@@ -28,20 +28,48 @@ public:
 	};
 
 
+	/**
+	 * Constructeur de gestionnaire d'événement
+	 * @param keyMap : tableau des controles
+	 **/
 	explicit EventHandler(const map<control, SDLKey> &keyMap);
 
+	/**
+	 * Gère les evenement de l'ecran titre
+	 * @param windowManager : gestionnaire de la fenetre
+	 * @return l'etat du jeu
+	 **/
 	State handleBeginTitleEvent(SDLWindowManager &windowManager);
 
+	/**
+	 * Gère les evenement de l'ecran de debut
+	 * @param windowManager : gestionnaire de la fenetre
+	 * @param game : le jeu
+	 * @return l'etat du jeu
+	 **/
 	State handleBeginGameEvent(SDLWindowManager &windowManager, Game &game);
 
 	/**
-	 * Gère les evenement liés à la SDL, tel que les touches appuyer ou les mouvement de la souris
-	 * @param windowManager Window Manager
-	 */
+	 * Gère les evenement du jeu
+	 * @param windowManager : gestionnaire de la fenetre
+	 * @param game : le jeu
+	 * @return l'etat du jeu
+	 **/
 	State handleGameEvent(SDLWindowManager &windowManager, Game &game);
 	
+	/**
+	 * Gère les evenement de l'ecran de pause
+	 * @param windowManager : gestionnaire de la fenetre
+	 * @param game : le jeu
+	 * @return l'etat du jeu
+	 **/
 	State handlePauseMenuEvent(SDLWindowManager &windowManager, Game &game);
 
+	/**
+	 * Gère les evenement de l'ecran de fin
+	 * @param windowManager : gestionnaire de la fenetre
+	 * @return l'etat du jeu
+	 **/
 	State handleEndTitleEvent(SDLWindowManager &windowManager);
 
 };

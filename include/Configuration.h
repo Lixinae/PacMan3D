@@ -64,12 +64,28 @@ public:
 	 */
 	static Configuration fromJSONFile(const string &filePath);
 
+	/**
+	 * Renvoie le tableau des controles
+	 * @return le tableau des controles
+	 **/
 	const map<control, SDLKey> getControlMap() const;
 
+	/**
+	 * Renvoie les generateurs pour les modeles abstraits 3D
+	 * @return les generateurs pour les modeles abstraits 3D
+	 **/
 	const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> getModelMap() const;
 
+	/**
+	 * Renvoie la largeur de la fenetre
+	 * @return la largeur de la fenetre
+	 **/
 	int getWidth() const;
 
+	/**
+	 * Renvoie la hauteur de la fenetre
+	 * @return la hauteur de la fenetre
+	 **/
 	int getHeight() const;
 
 };
