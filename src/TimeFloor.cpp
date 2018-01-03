@@ -60,7 +60,6 @@ void TimeFloor::iterate() {
 	if (_iter <= _max_iter) {
 		_iter++;
 	}
-	cerr << _iter << endl;;
 }
 
 BoardSquare *TimeFloor::clone() const {
