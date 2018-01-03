@@ -12,7 +12,6 @@ GameInformations::GameInformations(int score, int score_max_life, int step_score
 		_score_max_life(score_max_life),
 		_step_score_max_life(step_score_max_life),
 		_lives(lives),
-		_lives_init(lives),
 		_multiplier(multiplier),
 		_multiplierCounter(multiplierCounter),
 		_level(level)

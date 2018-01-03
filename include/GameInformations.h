@@ -13,7 +13,6 @@ private:
 	int _score_max_life;
 	int _step_score_max_life;
 	int _lives;
-	int _lives_init;
 	int _multiplier;
 	int _multiplierCounter;
 	int _level;
