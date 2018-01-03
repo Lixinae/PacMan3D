@@ -79,6 +79,11 @@ public:
 	virtual bool isDone() const = 0;
 	
 	/**
+	 * Itere la case
+	 **/
+	virtual void iterate() = 0;
+	
+	/**
 	 * Renvoie la position du voisin de la case
 	 * @param position : position de la case
 	 * @param orientation : orientation pour le prochain voisin

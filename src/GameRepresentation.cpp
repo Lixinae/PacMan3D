@@ -19,6 +19,7 @@ vector<GameRepresentation::ModelType> GameRepresentation::buildVector() {
 	models.push_back(GameRepresentation::ModelType::DOOR);
 	models.push_back(GameRepresentation::ModelType::PAC_GOMME);
 	models.push_back(GameRepresentation::ModelType::SUPER_PAC_GOMME);
+	models.push_back(GameRepresentation::ModelType::FRUIT);
 	return models;
 }
 
@@ -58,6 +59,9 @@ GameRepresentation::ModelType GameRepresentation::modelFromString(const string &
 	}
 	if (strModel == "Super_pac_gomme") {
 		return GameRepresentation::ModelType::SUPER_PAC_GOMME;
+	}
+	if (strModel == "Fruit") {
+		return GameRepresentation::ModelType::FRUIT;
 	}
 }
 

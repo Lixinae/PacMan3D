@@ -2,6 +2,7 @@
 
 #include <PacGomme.h>
 #include <SuperPacGomme.h>
+#include <Fruit.h>
 
 using json = nlohmann::json;
 
@@ -17,6 +18,9 @@ Bonus *Bonus::fromJSON(const json &jsonBonus) {
 	}
 	if (type == "super_pacgomme") {
 		return new SuperPacGomme;
+	}
+	if (type == "fruit") {
+		return new Fruit;
 	}
 	throw invalid_argument(type + " is not a valid string representation of bonus type");
 }

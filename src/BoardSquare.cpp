@@ -4,6 +4,7 @@
 #include <Floor.h>
 #include <Tunnel.h>
 #include <Door.h>
+#include <TimeFloor.h>
 #include <Utils.h>
 
 using json = nlohmann::json;
@@ -35,6 +36,16 @@ BoardSquare *BoardSquare::fromJSON(const json &jsonSquare) {
 		}
 		Bonus *bonus = Bonus::fromJSON(jsonBonus);
 		BoardSquare *square = new Floor(bonus);
+		delete bonus;
+		return square;
+	}
+	if (type == "time_floor") {
+		Bonus *bonus = Bonus::fromJSON(jsonSquare["args"]["bonus"]);
+		bool ispresent = jsonSquare["args"]["bonus_is_present"];
+		int min_iter = jsonSquare["args"]["min_iter"];
+		int max_iter = jsonSquare["args"]["max_iter"];
+		int iter = jsonSquare["args"]["iter"];
+		BoardSquare *square = new TimeFloor(bonus, ispresent, min_iter, max_iter, iter);
 		delete bonus;
 		return square;
 	}

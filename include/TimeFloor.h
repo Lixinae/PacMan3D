@@ -1,15 +1,20 @@
-#ifndef __WALL_H__
-#define __WALL_H__
+#ifndef __TIME_FLOOR_H__
+#define __TIME_FLOOR_H__
 
 #include <BoardSquare.h>
 #include <Pacman.h>
+#include <Bonus.h>
 #include <GameRepresentation.h>
 
-class Wall : public BoardSquare {
+class TimeFloor : public BoardSquare {
 
 public:
 
-	Wall();
+	TimeFloor(const Bonus *bonus, bool bonusIsPresent, int min_iter, int max_iter, int iter);
+
+	TimeFloor(const TimeFloor &other);
+
+	~TimeFloor();
 
 	vector<GameRepresentation::Model> getModels() const;
 
@@ -24,10 +29,20 @@ public:
 	bool isDone() const;
 	
 	void iterate();
-	
+
 	BoardSquare *clone() const;
-	
+
 	json toJSON() const;
+
+	TimeFloor &operator=(const TimeFloor &floor);
+
+private:
+
+	Bonus *_bonus;
+	bool _bonusIsPresent;
+	int _min_iter;
+	int _max_iter;
+	int _iter;
 
 };
 
