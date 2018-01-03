@@ -21,6 +21,7 @@ public:
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_DIRECTION;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_COLOR;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_INTENSITY;
+	static const GLchar *FRAGMENT_UNIFORM_LIGHT_POS;
 
 	static LightTexModel3D *create(const string &meshPath, const string &texturePath, const Material &material, const mat4 &modelTransform);
 
@@ -41,6 +42,7 @@ private:
 	GLint _uLightDirection;
 	GLint _uLightColor;
 	GLint _uLightIntensity;
+	GLint _uLightPos;
 
 	LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const Material &material, const mat4 &modelTransform);
 

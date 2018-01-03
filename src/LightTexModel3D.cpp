@@ -9,6 +9,7 @@ const GLchar *LightTexModel3D::FRAGMENT_UNIFORM_SHININESS = "uShininess";
 const GLchar *LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_DIRECTION = "uLightDir_vs";
 const GLchar *LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_COLOR = "uLightColor";
 const GLchar *LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_INTENSITY = "uLightIntensity";
+const GLchar *LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_POS = "uLightPos_vs";
 
 void LightTexModel3D::initTexture(const unique_ptr<Image> &texture) {
 	_uTexture = getUniformLocation(LightTexModel3D::FRAGMENT_UNIFORM_TEXTURE);
@@ -27,6 +28,7 @@ void LightTexModel3D::initLight() {
 	_uLightDirection = getUniformLocation(LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_DIRECTION);
 	_uLightColor = getUniformLocation(LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_COLOR);
 	_uLightIntensity = getUniformLocation(LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_INTENSITY);
+	_uLightPos = getUniformLocation(LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_POS);
 }
 
 LightTexModel3D::LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const Material &material, const mat4 &modelTransform) :
@@ -58,12 +60,15 @@ void LightTexModel3D::bind() {
 	vec3 glossy = _material.getGlossy();
 	glUniform3f(_uGlossy, glossy.x, glossy.y, glossy.z);
 	//LIGHT
-	vec3 lightDir = vec3(0.5f, 1.f, 0.5f); // Light dir
+	vec3 lightDir(0.5f, 1.f, 0.5f); // Light dir
 	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
 	vec3 lightColor = vec3(1, 1, 1); // Light color
 	glUniform3f(_uLightColor, lightColor.x, lightColor.y, lightColor.z);
-	float intensity = 5.f;
+	float intensity = 500.f;
 	glUniform1f(_uLightIntensity, intensity);
+
+	vec3 lightPos(0.f, 10.f, 1.f);
+	glUniform3f(_uLightPos, lightPos.x, lightPos.y, lightPos.z);
 }
 
 void LightTexModel3D::unbind() {
