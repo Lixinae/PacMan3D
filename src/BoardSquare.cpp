@@ -38,6 +38,12 @@ BoardSquare *BoardSquare::fromJSON(const json &jsonSquare) {
 		delete bonus;
 		return square;
 	}
+	if (type == "time_floor") {
+		Bonus *bonus = Bonus::fromJSON(jsonSquare["args"]["bonus"]);
+		BoardSquare *square = new Floor(bonus);
+		delete bonus;
+		return square;
+	}
 	if (type == "tunnel") {
 		Utils::Orientation orientation = Utils::orientationFromString(jsonSquare["args"]["orientation"]);
 		BoardPosition dest = BoardPosition::fromJSON(jsonSquare["args"]["dest"]);
