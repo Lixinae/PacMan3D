@@ -23,6 +23,8 @@ public:
 
 	bool isDone() const;
 	
+	void iterate();
+	
 	BoardSquare *clone() const;
 	
 	json toJSON() const;

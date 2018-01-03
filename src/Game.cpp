@@ -247,6 +247,7 @@ Game::State Game::iterate() {
 	}
 	_informations.iterate();
 	for (const BoardPosition &position : _board.getPositions()) {
+		_board[position]->iterate();
 		if (!_board[position]->isDone()) {
 			return Game::State::CONTINUE;
 		}

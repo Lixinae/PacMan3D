@@ -48,6 +48,10 @@ bool TimeFloor::isDone() const {
 	return false;
 }
 
+void TimeFloor::iterate() {
+	
+}
+
 BoardSquare *TimeFloor::clone() const {
 	return new TimeFloor(*this);
 }

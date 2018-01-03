@@ -27,6 +27,8 @@ public:
 	void receiveGhost(BoardSquare::GhostContext &context);
 
 	bool isDone() const;
+	
+	void iterate();
 
 	BoardSquare *clone() const;
 

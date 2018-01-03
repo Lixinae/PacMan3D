@@ -32,6 +32,10 @@ bool Door::isDone() const {
 	return true;
 }
 
+void Door::iterate() {
+	
+}
+
 BoardSquare *Door::clone() const {
 	return new Door(*this);
 }

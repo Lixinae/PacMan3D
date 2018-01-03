@@ -54,6 +54,10 @@ bool Floor::isDone() const {
 	return false;
 }
 
+void Floor::iterate() {
+	
+}
+
 BoardSquare *Floor::clone() const {
 	return new Floor(*this);
 }
