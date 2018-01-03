@@ -25,7 +25,8 @@ public:
 		TUNNEL,
 		DOOR,
 		PAC_GOMME,
-		SUPER_PAC_GOMME
+		SUPER_PAC_GOMME,
+		FRUIT
 
 	};
 

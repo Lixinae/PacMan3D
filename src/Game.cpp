@@ -89,6 +89,7 @@ Game Game::fromJSON(const json &jsonGame) {
 	}
 	Game game(board, board_init, pacman, pacman_init, ghosts, ghosts_init, informations, informations_init);
 	Utils::cleanVector(ghosts);
+	Utils::cleanVector(ghosts_init);
 	return game;
 }
 
