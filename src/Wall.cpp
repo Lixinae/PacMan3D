@@ -28,6 +28,10 @@ bool Wall::isDone() const {
 	return true;
 }
 
+void Wall::iterate() {
+	
+}
+
 BoardSquare *Wall::clone() const {
 	return new Wall(*this);
 }
