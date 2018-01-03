@@ -10,19 +10,22 @@ class GameInformations {
 private:
 	int _score;
 	int _score_init;
+	int _score_max_life;
+	int _step_score_max_life;
 	int _lives;
 	int _lives_init;
 	int _multiplier;
 	int _multiplierCounter;
 	int _level;
-	int _level_init;
+	
+	void addLifeScore();
 public:
 
 	static GameInformations fromJSON(const json &jsonInfo);
 
 	GameInformations();
 
-	explicit GameInformations(int score, int lives, int multiplier, int multiplierCounter, int level);
+	explicit GameInformations(int score, int score_max_life, int step_score_max_life, int lives, int multiplier, int multiplierCounter, int level);
 
 	/**
 	 *
@@ -76,13 +79,6 @@ public:
 
 	int getLevel() const;
 
-	void resetLevel();
-
-	void resetScore();
-
-	void resetLives();
-
-	void resetAll();
 };
 
 #endif

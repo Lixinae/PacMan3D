@@ -75,8 +75,9 @@ private:
 	PointOfView _pointOfView;
 
 	GameInformations _informations;
+	GameInformations _informations_init;
 
-	Game(const Board &board, const Board &board_init, const Pacman &pacman, const Pacman &pacman_init, const vector<Ghost *> &ghosts, const GameInformations &informations);
+	Game(const Board &board, const Board &board_init, const Pacman &pacman, const Pacman &pacman_init, const vector<Ghost *> &ghosts, const vector<Ghost *> &ghosts_init, const GameInformations &informations, const GameInformations &informations_init);
 	Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts, const GameInformations &informations);
 
 	void updateFirstPersonCameraPosition();
