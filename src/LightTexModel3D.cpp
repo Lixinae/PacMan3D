@@ -31,19 +31,22 @@ void LightTexModel3D::initLight() {
 	_uLightPos = getUniformLocation(LightTexModel3D::FRAGMENT_UNIFORM_LIGHT_POS);
 }
 
-LightTexModel3D::LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const Material &material, const mat4 &modelTransform) :
+LightTexModel3D::LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const Material &material, const mat4 &modelTransform,
+                                 const SpotLight *spotLight) :
 		AbstractModel3D(mesh, "shaders/lightTex3D.fs.glsl", modelTransform),
-		_material(material)
+		_material(material),
+		_spotLight(spotLight->clone())
 {
 	initTexture(texture);
 	initLight();
 }
 
-LightTexModel3D *LightTexModel3D::create(const string &meshPath, const string &texturePath, const Material &material, const mat4 &modelTransform) {
+LightTexModel3D *LightTexModel3D::create(const string &meshPath, const string &texturePath, const Material &material, const mat4 &modelTransform,
+                                         const SpotLight *spotLight) {
 	Mesh mesh = Mesh::fromOBJFile(meshPath);
 	unique_ptr<Image> texture = loadImage(texturePath);
 	//TODO nullcheck
-	return new LightTexModel3D(mesh, texture, material, modelTransform);
+	return new LightTexModel3D(mesh, texture, material, modelTransform, spotLight);
 }
 
 LightTexModel3D::~LightTexModel3D() {
@@ -60,14 +63,15 @@ void LightTexModel3D::bind() {
 	vec3 glossy = _material.getGlossy();
 	glUniform3f(_uGlossy, glossy.x, glossy.y, glossy.z);
 	//LIGHT
-	vec3 lightDir(0.5f, 1.f, 0.5f); // Light dir
-	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
-	vec3 lightColor = vec3(1, 1, 1); // Light color
+//	vec3 lightDir(0.5f, 1.f, 0.5f); // Light dir
+//	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
+
+	vec3 lightColor = _spotLight->getColor();
 	glUniform3f(_uLightColor, lightColor.x, lightColor.y, lightColor.z);
-	float intensity = 500.f;
+	float intensity = _spotLight->getIntensity();
 	glUniform1f(_uLightIntensity, intensity);
 
-	vec3 lightPos(0.f, 10.f, 1.f);
+	vec3 lightPos = _spotLight->getPosition();
 	glUniform3f(_uLightPos, lightPos.x, lightPos.y, lightPos.z);
 }
 

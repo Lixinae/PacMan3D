@@ -30,10 +30,17 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
 map<GameRepresentation::ModelType, function<AbstractModel3D *()>> Configuration::modelMapFromJSON(const json &jsonModels) {
 	map<GameRepresentation::ModelType, function<AbstractModel3D *()>> modelMap;
 	json modelsArray = jsonModels["models"];
+	json lightArray = jsonModels["lights"];
+
+	SpotLight *spotLight = nullptr;
+	// todo -> Changer quand il aura plus de lumiere
+	if (lightArray[0]["type"] == "spot") {
+		spotLight = SpotLight::fromJSON(lightArray[0]);
+	}
 	for (auto &it : modelsArray) {
 		GameRepresentation::ModelType modelType = GameRepresentation::modelFromString(it["name"]);
-		function<AbstractModel3D * ()> generator = [it]() {
-			return AbstractModel3D::fromJSON(it["model"]);
+		function<AbstractModel3D *()> generator = [it, spotLight]() {
+			return AbstractModel3D::fromJSON(it["model"], spotLight);
 		};
 		modelMap[modelType] = generator;
 	}

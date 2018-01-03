@@ -1,8 +1,8 @@
 {
   "keybinds": {
-    "Up": "z",
+    "Up": "w",
     "Down": "s",
-    "Left": "q",
+    "Left": "a",
     "Right": "d",
     "ChangeCamera": "c"
   },
@@ -10,6 +10,22 @@
     "width": 800,
     "height": 600
   },
+  "lights": [
+    {
+      "type": "spot",
+      "color": {
+        "x": 0.9,
+        "y": 0.9,
+        "z": 0.9
+      },
+      "position": {
+        "x": 0,
+        "y": 10,
+        "z": 5
+      },
+      "intensity": 500
+    }
+  ],
   "models": [
     {
       "name": "Pacman",

@@ -2,20 +2,26 @@
 #define PACMAN3D_SPOTLIGHT_H
 
 #include <Light.h>
+#include <json/json.hpp>
 
 // todo -> Implement
 using namespace glm;
+using json = nlohmann::json;
 
 class SpotLight : public Light {
 
-	glm::vec3 _position;
+private:
+	vec3 _position;
 
-	struct {
-		float _constant;
-		float _linear;
-		float _exp;
-	} _Attenuation;
+	SpotLight(const vec3 &color, const vec3 &position, float intensity);
 
+public:
+
+	const vec3 &getPosition() const;
+
+	SpotLight *clone() const;
+
+	static SpotLight *fromJSON(const json &jsonLight);
 };
 
 #endif //PACMAN3D_SPOTLIGHT_H
