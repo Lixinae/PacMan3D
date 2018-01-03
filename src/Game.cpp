@@ -40,7 +40,7 @@ Game::Game(const Game & other) :
 		other._ghosts,
 		other._ghosts_init,
 		other._informations,
-		other._informations
+		other._informations_init
 	)
 {
 	
@@ -61,7 +61,7 @@ Game &Game::operator=(const Game &other) {
 		std::swap(_ghosts, tmp._ghosts);
 		std::swap(_ghosts_init, tmp._ghosts_init);
 		std::swap(_pointOfView, tmp._pointOfView);
-		std::swap(_informations, tmp._informations);
+		std::swap(_informations, tmp._informations_init);
 	}
 	return *this;
 }
@@ -110,7 +110,7 @@ json Game::toJSON() const {
 	for (const Ghost * ghost : _ghosts_init) {
 		jsonGhostsInit.push_back(ghost->toJSON());
 	}
-	jsonGame["init"]["ghosts"] = jsonGhosts;
+	jsonGame["init"]["ghosts"] = jsonGhostsInit;
 	return jsonGame;
 }
 
@@ -226,6 +226,9 @@ void Game::iterateGhost(Ghost *ghost) {
 }
 
 Game::State Game::iterate() {
+	for (const BoardPosition &position : _board.getPositions()) {
+		_board[position]->iterate();
+	}
 	iteratePacman();
 	for (unsigned int i = 0; i < _ghosts.size(); i++) {
 		if (Utils::intersection(_pacman.getGraphicalPositions(), _ghosts[i]->getGraphicalPositions()).size() != 0) {
@@ -247,7 +250,6 @@ Game::State Game::iterate() {
 	}
 	_informations.iterate();
 	for (const BoardPosition &position : _board.getPositions()) {
-		_board[position]->iterate();
 		if (!_board[position]->isDone()) {
 			return Game::State::CONTINUE;
 		}

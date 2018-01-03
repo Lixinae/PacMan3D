@@ -10,7 +10,7 @@ class TimeFloor : public BoardSquare {
 
 public:
 
-	TimeFloor(const Bonus *bonus);
+	TimeFloor(const Bonus *bonus, bool bonusIsPresent, int min_iter, int max_iter, int iter);
 
 	TimeFloor(const TimeFloor &other);
 
@@ -38,7 +38,11 @@ public:
 
 private:
 
-	Bonus *_bonus; // bonus optional
+	Bonus *_bonus;
+	bool _bonusIsPresent;
+	int _min_iter;
+	int _max_iter;
+	int _iter;
 
 };
 

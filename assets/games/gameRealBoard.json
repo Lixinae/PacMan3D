@@ -9124,7 +9124,11 @@
           "args": {
 		    "bonus": {
 			  "type": "fruit"	
-			}
+			},
+			"bonus_is_present": true,
+			"min_iter": 600,
+			"max_iter": 850,
+			"iter": 0
 		  },
           "type": "time_floor"
         },
