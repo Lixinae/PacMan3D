@@ -50,6 +50,13 @@ BoardPosition Pacman::getPosition() const {
 	return _position;
 }
 
+vector<BoardPosition> Pacman::getGraphicalPositions() const {
+	if (_iterPosition <= Pacman::MAX_ITERATION/2) {
+		return {_position};
+	}
+	return {_position, _position.translate(_orientation)};
+}
+
 void Pacman::setPosition(const BoardPosition &position) {
 	_position = position;
 	_iterPosition = 0;

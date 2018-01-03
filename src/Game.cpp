@@ -213,7 +213,7 @@ void Game::iterateGhost(Ghost *ghost) {
 Game::State Game::iterate() {
 	iteratePacman();
 	for (unsigned int i = 0; i < _ghosts.size(); i++) {
-		if (_pacman.getPosition() == _ghosts[i]->getPosition()) {
+		if (Utils::intersection(_pacman.getGraphicalPositions(), _ghosts[i]->getGraphicalPositions()).size() != 0) {
 			if (_ghosts[i]->isWeak()) {
 				_informations.increaseMultiplier();
 				_informations.updateMultipliedScore(100);

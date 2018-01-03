@@ -82,6 +82,13 @@ BoardPosition Ghost::getPosition() const {
 	return _position;
 }
 
+vector<BoardPosition> Ghost::getGraphicalPositions() const {
+	if (_iterPosition <= Ghost::MAX_ITERATION/2) {
+		return {_position};
+	}
+	return {_position, _position.translate(_orientation)};
+}
+
 void Ghost::setPosition(const BoardPosition &position) {
 	_position = position;
 	_iterPosition = 0;

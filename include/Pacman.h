@@ -26,6 +26,8 @@ public:
 
 	void setPosition(const BoardPosition &position);
 
+	vector<BoardPosition> getGraphicalPositions() const;
+
 	bool goTo(const BoardPosition &position);
 
 	float getShift() const;
