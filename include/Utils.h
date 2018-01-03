@@ -40,6 +40,17 @@ public:
 	static Utils::Orientation relativeOrientation(Utils::Orientation viewOrientation, Utils::Orientation orientation);
 
 	template<typename T>
+	static vector<T> intersection(vector<T> a, vector<T> b) {
+		vector<T> sa(a);
+		vector<T> sb(b);
+		vector<T> result;
+		sort(sa.begin(), sa.end());
+		sort(sb.begin(), sb.end());
+		set_intersection(sa.begin(), sa.end(), sb.begin(), sb.end(), back_inserter(result));
+		return result;
+	};
+	
+	template<typename T>
 	static void cleanVector(vector<T *> vector) {
 		for (T *value : vector) {
 			delete value;

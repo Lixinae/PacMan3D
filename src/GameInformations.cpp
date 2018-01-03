@@ -1,20 +1,20 @@
 #include <GameInformations.h>
 
 GameInformations::GameInformations() :
-		GameInformations::GameInformations(0, 3, 1, 0, 1)
+		GameInformations::GameInformations(0, 10000, 10000, 3, 1, 0, 1)
 {
 
 }
 
-GameInformations::GameInformations(int score, int lives, int multiplier, int multiplierCounter, int level) :
+GameInformations::GameInformations(int score, int score_max_life, int step_score_max_life, int lives, int multiplier, int multiplierCounter, int level) :
 		_score(score),
 		_score_init(score),
+		_score_max_life(score_max_life),
+		_step_score_max_life(step_score_max_life),
 		_lives(lives),
-		_lives_init(lives),
 		_multiplier(multiplier),
 		_multiplierCounter(multiplierCounter),
-		_level(level),
-		_level_init(level)
+		_level(level)
 {
 
 }
@@ -22,6 +22,8 @@ GameInformations::GameInformations(int score, int lives, int multiplier, int mul
 GameInformations GameInformations::fromJSON(const json &jsonInfo) {
 	return GameInformations(
 			jsonInfo["score"],
+			jsonInfo["score_max_life"],
+			jsonInfo["step_score_max_life"],
 			jsonInfo["lives"],
 			jsonInfo["multiplier"],
 			jsonInfo["multiplierCounter"],
@@ -45,12 +47,21 @@ bool GameInformations::isDead() const {
 	return _lives == 0;
 }
 
+void GameInformations::addLifeScore() {
+	if (_score > _score_max_life) {
+		_lives++;
+		_score_max_life += _step_score_max_life;
+	}
+}
+
 void GameInformations::updateScore(int value) {
 	_score += value;
+	addLifeScore();
 }
 
 void GameInformations::updateMultipliedScore(int value) {
 	_score += (value * _multiplier);
+	addLifeScore();
 }
 
 void GameInformations::decreaseLife() {
@@ -79,6 +90,8 @@ void GameInformations::iterate() {
 json GameInformations::toJSON() const {
 	json jsonInfo;
 	jsonInfo["score"] = _score;
+	jsonInfo["score_max_life"] = _score_max_life;
+	jsonInfo["step_score_max_life"] = _step_score_max_life;
 	jsonInfo["lives"] = _lives;
 	jsonInfo["multiplier"] = _multiplier;
 	jsonInfo["multiplierCounter"] = _multiplierCounter;
@@ -92,22 +105,4 @@ void GameInformations::increaseLevel() {
 
 int GameInformations::getLevel() const {
 	return _level;
-}
-
-void GameInformations::resetScore() {
-	_score = _score_init;
-}
-
-void GameInformations::resetLevel() {
-	_level = _level_init;
-}
-
-void GameInformations::resetAll() {
-	resetLevel();
-	resetScore();
-	resetLives();
-}
-
-void GameInformations::resetLives() {
-	_lives = _lives_init;
 }

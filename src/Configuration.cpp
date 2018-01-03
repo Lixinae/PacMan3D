@@ -12,23 +12,6 @@ Configuration::Configuration(
 
 }
 
-//TODO RM
-Configuration Configuration::defaultConfiguration() {
-	map<control, SDLKey> keyMap;
-	keyMap[control::UP] = Utils::Utils::stringToKey("z");
-	keyMap[control::DOWN] = Utils::stringToKey("s");
-	keyMap[control::LEFT] = Utils::stringToKey("q");
-	keyMap[control::RIGHT] = Utils::stringToKey("d");
-	keyMap[control::CHANGE_CAMERA] = Utils::stringToKey("c");
-	keyMap[control::PAUSE_GAME] = Utils::stringToKey("p");
-	keyMap[control::SAVE_GAME] = Utils::stringToKey("o");
-	keyMap[control::LOAD_GAME] = Utils::stringToKey("i");
-	keyMap[control::EXIT] = Utils::stringToKey("k");
-	keyMap[control::RESTART] = Utils::stringToKey("r");
-	map<GameRepresentation::ModelType, function<AbstractModel3D *()>> modelMap; //TODO
-	return Configuration(keyMap, modelMap, 800, 600);
-}
-
 map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
 	map<control, SDLKey> keyMap;
 	keyMap[control::UP] = Utils::stringToKey(json["Up"]);
@@ -36,11 +19,11 @@ map<control, SDLKey> Configuration::keyMapFromJSON(const json &json) {
 	keyMap[control::LEFT] = Utils::stringToKey(json["Left"]);
 	keyMap[control::RIGHT] = Utils::stringToKey(json["Right"]);
 	keyMap[control::CHANGE_CAMERA] = Utils::stringToKey(json["ChangeCamera"]);
-	keyMap[control::PAUSE_GAME] = Utils::stringToKey("p");
-	keyMap[control::SAVE_GAME] = Utils::stringToKey("o");
-	keyMap[control::LOAD_GAME] = Utils::stringToKey("i");
-	keyMap[control::EXIT] = Utils::stringToKey("k");
-	keyMap[control::RESTART] = Utils::stringToKey("r");
+	keyMap[control::PAUSE_GAME] = SDLK_ESCAPE;
+	keyMap[control::SAVE_GAME] = SDLK_o;
+	keyMap[control::LOAD_GAME] = SDLK_i;
+	keyMap[control::EXIT] = SDLK_k;
+	keyMap[control::RESTART] = SDLK_r;
 	return keyMap;
 }
 
