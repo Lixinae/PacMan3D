@@ -8,6 +8,7 @@
 #include <glimac/Program.hpp>
 #include <json/json.hpp>
 #include <SpotLight.h>
+#include <DirectionalLight.h>
 
 using namespace std;
 using namespace glimac;
@@ -59,7 +60,7 @@ public:
 	 * @param jsonModel : représentation en JSON du modele abstrait 3D
 	 * @return le modele abstrait 3D crée
 	 **/
-	static AbstractModel3D *fromJSON(const json &jsonModel, const SpotLight *spotLight);
+	static AbstractModel3D *fromJSON(const json &jsonModel, const SpotLight *spotLight, const DirectionalLight *directionalLight);
 
 	/**
 	 * Destructeur

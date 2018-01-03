@@ -11,8 +11,10 @@ uniform sampler2D uTexture;
 uniform vec3 uLightDir_vs;
 uniform vec3 uLightPos_vs;
 
-uniform vec3 uLightColor;
-uniform float uLightIntensity;
+uniform vec3 uLightColorDirectional;
+uniform vec3 uLightColorSpot;
+uniform float uLightIntensityDirectional;
+uniform float uLightIntensitySpot;
 
 uniform vec3 uKs;
 uniform vec3 uKd;
@@ -25,7 +27,8 @@ vec4 blinnPhongDirectionnal(){
     vec3 wi = normalize(uLightDir_vs);
     vec3 w0 = normalize(-vPosition_vs);
     vec3 halfVector = (wi + w0)/2;
-	vec3 color = ((uLightColor*uLightIntensity)/(pow(length(uLightDir_vs), 2))) * (uKd*dot(wi,normal) + uKs*pow(dot(halfVector, normal), uShininess));
+    vec3 li = uLightColorDirectional*(uLightIntensityDirectional)/(pow(length(uLightDir_vs), 8));
+	vec3 color = li * (uKd*dot(wi,normal) + uKs*pow(dot(halfVector, normal), uShininess));
 	return vec4(pow(color, vec3(1.0/screenGamma)), 1.0);
 }
 
@@ -35,7 +38,7 @@ vec4 blinnPhongSpot(){
     vec3 w0 = normalize(-vPosition_vs);
     vec3 halfVector = (wi + w0)/2;
     float d = distance(uLightPos_vs, vPosition_vs);
-    vec3 li = uLightColor*(uLightIntensity / (d * d));
+    vec3 li = uLightColorSpot*(uLightIntensitySpot / (d * d));
 	vec3 color = li * (uKd*dot(wi,normal) + uKs*pow(dot(halfVector, normal), uShininess));
 	return vec4(pow(color, vec3(1.0/screenGamma)), 1.0);
 }
@@ -44,6 +47,7 @@ vec4 blinnPhongSpot(){
 void main() {
 
 //	fFragColor = texture(uTexture, vTexCoords) *  blinnPhongDirectionnal();
-	fFragColor = texture(uTexture, vTexCoords) *  blinnPhongSpot();
+//	fFragColor = texture(uTexture, vTexCoords) *  blinnPhongSpot();
+	fFragColor = texture(uTexture, vTexCoords) *  blinnPhongSpot() * blinnPhongDirectionnal();
 
 }

@@ -33,14 +33,22 @@ map<GameRepresentation::ModelType, function<AbstractModel3D *()>> Configuration:
 	json lightArray = jsonModels["lights"];
 
 	SpotLight *spotLight = nullptr;
+	DirectionalLight *directionalLight = nullptr;
 	// todo -> Changer quand il aura plus de lumiere
 	if (lightArray[0]["type"] == "spot") {
 		spotLight = SpotLight::fromJSON(lightArray[0]);
+	} else if (lightArray[1]["type"] == "spot") {
+		spotLight = SpotLight::fromJSON(lightArray[1]);
+	}
+	if (lightArray[1]["type"] == "directional") {
+		directionalLight = DirectionalLight::fromJSON(lightArray[1]);
+	} else if (lightArray[0]["type"] == "directional") {
+		directionalLight = DirectionalLight::fromJSON(lightArray[0]);
 	}
 	for (auto &it : modelsArray) {
 		GameRepresentation::ModelType modelType = GameRepresentation::modelFromString(it["name"]);
-		function<AbstractModel3D *()> generator = [it, spotLight]() {
-			return AbstractModel3D::fromJSON(it["model"], spotLight);
+		function<AbstractModel3D *()> generator = [it, spotLight, directionalLight]() {
+			return AbstractModel3D::fromJSON(it["model"], spotLight, directionalLight);
 		};
 		modelMap[modelType] = generator;
 	}

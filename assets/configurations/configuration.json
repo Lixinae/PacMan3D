@@ -23,7 +23,21 @@
         "y": 10,
         "z": 5
       },
-      "intensity": 500
+      "intensity": 300
+    },
+    {
+      "type": "directional",
+      "color": {
+        "x": 0.9,
+        "y": 0.9,
+        "z": 0.9
+      },
+      "direction": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "intensity": 300
     }
   ],
   "models": [
