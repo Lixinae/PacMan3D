@@ -60,9 +60,6 @@ void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
 	int currentScore = gameInfo.getScore();
 	y -= ecart;
 	_textRenderer.render("Score : " + to_string(currentScore), x, y, scale, color);
-	int multiplier = gameInfo.getMultiplier();
-	y -= ecart;
-	_textRenderer.render("Multiplier : " + to_string(multiplier), x, y, scale, color);
 	int level = gameInfo.getLevel();
 	y -= ecart;
 	_textRenderer.render("Level : " + to_string(level), x, y, scale, color);

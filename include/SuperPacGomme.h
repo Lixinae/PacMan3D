@@ -11,15 +11,15 @@ public:
 
 	SuperPacGomme();
 
-	GameRepresentation::Model getModel() const;
+	GameRepresentation::Model getModel() const override;
 
-	void apply(Bonus::Context &context);
+	void apply(Bonus::Context &context) override;
 
-	bool isRequired() const;
-	
-	Bonus *clone() const;
-	
-	json toJSON() const;
+	bool isRequired() const override;
+
+	Bonus *clone() const override;
+
+	json toJSON() const override;
 
 };
 

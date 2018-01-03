@@ -39,10 +39,6 @@ int GameInformations::getLives() const {
 	return _lives;
 }
 
-int GameInformations::getMultiplier() const {
-	return _multiplier;
-}
-
 bool GameInformations::isDead() const {
 	return _lives == 0;
 }
@@ -70,7 +66,7 @@ void GameInformations::decreaseLife() {
 	}
 }
 
-void GameInformations::setMultiplier(int time) {
+void GameInformations::setMultiplierCounter(int time) {
 	_multiplierCounter = time;
 }
 

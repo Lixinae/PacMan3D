@@ -27,55 +27,62 @@ public:
 	explicit GameInformations(int score, int score_max_life, int step_score_max_life, int lives, int multiplier, int multiplierCounter, int level);
 
 	/**
-	 *
-	 * @return True If the player is dead, false otherwise
+	 * Indique si le joueur est mort ou non
+	 * @return True si le joueur est mort , False sinon
 	 */
 	bool isDead() const;
 
 	/**
-	 * Update the score of the player from
-	 * @param value used to upgrade the score
+	 * Augmente le score
+	 * @param value La valeur à additioner au score
 	 */
 	void updateScore(int value);
 
 	void updateMultipliedScore(int value);
 
 	/**
-	 * Decrease the life count of the player by one
+	 * Reduit de 1 le nombre de vie du joueur
 	 */
 	void decreaseLife();
 
-	void setMultiplier(int time);
+	/**
+	 * Met la durée du multiplicateur
+	 * @param time Durée du multiplicateur
+	 */
+	void setMultiplierCounter(int time);
 
 	/**
-	 * Increase the multiplier
+	 * Augmente le multiplicateur
 	 */
 	void increaseMultiplier();
 
 	void iterate();
 
 	/**
-	 *
-	 * @return The score
+	 * Renvoie le score
+	 * @return Le score
 	 */
 	int getScore() const;
 
 	/**
-	 *
-	 * @return The lives left
+	 * Renvoie le nombre de vie restantes
+	 * @return Le nombre de vie restantes
 	 */
 	int getLives() const;
 
-	/**
-	 *
-	 * @return The multiplier
-	 */
-	int getMultiplier() const;
+
 	
 	json toJSON() const;
 
+	/**
+	 * Augmente le niveau
+	 */
 	void increaseLevel();
 
+	/**
+	 * Renvoie le niveau sur lequel est le joueur
+	 * @return Le niveau sur lequel est le joueur
+	 */
 	int getLevel() const;
 
 };

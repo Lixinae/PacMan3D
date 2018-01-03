@@ -12,29 +12,29 @@ public:
 
 	Floor();
 
-	Floor(const Bonus *bonus);
+	explicit Floor(const Bonus *bonus);
 
 	Floor(const Floor &other);
 
-	~Floor();
+	~Floor() override;
 
-	vector<GameRepresentation::Model> getModels() const;
+	vector<GameRepresentation::Model> getModels() const override;
 
-	bool isPacmanWalkable(const BoardSquare::PacmanContext &context) const;
+	bool isPacmanWalkable(const BoardSquare::PacmanContext &context) const override;
 
-	void receivePacman(BoardSquare::PacmanContext &context);
+	void receivePacman(BoardSquare::PacmanContext &context) override;
 
-	bool isGhostWalkable(const BoardSquare::GhostContext &context) const;
+	bool isGhostWalkable(const BoardSquare::GhostContext &context) const override;
 
-	void receiveGhost(BoardSquare::GhostContext &context);
+	void receiveGhost(BoardSquare::GhostContext &context) override;
 
-	bool isDone() const;
-	
-	void iterate();
+	bool isDone() const override;
 
-	BoardSquare *clone() const;
+	void iterate() override;
 
-	json toJSON() const;
+	BoardSquare *clone() const override;
+
+	json toJSON() const override;
 
 	Floor &operator=(const Floor &floor);
 

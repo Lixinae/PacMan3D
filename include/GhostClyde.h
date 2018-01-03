@@ -9,13 +9,13 @@ class GhostClyde : public Ghost {
 
 public:
 
-	Utils::Orientation getNextOrientation(const MovingContext & context) const;
+	Utils::Orientation getNextOrientation(const MovingContext &context) const override;
 
-	GameRepresentation::ModelType getModelType() const;
+	GameRepresentation::ModelType getModelType() const override;
 
-	Ghost *clone() const;
-	
-	json toJSON() const;
+	Ghost *clone() const override;
+
+	json toJSON() const override;
 
 };
 

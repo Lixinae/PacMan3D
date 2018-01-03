@@ -20,10 +20,18 @@ public:
 
 	FreeflyCamera(glm::vec3 Position, float phi, float theta);
 
+	/**
+	 * Change l'angle horizontal de la camera
+	 * @param degrees Nombre de degrées à ajouter à l'angle
+	 */
 	void setHorizontalAngle(float degrees);
 
 	void setVerticalAngle(float degrees);
 
+	/**
+	 * Change la position de la camera
+	 * @param position La nouvelle position de la camera
+	 */
 	void setPosition(glm::vec3 position);
 
 	/**

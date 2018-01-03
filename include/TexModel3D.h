@@ -17,7 +17,7 @@ public:
 
 	static TexModel3D *create(const string &meshPath, const string &texturePath, const mat4 &modelTransform);
 
-	~TexModel3D();
+	~TexModel3D() override;
 
 	void bind() override;
 

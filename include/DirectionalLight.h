@@ -18,19 +18,19 @@ private:
 
 public:
 	/**
-	 *
+	 * Renvoie la direction de la lumiere
 	 * @return La direction de la lumiere
 	 */
 	const vec3 &getDirection() const;
 
 	/**
-	 *
+	 * Renvoie une copie de la lumiere directionnel
 	 * @return Une copie de la lumiere
 	 */
 	DirectionalLight *clone() const;
 
 	/**
-	 *
+	 * Renvoie une lumiere directionnel à partir du JSON
 	 * @param jsonLight Json ou lire les données
 	 * @return Une nouvelle lumière directionnel
 	 */

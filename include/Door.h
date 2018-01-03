@@ -10,23 +10,23 @@ public:
 
 	Door();
 
-	vector<GameRepresentation::Model> getModels() const;
+	vector<GameRepresentation::Model> getModels() const override;
 
-	bool isPacmanWalkable(const BoardSquare::PacmanContext &context) const;
+	bool isPacmanWalkable(const BoardSquare::PacmanContext &context) const override;
 
-	void receivePacman(BoardSquare::PacmanContext &context);
+	void receivePacman(BoardSquare::PacmanContext &context) override;
 
-	bool isGhostWalkable(const BoardSquare::GhostContext &context) const;
+	bool isGhostWalkable(const BoardSquare::GhostContext &context) const override;
 
-	void receiveGhost(BoardSquare::GhostContext &context);
+	void receiveGhost(BoardSquare::GhostContext &context) override;
 
-	bool isDone() const;
+	bool isDone() const override;
 
-	void iterate();
+	void iterate() override;
 
-	BoardSquare *clone() const;
-	
-	json toJSON() const;
+	BoardSquare *clone() const override;
+
+	json toJSON() const override;
 
 };
 

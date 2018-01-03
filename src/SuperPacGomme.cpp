@@ -1,8 +1,6 @@
 #include <SuperPacGomme.h>
 
-SuperPacGomme::SuperPacGomme() {
-
-}
+SuperPacGomme::SuperPacGomme() = default;
 
 GameRepresentation::Model SuperPacGomme::getModel() const {
 	return GameRepresentation::Model(GameRepresentation::ModelType::SUPER_PAC_GOMME);
@@ -14,7 +12,7 @@ void SuperPacGomme::apply(Context &context) {
 	for (Ghost *ghost : context.ghosts) {
 		ghost->setWeak(time);
 	}
-	context.informations.setMultiplier(time);
+	context.informations.setMultiplierCounter(time);
 }
 
 bool SuperPacGomme::isRequired() const {
