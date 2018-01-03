@@ -19,6 +19,12 @@ public:
 	
 	static function<Utils::Orientation()> orientationAvoidTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const BoardPosition & target);
 
+private:
+
+	static vector<Utils::Orientation> walkableOrientations(const BoardPosition & position, const Board & board, const BoardSquare::GhostContext & context);
+	
+	static Utils::Orientation auxOrientatioGoToTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const BoardPosition & target);
+
 };
 
 #endif
