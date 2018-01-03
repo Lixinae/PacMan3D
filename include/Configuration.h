@@ -51,11 +51,6 @@ private:
 
 public:
 
-	/**
-	 * Charge la configuration par default de l'application
-	 * @return La configuration par default de l'application
-	 */
-	static Configuration defaultConfiguration();
 
 	/**
 	 * Charge la configuration contenu dans le fichier json donné en argument
