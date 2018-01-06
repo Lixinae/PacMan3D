@@ -39,7 +39,7 @@ void Renderer3D::renderSkyBox() const {
 			GlobalMVMatrix, position.inSpace()
 	);
 
-	_skybox->setMatrices(_ProjMatrix, MVMatrix);
+	_skybox->setMatrices(_ProjMatrix, GlobalMVMatrix, MVMatrix);
 	glDrawArrays(GL_TRIANGLES, 0, _skybox->count());
 
 	_skybox->unbind();
