@@ -93,9 +93,10 @@ public:
 	/**
 	 * Met a jour les matrices passées en variables uniformes du modele
 	 * @param ProjMatrix : matrice de projection
+	 * @param ViewMatrix : matrice View
 	 * @param MVMatrix : matrice ModelView
 	 **/
-	void setMatrices(const mat4 &ProjMatrix, const mat4 &MVMatrix);
+	virtual void setMatrices(const mat4 &ProjMatrix, const mat4 &ViewMatrix, const mat4 &MVMatrix);
 
 protected:
 

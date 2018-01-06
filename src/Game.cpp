@@ -215,21 +215,9 @@ void Game::iterateGhost(Ghost *ghost) {
 		}
 	}
 	function<vector<Utils::Orientation>()> walkableOrientations = DistanceMap::walkableOrientations(*ghost, _board, context);
-	// Point on the two previous pacman case to follow him
-	Utils::Orientation opposite = Utils::oppositeOrientation(_pacman.getOrientation());
-	BoardPosition targetFollow = 
-		_pacman.getPosition()
-		.translate(opposite)
-		.translate(opposite);
-	function<Utils::Orientation()> orientationOnPacman = DistanceMap::orientationGoToTarget(*ghost, _board, context, targetFollow);
-	// Point on the three next pacman case to try to block him
-	BoardPosition targetBlock = 
-		_pacman.getPosition()
-		.translate(_pacman.getOrientation())
-		.translate(_pacman.getOrientation())
-		.translate(_pacman.getOrientation());
-	function<Utils::Orientation()> orientationBlockPacman = DistanceMap::orientationGoToTarget(*ghost, _board, context, targetBlock);
-	function<Utils::Orientation()> orientationAvoidPacman = DistanceMap::orientationAvoidTarget(*ghost, _board, context, _pacman.getPosition());
+	function<Utils::Orientation()> orientationOnPacman = DistanceMap::orientationFollowPacman(*ghost, _board, context, _pacman);
+	function<Utils::Orientation()> orientationBlockPacman = DistanceMap::orientationBlockPacman(*ghost, _board, context, _pacman);
+	function<Utils::Orientation()> orientationAvoidPacman = DistanceMap::orientationAvoidPacman(*ghost, _board, context, _pacman);
 	Ghost::MovingContext movingContext(_pacman, walkableOrientations, orientationOnPacman, orientationBlockPacman, orientationAvoidPacman);
 	ghost->orientToTarget(movingContext);
 	ghost->iterate();

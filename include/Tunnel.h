@@ -26,6 +26,8 @@ public:
 	bool isDone() const override;
 
 	void iterate() override;
+	
+	BoardPosition neighbour(const BoardPosition & position, Utils::Orientation orientation) override;
 
 	BoardSquare *clone() const override;
 

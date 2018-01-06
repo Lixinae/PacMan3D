@@ -14,16 +14,22 @@ class DistanceMap {
 public:
 
 	static function<vector<Utils::Orientation>()> walkableOrientations(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context);
+
+	static function<Utils::Orientation()> orientationFollowPacman(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const Pacman & pacman);
 	
-	static function<Utils::Orientation()> orientationGoToTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const BoardPosition & target);
+	static function<Utils::Orientation()> orientationBlockPacman(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const Pacman & pacman);
 	
-	static function<Utils::Orientation()> orientationAvoidTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const BoardPosition & target);
+	static function<Utils::Orientation()> orientationAvoidPacman(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const Pacman & pacman);
 
 private:
 
 	static vector<Utils::Orientation> walkableOrientations(const BoardPosition & position, const Board & board, const BoardSquare::GhostContext & context);
 	
-	static Utils::Orientation auxOrientatioGoToTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const BoardPosition & target);
+	static Utils::Orientation auxOrientatioGoToTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, BoardPosition target);
+
+	static function<Utils::Orientation()> orientationGoToTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, BoardPosition target);
+	
+	static function<Utils::Orientation()> orientationAvoidTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, BoardPosition target);
 
 };
 
