@@ -104,7 +104,7 @@ GLint AbstractModel3D::getUniformLocation(const GLchar *uniform) {
 	return glGetUniformLocation(_program.getGLId(), uniform);
 }
 
-void AbstractModel3D::setMatrices(const mat4 &ProjMatrix, const mat4 &MVMatrix) {
+void AbstractModel3D::setMatrices(const mat4 &ProjMatrix, const mat4 &ViewMatrix, const mat4 &MVMatrix) {
 	mat4 transformMVMatrix = MVMatrix * _modelTransform;
 	glUniformMatrix4fv(_uMVPmatrix, 1, GL_FALSE, value_ptr(ProjMatrix * transformMVMatrix));
 	glUniformMatrix4fv(_uMVmatrix, 1, GL_FALSE, value_ptr(transformMVMatrix));

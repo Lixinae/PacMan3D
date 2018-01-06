@@ -43,7 +43,7 @@ void Renderer3D::renderModels(const GameRepresentation &repr) const {
 							radians(Utils::degreesOfOrientation(orientation)),
 							vec3(0, 1, 0)
 					);
-			model3d->setMatrices(_ProjMatrix, MVMatrix);
+			model3d->setMatrices(_ProjMatrix, GlobalMVMatrix, MVMatrix);
 			glDrawArrays(GL_TRIANGLES, 0, model3d->count());
 		}
 		model3d->unbind();

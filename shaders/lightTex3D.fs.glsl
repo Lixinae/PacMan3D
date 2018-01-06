@@ -46,8 +46,6 @@ vec4 blinnPhongSpot(){
 
 void main() {
 
-//	fFragColor = texture(uTexture, vTexCoords) *  blinnPhongDirectionnal();
-//	fFragColor = texture(uTexture, vTexCoords) *  blinnPhongSpot();
 	fFragColor = texture(uTexture, vTexCoords) *  blinnPhongSpot() * blinnPhongDirectionnal();
 
 }

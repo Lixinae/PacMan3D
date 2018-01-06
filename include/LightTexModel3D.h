@@ -35,6 +35,8 @@ public:
 	void bind() override;
 
 	void unbind() override;
+	
+	void setMatrices(const mat4 &ProjMatrix, const mat4 &ViewMatrix, const mat4 &MVMatrix);
 
 private:
 

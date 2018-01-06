@@ -67,25 +67,29 @@ void LightTexModel3D::bind() {
 	glUniform3f(_uDiffuse, diffuse.x, diffuse.y, diffuse.z);
 	vec3 glossy = _material.getGlossy();
 	glUniform3f(_uGlossy, glossy.x, glossy.y, glossy.z);
-
-	// Directional
-	vec3 lightDir = _directionalLight->getDirection();
-	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
-	vec3 lightColor = _directionalLight->getColor();
-	glUniform3f(_uLightColorDirectional, lightColor.x, lightColor.y, lightColor.z);
-	float intensity = _directionalLight->getIntensity();
-	glUniform1f(_uLightIntensityDirectional, intensity);
-
-	// Spot
-	lightColor = _spotLight->getColor();
-	glUniform3f(_uLightColorSpot, lightColor.x, lightColor.y, lightColor.z);
-	intensity = _spotLight->getIntensity();
-	glUniform1f(_uLightIntensitySpot, intensity);
-	vec3 lightPos = _spotLight->getPosition();
-	glUniform3f(_uLightPos, lightPos.x, lightPos.y, lightPos.z);
 }
 
 void LightTexModel3D::unbind() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	AbstractModel3D::unbind();
 }
+
+void LightTexModel3D::setMatrices(const mat4 &ProjMatrix, const mat4 &ViewMatrix, const mat4 &MVMatrix) {
+	// Directional
+	vec3 lightDir = _directionalLight->getDirection(); // relative to camera position
+	glUniform3f(_uLightDirection, lightDir.x, lightDir.y, lightDir.z);
+	vec3 lightColor = _directionalLight->getColor();
+	glUniform3f(_uLightColorDirectional, lightColor.x, lightColor.y, lightColor.z);
+	float intensity = _directionalLight->getIntensity();
+	glUniform1f(_uLightIntensityDirectional, intensity);
+	// Spot
+	lightColor = _spotLight->getColor();
+	glUniform3f(_uLightColorSpot, lightColor.x, lightColor.y, lightColor.z);
+	intensity = _spotLight->getIntensity();
+	glUniform1f(_uLightIntensitySpot, intensity);
+	vec3 lightPos = _spotLight->getPosition();
+	////vec3 lightPos = vec3(ViewMatrix * vec4(_spotLight->getPosition(),1)); // absolute in viewspace
+	glUniform3f(_uLightPos, lightPos.x, lightPos.y, lightPos.z);
+	AbstractModel3D::setMatrices(ProjMatrix, ViewMatrix, MVMatrix);
+}
+
