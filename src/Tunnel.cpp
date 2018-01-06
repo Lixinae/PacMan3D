@@ -38,6 +38,13 @@ void Tunnel::iterate() {
 	
 }
 
+BoardPosition Tunnel::neighbour(const BoardPosition & position, Utils::Orientation orientation) {
+	if (_orientation == orientation) {
+		return _dest;
+	}
+	return BoardSquare::neighbour(position, orientation);
+}
+
 BoardSquare *Tunnel::clone() const {
 	return new Tunnel(*this);
 }
