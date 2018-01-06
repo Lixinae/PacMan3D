@@ -62,6 +62,10 @@ public:
 	
 	Game & operator=(const Game &other);
 
+	BoardPosition getLowerBound() const;
+
+	BoardPosition getUpperBound() const;
+
 private:
 
 	Board _board;

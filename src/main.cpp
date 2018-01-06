@@ -116,7 +116,10 @@ int realMain() {
 
 	EventHandler eventHandler(configuration.getControlMap());
 
-	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap());
+	BoardPosition lowerBound = game.getLowerBound();
+	BoardPosition upperBound = game.getUpperBound();
+
+	Renderer *renderer = new Renderer3D(windowWidth, windowHeight, game.getPointOfView(), configuration.getModelMap(), lowerBound, upperBound);
 
 	play(game, windowManager, *renderer, eventHandler, configuration.getControlMap());
 

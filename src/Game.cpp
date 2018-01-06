@@ -293,4 +293,28 @@ void Game::setNextLevel() {
 	restartKeepingScore();
 }
 
+BoardPosition Game::getLowerBound() const {
+	int x = numeric_limits<int>::max(), y = numeric_limits<int>::max();
+	for (const BoardPosition &position : _board.getPositions()) {
+		if (position.getX() <= x) {
+			x = position.getX();
+		}
+		if (position.getY() <= y) {
+			y = position.getY();
+		}
+	}
+	return BoardPosition(x, y);
+}
 
+BoardPosition Game::getUpperBound() const {
+	int x = numeric_limits<int>::min(), y = numeric_limits<int>::min();
+	for (const BoardPosition &position : _board.getPositions()) {
+		if (position.getX() >= x) {
+			x = position.getX();
+		}
+		if (position.getY() >= y) {
+			y = position.getY();
+		}
+	}
+	return BoardPosition(x, y);
+}

@@ -8,21 +8,56 @@ Renderer3D::Renderer3D(
 		int windowWidth,
 		int windowHeight,
 		const PointOfView &pointOfView,
-		const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &map_model3D
+		const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &map_model3D,
+		BoardPosition lowerBound,
+		BoardPosition upperBound
 ) :
 		_pointOfView(pointOfView),
 		_ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
 		_models(),
-		_textRenderer(windowWidth, windowHeight, "assets/fonts/game_over.ttf") //TODO static or from config
-{
+		_textRenderer(windowWidth, windowHeight, "assets/fonts/game_over.ttf"),//TODO static or from config
+		_lowerBound(lowerBound),
+		_upperBound(upperBound) {
 	for (auto &entry : map_model3D) {
 		_models[entry.first] = entry.second();
 	}
+	_skybox = initSkybox();
 }
 
 Renderer3D::~Renderer3D() {
 	Utils::cleanMap(_models);
 }
+
+void Renderer3D::renderSkyBox() const {
+
+	// Render
+	mat4 GlobalMVMatrix = _pointOfView.getCurrentCamera().getViewMatrix();
+	BoardPosition position(0, 0);
+	_skybox->bind();
+
+	mat4 MVMatrix = translate(
+			GlobalMVMatrix, position.inSpace()
+	);
+
+	_skybox->setMatrices(_ProjMatrix, MVMatrix);
+	glDrawArrays(GL_TRIANGLES, 0, _skybox->count());
+
+	_skybox->unbind();
+}
+
+TexModel3D *Renderer3D::initSkybox() const {
+	mat4 transformations(1.f);
+
+	float x = abs(_lowerBound.getX()) + abs(_upperBound.getX());
+	float y = abs(_lowerBound.getY()) + abs(_upperBound.getY());
+	float z = x;
+
+	transformations = scale(transformations, vec3(x, y, z));
+
+	TexModel3D *skybox = TexModel3D::create("assets/models/cube.obj", "assets/textures/skybox.png", transformations);
+	return skybox;
+}
+
 
 void Renderer3D::renderModels(const GameRepresentation &repr) const {
 	mat4 GlobalMVMatrix = _pointOfView.getCurrentCamera().getViewMatrix();
@@ -38,7 +73,7 @@ void Renderer3D::renderModels(const GameRepresentation &repr) const {
 					rotate(
 							translate(
 									GlobalMVMatrix,
-									position.inSpace() + shift*Utils::vectorOfOrientation(orientation)
+									position.inSpace() + shift * Utils::vectorOfOrientation(orientation)
 							),
 							radians(Utils::degreesOfOrientation(orientation)),
 							vec3(0, 1, 0)
@@ -66,6 +101,7 @@ void Renderer3D::renderTexts(const GameInformations &gameInfo) const {
 }
 
 void Renderer3D::renderGame(const GameRepresentation &repr, const GameInformations &gameInfo) const {
+	renderSkyBox();
 	renderModels(repr);
 	renderTexts(gameInfo);
 }
@@ -105,3 +141,4 @@ void Renderer3D::renderEndTitle(const GameInformations &gameInfo) const {
 	_textRenderer.renderXCentered("Level : " + to_string(gameInfo.getLevel()), 65, 0.65, color);
 	_textRenderer.renderXCentered("Appuyer sur entree pour quitter", 60, 0.65, color);
 }
+

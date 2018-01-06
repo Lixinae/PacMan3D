@@ -16,7 +16,9 @@ class Renderer3D : public Renderer {
 public:
 
 	Renderer3D(int windowWidth, int windowHeight, const PointOfView &pointOfView,
-	           const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &map_model3D);
+	           const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &map_model3D,
+	           BoardPosition lowerBound,
+	           BoardPosition upperBound);
 
 	~Renderer3D() override;
 
@@ -37,10 +39,19 @@ private:
 	map<GameRepresentation::ModelType, AbstractModel3D *> _models;
 	ColorText2DRenderer _textRenderer;
 
+	TexModel3D *_skybox;
+
+	BoardPosition _lowerBound;
+	BoardPosition _upperBound;
+
+
+	void renderSkyBox() const;
+
 	void renderModels(const GameRepresentation &repr) const;
 
 	void renderTexts(const GameInformations &informations) const;
 
+	TexModel3D *initSkybox() const;
 };
 
 #endif
