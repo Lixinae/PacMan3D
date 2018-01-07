@@ -1,8 +1,6 @@
 #include <EventHandler.h>
 
-EventHandler::EventHandler(const map<control, SDLKey> &keyMap) : _keyMap(keyMap) {
-
-}
+EventHandler::EventHandler(const map<control, SDLKey> &keyMap) : _keyMap(keyMap) {}
 
 EventHandler::State EventHandler::handleBeginTitleEvent(SDLWindowManager &windowManager) {
 	SDL_Event event{};
@@ -110,7 +108,6 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 			if (event.key.keysym.sym == _keyMap[control::RESTART]) {
 				game.restart();
 			}
-
 		}
 	}
 	cameraMovement(windowManager, game);
