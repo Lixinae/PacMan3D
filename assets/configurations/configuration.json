@@ -20,24 +20,24 @@
       },
       "position": {
         "x": 0,
-        "y": 10,
-        "z": 5
+        "y": 20,
+        "z": 0
       },
-      "intensity": 300
+      "intensity": 450
     },
     {
-      "type": "directional",
+      "type": "spot",
       "color": {
         "x": 0.9,
         "y": 0.9,
         "z": 0.9
       },
-      "direction": {
-        "x": 1,
-        "y": 1,
-        "z": 1
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": -0.5
       },
-      "intensity": 300
+      "intensity": 0.8
     }
   ],
   "models": [

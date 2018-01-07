@@ -23,7 +23,7 @@ const GLchar *AbstractModel3D::VERTEX_UNIFORM_MV_MATRIX = "uMVMatrix";
 const GLchar *AbstractModel3D::VERTEX_UNIFORM_NORMAL_MATRIX = "uNormalMatrix";
 
 
-AbstractModel3D *AbstractModel3D::fromJSON(const json &jsonModel, const SpotLight *spotLight, const DirectionalLight *directionalLight) {
+AbstractModel3D *AbstractModel3D::fromJSON(const json &jsonModel, const SpotLight *spotLight, const SpotLight *spotLightCamera) {
 	// TODO static assets/models path in UTILS
 	string type = jsonModel["type"];
 	mat4 transformations(1.f);
@@ -41,7 +41,7 @@ AbstractModel3D *AbstractModel3D::fromJSON(const json &jsonModel, const SpotLigh
 		string mesh = jsonModel["args"]["objPath"];
 		string texture = jsonModel["args"]["texPath"];
 		Material material = Material::fromJSON(jsonModel["args"]["material"]);
-		return LightTexModel3D::create("assets/models/" + mesh, "assets/textures/" + texture, material, transformations, spotLight, directionalLight);
+		return LightTexModel3D::create("assets/models/" + mesh, "assets/textures/" + texture, material, transformations, spotLight, spotLightCamera);
 	}
 	if (type == "normal") {
 		string mesh = jsonModel["args"]["objPath"];

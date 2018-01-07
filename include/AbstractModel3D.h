@@ -60,7 +60,7 @@ public:
 	 * @param jsonModel : représentation en JSON du modele abstrait 3D
 	 * @return le modele abstrait 3D crée
 	 **/
-	static AbstractModel3D *fromJSON(const json &jsonModel, const SpotLight *spotLight, const DirectionalLight *directionalLight);
+	static AbstractModel3D *fromJSON(const json &jsonModel, const SpotLight *spotLight, const SpotLight *spotLightCamera);
 
 	/**
 	 * Destructeur

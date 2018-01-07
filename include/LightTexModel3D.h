@@ -19,24 +19,24 @@ public:
 	static const GLchar *FRAGMENT_UNIFORM_DIFFUSE;
 	static const GLchar *FRAGMENT_UNIFORM_GLOSSY;
 	static const GLchar *FRAGMENT_UNIFORM_SHININESS;
-	static const GLchar *FRAGMENT_UNIFORM_LIGHT_DIRECTION;
-	static const GLchar *FRAGMENT_UNIFORM_LIGHT_COLOR_DIRECTIONAL;
+	static const GLchar *FRAGMENT_UNIFORM_LIGHT_POS_CAMERA;
+	static const GLchar *FRAGMENT_UNIFORM_LIGHT_COLOR_SPOT_CAMERA;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_COLOR_SPOT;
-	static const GLchar *FRAGMENT_UNIFORM_LIGHT_INTENSITY_DIRECTIONAL;
+	static const GLchar *FRAGMENT_UNIFORM_LIGHT_INTENSITY_SPOT_CAMERA;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_INTENSITY_SPOT;
 	static const GLchar *FRAGMENT_UNIFORM_LIGHT_POS;
 
 	static LightTexModel3D *
 	create(const string &meshPath, const string &texturePath, const Material &material, const mat4 &modelTransform, const SpotLight *spotLight,
-	       const DirectionalLight *directionalLight);
+	       const SpotLight *spotLightCamera);
 
-	~LightTexModel3D();
+	~LightTexModel3D() override;
 
 	void bind() override;
 
 	void unbind() override;
-	
-	void setMatrices(const mat4 &ProjMatrix, const mat4 &ViewMatrix, const mat4 &MVMatrix);
+
+	void setMatrices(const mat4 &ProjMatrix, const mat4 &ViewMatrix, const mat4 &MVMatrix) override;
 
 private:
 
@@ -46,18 +46,19 @@ private:
 	GLint _uShininess;
 	GLint _uDiffuse;
 	GLint _uGlossy;
-	GLint _uLightDirection;
-	GLint _uLightColorDirectional;
+	GLint _uLightPosSpotCamera;
+	GLint _uLightColorSpotCamera;
 	GLint _uLightColorSpot;
-	GLint _uLightIntensityDirectional;
+	GLint _uLightIntensitySpotCamera;
 	GLint _uLightIntensitySpot;
 	GLint _uLightPos;
 
 	SpotLight *_spotLight;
-	DirectionalLight *_directionalLight;
+	SpotLight *_spotLightCamera;
+//	DirectionalLight *_directionalLight;
 
 	LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const Material &material, const mat4 &modelTransform,
-	                const SpotLight *spotLight, const DirectionalLight *directionalLight);
+	                const SpotLight *spotLight, const SpotLight *spotLightCamera);
 
 	void initTexture(const unique_ptr<Image> &texture);
 

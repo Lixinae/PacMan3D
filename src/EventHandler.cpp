@@ -102,6 +102,9 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 			state = EventHandler::State::QUIT;
 		}
 		if (event.type == SDL_KEYDOWN) {
+			if (event.key.keysym.sym == _keyMap[control::CHANGE_CAMERA]) {
+				game.changeCamera();
+			}
 			if (event.key.keysym.sym == _keyMap[control::PAUSE_GAME]) {
 				state = EventHandler::State::NEXT;
 			}
