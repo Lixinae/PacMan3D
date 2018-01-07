@@ -25,7 +25,7 @@ L’objectif de ce projet est de développer un jeu de type "PACMAN" en 3D en C+
 ## Commands 
 
 ### Active only during the game
-These binds can be changed in the json configuration file located in "assets/configurations"
+These binds can be changed in the json configuration file located in the "assets/configurations/" folder
 
   * Movement :
     * Z : Move FORWARD
@@ -33,19 +33,20 @@ These binds can be changed in the json configuration file located in "assets/con
     * Q : Move LEFT
     * D : Move RIGHT
     
-  
-  * Camera : 
-    * C : Change camera
-    * These two binds can't be changed !
-    * Mouse Left click : Zoom In
-    * Mouse Right click : Zoom out
-    
 ### Active on the pause menu
 These binds cannot be changed 
+
   * Interface :
     * P : Pause
     * O : Save
     * I : Load
     * K : Exit the game
     
-    
+### Active anywhere
+These binds can be changed in the json configuration file located in "assets/configurations"
+
+  * Camera : 
+    * C : Change camera
+    * These two binds can't be changed !
+    * Mouse Left click : Zoom In
+    * Mouse Right click : Zoom out    

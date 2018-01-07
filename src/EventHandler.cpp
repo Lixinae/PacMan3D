@@ -123,5 +123,12 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 
 		}
 	}
+	if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
+		game.moveFrontCamera(1);
+	}
+	if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT)) {
+		game.moveFrontCamera(-1);
+	}
+
 	return state;
 }
