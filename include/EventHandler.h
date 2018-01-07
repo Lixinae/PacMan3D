@@ -18,6 +18,7 @@ private:
 
 	map<control, SDLKey> _keyMap;
 
+	void cameraMovement(const SDLWindowManager &windowManager, Game &game) const;
 public:
 
 	enum class State {
@@ -71,6 +72,7 @@ public:
 	 * @return l'etat du jeu
 	 **/
 	State handleEndTitleEvent(SDLWindowManager &windowManager);
+
 
 };
 

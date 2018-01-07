@@ -48,12 +48,7 @@ EventHandler::State EventHandler::handleBeginGameEvent(SDLWindowManager &windowM
 			}
 		}
 	}
-	if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
-		game.moveFrontCamera(1);
-	}
-	if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT)) {
-		game.moveFrontCamera(-1);
-	}
+	cameraMovement(windowManager, game);
 	return state;
 }
 
@@ -85,12 +80,7 @@ EventHandler::State EventHandler::handleGameEvent(SDLWindowManager &windowManage
 	if (windowManager.isKeyPressed(_keyMap[control::RIGHT])) {
 		game.orientPacman(Utils::Orientation::EAST);
 	}
-	if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
-		game.moveFrontCamera(1);
-	}
-	if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT)) {
-		game.moveFrontCamera(-1);
-	}
+	cameraMovement(windowManager, game);
 	return state;
 }
 
@@ -123,12 +113,16 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 
 		}
 	}
+	cameraMovement(windowManager, game);
+
+	return state;
+}
+
+void EventHandler::cameraMovement(const SDLWindowManager &windowManager, Game &game) const {
 	if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
 		game.moveFrontCamera(1);
 	}
 	if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT)) {
 		game.moveFrontCamera(-1);
 	}
-
-	return state;
 }
