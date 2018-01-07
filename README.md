@@ -20,8 +20,8 @@ L’objectif de ce projet est de développer un jeu de type "PACMAN" en 3D en C+
 * If it's already compiled :
   * run the program from the command line inside the build directory with the command :
     * On linux : ./bin/Pacman3D
-    * On windows : ./bin/Pacman3D.exe
-  
+    * On windows : ./bin/Pacman3D.exe 
+  * On windows you need to use the powerShell or MinGW shell. Not the command prompt !!!
 ## Commands 
 
 ### Active only during the game
