@@ -32,7 +32,7 @@
 
   SCRIPT( adlm, ADLM,
           "Adlam",
-          HB_SCRIPT_ADLAM,
+          HB_SCRIPT_ARABIC,
           HINTING_BOTTOM_TO_TOP,
           "\xF0\x9E\xA4\x8C \xF0\x9E\xA4\xAE" ) /* 𞤌 𞤮 */
 
@@ -275,7 +275,7 @@
 
   SCRIPT( osge, OSGE,
           "Osage",
-          HB_SCRIPT_OSAGE,
+          HB_SCRIPT_ARABIC,
           HINTING_BOTTOM_TO_TOP,
           "\xF0\x90\x93\x82 \xF0\x90\x93\xAA" ) /* 𐓂 𐓪 */
 
