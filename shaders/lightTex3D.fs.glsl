@@ -45,8 +45,8 @@ vec3 blinnPhongSpot(vec3 lightPos,vec3 lightColor,float intensity){
     vec3 li = lightColor*(intensity / (d * d));
     vec3 diffuse = uKd*dot(wi,normal);
     vec3 specular = uKs*pow(dot(halfVector, normal), uShininess);
-	vec3 color = li * (diffuse + specular);
-	return color;
+    vec3 color = li * (diffuse + specular);
+    return color;
 }
 
 
