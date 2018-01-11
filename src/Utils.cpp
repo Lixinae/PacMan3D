@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const string Utils::SHADER_PATH = "shaders";
+const string Utils::GAME_SAVE_FILE = "assets/games/save.json";
 
 Utils::Orientation Utils::orientationFromString(string strOrientation) {
 	if (strOrientation == "north") {

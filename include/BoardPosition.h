@@ -14,6 +14,8 @@ class BoardPosition {
 
 public:
 
+	static float SQUARE_SIZE;
+
 	/**
 	 * Construit la position
 	 * @param x : valeur en abcisse

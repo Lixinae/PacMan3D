@@ -15,7 +15,7 @@ Renderer3D::Renderer3D(
 		_pointOfView(pointOfView),
 		_ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
 		_models(),
-		_textRenderer(windowWidth, windowHeight, "assets/fonts/game_over.ttf"),//TODO static or from config
+		_textRenderer(windowWidth, windowHeight, "assets/fonts/game_over.ttf"),
 		_lowerBound(lowerBound),
 		_upperBound(upperBound) {
 	for (auto &entry : map_model3D) {

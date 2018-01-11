@@ -5,9 +5,11 @@
 
 #include FT_FREETYPE_H
 
+const string ColorText2DRenderer::VERTEX_SHADER_TEXT_2D = "shaders/text2D.vs.glsl";
+const string ColorText2DRenderer::FRAGMENT_SHADER_TEXT_2D = "shaders/text2D.fs.glsl";
+
 void ColorText2DRenderer::initProgram() {
-	// TODO static const for fs vs
-	_program = loadProgram("shaders/text2D.vs.glsl", "shaders/text2D.fs.glsl");
+	_program = loadProgram(VERTEX_SHADER_TEXT_2D, FRAGMENT_SHADER_TEXT_2D);
 	_uProjection = glGetUniformLocation(_program.getGLId(), "uProjection");
 	_uTextColor = glGetUniformLocation(_program.getGLId(), "uTextColor");
 }

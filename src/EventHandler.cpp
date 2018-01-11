@@ -100,10 +100,10 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 				state = EventHandler::State::QUIT;
 			}
 			if (event.key.keysym.sym == _keyMap[control::SAVE_GAME]) {
-				game.toJSONFile("assets/games/save.json"); //TODO static const
+				game.toJSONFile(Utils::GAME_SAVE_FILE);
 			}
 			if (event.key.keysym.sym == _keyMap[control::LOAD_GAME]) {
-				game = Game::fromJSONFile("assets/games/save.json"); //TODO static const
+				game = Game::fromJSONFile(Utils::GAME_SAVE_FILE);
 			}
 			if (event.key.keysym.sym == _keyMap[control::RESTART]) {
 				game.restart();

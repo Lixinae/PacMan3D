@@ -1,8 +1,8 @@
 {
   "keybinds": {
-    "Up": "w",
+    "Up": "z",
     "Down": "s",
-    "Left": "a",
+    "Left": "q",
     "Right": "d",
     "ChangeCamera": "c"
   },
@@ -34,7 +34,7 @@
       },
       "position": {
         "x": 0,
-        "y": 0,
+        "y": 0.25,
         "z": -0.5
       },
       "intensity": 0.8

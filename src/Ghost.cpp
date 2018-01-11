@@ -27,18 +27,20 @@ Ghost::MovingContext::MovingContext(
 Ghost *Ghost::fromJSON(const json &jsonGhost) {
 	BoardPosition position = BoardPosition::fromJSON(jsonGhost["position"]);
 	Utils::Orientation orientation = Utils::orientationFromString(jsonGhost["orientation"]);
-	if (jsonGhost["type"] == "blinky") {
+	string type = jsonGhost["type"];
+	if (type == "blinky") {
 		return new GhostBlinky(position, orientation);
 	}
-	if (jsonGhost["type"] == "pinky") {
+	if (type == "pinky") {
 		return new GhostPinky(position, orientation);
 	}
-	if (jsonGhost["type"] == "inky") {
+	if (type == "inky") {
 		return new GhostInky(position, orientation);
 	}
-	if (jsonGhost["type"] == "clyde") {
+	if (type == "clyde") {
 		return new GhostClyde(position, orientation);
 	}
+	throw invalid_argument(type + " is not a valid string representation of ghost type");
 }
 
 Ghost::Ghost(const BoardPosition &position, Utils::Orientation orientation) :

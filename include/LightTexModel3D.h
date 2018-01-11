@@ -55,7 +55,6 @@ private:
 
 	SpotLight *_spotLight;
 	SpotLight *_spotLightCamera;
-//	DirectionalLight *_directionalLight;
 
 	LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const Material &material, const mat4 &modelTransform,
 	                const SpotLight *spotLight, const SpotLight *spotLightCamera);

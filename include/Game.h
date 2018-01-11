@@ -26,44 +26,118 @@ public:
 		RESTART
 	};
 
+	/**
+	 * Créer une partie à partir de sa représentation en JSON
+	 * @param jsonGame : représentation en JSON de la partie
+	 * @return la partie crée
+	 */
 	static Game fromJSON(const json &jsonGame);
 
+	/**
+	 * Créer une partie à partir de sa représentation en JSON
+	 * @param filePath : fichier JSON représentant la partie
+	 * @return la partie crée
+	 */
 	static Game fromJSONFile(const string &filePath);
 
+	/**
+	 * Constructeur de copie
+	 */
 	Game(const Game & other);
 
+	/**
+	 * Destructeur
+	 */
 	~Game();
 
+	/**
+	 * Renvoie le point de vue de la partie
+	 * @return le point de vue de la partie
+	 */
 	const PointOfView &getPointOfView() const;
 
+	/**
+	 * Change la camera courante
+	 */
 	void changeCamera();
 
+	/**
+	 * Depace la camera courante
+	 * @param distance : distance de deplacement
+	 */
 	void moveFrontCamera(float distance);
 
+	/**
+	 * Oriente pacman
+	 * @param orientation : nouvelle orientation de pacman
+	 */
 	void orientPacman(Utils::Orientation orientation);
 
+	/**
+	 * Renvoie la representation de la partie
+	 * @return la representation de la partie
+	 */
 	GameRepresentation getRepresentation() const;
-
+	
+	/**
+	 * Renvoie les informations de la partie
+	 * @return les informations de la partie
+	 */
 	const GameInformations &getInformations() const;
 
+	/**
+	 * Itere la partie
+	 * @return l'etat de la partie
+	 */
 	State iterate();
 
+	/**
+	 * Reinitialise les fantomes et pacman
+	 **/
 	void reset();
 	
+	/**
+	 * Reinitialise les fantomes, pacman, le plateau et le score
+	 */
 	void restart();
 
+	/**
+	 * Reinitialise les fantomes, pacman et le plateau
+	 */
 	void restartKeepingScore();
 
+	/**
+	 * Passe au prochain niveau
+	 */
 	void setNextLevel();
 	
+	/**
+	 * Convertit la partie en JSON
+	 * @return la representation en JSON de la partie
+	 */
 	json toJSON() const;
 	
+	/**
+	 * Convertit la partie dans un fichier JSON
+	 * @param filePath : fichier JSON dans lequel sera sauvegarder la representation de la partie en JSON
+	 */
 	void toJSONFile(const string &filePath) const;
 	
+	/**
+	 * Operator d'affectation
+	 */
 	Game & operator=(const Game &other);
 
+	/**
+	 * Renvoie la position inférieur du plateau de la partie
+	 * @return la position inférieur du plateau de la partie
+	 */
 	BoardPosition getLowerBound() const;
 
+	/**
+	 * Renvoie la position supérieur du plateau de la partie
+	 * @return la position supérieur du plateau de la partie
+	 */
 	BoardPosition getUpperBound() const;
 
 private:

@@ -14,8 +14,8 @@ Mesh::Mesh(vector<ShapeVertex> vertices) : _vertices(vertices) {
 Mesh Mesh::fromOBJFile(const string &filePath) {
 	Assimp::Importer importer;
 	const aiScene *scene = importer.ReadFile(filePath, aiProcessPreset_TargetRealtime_Fast);
-	if (!scene) { // TODO except
-		std::cerr << importer.GetErrorString() << std::endl;
+	if (!scene) {
+		throw invalid_argument("invalid OBJ file " + filePath);
 	}
 	vector<ShapeVertex> vertices;
 	for (unsigned int i = 0; i < scene->mNumMeshes; i++) {

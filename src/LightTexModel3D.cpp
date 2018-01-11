@@ -50,7 +50,9 @@ LightTexModel3D *LightTexModel3D::create(const string &meshPath, const string &t
                                          const SpotLight *spotLight, const SpotLight *spotLightCamera) {
 	Mesh mesh = Mesh::fromOBJFile(meshPath);
 	unique_ptr<Image> texture = loadImage(texturePath);
-	//TODO nullcheck
+	if (texture == nullptr) {
+		throw invalid_argument("invalid texture " + texturePath);
+	}
 	return new LightTexModel3D(mesh, texture, material, modelTransform, spotLight, spotLightCamera);
 }
 
@@ -77,7 +79,6 @@ void LightTexModel3D::unbind() {
 void LightTexModel3D::setMatrices(const mat4 &ProjMatrix, const mat4 &ViewMatrix, const mat4 &MVMatrix) {
 	// Directional
 	vec3 lightPosSpotCamera = _spotLightCamera->getPosition(); // relative to camera position
-//	vec3 lightPosSpotCamera =  vec3(ViewMatrix * vec4(_directionalLight->getDirection(),1)); // relative to camera position
 	glUniform3f(_uLightPosSpotCamera, lightPosSpotCamera.x, lightPosSpotCamera.y, lightPosSpotCamera.z);
 	vec3 lightColor = _spotLightCamera->getColor();
 	glUniform3f(_uLightColorSpotCamera, lightColor.x, lightColor.y, lightColor.z);
@@ -88,7 +89,6 @@ void LightTexModel3D::setMatrices(const mat4 &ProjMatrix, const mat4 &ViewMatrix
 	glUniform3f(_uLightColorSpot, lightColor.x, lightColor.y, lightColor.z);
 	intensity = _spotLight->getIntensity();
 	glUniform1f(_uLightIntensitySpot, intensity);
-//	vec3 lightPos = _spotLight->getPosition();
 	vec3 lightPos = vec3(ViewMatrix * vec4(_spotLight->getPosition(), 1)); // absolute in viewspace
 	glUniform3f(_uLightPos, lightPos.x, lightPos.y, lightPos.z);
 	AbstractModel3D::setMatrices(ProjMatrix, ViewMatrix, MVMatrix);

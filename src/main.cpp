@@ -14,8 +14,12 @@ using namespace glimac;
 using namespace std;
 using namespace glm;
 
+void waitFrameRate(int loop_time) {
+	this_thread::sleep_for(chrono::milliseconds(50 - loop_time));
+}
+
 void waitFrameRate() {
-	this_thread::sleep_for(chrono::milliseconds(38));
+	waitFrameRate(0);
 }
 
 void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, EventHandler &eventHandler, map<control, SDLKey> keyMap) {
@@ -46,9 +50,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 		Game::State gameState = Game::State::CONTINUE;
 		while (gameState == Game::State::CONTINUE) {
 			gameState = game.iterate();
-			const clock_t atime = clock();
 			state = eventHandler.handleGameEvent(windowManager, game);
-			cerr << "a " << 1000 * (float( clock () - atime ) /  CLOCKS_PER_SEC) << endl;
 			if (state == EventHandler::State::QUIT) {
 				return;
 			}
@@ -67,13 +69,11 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 				}
 			}
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			const clock_t btime = clock();
+			const clock_t begin_time = clock();
 			renderer.renderGame(game.getRepresentation(), game.getInformations());
-			cerr << "b " << 1000*(float( clock () - btime )) /  CLOCKS_PER_SEC << endl;
-			const clock_t ctime = clock();
+			const clock_t end_time = clock();
 			windowManager.swapBuffers();
-			cerr << "c " << 1000*(float( clock () - ctime ) /  CLOCKS_PER_SEC) << endl;
-			waitFrameRate();
+			waitFrameRate(1000*(float(end_time - begin_time))/ CLOCKS_PER_SEC);
 		}
 		if (gameState == Game::State::WIN) {
 			game.setNextLevel();
