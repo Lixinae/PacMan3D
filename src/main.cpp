@@ -19,10 +19,10 @@ void waitFrameRate(int loop_time) {
 }
 
 void waitFrameRate() {
-	waitFrameRate(0);
+	waitFrameRate(20);
 }
 
-void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, EventHandler &eventHandler, map<control, SDLKey> keyMap) {
+void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, EventHandler &eventHandler, const map<control, SDLKey> &keyMap) {
 	EventHandler::State state;
 	state = EventHandler::State::CONTINUE;
 	while (state == EventHandler::State::CONTINUE) {
@@ -73,7 +73,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 			renderer.renderGame(game.getRepresentation(), game.getInformations());
 			const clock_t end_time = clock();
 			windowManager.swapBuffers();
-			waitFrameRate(1000*(float(end_time - begin_time))/ CLOCKS_PER_SEC);
+			waitFrameRate(1000 * (float(end_time - begin_time)) / CLOCKS_PER_SEC);
 		}
 		if (gameState == Game::State::WIN) {
 			game.setNextLevel();
@@ -97,8 +97,8 @@ int realMain() {
 
 	Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
 
-	int windowWidth = configuration.getWidth();
-	int windowHeight = configuration.getHeight();
+	uint32_t windowWidth = configuration.getWidth();
+	uint32_t windowHeight = configuration.getHeight();
 
 	SDLWindowManager windowManager(windowWidth, windowHeight, "Pacman3D");
 

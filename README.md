@@ -1,5 +1,5 @@
 # PacMan3D
-L’objectif de ce projet est de développer un jeu de type "PACMAN" en 3D en C++/OpenGL 3+
+This project's purpose is to developp a PACMAN-like game in 3D , using C++ and OpenGL 3+
 
 ## Requirements to compile
 * Have SDL1.2 installed
@@ -37,7 +37,7 @@ These binds can be changed in the json configuration file located in the "assets
 These binds cannot be changed 
 
   * Interface :
-    * P : Pause
+    * ESC : Pause
     * O : Save
     * I : Load
     * K : Exit the game

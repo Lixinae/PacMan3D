@@ -2,24 +2,22 @@
 
 using namespace std;
 
-// Laisser cette ligne sinon erreur !
-vector<GameRepresentation::ModelType> GameRepresentation::MODELS;
-
-vector<GameRepresentation::ModelType> GameRepresentation::buildVector() {
-	vector<GameRepresentation::ModelType> models;
-	models.push_back(GameRepresentation::ModelType::PACMAN);
-	models.push_back(GameRepresentation::ModelType::GHOST_BLINKY);
-	models.push_back(GameRepresentation::ModelType::GHOST_PINKY);
-	models.push_back(GameRepresentation::ModelType::GHOST_INKY);
-	models.push_back(GameRepresentation::ModelType::GHOST_CLYDE);
-	models.push_back(GameRepresentation::ModelType::GHOST_WEAK);
-	models.push_back(GameRepresentation::ModelType::WALL);
-	models.push_back(GameRepresentation::ModelType::FLOOR);
-	models.push_back(GameRepresentation::ModelType::TUNNEL);
-	models.push_back(GameRepresentation::ModelType::DOOR);
-	models.push_back(GameRepresentation::ModelType::PAC_GOMME);
-	models.push_back(GameRepresentation::ModelType::SUPER_PAC_GOMME);
-	models.push_back(GameRepresentation::ModelType::FRUIT);
+const vector<GameRepresentation::ModelType> GameRepresentation::MODELS() {
+	vector<ModelType> models = {
+			GameRepresentation::ModelType::PACMAN,
+			GameRepresentation::ModelType::GHOST_BLINKY,
+			GameRepresentation::ModelType::GHOST_PINKY,
+			GameRepresentation::ModelType::GHOST_INKY,
+			GameRepresentation::ModelType::GHOST_CLYDE,
+			GameRepresentation::ModelType::GHOST_WEAK,
+			GameRepresentation::ModelType::WALL,
+			GameRepresentation::ModelType::FLOOR,
+			GameRepresentation::ModelType::TUNNEL,
+			GameRepresentation::ModelType::DOOR,
+			GameRepresentation::ModelType::PAC_GOMME,
+			GameRepresentation::ModelType::SUPER_PAC_GOMME,
+			GameRepresentation::ModelType::FRUIT
+	};
 	return models;
 }
 
@@ -68,14 +66,13 @@ GameRepresentation::ModelType GameRepresentation::modelFromString(const string &
 GameRepresentation::Model::Model(ModelType modelType, Utils::Orientation orientation, float shift) :
 		modelType(modelType),
 		orientation(orientation),
-		shift(shift)
-{
+		shift(shift) {
 
 }
 
 GameRepresentation::Model::Model(ModelType modelType) :
-		GameRepresentation::Model::Model(modelType, Utils::Orientation::SOUTH, 0) 
-		// South is default orientation
+		GameRepresentation::Model::Model(modelType, Utils::Orientation::SOUTH, 0)
+// South is default orientation
 {
 
 }
@@ -83,15 +80,14 @@ GameRepresentation::Model::Model(ModelType modelType) :
 GameRepresentation::ModelInformations::ModelInformations(const BoardPosition &position, Utils::Orientation orientation, float shift) :
 		position(position),
 		orientation(orientation),
-		shift(shift)
-{
+		shift(shift) {
 
 }
 
 GameRepresentation::GameRepresentation() :
 		_modelsPositions() {
-	GameRepresentation::MODELS = buildVector(); //TODO enlever
-	for (auto &modelType : GameRepresentation::MODELS) {
+	//GameRepresentation::MODELS = buildVector(); //TODO enlever
+	for (auto &modelType : GameRepresentation::MODELS()) {
 		_modelsPositions[modelType] = vector<ModelInformations>();
 	}
 }

@@ -117,9 +117,9 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 
 void EventHandler::cameraMovement(const SDLWindowManager &windowManager, Game &game) const {
 	if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT)) {
-		game.moveFrontCamera(1);
+		game.moveFrontCamera(-1);
 	}
 	if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT)) {
-		game.moveFrontCamera(-1);
+		game.moveFrontCamera(1);
 	}
 }

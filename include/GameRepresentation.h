@@ -38,7 +38,7 @@ public:
 
 		Model(ModelType modelType, Utils::Orientation orientation, float shift);
 
-		Model(ModelType modelType);
+		explicit Model(ModelType modelType);
 
 	};
 
@@ -52,7 +52,7 @@ public:
 
 	};
 
-	static vector<ModelType> MODELS;
+	static const vector<ModelType> MODELS();
 
 	/**
 	 * Créer un modele a partir de sa representation en chaine de caracteres
@@ -97,8 +97,6 @@ public:
 private:
 
 	map<ModelType, vector<ModelInformations>> _modelsPositions;
-
-	static vector<ModelType> buildVector();
 };
 
 #endif

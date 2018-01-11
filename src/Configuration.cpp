@@ -3,8 +3,8 @@
 Configuration::Configuration(
 		const map<control, SDLKey> &keyMap,
 		const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &modelMap,
-		int windowWidth,
-		int windowHeight) :
+		uint32_t windowWidth,
+		uint32_t windowHeight) :
 		_keyMap(keyMap),
 		_windowWidth(windowWidth),
 		_windowHeight(windowHeight),
@@ -67,11 +67,11 @@ Configuration Configuration::fromJSONFile(const string &filePath) {
 	return fromJSON(jsonConfig);
 }
 
-int Configuration::getWidth() const {
+uint32_t Configuration::getWidth() const {
 	return _windowWidth;
 }
 
-int Configuration::getHeight() const {
+uint32_t Configuration::getHeight() const {
 	return _windowHeight;
 }
 

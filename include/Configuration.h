@@ -34,14 +34,14 @@ private:
 	Configuration(
 			const map<control, SDLKey> &keyMap,
 			const map<GameRepresentation::ModelType, function<AbstractModel3D *()>> &modelMap,
-			int windowWidth,
-			int windowHeight
+			uint32_t windowWidth,
+			uint32_t windowHeight
 	);
 
 	map<control, SDLKey> _keyMap;
 	map<GameRepresentation::ModelType, function<AbstractModel3D *()>> _map_model3D;
-	int _windowWidth;
-	int _windowHeight;
+	uint32_t _windowWidth;
+	uint32_t _windowHeight;
 
 	static map<control, SDLKey> keyMapFromJSON(const json &json);
 
@@ -75,13 +75,13 @@ public:
 	 * Renvoie la largeur de la fenetre
 	 * @return la largeur de la fenetre
 	 **/
-	int getWidth() const;
+	uint32_t getWidth() const;
 
 	/**
 	 * Renvoie la hauteur de la fenetre
 	 * @return la hauteur de la fenetre
 	 **/
-	int getHeight() const;
+	uint32_t getHeight() const;
 
 };
 

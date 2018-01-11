@@ -61,7 +61,7 @@ TexModel3D *Renderer3D::initSkybox() const {
 
 void Renderer3D::renderModels(const GameRepresentation &repr) const {
 	mat4 GlobalMVMatrix = _pointOfView.getCurrentCamera().getViewMatrix();
-	for (auto &modelType : GameRepresentation::MODELS) {
+	for (auto &modelType : GameRepresentation::MODELS()) {
 		vector<GameRepresentation::ModelInformations> informations = repr[modelType];
 		AbstractModel3D *model3d = _models.at(modelType);
 		model3d->bind();
