@@ -22,7 +22,9 @@ TexModel3D::TexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const
 TexModel3D *TexModel3D::create(const string &meshPath, const string &texturePath, const mat4 &modelTransform) {
 	Mesh mesh = Mesh::fromOBJFile(meshPath);
 	unique_ptr<Image> texture = loadImage(texturePath);
-	//TODO nullcheck
+	if (texture == nullptr) {
+		throw invalid_argument(texturePath + " is not a valid texture");
+	}
 	return new TexModel3D(mesh, texture, modelTransform);
 }
 

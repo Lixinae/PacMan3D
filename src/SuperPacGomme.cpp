@@ -1,5 +1,7 @@
 #include <SuperPacGomme.h>
 
+int SuperPacGomme::WEAK_ITERATION = 150;
+
 SuperPacGomme::SuperPacGomme() = default;
 
 GameRepresentation::Model SuperPacGomme::getModel() const {
@@ -7,12 +9,10 @@ GameRepresentation::Model SuperPacGomme::getModel() const {
 }
 
 void SuperPacGomme::apply(Context &context) {
-	// TODO static const for time
-	int time = 150;
 	for (Ghost *ghost : context.ghosts) {
-		ghost->setWeak(time);
+		ghost->setWeak(WEAK_ITERATION);
 	}
-	context.informations.setMultiplierCounter(time);
+	context.informations.setMultiplierCounter(WEAK_ITERATION);
 }
 
 bool SuperPacGomme::isRequired() const {

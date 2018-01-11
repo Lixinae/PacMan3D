@@ -9,6 +9,8 @@ class SuperPacGomme : public Bonus {
 
 public:
 
+	static int WEAK_ITERATION;
+
 	SuperPacGomme();
 
 	GameRepresentation::Model getModel() const override;

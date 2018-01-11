@@ -4,6 +4,8 @@ using namespace std;
 
 using json = nlohmann::json;
 
+float BoardPosition::SQUARE_SIZE = 1;
+
 BoardPosition::BoardPosition(int x, int y) : _x(x), _y(y) {
 
 }
@@ -51,7 +53,6 @@ BoardPosition BoardPosition::translate(Utils::Orientation orientation) const {
 }
 
 glm::vec3 BoardPosition::inSpace() const {
-	float SQUARE_SIZE = 1; //TODO static const
 	return glm::vec3(_x * SQUARE_SIZE, 0, -_y * SQUARE_SIZE);
 }
 

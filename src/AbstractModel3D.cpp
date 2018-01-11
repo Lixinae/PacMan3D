@@ -11,7 +11,6 @@ using namespace glm;
 
 using json = nlohmann::json;
 
-//const string AbstractModel3D::VERTEX_SHADER_3D = Utils::SHADER_PATH + "/" + "3D.vs.glsl";
 const string AbstractModel3D::VERTEX_SHADER_3D = "shaders/3D.vs.glsl";
 
 const GLuint AbstractModel3D::VERTEX_ATTR_POSITION = 0;
@@ -24,14 +23,16 @@ const GLchar *AbstractModel3D::VERTEX_UNIFORM_NORMAL_MATRIX = "uNormalMatrix";
 
 
 AbstractModel3D *AbstractModel3D::fromJSON(const json &jsonModel, const SpotLight *spotLight, const SpotLight *spotLightCamera) {
-	// TODO static assets/models path in UTILS
 	string type = jsonModel["type"];
 	mat4 transformations(1.f);
 	transformations = scale(transformations, vec3(jsonModel["scale"]["x"], jsonModel["scale"]["y"], jsonModel["scale"]["z"]));
 	transformations = translate(transformations, vec3(jsonModel["translate"]["x"], jsonModel["translate"]["y"], jsonModel["translate"]["z"]));
-
-//    transformations = rotate(transformations,0,vec3(jsonModel["rotate"]["x"], jsonModel["rotate"]["y"], jsonModel["rotate"]["z"]));
-	//TODO rotate
+	float ax = jsonModel["rotate"]["x"];
+	float ay = jsonModel["rotate"]["y"];
+	float az = jsonModel["rotate"]["z"];
+	transformations = rotate(transformations, radians(ax), vec3(1.f, 0.f, 0.f));
+	transformations = rotate(transformations, radians(ay), vec3(0.f, 1.f, 0.f));
+	transformations = rotate(transformations, radians(az), vec3(0.f, 0.f, 1.f));
 	if (type == "texture") {
 		string mesh = jsonModel["args"]["objPath"];
 		string texture = jsonModel["args"]["texPath"];

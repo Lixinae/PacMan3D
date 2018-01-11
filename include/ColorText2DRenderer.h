@@ -22,6 +22,16 @@ public:
 		GLuint Advance;
 	};
 
+	/**
+	 * Nom du vertex shader texte 2D
+	 **/
+	static const string VERTEX_SHADER_TEXT_2D;	
+
+	/**
+	 * Nom du fragment shader texte 2D
+	 **/
+	static const string FRAGMENT_SHADER_TEXT_2D;	
+
 	ColorText2DRenderer(int windowWidth, int windowHeight, const string &fontPath);
 
 	// TODO DESTRUCT

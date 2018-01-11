@@ -34,7 +34,6 @@ map<GameRepresentation::ModelType, function<AbstractModel3D *()>> Configuration:
 
 	SpotLight *spotLight = nullptr;
 	SpotLight *spotLightCamera = nullptr;
-	// todo -> Changer quand il aura plus de lumiere
 	if (lightArray[0]["type"] == "spot") {
 		spotLight = SpotLight::fromJSON(lightArray[0]);
 	}
