@@ -106,7 +106,7 @@ public:
 	/**
 	 * Destructeur
 	 **/
-	virtual ~BoardSquare() = default;;
+	virtual ~BoardSquare() = default;
 
 };
 
