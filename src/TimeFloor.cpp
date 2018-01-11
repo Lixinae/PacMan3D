@@ -1,18 +1,16 @@
 #include <TimeFloor.h>
 
-TimeFloor::TimeFloor(const Bonus *bonus, bool bonusIsPresent, int min_iter, int max_iter, int iter) : 
-	_bonus(bonus->clone()),
-	_bonusIsPresent(bonusIsPresent),
-	_min_iter(min_iter),
-	_max_iter(max_iter),
-	_iter(iter)
-{
+TimeFloor::TimeFloor(const Bonus *bonus, bool bonusIsPresent, int min_iter, int max_iter, int iter) :
+		_bonus(bonus->clone()),
+		_bonusIsPresent(bonusIsPresent),
+		_min_iter(min_iter),
+		_max_iter(max_iter),
+		_iter(iter) {
 
 }
 
-TimeFloor::TimeFloor(const TimeFloor &other) : 
-	TimeFloor(other._bonus, other._bonusIsPresent, other._min_iter, other._max_iter, other._iter)
-{
+TimeFloor::TimeFloor(const TimeFloor &other) :
+		TimeFloor(other._bonus, other._bonusIsPresent, other._min_iter, other._max_iter, other._iter) {
 
 }
 
@@ -50,10 +48,7 @@ void TimeFloor::receiveGhost(BoardSquare::GhostContext &) {
 }
 
 bool TimeFloor::isDone() const {
-	if (!_bonusIsPresent || !_bonus->isRequired()) {
-		return true;
-	}
-	return false;
+	return !_bonusIsPresent || !_bonus->isRequired();
 }
 
 void TimeFloor::iterate() {

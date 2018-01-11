@@ -1,6 +1,6 @@
 #include <GhostBlinky.h>
 
-Utils::Orientation GhostBlinky::getNextOrientation(const MovingContext & context) const {
+Utils::Orientation GhostBlinky::getNextOrientation(const MovingContext &context) const {
 	return context.orientationOnPacman();
 }
 

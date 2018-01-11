@@ -53,8 +53,8 @@ map<GameRepresentation::ModelType, function<AbstractModel3D *()>> Configuration:
 Configuration Configuration::fromJSON(const json &json) {
 	map<control, SDLKey> keyMap = keyMapFromJSON(json["keybinds"]);
 	map<GameRepresentation::ModelType, function<AbstractModel3D *()>> modelMap = modelMapFromJSON(json);
-	int windowWidth = json["windowSize"]["width"];
-	int windowHeight = json["windowSize"]["height"];
+	uint32_t windowWidth = json["windowSize"]["width"];
+	uint32_t windowHeight = json["windowSize"]["height"];
 	return Configuration(keyMap, modelMap, windowWidth, windowHeight);
 }
 

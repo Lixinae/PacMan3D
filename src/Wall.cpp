@@ -1,8 +1,6 @@
 #include <Wall.h>
 
-Wall::Wall() {
-
-}
+Wall::Wall() = default;
 
 vector<GameRepresentation::Model> Wall::getModels() const {
 	return {GameRepresentation::Model(GameRepresentation::ModelType::WALL)};
@@ -29,7 +27,7 @@ bool Wall::isDone() const {
 }
 
 void Wall::iterate() {
-	
+
 }
 
 BoardSquare *Wall::clone() const {

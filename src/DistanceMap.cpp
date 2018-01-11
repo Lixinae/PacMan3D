@@ -1,16 +1,16 @@
 #include <DistanceMap.h>
 
 #include <set>
-#include <map>
 
 using namespace std;
 
-vector<Utils::Orientation> DistanceMap::walkableOrientations(const BoardPosition & position, const Board & board, const BoardSquare::GhostContext & context) {
+vector<Utils::Orientation>
+DistanceMap::walkableOrientations(const BoardPosition &position, const Board &board, const BoardSquare::GhostContext &context) {
 	vector<Utils::Orientation> orientations = {
-		Utils::Orientation::NORTH,
-		Utils::Orientation::SOUTH,
-		Utils::Orientation::EAST,
-		Utils::Orientation::WEST
+			Utils::Orientation::NORTH,
+			Utils::Orientation::SOUTH,
+			Utils::Orientation::EAST,
+			Utils::Orientation::WEST
 	};
 	vector<Utils::Orientation> walkable;
 	for (Utils::Orientation orientation : orientations) {
@@ -23,13 +23,15 @@ vector<Utils::Orientation> DistanceMap::walkableOrientations(const BoardPosition
 	return walkable;
 }
 
-function<vector<Utils::Orientation>()> DistanceMap::walkableOrientations(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context) {
+function<vector<Utils::Orientation>()>
+DistanceMap::walkableOrientations(const Ghost &ghost, const Board &board, const BoardSquare::GhostContext &context) {
 	return [&]() {
 		return walkableOrientations(ghost.getPosition(), board, context);
 	};
 }
 
-Utils::Orientation DistanceMap::auxOrientatioGoToTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, BoardPosition target) {
+Utils::Orientation
+DistanceMap::auxOrientatioGoToTarget(const Ghost &ghost, const Board &board, const BoardSquare::GhostContext &context, BoardPosition target) {
 	//Initialization
 	BoardPosition initPosition = ghost.getPosition();
 	vector<Utils::Orientation> walkable = DistanceMap::walkableOrientations(initPosition, board, context);
@@ -68,7 +70,7 @@ Utils::Orientation DistanceMap::auxOrientatioGoToTarget(const Ghost & ghost, con
 				}
 			}
 		}
-		if (nextPositions.size() == 0) {
+		if (nextPositions.empty()) {
 			break;
 		}
 		previousPositions = currentPositions;
@@ -79,13 +81,15 @@ Utils::Orientation DistanceMap::auxOrientatioGoToTarget(const Ghost & ghost, con
 	return Utils::randomOrientation(DistanceMap::walkableOrientations(ghost.getPosition(), board, context));
 }
 
-function<Utils::Orientation()> DistanceMap::orientationGoToTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, BoardPosition target) {
+function<Utils::Orientation()>
+DistanceMap::orientationGoToTarget(const Ghost &ghost, const Board &board, const BoardSquare::GhostContext &context, BoardPosition target) {
 	return [&ghost, &board, &context, target]() {
 		return auxOrientatioGoToTarget(ghost, board, context, target);
 	};
 }
 
-function<Utils::Orientation()> DistanceMap::orientationAvoidTarget(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, BoardPosition target) {
+function<Utils::Orientation()>
+DistanceMap::orientationAvoidTarget(const Ghost &ghost, const Board &board, const BoardSquare::GhostContext &context, BoardPosition target) {
 	return [&]() {
 		Utils::Orientation toTarget = auxOrientatioGoToTarget(ghost, board, context, target);
 		vector<Utils::Orientation> orientations;
@@ -93,34 +97,34 @@ function<Utils::Orientation()> DistanceMap::orientationAvoidTarget(const Ghost &
 		switch (toTarget) {
 			case Utils::Orientation::NORTH:
 				orientations = {
-					Utils::Orientation::SOUTH,
-					Utils::Orientation::WEST,
-					Utils::Orientation::EAST,
-					Utils::Orientation::NORTH,
+						Utils::Orientation::SOUTH,
+						Utils::Orientation::WEST,
+						Utils::Orientation::EAST,
+						Utils::Orientation::NORTH,
 				};
 				break;
 			case Utils::Orientation::SOUTH:
 				orientations = {
-					Utils::Orientation::NORTH,
-					Utils::Orientation::EAST,
-					Utils::Orientation::WEST,
-					Utils::Orientation::SOUTH,
+						Utils::Orientation::NORTH,
+						Utils::Orientation::EAST,
+						Utils::Orientation::WEST,
+						Utils::Orientation::SOUTH,
 				};
 				break;
 			case Utils::Orientation::EAST:
 				orientations = {
-					Utils::Orientation::WEST,
-					Utils::Orientation::NORTH,
-					Utils::Orientation::SOUTH,
-					Utils::Orientation::EAST,
+						Utils::Orientation::WEST,
+						Utils::Orientation::NORTH,
+						Utils::Orientation::SOUTH,
+						Utils::Orientation::EAST,
 				};
 				break;
 			case Utils::Orientation::WEST:
 				orientations = {
-					Utils::Orientation::EAST,
-					Utils::Orientation::SOUTH,
-					Utils::Orientation::NORTH,
-					Utils::Orientation::WEST,
+						Utils::Orientation::EAST,
+						Utils::Orientation::SOUTH,
+						Utils::Orientation::NORTH,
+						Utils::Orientation::WEST,
 				};
 				break;
 		}
@@ -135,13 +139,14 @@ function<Utils::Orientation()> DistanceMap::orientationAvoidTarget(const Ghost &
 	};
 }
 
-function<Utils::Orientation()> DistanceMap::orientationFollowPacman(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const Pacman & pacman) {
+function<Utils::Orientation()>
+DistanceMap::orientationFollowPacman(const Ghost &ghost, const Board &board, const BoardSquare::GhostContext &context, const Pacman &pacman) {
 	BoardPosition position = pacman.getPosition();
 	Utils::Orientation opposite = Utils::oppositeOrientation(pacman.getOrientation());
 	vector<BoardPosition> targets = {
-		position.translate(opposite).translate(opposite),
-		position.translate(opposite),
-		position
+			position.translate(opposite).translate(opposite),
+			position.translate(opposite),
+			position
 	};
 	for (BoardPosition target : targets) {
 		BoardSquare *square = board[target];
@@ -154,13 +159,14 @@ function<Utils::Orientation()> DistanceMap::orientationFollowPacman(const Ghost 
 	};
 }
 
-function<Utils::Orientation()> DistanceMap::orientationBlockPacman(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const Pacman & pacman) {
+function<Utils::Orientation()>
+DistanceMap::orientationBlockPacman(const Ghost &ghost, const Board &board, const BoardSquare::GhostContext &context, const Pacman &pacman) {
 	BoardPosition position = pacman.getPosition();
 	vector<BoardPosition> targets = {
-		position.translate(pacman.getOrientation()).translate(pacman.getOrientation()).translate(pacman.getOrientation()),
-		position.translate(pacman.getOrientation()).translate(pacman.getOrientation()),
-		position.translate(pacman.getOrientation()),
-		position
+			position.translate(pacman.getOrientation()).translate(pacman.getOrientation()).translate(pacman.getOrientation()),
+			position.translate(pacman.getOrientation()).translate(pacman.getOrientation()),
+			position.translate(pacman.getOrientation()),
+			position
 	};
 	for (BoardPosition target : targets) {
 		BoardSquare *square = board[target];
@@ -173,9 +179,10 @@ function<Utils::Orientation()> DistanceMap::orientationBlockPacman(const Ghost &
 	};
 }
 
-function<Utils::Orientation()> DistanceMap::orientationAvoidPacman(const Ghost & ghost, const Board & board, const BoardSquare::GhostContext & context, const Pacman & pacman) {
-	BoardPosition target = 
-		pacman.getPosition();
+function<Utils::Orientation()>
+DistanceMap::orientationAvoidPacman(const Ghost &ghost, const Board &board, const BoardSquare::GhostContext &context, const Pacman &pacman) {
+	BoardPosition target =
+			pacman.getPosition();
 	return DistanceMap::orientationAvoidTarget(ghost, board, context, target);
 }
 

@@ -39,7 +39,7 @@ public:
 	 * @param context : contexte
 	 **/
 	virtual void apply(Context &context) = 0;
-	
+
 	/**
 	 * Teste si le bonus est necessaire pour la fin du jeu
 	 * @return true si le bonus est necessaire, false sinon
@@ -51,7 +51,7 @@ public:
 	 * @return une copie du bonus
 	 **/
 	virtual Bonus *clone() const = 0;
-	
+
 	/**
 	 * Convertit le bonus en JSON
 	 * @return la représentation en JSON du bonus
@@ -61,9 +61,7 @@ public:
 	/**
 	 * Destructeur
 	 **/
-	virtual ~Bonus() {
-
-	};
+	virtual ~Bonus() = default;;
 
 };
 

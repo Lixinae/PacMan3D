@@ -5,7 +5,6 @@
 #include <Tunnel.h>
 #include <Door.h>
 #include <TimeFloor.h>
-#include <Utils.h>
 
 using json = nlohmann::json;
 
@@ -20,7 +19,7 @@ BoardSquare::GhostContext::GhostContext(Ghost &ghost) :
 
 }
 
-BoardPosition BoardSquare::neighbour(const BoardPosition & position, Utils::Orientation orientation) {
+BoardPosition BoardSquare::neighbour(const BoardPosition &position, Utils::Orientation orientation) {
 	return position.translate(orientation);
 }
 

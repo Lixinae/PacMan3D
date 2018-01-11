@@ -35,7 +35,7 @@ json Board::toJSON() const {
 	for (const auto &entry : _squares) {
 		json jsonSquare;
 		jsonSquare["position"] = entry.first.toJSON();
-		jsonSquare["case"] = entry.second->toJSON(); 
+		jsonSquare["case"] = entry.second->toJSON();
 		jsonSquares.push_back(jsonSquare);
 	}
 	jsonBoard["cases"] = jsonSquares;

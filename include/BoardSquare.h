@@ -28,7 +28,7 @@ public:
 
 		Ghost &ghost;
 
-		GhostContext(Ghost &ghost);
+		explicit GhostContext(Ghost &ghost);
 
 	};
 
@@ -77,26 +77,26 @@ public:
 	 * @return true si l'action a été réalisée sur la case, false sinon
 	 **/
 	virtual bool isDone() const = 0;
-	
+
 	/**
 	 * Itere la case
 	 **/
 	virtual void iterate() = 0;
-	
+
 	/**
 	 * Renvoie la position du voisin de la case
 	 * @param position : position de la case
 	 * @param orientation : orientation pour le prochain voisin
 	 * @return position sur prochain voisin
 	 **/
-	virtual BoardPosition neighbour(const BoardPosition & position, Utils::Orientation orientation);
-	
+	virtual BoardPosition neighbour(const BoardPosition &position, Utils::Orientation orientation);
+
 	/**
 	 * Copie la case
 	 * @return une copie de la case
 	 **/
 	virtual BoardSquare *clone() const = 0;
-	
+
 	/**
 	 * Renvoie la représentation en JSON de la case
 	 * @return la représentation en JSON de la case
@@ -106,9 +106,7 @@ public:
 	/**
 	 * Destructeur
 	 **/
-	virtual ~BoardSquare() {
-
-	};
+	virtual ~BoardSquare() = default;;
 
 };
 

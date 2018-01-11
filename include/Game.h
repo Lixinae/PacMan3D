@@ -43,7 +43,7 @@ public:
 	/**
 	 * Constructeur de copie
 	 */
-	Game(const Game & other);
+	Game(const Game &other);
 
 	/**
 	 * Destructeur
@@ -78,7 +78,7 @@ public:
 	 * @return la representation de la partie
 	 */
 	GameRepresentation getRepresentation() const;
-	
+
 	/**
 	 * Renvoie les informations de la partie
 	 * @return les informations de la partie
@@ -95,7 +95,7 @@ public:
 	 * Reinitialise les fantomes et pacman
 	 **/
 	void reset();
-	
+
 	/**
 	 * Reinitialise les fantomes, pacman, le plateau et le score
 	 */
@@ -110,23 +110,23 @@ public:
 	 * Passe au prochain niveau
 	 */
 	void setNextLevel();
-	
+
 	/**
 	 * Convertit la partie en JSON
 	 * @return la representation en JSON de la partie
 	 */
 	json toJSON() const;
-	
+
 	/**
 	 * Convertit la partie dans un fichier JSON
 	 * @param filePath : fichier JSON dans lequel sera sauvegarder la representation de la partie en JSON
 	 */
 	void toJSONFile(const string &filePath) const;
-	
+
 	/**
 	 * Operator d'affectation
 	 */
-	Game & operator=(const Game &other);
+	Game &operator=(const Game &other);
 
 	/**
 	 * Renvoie la position inférieur du plateau de la partie
@@ -155,7 +155,9 @@ private:
 	GameInformations _informations;
 	GameInformations _informations_init;
 
-	Game(const Board &board, const Board &board_init, const Pacman &pacman, const Pacman &pacman_init, const vector<Ghost *> &ghosts, const vector<Ghost *> &ghosts_init, const GameInformations &informations, const GameInformations &informations_init);
+	Game(const Board &board, const Board &board_init, const Pacman &pacman, const Pacman &pacman_init, const vector<Ghost *> &ghosts,
+	     const vector<Ghost *> &ghosts_init, const GameInformations &informations, const GameInformations &informations_init);
+
 	Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts, const GameInformations &informations);
 
 	void updateFirstPersonCameraPosition();

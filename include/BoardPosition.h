@@ -54,7 +54,7 @@ public:
 	 * @return la position dans l'espace 3D
 	 **/
 	glm::vec3 inSpace() const;
-	
+
 	/**
 	 * Renvoie la représentation en JSON de la position
 	 * @return la représentation en JSON de la position

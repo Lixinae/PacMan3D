@@ -3,7 +3,7 @@
 const string NormalModel3D::FRAGMENT_SHADER_NORMAL_3D = "shaders/normal3D.fs.glsl";
 
 NormalModel3D::NormalModel3D(const Mesh &mesh, const mat4 &modelTransform) :
-		AbstractModel3D(mesh, "shaders/normal3D.fs.glsl", modelTransform) {
+		AbstractModel3D(mesh, NormalModel3D::FRAGMENT_SHADER_NORMAL_3D, modelTransform) {
 
 }
 

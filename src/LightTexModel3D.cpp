@@ -40,8 +40,7 @@ LightTexModel3D::LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &text
 		AbstractModel3D(mesh, "shaders/lightTex3D.fs.glsl", modelTransform),
 		_material(material),
 		_spotLight(spotLight->clone()),
-		_spotLightCamera(spotLightCamera->clone())
-{
+		_spotLightCamera(spotLightCamera->clone()) {
 	initTexture(texture);
 	initLight();
 }

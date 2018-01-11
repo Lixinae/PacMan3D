@@ -1,13 +1,11 @@
 #include <Door.h>
 
-Door::Door() {
-
-}
+Door::Door() = default;
 
 vector<GameRepresentation::Model> Door::getModels() const {
 	return {
-		GameRepresentation::Model(GameRepresentation::ModelType::DOOR),
-		GameRepresentation::Model(GameRepresentation::ModelType::FLOOR)
+			GameRepresentation::Model(GameRepresentation::ModelType::DOOR),
+			GameRepresentation::Model(GameRepresentation::ModelType::FLOOR)
 	};
 }
 
@@ -19,11 +17,11 @@ void Door::receivePacman(BoardSquare::PacmanContext &) {
 
 }
 
-bool Door::isGhostWalkable(const BoardSquare::GhostContext & context) const {
+bool Door::isGhostWalkable(const BoardSquare::GhostContext &context) const {
 	return context.ghost.canCrossDoor();
 }
 
-void Door::receiveGhost(BoardSquare::GhostContext & context) {
+void Door::receiveGhost(BoardSquare::GhostContext &context) {
 	context.ghost.crossDoor();
 	context.ghost.setPosition(context.ghost.getPosition().translate(context.ghost.getOrientation()));
 }
@@ -33,7 +31,7 @@ bool Door::isDone() const {
 }
 
 void Door::iterate() {
-	
+
 }
 
 BoardSquare *Door::clone() const {

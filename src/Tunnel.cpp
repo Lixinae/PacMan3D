@@ -8,7 +8,6 @@ Tunnel::Tunnel(Utils::Orientation orientation, const BoardPosition &dest, Utils:
 }
 
 vector<GameRepresentation::Model> Tunnel::getModels() const {
-	GameRepresentation::ModelType modelTunel;
 	return {GameRepresentation::Model(GameRepresentation::ModelType::TUNNEL, _orientation, 0)};
 }
 
@@ -35,10 +34,10 @@ bool Tunnel::isDone() const {
 }
 
 void Tunnel::iterate() {
-	
+
 }
 
-BoardPosition Tunnel::neighbour(const BoardPosition & position, Utils::Orientation orientation) {
+BoardPosition Tunnel::neighbour(const BoardPosition &position, Utils::Orientation orientation) {
 	if (_orientation == orientation) {
 		return _dest;
 	}

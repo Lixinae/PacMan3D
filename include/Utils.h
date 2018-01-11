@@ -29,7 +29,7 @@ public:
 	 * @return l'orientation associé
 	 */
 	static Utils::Orientation orientationFromString(string strOrientation);
-	
+
 	/**
 	 * Renvoie la représentation en chaine de caractere d'une orientation
 	 * @param orientation : orientation
@@ -43,7 +43,7 @@ public:
 	 * @return l'angle d'orientation
 	 */
 	static float degreesOfOrientation(Utils::Orientation orientation);
-	
+
 	/**
 	 * Renvoie le vecteur associé à l'orientation
 	 * @param orientation : orientation
@@ -95,7 +95,7 @@ public:
 		set_intersection(sa.begin(), sa.end(), sb.begin(), sb.end(), back_inserter(result));
 		return result;
 	};
-	
+
 	/**
 	 * Desalloue la memoire des valeurs du vecteur
 	 * @param vecteur : vecteur a liberer

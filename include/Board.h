@@ -15,20 +15,20 @@ using json = nlohmann::json;
 class Board {
 
 public:
-	
+
 	/**
 	 * Créer un plateau à partir de sa représentation en JSON
 	 * @param jsonBoard : représentation en JSON du plateau
 	 * @return le plateau crée
 	 */
-	static Board fromJSON(const json & jsonBoard);
-	
+	static Board fromJSON(const json &jsonBoard);
+
 	/**
 	 * Constructeur de copie
 	 * @param other : plateau à copier
 	 **/
-	Board(const Board & other);
-	
+	Board(const Board &other);
+
 	/**
 	 * Destructeur
 	 **/
@@ -45,7 +45,7 @@ public:
 	 * @param position : position de la case
 	 * @return la case a la position en argument
 	 */
-	BoardSquare * getSquare(const BoardPosition & position) const;
+	BoardSquare *getSquare(const BoardPosition &position) const;
 
 	/**
 	 * Renvoie la case à la position en argument
@@ -66,12 +66,12 @@ public:
 	 * @return la représentation du plateau en JSON
 	 **/
 	json toJSON() const;
-			
+
 private:
- 
+
 	map<BoardPosition, BoardSquare *> _squares;
 
-	Board(const map<BoardPosition, BoardSquare *> & squares);
+	Board(const map<BoardPosition, BoardSquare *> &squares);
 
 };
 

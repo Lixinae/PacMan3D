@@ -1,12 +1,12 @@
 #include <GameInformations.h>
 
 GameInformations::GameInformations() :
-		GameInformations::GameInformations(0, 10000, 10000, 3, 1, 0, 1)
-{
+		GameInformations::GameInformations(0, 10000, 10000, 3, 1, 0, 1) {
 
 }
 
-GameInformations::GameInformations(int score, int score_max_life, int step_score_max_life, int lives, int multiplier, int multiplierCounter, int level) :
+GameInformations::GameInformations(int score, int score_max_life, int step_score_max_life, int lives, int multiplier, int multiplierCounter,
+                                   int level) :
 		_score(score),
 		_score_init(score),
 		_score_max_life(score_max_life),
@@ -14,8 +14,7 @@ GameInformations::GameInformations(int score, int score_max_life, int step_score
 		_lives(lives),
 		_multiplier(multiplier),
 		_multiplierCounter(multiplierCounter),
-		_level(level)
-{
+		_level(level) {
 
 }
 

@@ -1,6 +1,6 @@
 #include <GhostPinky.h>
 
-Utils::Orientation GhostPinky::getNextOrientation(const MovingContext & context) const {
+Utils::Orientation GhostPinky::getNextOrientation(const MovingContext &context) const {
 	return context.orientationBlockPacman();
 }
 

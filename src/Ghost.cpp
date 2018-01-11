@@ -6,22 +6,21 @@
 #include <GhostClyde.h>
 
 int Ghost::MAX_ITERATION = 3;
-int Ghost::CASE_REDIRECTION_ITERATION = 2*Ghost::MAX_ITERATION;
+int Ghost::CASE_REDIRECTION_ITERATION = 2 * Ghost::MAX_ITERATION;
 
 Ghost::MovingContext::MovingContext(
-			Pacman &pacman,
-			function<vector<Utils::Orientation>()> &availableOrientation,
-			function<Utils::Orientation()> &orientationOnPacman,
-			function<Utils::Orientation()> &orientationBlockPacman,
-			function<Utils::Orientation()> &orientationAvoidPacman
-		):
+		Pacman &pacman,
+		function<vector<Utils::Orientation>()> &availableOrientation,
+		function<Utils::Orientation()> &orientationOnPacman,
+		function<Utils::Orientation()> &orientationBlockPacman,
+		function<Utils::Orientation()> &orientationAvoidPacman
+) :
 		pacman(pacman),
 		availableOrientation(availableOrientation),
 		orientationOnPacman(orientationOnPacman),
 		orientationBlockPacman(orientationBlockPacman),
-		orientationAvoidPacman(orientationAvoidPacman)
-{
-	
+		orientationAvoidPacman(orientationAvoidPacman) {
+
 }
 
 Ghost *Ghost::fromJSON(const json &jsonGhost) {
@@ -50,8 +49,7 @@ Ghost::Ghost(const BoardPosition &position, Utils::Orientation orientation) :
 		_iterPosition(0),
 		_iterOrientation(0),
 		_weakCounter(),
-		_crossDoor(false)
-{
+		_crossDoor(false) {
 
 }
 
@@ -64,7 +62,7 @@ void Ghost::setOrientation(Utils::Orientation orientation) {
 	_orientation = orientation;
 }
 
-bool Ghost::orientToTarget(const MovingContext & context) {
+bool Ghost::orientToTarget(const MovingContext &context) {
 	if (_iterOrientation != 0) {
 		return false;
 	}
@@ -85,7 +83,7 @@ BoardPosition Ghost::getPosition() const {
 }
 
 vector<BoardPosition> Ghost::getGraphicalPositions() const {
-	if (_iterPosition <= Ghost::MAX_ITERATION/2) {
+	if (_iterPosition <= Ghost::MAX_ITERATION / 2) {
 		return {_position};
 	}
 	return {_position, _position.translate(_orientation)};
@@ -109,14 +107,14 @@ void Ghost::setWeak(int time) {
 bool Ghost::canCrossDoor() {
 	return !_crossDoor;
 }
-	
+
 void Ghost::crossDoor() {
 	_crossDoor = true;
 }
 
 bool Ghost::goTo(const BoardPosition &position) {
 	_nextPosition = position;
-	_iterPosition = (_iterPosition + 1)%Ghost::MAX_ITERATION;
+	_iterPosition = (_iterPosition + 1) % Ghost::MAX_ITERATION;
 	if (_iterPosition == 0) {
 		_position = _nextPosition;
 		return true;
@@ -125,9 +123,9 @@ bool Ghost::goTo(const BoardPosition &position) {
 }
 
 float Ghost::getShift() const {
-	return float(_iterPosition)/Ghost::MAX_ITERATION;
+	return float(_iterPosition) / Ghost::MAX_ITERATION;
 }
-	
+
 
 void Ghost::iterate() {
 	if (_weakCounter > 0) {

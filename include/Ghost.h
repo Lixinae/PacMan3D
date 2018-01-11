@@ -19,13 +19,13 @@ public:
 		function<Utils::Orientation()> &orientationOnPacman;
 		function<Utils::Orientation()> &orientationBlockPacman;
 		function<Utils::Orientation()> &orientationAvoidPacman;
-		
+
 		MovingContext(
-			Pacman &pacman,
-			function<vector<Utils::Orientation>()> &availableOrientation,
-			function<Utils::Orientation()> &orientationOnPacman,
-			function<Utils::Orientation()> &orientationBlockPacman,
-			function<Utils::Orientation()> &orientationAvoidPacman
+				Pacman &pacman,
+				function<vector<Utils::Orientation>()> &availableOrientation,
+				function<Utils::Orientation()> &orientationOnPacman,
+				function<Utils::Orientation()> &orientationBlockPacman,
+				function<Utils::Orientation()> &orientationAvoidPacman
 		);
 
 	};
@@ -58,13 +58,13 @@ public:
 	 * @param orientation : la nouvelle orientation du fantome
 	 */
 	void setOrientation(Utils::Orientation orientation);
-	
+
 	/**
 	 * Change la prochaine orientation du fantome
 	 * @param context : contexte
 	 * @return true si l'orientation du fantome a changé, false sinon
 	 */
-	bool orientToTarget(const MovingContext & context);
+	bool orientToTarget(const MovingContext &context);
 
 	/**
 	 * Renvoie la position du fantome
@@ -90,7 +90,7 @@ public:
 	 * @return true si le fantome a bougé, false sinon
 	 */
 	bool goTo(const BoardPosition &position);
-	
+
 	/**
 	 * Renvoie l'état du fantome
 	 * @return true si le fantome est en etat faible, false sinon
@@ -102,13 +102,13 @@ public:
 	 * @param time : nombre d'iteration en etat faible
 	 */
 	void setWeak(int time);
-	
+
 	/**
 	 * Est ce que le fantome peut traverser la porte
 	 * @return true si le fantome peut traverser la porte, false sinon
 	 */
 	bool canCrossDoor();
-	
+
 	/**
 	 * Fais traverser la porte au fantome
 	 */
@@ -136,7 +136,7 @@ public:
 	 * @param context : contexte
 	 * @return la prochaine orientation du fantome
 	 */
-	virtual Utils::Orientation getNextOrientation(const MovingContext & context) const = 0;
+	virtual Utils::Orientation getNextOrientation(const MovingContext &context) const = 0;
 
 	/**
 	 * Renvoie le type de modele du fantome
@@ -149,7 +149,7 @@ public:
 	 * @return une copie du fantome
 	 */
 	virtual Ghost *clone() const = 0;
-	
+
 	/**
 	 * Convertit le fantome en JSON
 	 * @return la representation en JSON du fantome

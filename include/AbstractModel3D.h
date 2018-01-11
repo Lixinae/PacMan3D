@@ -29,12 +29,12 @@ public:
 	 * Variable d'entree correspondant a la position d'un sommet
 	 **/
 	static const GLuint VERTEX_ATTR_POSITION;
-	
+
 	/**
 	 * Variable d'entree correspondant a la normale d'un sommet
 	 **/
 	static const GLuint VERTEX_ATTR_NORMAL;
-	
+
 	/**
 	 * Variable d'entree correspondant au cordonnées de texture d'un sommet
 	 **/
@@ -44,12 +44,12 @@ public:
 	 * Variable uniforme correspondant a la matrice ModelViewProjection
 	 **/
 	static const GLchar *VERTEX_UNIFORM_MVP_MATRIX;
-	
+
 	/**
 	 * Variable uniforme correspondant a la matrice ModelView
 	 **/
 	static const GLchar *VERTEX_UNIFORM_MV_MATRIX;
-	
+
 	/**
 	 * Variable uniforme correspondant a la matrice des normales
 	 **/

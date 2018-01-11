@@ -17,7 +17,7 @@ public:
 	 * @param jsonMaterial : representation en JSON du materiel
 	 * @return le materiel crée
 	 **/
-	static Material fromJSON(const json & jsonMaterial);
+	static Material fromJSON(const json &jsonMaterial);
 
 	/**
 	 * Construit un materiel
@@ -26,31 +26,31 @@ public:
 	 * @param glossy : reflection brillante de l'objet
 	 **/
 	Material(float shininess, const vec3 &diffuse, const vec3 &glossy);
-	
+
 	/**
 	 * Renvoie le coefficient de brillance
 	 * @return le coefficient de brillance
 	 **/
 	float getShininess() const;
-	
+
 	/**
 	 * Renvoie le vecteur de reflection diffuse de l'objet
 	 * @return le vecteur de reflection diffuse de l'objet
 	 **/
 	vec3 getDiffuse() const;
-	
+
 	/**
 	 * Renvoie le vecteur de reflection brillante de l'objet
 	 * @return le vecteur de reflection brillante de l'objet
 	 **/
 	vec3 getGlossy() const;
-	
+
 private:
-	
+
 	float _shininess;
 	vec3 _diffuse;
 	vec3 _glossy;
-	
+
 };
 
 

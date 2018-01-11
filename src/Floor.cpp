@@ -48,14 +48,11 @@ void Floor::receiveGhost(BoardSquare::GhostContext &) {
 }
 
 bool Floor::isDone() const {
-	if (_bonus == nullptr || !_bonus->isRequired()) {
-		return true;
-	}
-	return false;
+	return _bonus == nullptr || !_bonus->isRequired();
 }
 
 void Floor::iterate() {
-	
+
 }
 
 BoardSquare *Floor::clone() const {

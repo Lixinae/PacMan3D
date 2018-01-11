@@ -7,7 +7,8 @@ using json = nlohmann::json;
 
 using namespace std;
 
-Game::Game(const Board &board, const Board &board_init, const Pacman &pacman, const Pacman &pacman_init, const vector<Ghost *> &ghosts, const vector<Ghost *> &ghosts_init, const GameInformations &informations, const GameInformations &informations_init) :
+Game::Game(const Board &board, const Board &board_init, const Pacman &pacman, const Pacman &pacman_init, const vector<Ghost *> &ghosts,
+           const vector<Ghost *> &ghosts_init, const GameInformations &informations, const GameInformations &informations_init) :
 		_board(board),
 		_board_init(board_init),
 		_pacman(pacman),
@@ -15,9 +16,8 @@ Game::Game(const Board &board, const Board &board_init, const Pacman &pacman, co
 		_ghosts(ghosts.size()),
 		_ghosts_init(ghosts_init.size()),
 		_pointOfView(pacman.getPosition(), pacman.getOrientation()),
-		_informations(informations), 
-		_informations_init(informations_init)
-{
+		_informations(informations),
+		_informations_init(informations_init) {
 	for (unsigned int i = 0; i < ghosts.size(); i++) {
 		_ghosts[i] = ghosts[i]->clone();
 		_ghosts_init[i] = ghosts_init[i]->clone();
@@ -26,24 +26,22 @@ Game::Game(const Board &board, const Board &board_init, const Pacman &pacman, co
 }
 
 Game::Game(const Board &board, const Pacman &pacman, const vector<Ghost *> &ghosts, const GameInformations &informations) :
-	Game::Game(board, board, pacman, pacman, ghosts, ghosts, informations, informations)
-{
-	
+		Game::Game(board, board, pacman, pacman, ghosts, ghosts, informations, informations) {
+
 }
 
-Game::Game(const Game & other) :
-	Game::Game(
-		other._board, 
-		other._board_init,
-		other._pacman,
-		other._pacman_init,
-		other._ghosts,
-		other._ghosts_init,
-		other._informations,
-		other._informations_init
-	)
-{
-	
+Game::Game(const Game &other) :
+		Game::Game(
+				other._board,
+				other._board_init,
+				other._pacman,
+				other._pacman_init,
+				other._ghosts,
+				other._ghosts_init,
+				other._informations,
+				other._informations_init
+		) {
+
 }
 
 Game::~Game() {
@@ -99,7 +97,7 @@ json Game::toJSON() const {
 	jsonGame["pacman"] = _pacman.toJSON();
 	jsonGame["informations"] = _informations.toJSON();
 	json jsonGhosts;
-	for (const Ghost * ghost : _ghosts) {
+	for (const Ghost *ghost : _ghosts) {
 		jsonGhosts.push_back(ghost->toJSON());
 	}
 	jsonGame["ghosts"] = jsonGhosts;
@@ -107,7 +105,7 @@ json Game::toJSON() const {
 	jsonGame["init"]["pacman"] = _pacman_init.toJSON();
 	jsonGame["init"]["informations"] = _informations.toJSON();
 	json jsonGhostsInit;
-	for (const Ghost * ghost : _ghosts_init) {
+	for (const Ghost *ghost : _ghosts_init) {
 		jsonGhostsInit.push_back(ghost->toJSON());
 	}
 	jsonGame["init"]["ghosts"] = jsonGhostsInit;
@@ -129,10 +127,10 @@ void Game::toJSONFile(const string &filePath) const {
 }
 
 void Game::updateFirstPersonCameraPosition() {
-	glm::vec3 cameraPos = 
-		_pacman.getPosition().inSpace() + 
-		_pacman.getShift()*Utils::vectorOfOrientation(_pacman.getOrientation()) + 
-		glm::vec3(0, 1, 0);
+	glm::vec3 cameraPos =
+			_pacman.getPosition().inSpace() +
+			_pacman.getShift() * Utils::vectorOfOrientation(_pacman.getOrientation()) +
+			glm::vec3(0, 1, 0);
 	_pointOfView.getFirstPersonCamera().setPosition(cameraPos);
 }
 
@@ -196,7 +194,7 @@ void Game::iteratePacman() {
 	BoardSquare *nextSquare = _board[nextPosition];
 	BoardSquare::PacmanContext context(_pacman, _ghosts, _informations);
 	if (nextSquare != nullptr && nextSquare->isPacmanWalkable(context)) {
-		if(_pacman.goTo(nextPosition)){
+		if (_pacman.goTo(nextPosition)) {
 			nextSquare->receivePacman(context);
 		}
 		updateFirstPersonCameraPosition();
@@ -208,9 +206,8 @@ void Game::iterateGhost(Ghost *ghost) {
 	BoardPosition nextPosition = ghost->getPosition().translate(ghost->getOrientation());
 	BoardSquare *nextSquare = _board[nextPosition];
 	BoardSquare::GhostContext context(*ghost);
-	Utils::Orientation orientation;
 	if (nextSquare != nullptr && nextSquare->isGhostWalkable(context)) {
-		if(ghost->goTo(nextPosition)) {
+		if (ghost->goTo(nextPosition)) {
 			nextSquare->receiveGhost(context);
 		}
 	}
@@ -229,7 +226,7 @@ Game::State Game::iterate() {
 	}
 	iteratePacman();
 	for (unsigned int i = 0; i < _ghosts.size(); i++) {
-		if (Utils::intersection(_pacman.getGraphicalPositions(), _ghosts[i]->getGraphicalPositions()).size() != 0) {
+		if (!Utils::intersection(_pacman.getGraphicalPositions(), _ghosts[i]->getGraphicalPositions()).empty()) {
 			if (_ghosts[i]->isWeak()) {
 				_informations.increaseMultiplier();
 				_informations.updateMultipliedScore(100);

@@ -1,8 +1,6 @@
 #include <GhostInky.h>
 
-#include <algorithm>
-
-Utils::Orientation GhostInky::getNextOrientation(const MovingContext & context) const {
+Utils::Orientation GhostInky::getNextOrientation(const MovingContext &context) const {
 	Utils::Orientation horizontal, vertical;
 	BoardPosition pacmanPosition = context.pacman.getPosition();
 	BoardPosition ghostPosition = getPosition();

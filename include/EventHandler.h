@@ -19,6 +19,7 @@ private:
 	map<control, SDLKey> _keyMap;
 
 	void cameraMovement(const SDLWindowManager &windowManager, Game &game) const;
+
 public:
 
 	enum class State {
@@ -57,7 +58,7 @@ public:
 	 * @return l'etat du jeu
 	 **/
 	State handleGameEvent(SDLWindowManager &windowManager, Game &game);
-	
+
 	/**
 	 * Gère les evenement de l'ecran de pause
 	 * @param windowManager : gestionnaire de la fenetre

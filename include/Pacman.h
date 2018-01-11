@@ -32,7 +32,7 @@ public:
 	 * @param orientation : la nouvelle orientation de pacman
 	 */
 	void setOrientation(Utils::Orientation orientation);
-	
+
 	/**
 	 * Change la prochaine orientation de pacman
 	 * @param orientation : la prochaine orientation de pacman
@@ -69,7 +69,7 @@ public:
 	 * @return le decalage graphique par rapport au centre de la case
 	 */
 	float getShift() const;
-	
+
 	/**
 	 * Itere pacman
 	 **/
@@ -80,7 +80,7 @@ public:
 	 * @return le modele de pacman
 	 */
 	GameRepresentation::Model getModel() const;
-	
+
 	/**
 	 * Convertit pacman en JSON
 	 * @return la représentation de pacman en JSON

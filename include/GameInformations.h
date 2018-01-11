@@ -16,8 +16,9 @@ private:
 	int _multiplier;
 	int _multiplierCounter;
 	int _level;
-	
+
 	void addLifeScore();
+
 public:
 
 	static GameInformations fromJSON(const json &jsonInfo);
@@ -71,7 +72,6 @@ public:
 	int getLives() const;
 
 
-	
 	json toJSON() const;
 
 	/**

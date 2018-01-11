@@ -1,6 +1,6 @@
 #include <GhostClyde.h>
 
-Utils::Orientation GhostClyde::getNextOrientation(const MovingContext & context) const {
+Utils::Orientation GhostClyde::getNextOrientation(const MovingContext &context) const {
 	return Utils::randomOrientation(context.availableOrientation());
 }
 
