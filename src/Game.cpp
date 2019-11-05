@@ -115,7 +115,12 @@ json Game::toJSON() const {
 Game Game::fromJSONFile(const string &filePath) {
 	json jsonGame;
 	ifstream gameFile(filePath);
-	gameFile >> jsonGame;
+	try {
+
+		gameFile >> jsonGame;
+	} catch (json::exception &) {
+		cerr << "Fuck it 2" << endl;
+	}
 	gameFile.close();
 	return fromJSON(jsonGame);
 }

@@ -21,8 +21,6 @@ public:
 		WEST
 	};
 
-	static const string GAME_SAVE_FILE;
-
 	/**
 	 * Renvoie une orientation à partir de sa représentation en chaine de caractere
 	 * @param strOrientation : representation en chaine de caractere de l'orientation

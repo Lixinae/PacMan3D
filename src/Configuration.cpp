@@ -62,7 +62,20 @@ Configuration Configuration::fromJSON(const json &json) {
 Configuration Configuration::fromJSONFile(const string &filePath) {
 	json jsonConfig;
 	ifstream configFile(filePath);
-	configFile >> jsonConfig;
+	string line;
+
+	try {
+
+		configFile >> jsonConfig;
+	} catch (json::parse_error &e) {
+		while (getline(configFile, line)) {
+			cerr << line << '\n';
+		}
+		cerr << "message: " << e.what() << '\n'
+		     << "exception id: " << e.id << '\n'
+		     << "byte position of error: " << e.byte << endl;
+
+	}
 	configFile.close();
 	return fromJSON(jsonConfig);
 }

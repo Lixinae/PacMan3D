@@ -1,4 +1,5 @@
 #include <LightTexModel3D.h>
+#include <ConstantStrings.h>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ void LightTexModel3D::initLight() {
 
 LightTexModel3D::LightTexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const Material &material, const mat4 &modelTransform,
                                  const SpotLight *spotLight, const SpotLight *spotLightCamera) :
-		AbstractModel3D(mesh, "shaders/lightTex3D.fs.glsl", modelTransform),
+		AbstractModel3D(mesh, string(ConstantStrings::ShaderFolderPath) + "/lightTex3D.fs.glsl", modelTransform),
 		_material(material),
 		_spotLight(spotLight->clone()),
 		_spotLightCamera(spotLightCamera->clone()) {

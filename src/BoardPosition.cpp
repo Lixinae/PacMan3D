@@ -11,7 +11,7 @@ BoardPosition::BoardPosition(int x, int y) : _x(x), _y(y) {
 }
 
 BoardPosition BoardPosition::fromJSON(const json &jsonPosition) {
-	return BoardPosition(jsonPosition["x"], jsonPosition["y"]);
+	return {jsonPosition["x"], jsonPosition["y"]};
 }
 
 json BoardPosition::toJSON() const {
@@ -49,7 +49,7 @@ BoardPosition BoardPosition::translate(Utils::Orientation orientation) const {
 			dy = 0;
 			break;
 	}
-	return BoardPosition(_x + dx, _y + dy);
+	return {_x + dx, _y + dy};
 }
 
 glm::vec3 BoardPosition::inSpace() const {

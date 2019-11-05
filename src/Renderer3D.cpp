@@ -1,4 +1,5 @@
 #include <Renderer3D.h>
+#include <ConstantStrings.h>
 
 using namespace std;
 using namespace glimac;
@@ -15,7 +16,7 @@ Renderer3D::Renderer3D(
 		_pointOfView(pointOfView),
 		_ProjMatrix(perspective(radians(70.f), float(windowWidth) / windowHeight, 0.1f, 100.f)),
 		_models(),
-		_textRenderer(windowWidth, windowHeight, "assets/fonts/game_over.ttf"),
+		_textRenderer(windowWidth, windowHeight, string(ConstantStrings::AssetsFolderPath) + "/fonts/game_over.ttf"),
 		_lowerBound(lowerBound),
 		_upperBound(upperBound) {
 	for (auto &entry : map_model3D) {
@@ -54,7 +55,8 @@ TexModel3D *Renderer3D::initSkybox() const {
 
 	transformations = scale(transformations, vec3(x, y, z));
 
-	TexModel3D *skybox = TexModel3D::create("assets/models/cube.obj", "assets/textures/skybox.png", transformations);
+	TexModel3D *skybox = TexModel3D::create(string(ConstantStrings::AssetsFolderPath) + "/models/cube.obj",
+	                                        string(ConstantStrings::AssetsFolderPath) + "/textures/skybox.png", transformations);
 	return skybox;
 }
 

@@ -1,4 +1,5 @@
 #include <EventHandler.h>
+#include <ConstantStrings.h>
 
 EventHandler::EventHandler(const map<control, SDLKey> &keyMap) : _keyMap(keyMap) {}
 
@@ -100,10 +101,10 @@ EventHandler::State EventHandler::handlePauseMenuEvent(SDLWindowManager &windowM
 				state = EventHandler::State::QUIT;
 			}
 			if (event.key.keysym.sym == _keyMap[control::SAVE_GAME]) {
-				game.toJSONFile(Utils::GAME_SAVE_FILE);
+				game.toJSONFile(ConstantStrings::GameSaveFilePath);
 			}
 			if (event.key.keysym.sym == _keyMap[control::LOAD_GAME]) {
-				game = Game::fromJSONFile(Utils::GAME_SAVE_FILE);
+				game = Game::fromJSONFile(ConstantStrings::GameSaveFilePath);
 			}
 			if (event.key.keysym.sym == _keyMap[control::RESTART]) {
 				game.restart();

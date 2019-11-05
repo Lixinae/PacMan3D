@@ -25,15 +25,18 @@ void waitFrameRate() {
 void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, EventHandler &eventHandler, const map<control, SDLKey> &keyMap) {
 	EventHandler::State state;
 	state = EventHandler::State::CONTINUE;
+	// Rendu du menu de base
 	while (state == EventHandler::State::CONTINUE) {
 		state = eventHandler.handleBeginTitleEvent(windowManager);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		renderer.renderBeginTitle();
 		windowManager.swapBuffers();
 	}
+	// Indique si l'on a cliqué sur quitter
 	if (state == EventHandler::State::QUIT) {
 		return;
 	}
+	// Boucle principal
 	while (true) {
 		state = EventHandler::State::CONTINUE;
 		while (state == EventHandler::State::CONTINUE) {
@@ -54,6 +57,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 			if (state == EventHandler::State::QUIT) {
 				return;
 			}
+			// Si l'on appuie sur le bouton de pause
 			if (state == EventHandler::State::PAUSE) {
 				state = EventHandler::State::CONTINUE;
 				while (state == EventHandler::State::CONTINUE) {
@@ -75,6 +79,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 			windowManager.swapBuffers();
 			waitFrameRate(1000 * (float(end_time - begin_time)) / CLOCKS_PER_SEC);
 		}
+		// Si l'on gagne -> On va au niveau suivant
 		if (gameState == Game::State::WIN) {
 			game.setNextLevel();
 		} else if (gameState == Game::State::RESTART) {
@@ -95,7 +100,7 @@ void play(Game &game, SDLWindowManager &windowManager, Renderer &renderer, Event
 
 int realMain() {
 
-	Configuration configuration = Configuration::fromJSONFile("assets/configurations/configuration.json");
+	Configuration configuration = Configuration::fromJSONFile("../assets/configurations/configuration.json");
 
 	uint32_t windowWidth = configuration.getWidth();
 	uint32_t windowHeight = configuration.getHeight();
@@ -112,7 +117,7 @@ int realMain() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	Game game = Game::fromJSONFile("assets/games/gameRealBoard.json");
+	Game game = Game::fromJSONFile("../assets/games/gameRealBoard.json");
 
 	EventHandler eventHandler(configuration.getControlMap());
 

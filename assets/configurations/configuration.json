@@ -44,495 +44,495 @@
     {
       "name": "Pacman",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "pacman.obj",
-           "texPath": "pacman.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 1,
-           "y": 1,
-           "z": 1
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "pacman.obj",
+          "texPath": "pacman.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
       }
     },
     {
       "name": "Ghost_blinky",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "boo.obj",
-           "texPath": "red_boo.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.012,
-           "y": 0.012,
-           "z": 0.012
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "boo.obj",
+          "texPath": "red_boo.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.012,
+          "y": 0.012,
+          "z": 0.012
+        }
       }
     },
     {
       "name": "Ghost_pinky",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "boo.obj",
-           "texPath": "pink_boo.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.012,
-           "y": 0.012,
-           "z": 0.012
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "boo.obj",
+          "texPath": "pink_boo.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.012,
+          "y": 0.012,
+          "z": 0.012
+        }
       }
     },
     {
       "name": "Ghost_inky",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "boo.obj",
-           "texPath": "blue_boo.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.012,
-           "y": 0.012,
-           "z": 0.012
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "boo.obj",
+          "texPath": "blue_boo.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.012,
+          "y": 0.012,
+          "z": 0.012
+        }
       }
     },
     {
       "name": "Ghost_clyde",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "boo.obj",
-           "texPath": "orange_boo.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.012,
-           "y": 0.012,
-           "z": 0.012
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "boo.obj",
+          "texPath": "orange_boo.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.012,
+          "y": 0.012,
+          "z": 0.012
+        }
       }
     },
     {
       "name": "Ghost_weak",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "boo.obj",
-           "texPath": "black_boo.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.012,
-           "y": 0.012,
-           "z": 0.012
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "boo.obj",
+          "texPath": "black_boo.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.012,
+          "y": 0.012,
+          "z": 0.012
+        }
       }
     },
     {
       "name": "Wall",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "cube.obj",
-           "texPath": "blue.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 1.05,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.5,
-           "y": 0.5,
-           "z": 0.5
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "cube.obj",
+          "texPath": "blue.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 1.05,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0.5
+        }
       }
     },
     {
       "name": "Floor",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "cube.obj",
-           "texPath": "gray.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.5,
-           "y": 0.1,
-           "z": 0.5
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "cube.obj",
+          "texPath": "gray.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.5,
+          "y": 0.1,
+          "z": 0.5
+        }
       }
     },
     {
       "name": "Tunnel",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "cube.obj",
-           "texPath": "blue.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 1.05,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.5,
-           "y": 0.5,
-           "z": 0.5
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "cube.obj",
+          "texPath": "blue.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 1.05,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0.5
+        }
       }
     },
     {
       "name": "Door",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "cube.obj",
-           "texPath": "sky_blue.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 1.05,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.5,
-           "y": 0.5,
-           "z": 0.2
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "cube.obj",
+          "texPath": "sky_blue.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 1.05,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0.2
+        }
       }
     },
     {
       "name": "Pac_gomme",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "sphere.obj",
-	       "texPath": "yellow_sphere.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 3,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.15,
-           "y": 0.15,
-           "z": 0.15
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "sphere.obj",
+          "texPath": "yellow_sphere.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 3,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.15,
+          "y": 0.15,
+          "z": 0.15
+        }
       }
     },
     {
       "name": "Super_pac_gomme",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "sphere.obj",
-	       "texPath": "orange_sphere.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 1.7,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.3,
-           "y": 0.3,
-           "z": 0.3
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "sphere.obj",
+          "texPath": "orange_sphere.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 1.7,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.3,
+          "y": 0.3,
+          "z": 0.3
+        }
       }
     },
     {
       "name": "Fruit",
       "model": {
-         "type":"light_texture",
-         "args": {
-           "objPath": "sphere.obj",
-	       "texPath": "red_sphere.png",
-           "material": {
-		     "shininess": 10,
-		     "diffuse": {
-			   "x": 0.2, 	 
-			   "y": 0.2, 	 
-			   "z": 0.2 	 
-			 },
-		     "glossy": {
-			   "x": 0.7, 	 
-			   "y": 0.7, 	 
-			   "z": 0.7 	 
-			 }
-		   }
-         },
-         "translate": {
-           "x": 0,
-           "y": 1.7,
-           "z": 0
-         },
-         "rotate": {
-           "x": 0,
-           "y": 0,
-           "z": 0
-         },
-         "scale": {
-           "x": 0.3,
-           "y": 0.3,
-           "z": 0.3
-         }
+        "type": "light_texture",
+        "args": {
+          "objPath": "sphere.obj",
+          "texPath": "red_sphere.png",
+          "material": {
+            "shininess": 10,
+            "diffuse": {
+              "x": 0.2,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "glossy": {
+              "x": 0.7,
+              "y": 0.7,
+              "z": 0.7
+            }
+          }
+        },
+        "translate": {
+          "x": 0,
+          "y": 1.7,
+          "z": 0
+        },
+        "rotate": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.3,
+          "y": 0.3,
+          "z": 0.3
+        }
       }
     }
   ]

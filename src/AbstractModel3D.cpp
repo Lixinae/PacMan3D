@@ -4,6 +4,7 @@
 #include <TexModel3D.h>
 #include <LightTexModel3D.h>
 #include <NormalModel3D.h>
+#include <ConstantStrings.h>
 
 using namespace std;
 using namespace glimac;
@@ -11,7 +12,7 @@ using namespace glm;
 
 using json = nlohmann::json;
 
-const string AbstractModel3D::VERTEX_SHADER_3D = "shaders/3D.vs.glsl";
+const string AbstractModel3D::VERTEX_SHADER_3D = string(ConstantStrings::ShaderFolderPath) + "/3D.vs.glsl";
 
 const GLuint AbstractModel3D::VERTEX_ATTR_POSITION = 0;
 const GLuint AbstractModel3D::VERTEX_ATTR_NORMAL = 1;
@@ -36,17 +37,20 @@ AbstractModel3D *AbstractModel3D::fromJSON(const json &jsonModel, const SpotLigh
 	if (type == "texture") {
 		string mesh = jsonModel["args"]["objPath"];
 		string texture = jsonModel["args"]["texPath"];
-		return TexModel3D::create("assets/models/" + mesh, "assets/textures/" + texture, transformations);
+		return TexModel3D::create(string(ConstantStrings::AssetsFolderPath) + "/models/" + mesh,
+		                          string(ConstantStrings::AssetsFolderPath) + "/textures/" + texture, transformations);
 	}
 	if (type == "light_texture") {
 		string mesh = jsonModel["args"]["objPath"];
 		string texture = jsonModel["args"]["texPath"];
 		Material material = Material::fromJSON(jsonModel["args"]["material"]);
-		return LightTexModel3D::create("assets/models/" + mesh, "assets/textures/" + texture, material, transformations, spotLight, spotLightCamera);
+		return LightTexModel3D::create(string(ConstantStrings::AssetsFolderPath) + "/models/" + mesh,
+		                               string(ConstantStrings::AssetsFolderPath) + "/textures/" + texture, material, transformations, spotLight,
+		                               spotLightCamera);
 	}
 	if (type == "normal") {
 		string mesh = jsonModel["args"]["objPath"];
-		return NormalModel3D::create("assets/models/" + mesh, transformations);
+		return NormalModel3D::create(string(ConstantStrings::AssetsFolderPath) + "/models/" + mesh, transformations);
 	}
 	throw invalid_argument(type + " is not a valid string representation of model type");
 }

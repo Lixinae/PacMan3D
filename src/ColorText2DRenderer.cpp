@@ -2,11 +2,12 @@
 
 #include <iostream>
 #include <ft2build.h>
+#include <ConstantStrings.h>
 
 #include FT_FREETYPE_H
 
-const string ColorText2DRenderer::VERTEX_SHADER_TEXT_2D = "shaders/text2D.vs.glsl";
-const string ColorText2DRenderer::FRAGMENT_SHADER_TEXT_2D = "shaders/text2D.fs.glsl";
+const string ColorText2DRenderer::VERTEX_SHADER_TEXT_2D = string(ConstantStrings::ShaderFolderPath) + "/text2D.vs.glsl";
+const string ColorText2DRenderer::FRAGMENT_SHADER_TEXT_2D = string(ConstantStrings::ShaderFolderPath) + "/text2D.fs.glsl";
 
 void ColorText2DRenderer::initProgram() {
 	_program = loadProgram(VERTEX_SHADER_TEXT_2D, FRAGMENT_SHADER_TEXT_2D);

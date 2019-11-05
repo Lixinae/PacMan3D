@@ -1,8 +1,7 @@
 #include <Utils.h>
+#include <ConstantStrings.h>
 
 using namespace std;
-
-const string Utils::GAME_SAVE_FILE = "assets/games/save.json";
 
 Utils::Orientation Utils::orientationFromString(string strOrientation) {
 	if (strOrientation == "north") {

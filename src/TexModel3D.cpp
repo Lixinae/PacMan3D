@@ -1,4 +1,5 @@
 #include <TexModel3D.h>
+#include <ConstantStrings.h>
 
 using namespace std;
 
@@ -15,7 +16,7 @@ void TexModel3D::initTexture(const unique_ptr<Image> &texture) {
 }
 
 TexModel3D::TexModel3D(const Mesh &mesh, const unique_ptr<Image> &texture, const mat4 &modelTransform) :
-		AbstractModel3D(mesh, "shaders/tex3D.fs.glsl", modelTransform) {
+		AbstractModel3D(mesh, string(ConstantStrings::ShaderFolderPath) + "/tex3D.fs.glsl", modelTransform) {
 	initTexture(texture);
 }
 

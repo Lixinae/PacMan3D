@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.2)
 
 project(Pacman3D)
 
@@ -13,7 +13,6 @@ if (WIN32)
     set(GLEW_LIBRARY "D:/OpenGlUtils/glew-2.1.0/lib/Release/Win32/glew32.lib")
     set(SDL_INCLUDE_DIR "D:/OpenGlUtils/SDL-1.2.15/include")
     set(SDL_LIBRARY "D:/OpenGlUtils/SDL-1.2.15/lib/libSDL.dll.a;D:/OpenGlUtils/SDL-1.2.15/lib/libSDLmain.a")
-
 else (WIN32)
     # Set the linux variables
     find_package(SDL REQUIRED)
