@@ -118,8 +118,10 @@ Game Game::fromJSONFile(const string &filePath) {
 	try {
 
 		gameFile >> jsonGame;
-	} catch (json::exception &) {
-		cerr << "Fuck it 2" << endl;
+	} catch (json::parse_error &e) {
+		cerr << "message: " << e.what() << '\n'
+		     << "exception id: " << e.id << '\n'
+		     << "byte position of error: " << e.byte << endl;
 	}
 	gameFile.close();
 	return fromJSON(jsonGame);
